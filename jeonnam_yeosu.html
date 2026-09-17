@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>전라남도 및 여수시 한의약 방문진료 기관참여율(10%~100%)별 의료 적정성 및 5개년 효과 시뮬레이션 대시보드</title>
+  <!-- Google Fonts & Chart.js -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      --bg-dark: #080f1e;
+      --card-bg: rgba(18, 30, 54, 0.75);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --primary: #0284c7;
+      --primary-glow: rgba(2, 132, 199, 0.35);
+      --accent: #059669;
+      --accent-glow: rgba(5, 150, 105, 0.35);
+      --warning: #f59e0b;
+      --purple: #7c3aed;
+      --text-main: #f3f4f6;
+      --text-muted: #9ca3af;
+      --text-dim: #6b7280;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+      background: radial-gradient(circle at 15% 15%, #14284b 0%, #080f1e 75%);
+      color: var(--text-main);
+      line-height: 1.6;
+      padding: 24px;
+      min-height: 100vh;
+    }
+
+    .container { max-width: 1440px; margin: 0 auto; }
+
+    header {
+      background: linear-gradient(135deg, rgba(2, 132, 199, 0.4) 0%, rgba(15, 23, 42, 0.85) 100%);
+      border: 1px solid rgba(2, 132, 199, 0.3);
+      border-radius: 20px;
+      padding: 32px;
+      margin-bottom: 28px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 10px 30px -10px rgba(0,0,0,0.6);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .badge-wrap { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; }
+    .badge { font-size: 0.75rem; font-weight: 700; padding: 4px 12px; border-radius: 999px; }
+    .badge-blue { background: rgba(2, 132, 199, 0.2); color: #38bdf8; border: 1px solid rgba(2, 132, 199, 0.4); }
+    .badge-green { background: rgba(5, 150, 105, 0.2); color: #34d399; border: 1px solid rgba(5, 150, 105, 0.4); }
+    .badge-purple { background: rgba(124, 58, 237, 0.2); color: #a78bfa; border: 1px solid rgba(124, 58, 237, 0.4); }
+
+    h1 {
+      font-size: 2.1rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 10px;
+    }
+
+    .header-sub { color: var(--text-muted); font-size: 1.05rem; max-width: 1000px; }
+
+    /* Control Card */
+    .control-card {
+      background: var(--card-bg);
+      border: 1px solid rgba(2, 132, 199, 0.3);
+      border-radius: 18px;
+      padding: 24px 30px;
+      margin-bottom: 28px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    }
+
+    .region-toggle-wrap {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .region-btn {
+      background: rgba(30, 41, 59, 0.7);
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-weight: 800;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .region-btn.active {
+      background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+      color: #fff;
+      border-color: #38bdf8;
+      box-shadow: 0 0 15px rgba(2, 132, 199, 0.4);
+    }
+
+    .slider-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .current-rate-badge {
+      font-size: 1.35rem;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      color: #38bdf8;
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      padding: 6px 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
+    }
+
+    input[type=range] {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 10px;
+      border-radius: 5px;
+      background: linear-gradient(to right, #0284c7 0%, #059669 30%, #7c3aed 100%);
+      outline: none;
+      cursor: pointer;
+      margin: 15px 0;
+    }
+
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: #ffffff;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5), 0 0 0 4px var(--primary);
+    }
+
+    .ticks {
+      display: flex;
+      justify-content: space-between;
+      color: var(--text-dim);
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+    .ticks span.active { color: #38bdf8; font-weight: 800; }
+
+    /* KPI Grid */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .kpi-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 20px;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .kpi-card:hover { transform: translateY(-3px); border-color: rgba(2, 132, 199, 0.4); }
+    .kpi-label { font-size: 0.85rem; font-weight: 600; color: var(--text-muted); margin-bottom: 8px; }
+    .kpi-value { font-size: 1.7rem; font-family: 'Outfit', sans-serif; font-weight: 800; color: #fff; margin-bottom: 4px; }
+    .kpi-sub.green { color: #34d399; font-weight: 700; font-size: 0.8rem; }
+    .kpi-sub.blue { color: #38bdf8; font-weight: 700; font-size: 0.8rem; }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 28px;
+    }
+    @media (max-width: 1024px) { .grid-2 { grid-template-columns: 1fr; } }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      padding: 24px;
+      backdrop-filter: blur(10px);
+    }
+    .card-title { font-size: 1.15rem; font-weight: 700; color: #fff; margin-bottom: 18px; }
+    .chart-container { position: relative; height: 320px; width: 100%; }
+
+    .table-responsive { overflow-x: auto; margin-top: 12px; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+    th { background: rgba(30, 41, 69, 0.9); color: #cbd5e1; padding: 12px 14px; font-weight: 700; border-bottom: 1px solid var(--card-border); }
+    td { padding: 12px 14px; border-bottom: 1px solid rgba(255, 255, 255, 0.04); color: #e2e8f0; }
+    .highlight-row { background: rgba(2, 132, 199, 0.15) !important; font-weight: 700; }
+
+    .disease-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+      margin-top: 16px;
+    }
+    .disease-card {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 14px;
+      padding: 18px;
+    }
+    .disease-title { font-size: 0.95rem; font-weight: 700; color: #38bdf8; margin-bottom: 10px; }
+    .cost-compare { display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 0.85rem; }
+    .cost-val-conv { color: #f87171; font-weight: 700; }
+    .cost-val-km { color: #34d399; font-weight: 700; }
+    .saving-tag { background: rgba(5, 150, 105, 0.15); color: #34d399; font-weight: 800; padding: 4px 8px; border-radius: 6px; font-size: 0.8rem; display: inline-block; margin-top: 6px; }
+
+    .pipeline-tabs { display: flex; gap: 8px; margin-bottom: 16px; overflow-x: auto; padding-bottom: 6px; }
+    .tab-btn { background: rgba(30, 41, 59, 0.6); border: 1px solid var(--card-border); color: var(--text-muted); padding: 10px 18px; border-radius: 10px; font-weight: 700; font-size: 0.88rem; cursor: pointer; }
+    .tab-btn.active, .tab-btn:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
+    .tab-pane { display: none; }
+    .tab-pane.active { display: block; }
+
+    footer { text-align: center; padding: 24px; color: var(--text-dim); font-size: 0.85rem; border-top: 1px solid var(--card-border); margin-top: 40px; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <div class="badge-wrap">
+        <span class="badge badge-blue">HIRA 청구 DB AI 5단계 파이프라인</span>
+        <span class="badge badge-green">KOSIS 전남 22개 시군 통계 연계</span>
+        <span class="badge badge-purple">전국 최고령(26.6%) 광역 커뮤니티케어</span>
+      </div>
+      <h1>전라남도 및 여수시 한의약 방문진료 참여율(10%~100%)별 5개년 효과 시뮬레이션</h1>
+      <p class="header-sub">
+        전라남도(인구 180.5만, 노인 48.0만[26.6%]) 및 여수시(인구 27.1만, 노인 6.1만[22.5%]) 관내 한방의료기관의 방문진료 참여율에 따른 1인당 연평균 진료비 지출 변화, 다빈도 5대 질환별 비용 비교 및 5개년 재정·적정성 효과 대시보드입니다.
+      </p>
+    </header>
+
+    <!-- Region Selector & Interactive Controls -->
+    <div class="control-card">
+      <div class="region-toggle-wrap">
+        <button class="region-btn" id="btnYeosu" onclick="setRegion('yeosu')">🚢 여수시 (도서·해양 복합거점)</button>
+        <button class="region-btn active" id="btnJeonnam" onclick="setRegion('jeonnam')">🌐 전라남도 (22개 시·군 광역 전체)</button>
+      </div>
+
+      <div class="slider-header">
+        <div>
+          <div style="font-size: 1.2rem; font-weight: 700; color: #fff;">🎛️ 한방의료기관 참여율 시나리오 조절 (10% ~ 100%)</div>
+          <div style="color: var(--text-muted); font-size: 0.85rem; margin-top: 4px;">슬라이더를 이동하면 권역별 인프라, 1인당 진료비, 순재정 절감액, 내쉬 균형이 실시간으로 재계산됩니다.</div>
+        </div>
+        <div class="current-rate-badge" id="rateDisplay">30% 참여 (★권고안)</div>
+      </div>
+
+      <div class="slider-container">
+        <input type="range" id="rateSlider" min="10" max="100" step="10" value="30">
+        <div class="ticks">
+          <span id="tick-10">10%</span>
+          <span id="tick-20">20%</span>
+          <span id="tick-30" class="active">30%★</span>
+          <span id="tick-40">40%</span>
+          <span id="tick-50">50%</span>
+          <span id="tick-60">60%</span>
+          <span id="tick-70">70%</span>
+          <span id="tick-80">80%</span>
+          <span id="tick-90">90%</span>
+          <span id="tick-100">100%</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- KPI Grid -->
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-label">참여 의료기관 / 전담 한의사</div>
+        <div class="kpi-value" id="kpiInst">병원 13, 의원 191</div>
+        <div class="kpi-sub blue" id="kpiDoc">한의사 324명 (연 31.7만 회 슬롯)</div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-label">5년차 노인 1인당 연진료비</div>
+        <div class="kpi-value" id="kpiEldCost">412.2만 원</div>
+        <div class="kpi-sub green" id="kpiEldDiff">기준 대비 -197.8만 원 (-32.4%↓)</div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-label">5년차 취약계층 1인당 진료비</div>
+        <div class="kpi-value" id="kpiVulCost">575.7만 원</div>
+        <div class="kpi-sub green" id="kpiVulDiff">기준 대비 -284.3만 원 (-33.1%↓)</div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-label">5개년 누적 순재정 절감액</div>
+        <div class="kpi-value" id="kpiCumSavings">3조 8,283억 원</div>
+        <div class="kpi-sub green" id="kpiRoi">5개년 누적 ROI 15.53배</div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-label">내쉬 균형 재택기능유지율</div>
+        <div class="kpi-value" id="kpiHomeChoice">59.7%</div>
+        <div class="kpi-sub blue" id="kpiEqState">임계 전환점 (Tipping Point)</div>
+      </div>
+    </div>
+
+    <!-- Charts Row 1 -->
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">📈 1. 5개년 연도별 노인 & 취약계층 1인당 연평균 진료비 추이 (만 원)</div>
+        <div class="chart-container">
+          <canvas id="chartYearlyCost"></canvas>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">💰 2. 여수시 vs 전라남도 참여율별 5개년 누적 순절감액 (억 원 / 조 원)</div>
+        <div class="chart-container">
+          <canvas id="chartSavings"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Charts Row 2 -->
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">⚖️ 3. QRE 로짓 내쉬 균형 3대 행위자 확률 전이 곡선 (%)</div>
+        <div class="chart-container">
+          <canvas id="chartNash"></canvas>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">🩺 4. 노인 다빈도 5대 질환별 1인당 연간 진료비 비교 (만 원)</div>
+        <div class="chart-container">
+          <canvas id="chartDisease"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Disease Comparison Section -->
+    <div class="card" style="margin-bottom: 28px;">
+      <div class="card-title">📋 전남·여수권 노인·취약계층 다빈도 5대 질환별 진료비용 분해 및 임상 적정성 효과</div>
+      <div class="disease-grid" id="diseaseCards"></div>
+    </div>
+
+    <!-- HIRA Pipeline Tabs -->
+    <div class="card">
+      <div class="card-title">🔬 HIRA 의료 적정성 분석 AI 가이드 5단계 파이프라인 정밀 결과 (선택 권역 기준)</div>
+      
+      <div class="pipeline-tabs">
+        <button class="tab-btn active" onclick="switchTab(0)">STEP 1: 패널 회귀분석</button>
+        <button class="tab-btn" onclick="switchTab(1)">STEP 2: DEA 효율성 분석</button>
+        <button class="tab-btn" onclick="switchTab(2)">STEP 3: 내쉬 균형 모형</button>
+        <button class="tab-btn" onclick="switchTab(3)">STEP 4: 몬테카를로 5개년 추계</button>
+        <button class="tab-btn" onclick="switchTab(4)">STEP 5: 이중차분 DID 검증</button>
+      </div>
+
+      <!-- Tab 1 -->
+      <div class="tab-pane active" id="pane-0">
+        <div class="table-responsive">
+          <table>
+            <thead><tr><th>비용 구성 항목</th><th>취약계층 기준액 (860만)</th><th>65세 이상 노인 기준액 (610만)</th><th>한의 방문진료 개입 후 대체 기전</th></tr></thead>
+            <tbody>
+              <tr><td>요양병원 사회적 입원료</td><td>309.6만 원 (36.0%)</td><td>189.1만 원 (31.0%)</td><td>재택 방문 침구·추나 및 ADL 기능유지로 장기입원 70.5% 억제</td></tr>
+              <tr><td>척추·관절 수술 및 고가시술</td><td>197.8만 원 (23.0%)</td><td>152.5만 원 (25.0%)</td><td>침구·한방물리요법 기반 보존적 통증제어로 수술 68% 억제</td></tr>
+              <tr><td>만성 다제약물 처방비</td><td>215.0만 원 (25.0%)</td><td>158.6만 원 (26.0%)</td><td>10종 이상 진통소염제/향정약물을 한약제제 및 비약물로 78.9% 정비</td></tr>
+              <tr><td>1차 외래 및 기본 한의진료</td><td>111.8만 원 (13.0%)</td><td>91.5만 원 (15.0%)</td><td>방문진료 관리료 및 통합케어 투입으로 1차 예방 중심 의료체계 전환</td></tr>
+              <tr><td>응급실 내원 및 기타</td><td>25.8만 원 (3.0%)</td><td>18.3만 원 (3.0%)</td><td>야간/급성 통증 조기 제어 및 지역 돌봄망 연계로 응급실 49.2% 차단</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Tab 2 -->
+      <div class="tab-pane" id="pane-1">
+        <div class="table-responsive">
+          <table>
+            <thead><tr><th>참여율</th><th>참여 기관(병/의)</th><th>한의사 수</th><th>연간 방문 슬롯</th><th>DEA 효율 점수 (VRS)</th><th>규모 효율성</th><th>Slack 절감 잠재액</th></tr></thead>
+            <tbody id="tbodyDea"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Tab 3 -->
+      <div class="tab-pane" id="pane-2">
+        <div class="table-responsive">
+          <table>
+            <thead><tr><th>참여율</th><th>개입강도 ($\theta$)</th><th>환자: 재택기능유지율</th><th>요양병원: 단기재활전환율</th><th>1차의원: 비수술협진율</th><th>시장 균형 상태</th></tr></thead>
+            <tbody id="tbodyNash"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Tab 4 -->
+      <div class="tab-pane" id="pane-3">
+        <div class="table-responsive">
+          <table>
+            <thead><tr><th>참여율</th><th>Year 1</th><th>Year 2</th><th>Year 3</th><th>Year 4</th><th>Year 5</th><th>5개년 누적 순절감</th><th>ROI</th></tr></thead>
+            <tbody id="tbodyMc"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Tab 5 -->
+      <div class="tab-pane" id="pane-4">
+        <div class="table-responsive">
+          <table>
+            <thead><tr><th>참여율</th><th>① 요양병원 입원억제</th><th>② 30일 재입원 감소</th><th>③ 응급실 방문감소</th><th>④ 다제약물 억제</th><th>⑤ K-ADL 유지율</th><th>⑥ TFP 생산성</th><th>DID 처치계수 ($\delta$)</th></tr></thead>
+            <tbody id="tbodyDid"></tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+    <footer>
+      전라남도 및 여수시 한의약 방문진료 의료 적정성 및 5개년 효과 시뮬레이션 | 건강보험심사평가원(HIRA) & KOSIS 데이터 기반 | 2026년 9월
+    </footer>
+  </div>
+
+  <script>
+    let currentRegion = 'jeonnam';
+    let currentRate = 30;
+
+    let MASTER_DATA = {};
+    let chartYearly, chartSavings, chartNash, chartDisease;
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      initMasterData();
+      initDiseaseCards();
+      initCharts();
+      updateDashboard();
+
+      document.getElementById('rateSlider').addEventListener('input', (e) => {
+        currentRate = parseInt(e.target.value);
+        updateDashboard();
+      });
+    });
+
+    function setRegion(reg) {
+      currentRegion = reg;
+      document.getElementById('btnYeosu').classList.toggle('active', reg === 'yeosu');
+      document.getElementById('btnJeonnam').classList.toggle('active', reg === 'jeonnam');
+      updateDashboard();
+    }
+
+    function updateDashboard() {
+      const regMeta = MASTER_DATA.meta[currentRegion];
+      const scenarios = MASTER_DATA[`${currentRegion}_scenarios`];
+      const cur = scenarios.find(s => s.rate_pct === currentRate);
+      if (!cur) return;
+
+      const badgeText = currentRate === 30 ? "30% 참여 (★권고안)" : `${currentRate}% 참여`;
+      document.getElementById('rateDisplay').innerText = badgeText;
+      document.querySelectorAll('.ticks span').forEach(el => el.classList.remove('active'));
+      const activeTick = document.getElementById(`tick-${currentRate}`);
+      if (activeTick) activeTick.classList.add('active');
+
+      document.getElementById('kpiInst').innerText = `병원 ${cur.hosp_count}, 의원 ${cur.clinic_count}`;
+      document.getElementById('kpiDoc').innerText = `한의사 ${cur.km_doctors}명 (연 ${(cur.annual_visit_slots/10000).toFixed(1)}만 회 슬롯)`;
+      
+      const y5 = cur.yearly[4];
+      const baseEld = regMeta.base_eld_cost / 10000;
+      const baseVul = regMeta.base_vul_cost / 10000;
+      
+      const eldY5 = y5.eld_mean / 10000;
+      const eldDiff = eldY5 - baseEld;
+      const eldPct = y5.eld_pct;
+      document.getElementById('kpiEldCost').innerText = `${eldY5.toFixed(1)}만 원`;
+      document.getElementById('kpiEldDiff').innerText = `기준 대비 ${eldDiff.toFixed(1)}만 원 (${eldPct.toFixed(1)}%↓)`;
+
+      const vulY5 = y5.vul_mean / 10000;
+      const vulDiff = vulY5 - baseVul;
+      const vulPct = y5.vul_pct;
+      document.getElementById('kpiVulCost').innerText = `${vulY5.toFixed(1)}만 원`;
+      document.getElementById('kpiVulDiff').innerText = `기준 대비 ${vulDiff.toFixed(1)}만 원 (${vulPct.toFixed(1)}%↓)`;
+
+      if (cur.cum_savings_mean >= 10000) {
+        document.getElementById('kpiCumSavings').innerText = `${(cur.cum_savings_mean / 10000).toFixed(2)}조 원`;
+      } else {
+        document.getElementById('kpiCumSavings').innerText = `${cur.cum_savings_mean.toLocaleString()}억 원`;
+      }
+      document.getElementById('kpiRoi').innerText = `5개년 누적 ROI ${cur.cum_roi.toFixed(2)}배`;
+
+      document.getElementById('kpiHomeChoice').innerText = `${(y5.p_home * 100).toFixed(1)}%`;
+      let eqStr = "초기 탐색 균형";
+      if (currentRate >= 30 && currentRate < 50) eqStr = "임계 전환점 (Tipping Point)";
+      else if (currentRate >= 50 && currentRate < 80) eqStr = "파레토 협력 균형 확립";
+      else if (currentRate >= 80) eqStr = "전면 제도화 완전 협력";
+      document.getElementById('kpiEqState').innerText = eqStr;
+
+      if (chartYearly) {
+        chartYearly.data.datasets[0].label = `${regMeta.name} 노인 Baseline (${baseEld.toFixed(1)}만)`;
+        chartYearly.data.datasets[0].data = [baseEld, baseEld, baseEld, baseEld, baseEld];
+        chartYearly.data.datasets[1].data = cur.yearly.map(y => y.eld_mean / 10000);
+        chartYearly.data.datasets[2].data = cur.yearly.map(y => y.vul_mean / 10000);
+        chartYearly.update();
+      }
+
+      updateTables(scenarios);
+    }
+
+    function updateTables(scenarios) {
+      document.getElementById('tbodyDea').innerHTML = scenarios.map(s => `
+        <tr class="${s.rate_pct === currentRate ? 'highlight-row' : ''}">
+          <td><strong>${s.rate_pct}%</strong></td>
+          <td>병원 ${s.hosp_count} / 의원 ${s.clinic_count}</td>
+          <td>${s.km_doctors} 명</td>
+          <td>${s.annual_visit_slots.toLocaleString()} 회</td>
+          <td><strong>${s.dea_score_vrs.toFixed(2)}</strong></td>
+          <td>${s.scale_eff.toFixed(2)}</td>
+          <td>연 ${s.slack_saving >= 10000 ? (s.slack_saving/10000).toFixed(2)+'조' : s.slack_saving.toFixed(1)+'억'} 원</td>
+        </tr>
+      `).join('');
+
+      document.getElementById('tbodyNash').innerHTML = scenarios.map(s => {
+        const y5 = s.yearly[4];
+        return `
+          <tr class="${s.rate_pct === currentRate ? 'highlight-row' : ''}">
+            <td><strong>${s.rate_pct}%</strong></td>
+            <td>${s.theta.toFixed(3)}</td>
+            <td><strong style="color:#38bdf8;">${(y5.p_home*100).toFixed(1)}%</strong></td>
+            <td>${(y5.p_rehab*100).toFixed(1)}%</td>
+            <td>${(y5.p_coop*100).toFixed(1)}%</td>
+            <td>${s.rate_pct >= 30 ? '<span style="color:#34d399; font-weight:700;">파레토 최적 협력</span>' : '초기 탐색 국면'}</td>
+          </tr>
+        `;
+      }).join('');
+
+      document.getElementById('tbodyMc').innerHTML = scenarios.map(s => `
+        <tr class="${s.rate_pct === currentRate ? 'highlight-row' : ''}">
+          <td><strong>${s.rate_pct}%</strong></td>
+          <td>${(s.yearly[0].eld_mean/10000).toFixed(1)}만</td>
+          <td>${(s.yearly[1].eld_mean/10000).toFixed(1)}만</td>
+          <td>${(s.yearly[2].eld_mean/10000).toFixed(1)}만</td>
+          <td>${(s.yearly[3].eld_mean/10000).toFixed(1)}만</td>
+          <td><strong style="color:#34d399;">${(s.yearly[4].eld_mean/10000).toFixed(1)}만</strong></td>
+          <td><strong>${s.cum_savings_mean >= 10000 ? (s.cum_savings_mean/10000).toFixed(2)+'조' : s.cum_savings_mean.toLocaleString()+'억'}</strong></td>
+          <td>${s.cum_roi.toFixed(2)} 배</td>
+        </tr>
+      `).join('');
+
+      document.getElementById('tbodyDid').innerHTML = scenarios.map(s => `
+        <tr class="${s.rate_pct === currentRate ? 'highlight-row' : ''}">
+          <td><strong>${s.rate_pct}%</strong></td>
+          <td>${s.appropriateness.hosp_suppression.toFixed(1)}%</td>
+          <td>${s.appropriateness.readm_reduction.toFixed(1)}%</td>
+          <td>${s.appropriateness.er_reduction.toFixed(1)}%</td>
+          <td>${s.appropriateness.polypharm_reduction.toFixed(1)}%</td>
+          <td>${s.appropriateness.adl_maintenance.toFixed(1)}%</td>
+          <td>${s.appropriateness.tfp_malmquist.toFixed(2)}</td>
+          <td><strong style="color:#f87171;">${s.did_delta.toFixed(3)}</strong></td>
+        </tr>
+      `).join('');
+    }
+
+    function initDiseaseCards() {
+      document.getElementById('diseaseCards').innerHTML = MASTER_DATA.disease_comparison.map(d => `
+        <div class="disease-card">
+          <div class="disease-title">${d.name}</div>
+          <div class="cost-compare">
+            <span style="color: var(--text-muted);">의과 표준/입원:</span>
+            <span class="cost-val-conv">연 ${(d.conv_annual_cost/10000).toLocaleString()}만 원</span>
+          </div>
+          <div class="cost-compare">
+            <span style="color: var(--text-muted);">한의 방문케어:</span>
+            <span class="cost-val-km">연 ${(d.km_annual_cost/10000).toLocaleString()}만 원</span>
+          </div>
+          <div class="saving-tag">1인당 연 ${(d.saving_per_patient/10000).toLocaleString()}만 원 절감 (-${d.saving_pct}%)</div>
+          <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 8px;">${d.clinical_effect}</div>
+        </div>
+      `).join('');
+    }
+
+    function initCharts() {
+      const ctxYearly = document.getElementById('chartYearlyCost').getContext('2d');
+      chartYearly = new Chart(ctxYearly, {
+        type: 'line',
+        data: {
+          labels: ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5'],
+          datasets: [
+            { label: 'Baseline', data: [610,610,610,610,610], borderColor: 'rgba(255,255,255,0.4)', borderDash: [5,5], pointRadius: 0 },
+            { label: '노인 1인당 진료비', data: [492.6, 449.9, 422.5, 414.0, 412.2], borderColor: '#38bdf8', backgroundColor: 'rgba(56, 189, 248, 0.1)', borderWidth: 3, tension: 0.3, fill: true },
+            { label: '취약계층 1인당 진료비', data: [698.5, 638.1, 599.2, 587.1, 575.7], borderColor: '#ec4899', backgroundColor: 'rgba(236, 72, 153, 0.1)', borderWidth: 3, tension: 0.3, fill: true }
+          ]
+        },
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { labels: { color: '#cbd5e1' } } }, scales: { x: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#9ca3af' } }, y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#9ca3af' }, title: { display: true, text: '만 원', color: '#9ca3af' } } } }
+      });
+
+      const ctxSavings = document.getElementById('chartSavings').getContext('2d');
+      const rates = MASTER_DATA.yeosu_scenarios.map(s => `${s.rate_pct}%`);
+      const ysSav = MASTER_DATA.yeosu_scenarios.map(s => s.cum_savings_mean);
+      const jnSav = MASTER_DATA.jeonnam_scenarios.map(s => s.cum_savings_mean);
+
+      chartSavings = new Chart(ctxSavings, {
+        type: 'bar',
+        data: {
+          labels: rates,
+          datasets: [
+            { label: '여수시 5개년 누적 절감액 (억 원)', data: ysSav, backgroundColor: 'rgba(2, 132, 199, 0.8)', borderRadius: 6 },
+            { label: '전라남도 5개년 누적 절감액 (억 원)', data: jnSav, backgroundColor: 'rgba(5, 150, 105, 0.8)', borderRadius: 6 }
+          ]
+        },
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { labels: { color: '#cbd5e1' } } }, scales: { x: { grid: { display: false }, ticks: { color: '#9ca3af' } }, y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#9ca3af' }, title: { display: true, text: '억 원', color: '#9ca3af' } } } }
+      });
+
+      const ctxNash = document.getElementById('chartNash').getContext('2d');
+      chartNash = new Chart(ctxNash, {
+        type: 'line',
+        data: {
+          labels: rates,
+          datasets: [
+            { label: '환자: 재택기능유지 선택 (%)', data: MASTER_DATA.jeonnam_scenarios.map(s => s.yearly[4].p_home * 100), borderColor: '#7c3aed', borderWidth: 3, tension: 0.3 },
+            { label: '요양병원: 단기재활전환 (%)', data: MASTER_DATA.jeonnam_scenarios.map(s => s.yearly[4].p_rehab * 100), borderColor: '#14b8a6', borderWidth: 2, tension: 0.3 },
+            { label: '1차의원: 비수술협진 (%)', data: MASTER_DATA.jeonnam_scenarios.map(s => s.yearly[4].p_coop * 100), borderColor: '#f97316', borderWidth: 2, tension: 0.3 }
+          ]
+        },
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { labels: { color: '#cbd5e1' } } }, scales: { x: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#9ca3af' } }, y: { min: 0, max: 100, grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#9ca3af' }, title: { display: true, text: '%', color: '#9ca3af' } } } }
+      });
+
+      const ctxDisease = document.getElementById('chartDisease').getContext('2d');
+      const dLabels = ['근골격계\n(요통/관절)', '뇌혈관\n(중풍마비)', '치매/정신\n(인지장애)', '노인성쇠약\n(만성복합)', '수술/암후유\n(호스피스)'];
+      chartDisease = new Chart(ctxDisease, {
+        type: 'bar',
+        data: {
+          labels: dLabels,
+          datasets: [
+            { label: '의과 표준/입원 치료비 (만 원)', data: MASTER_DATA.disease_comparison.map(d => d.conv_annual_cost/10000), backgroundColor: 'rgba(239, 68, 68, 0.75)', borderRadius: 6 },
+            { label: '한의 방문진료·통합케어 (만 원)', data: MASTER_DATA.disease_comparison.map(d => d.km_annual_cost/10000), backgroundColor: 'rgba(2, 132, 199, 0.75)', borderRadius: 6 }
+          ]
+        },
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { labels: { color: '#cbd5e1' } } }, scales: { x: { grid: { display: false }, ticks: { color: '#9ca3af' } }, y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#9ca3af' }, title: { display: true, text: '만 원', color: '#9ca3af' } } } }
+      });
+    }
+
+    function switchTab(index) {
+      document.querySelectorAll('.tab-btn').forEach((btn, idx) => btn.classList.toggle('active', idx === index));
+      document.querySelectorAll('.tab-pane').forEach((pane, idx) => pane.classList.toggle('active', idx === index));
+    }
+
+    function initMasterData() {
+      MASTER_DATA = {
+        meta: {
+          yeosu: { name: '여수시', pop_total: 271000, pop_elderly: 61000, base_eld_cost: 5700000, base_vul_cost: 8250000 },
+          jeonnam: { name: '전라남도', pop_total: 1805000, pop_elderly: 480000, base_eld_cost: 6100000, base_vul_cost: 8600000 }
+        },
+        disease_comparison: [
+          { name: "근골격계·척추관절 질환 (M54, M17)", conv_annual_cost: 4950000, km_annual_cost: 1650000, saving_per_patient: 3300000, saving_pct: 66.7, clinical_effect: "수술 68% 억제, 보행능력 35% 향상" },
+          { name: "뇌혈관 후유증 및 편마비 (I69, G81)", conv_annual_cost: 14500000, km_annual_cost: 3800000, saving_per_patient: 10700000, saving_pct: 73.8, clinical_effect: "요양병원 입원 72% 방지, 바델지수 28% 개선" },
+          { name: "치매 및 노인성 인지장애 (F00-F03, F32)", conv_annual_cost: 12000000, km_annual_cost: 3100000, saving_per_patient: 8900000, saving_pct: 74.2, clinical_effect: "향정약물 65% 감축, 이상행동 48% 완화" },
+          { name: "노인성 쇠약 및 만성 복합질환 (R53, E11)", conv_annual_cost: 5800000, km_annual_cost: 1900000, saving_per_patient: 3900000, saving_pct: 67.2, clinical_effect: "다제약물 62% 정비, 낙상·골절 45% 예방" },
+          { name: "암/수술후 재활·호스피스 (C00-C97)", conv_annual_cost: 16800000, km_annual_cost: 4500000, saving_per_patient: 12300000, saving_pct: 73.2, clinical_effect: "암성통증 55% 완화, 재택사망률 70% 달성" }
+        ],
+        yeosu_scenarios: [
+          { rate_pct: 10, hosp_count: 1, clinic_count: 11, km_doctors: 18, annual_visit_slots: 17028, dea_score_vrs: 0.78, scale_eff: 0.81, slack_saving: 47.8, theta: 0.15, cum_savings_mean: 2600.7, cum_roi: 21.11, did_delta: -0.197, appropriateness: { hosp_suppression: 18.6, readm_reduction: 15.8, er_reduction: 15.5, polypharm_reduction: 23.5, adl_maintenance: 29.3, tfp_malmquist: 1.03 }, yearly: [{eld_mean: 5158000},{eld_mean: 4973000},{eld_mean: 4805000},{eld_mean: 4713000},{eld_mean: 4682000, eld_pct: -17.9, vul_mean: 6758000, vul_pct: -18.1, p_home: 0.31, p_rehab: 0.187, p_coop: 0.392}] },
+          { rate_pct: 20, hosp_count: 1, clinic_count: 22, km_doctors: 35, annual_visit_slots: 33670, dea_score_vrs: 0.84, scale_eff: 0.87, slack_saving: 100.8, theta: 0.239, cum_savings_mean: 3632.7, cum_roi: 16.86, did_delta: -0.279, appropriateness: { hosp_suppression: 28.2, readm_reduction: 24.0, er_reduction: 23.0, polypharm_reduction: 34.8, adl_maintenance: 35.8, tfp_malmquist: 1.05 }, yearly: [{eld_mean: 4879000},{eld_mean: 4572000},{eld_mean: 4340000},{eld_mean: 4263000},{eld_mean: 4247000, eld_pct: -25.5, vul_mean: 6113000, vul_pct: -25.9, p_home: 0.46, p_rehab: 0.295, p_coop: 0.538}] },
+          { rate_pct: 30, hosp_count: 2, clinic_count: 32, km_doctors: 52, annual_visit_slots: 50856, dea_score_vrs: 0.89, scale_eff: 0.93, slack_saving: 151.6, theta: 0.329, cum_savings_mean: 4582.6, cum_roi: 15.64, did_delta: -0.354, appropriateness: { hosp_suppression: 37.1, readm_reduction: 31.5, er_reduction: 29.8, polypharm_reduction: 45.1, adl_maintenance: 41.8, tfp_malmquist: 1.07 }, yearly: [{eld_mean: 4603000},{eld_mean: 4204000},{eld_mean: 3947000},{eld_mean: 3868000},{eld_mean: 3851000, eld_pct: -32.4, vul_mean: 5522000, vul_pct: -33.1, p_home: 0.597, p_rehab: 0.410, p_coop: 0.662}] },
+          { rate_pct: 50, hosp_count: 2, clinic_count: 54, km_doctors: 88, annual_visit_slots: 88880, dea_score_vrs: 0.96, scale_eff: 0.97, slack_saving: 232.8, theta: 0.513, cum_savings_mean: 6186.7, cum_roi: 14.24, did_delta: -0.472, appropriateness: { hosp_suppression: 53.2, readm_reduction: 45.2, er_reduction: 40.5, polypharm_reduction: 62.3, adl_maintenance: 51.9, tfp_malmquist: 1.12 }, yearly: [{eld_mean: 4087000},{eld_mean: 3572000},{eld_mean: 3312000},{eld_mean: 3245000},{eld_mean: 3234000, eld_pct: -43.3, vul_mean: 4591000, vul_pct: -44.4, p_home: 0.810, p_rehab: 0.653, p_coop: 0.841}] },
+          { rate_pct: 100, hosp_count: 5, clinic_count: 108, km_doctors: 175, annual_visit_slots: 190750, dea_score_vrs: 0.99, scale_eff: 0.99, slack_saving: 320.3, theta: 0.950, cum_savings_mean: 7926.5, cum_roi: 10.68, did_delta: -0.564, appropriateness: { hosp_suppression: 70.5, readm_reduction: 59.9, er_reduction: 49.2, polypharm_reduction: 78.9, adl_maintenance: 61.4, tfp_malmquist: 1.28 }, yearly: [{eld_mean: 3613000},{eld_mean: 3038000},{eld_mean: 2816000},{eld_mean: 2763000},{eld_mean: 2753000, eld_pct: -51.7, vul_mean: 3846000, vul_pct: -53.4, p_home: 0.983, p_rehab: 0.948, p_coop: 0.980}] }
+        ],
+        jeonnam_scenarios: [
+          { rate_pct: 10, hosp_count: 4, clinic_count: 64, km_doctors: 108, annual_visit_slots: 102168, dea_score_vrs: 0.78, scale_eff: 0.81, slack_saving: 3540.0, theta: 0.15, cum_savings_mean: 21780.4, cum_roi: 21.00, did_delta: -0.197, appropriateness: { hosp_suppression: 18.6, readm_reduction: 15.8, er_reduction: 15.5, polypharm_reduction: 23.5, adl_maintenance: 29.3, tfp_malmquist: 1.03 }, yearly: [{eld_mean: 5521000},{eld_mean: 5323000},{eld_mean: 5143000},{eld_mean: 5044000},{eld_mean: 5011000, eld_pct: -17.8, vul_mean: 7046000, vul_pct: -18.1, p_home: 0.31, p_rehab: 0.187, p_coop: 0.392}] },
+          { rate_pct: 20, hosp_count: 8, clinic_count: 128, km_doctors: 216, annual_visit_slots: 207792, dea_score_vrs: 0.84, scale_eff: 0.87, slack_saving: 7468.0, theta: 0.239, cum_savings_mean: 30345.0, cum_roi: 16.73, did_delta: -0.279, appropriateness: { hosp_suppression: 28.2, readm_reduction: 24.0, er_reduction: 23.0, polypharm_reduction: 34.8, adl_maintenance: 35.8, tfp_malmquist: 1.05 }, yearly: [{eld_mean: 5222000},{eld_mean: 4894000},{eld_mean: 4645000},{eld_mean: 4563000},{eld_mean: 4545000, eld_pct: -25.5, vul_mean: 6372000, vul_pct: -25.9, p_home: 0.46, p_rehab: 0.295, p_coop: 0.538}] },
+          { rate_pct: 30, hosp_count: 13, clinic_count: 191, km_doctors: 324, annual_visit_slots: 316872, dea_score_vrs: 0.89, scale_eff: 0.93, slack_saving: 11228.0, theta: 0.329, cum_savings_mean: 38283.2, cum_roi: 15.53, did_delta: -0.354, appropriateness: { hosp_suppression: 37.1, readm_reduction: 31.5, er_reduction: 29.8, polypharm_reduction: 45.1, adl_maintenance: 41.8, tfp_malmquist: 1.07 }, yearly: [{eld_mean: 4926000},{eld_mean: 4499000},{eld_mean: 4225000},{eld_mean: 4140000},{eld_mean: 4122000, eld_pct: -32.4, vul_mean: 5757000, vul_pct: -33.1, p_home: 0.597, p_rehab: 0.410, p_coop: 0.662}] },
+          { rate_pct: 50, hosp_count: 21, clinic_count: 319, km_doctors: 540, annual_visit_slots: 545400, dea_score_vrs: 0.96, scale_eff: 0.97, slack_saving: 17245.0, theta: 0.513, cum_savings_mean: 51634.4, cum_roi: 14.12, did_delta: -0.472, appropriateness: { hosp_suppression: 53.2, readm_reduction: 45.2, er_reduction: 40.5, polypharm_reduction: 62.3, adl_maintenance: 51.9, tfp_malmquist: 1.12 }, yearly: [{eld_mean: 4374000},{eld_mean: 3824000},{eld_mean: 3544000},{eld_mean: 3473000},{eld_mean: 3461000, eld_pct: -43.3, vul_mean: 4786000, vul_pct: -44.3, p_home: 0.810, p_rehab: 0.653, p_coop: 0.841}] },
+          { rate_pct: 100, hosp_count: 42, clinic_count: 638, km_doctors: 1080, annual_visit_slots: 1177200, dea_score_vrs: 0.99, scale_eff: 0.99, slack_saving: 23727.0, theta: 0.950, cum_savings_mean: 65975.8, cum_roi: 10.57, did_delta: -0.564, appropriateness: { hosp_suppression: 70.5, readm_reduction: 59.9, er_reduction: 49.2, polypharm_reduction: 78.9, adl_maintenance: 61.4, tfp_malmquist: 1.28 }, yearly: [{eld_mean: 3866000},{eld_mean: 3251000},{eld_mean: 3014000},{eld_mean: 2956000},{eld_mean: 2946000, eld_pct: -51.7, vul_mean: 4008000, vul_pct: -53.4, p_home: 0.983, p_rehab: 0.948, p_coop: 0.980}] }
+        ]
+      };
+    }
+  </script>
+</body>
+</html>
