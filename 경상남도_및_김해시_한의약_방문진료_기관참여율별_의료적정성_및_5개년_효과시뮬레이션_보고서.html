@@ -376,6 +376,51 @@
 <li><strong>STEP 5 이중차분 DID</strong>: 방문진료 개시 후 60일 이내 기존 의과 외래 및 요양병원 청구가 80% 이상 감소한 <strong>'순수 대체군(Pure Substitution Group)'</strong>만을 처치군으로 필터링하여 인과적 절감 효과 $\delta = -18.4\%$ 추정.</li>
 </ol>
 <hr />
+<h3 id="32-rho">3.2 기존 병·의원 진료 병행 비율($\rho$) 민감도 평가 모델식 및 절감액 추정</h3>
+<p>한의약 방문진료 이용 환자가 기존 의과 병·의원에서 동종 상병으로 진료를 병행하는 비율 $\rho \in [0, 0.30]$에 따른 순 재정 절감액 $S(\rho)$는 다음과 같이 산출됩니다:</p>
+<p>$$S(\rho) = S_{base} \times (1 - \rho)$$</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">병행 비율 ($\rho$)</th>
+<th style="text-align: left;">병행 유형 및 행태 모형</th>
+<th style="text-align: center;">김해시 50% 참여 5개년 누적 절감액</th>
+<th style="text-align: center;">경상남도 50% 참여 5개년 누적 절감액</th>
+<th style="text-align: center;">재정 절감 보존율</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>$\rho = 0\%$</strong></td>
+<td style="text-align: left;"><strong>완전 대체</strong> (제도적 병행 차단 100% 적용)</td>
+<td style="text-align: center;"><strong>2,087.6 억 원</strong></td>
+<td style="text-align: center;"><strong>1조 5,150.1 억 원</strong></td>
+<td style="text-align: center;"><strong>100.0%</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>$\rho = 10\%$</strong></td>
+<td style="text-align: left;"><strong>소폭 병행</strong> (의과 외래 물리치료 간헐적 병행)</td>
+<td style="text-align: center;"><strong>1,878.9 억 원</strong></td>
+<td style="text-align: center;"><strong>1조 3,635.1 억 원</strong></td>
+<td style="text-align: center;"><strong>90.0%</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>$\rho = 20\%$</strong></td>
+<td style="text-align: left;"><strong>중폭 병행</strong> (의과 외래 약물·주사 지속 병행)</td>
+<td style="text-align: center;"><strong>1,670.1 억 원</strong></td>
+<td style="text-align: center;"><strong>1조 2,120.1 억 원</strong></td>
+<td style="text-align: center;"><strong>80.0%</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>$\rho = 30\%$</strong></td>
+<td style="text-align: left;"><strong>고도 병행</strong> (요양병원 입원 이중 유지)</td>
+<td style="text-align: center;"><strong>1,461.3 억 원</strong></td>
+<td style="text-align: center;"><strong>1조 0,605.1 억 원</strong></td>
+<td style="text-align: center;"><strong>70.0%</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
 <h2 id="4-db-kdca-8-4">4. 코퍼스 DB (KDCA 8대 체계 &amp; 이혜진 교수 4대 기능 모델) 통합 변수 추가 및 의료 적정성 재검증</h2>
 <h3 id="41-db-4">4.1 코퍼스 DB 추가 4대 계수 및 산출식</h3>
 <p>정책 보고서 코퍼스 DB를 통해 도출된 신규 4대 변수를 모형에 추가 반영하였습니다.</p>

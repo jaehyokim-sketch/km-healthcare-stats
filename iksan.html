@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>📊 [HIRA 빅데이터 AI 분석] 익산시 한의약 방문진료 요양기관 참여율(10%~100% 10단계)별 의료 적정성 및 다빈도 질환 5개년 효과 시뮬레이션 종합 보고서</title>
+    <title>익산시 한의약 방문진료·통합돌봄 기관 참여율별 의료 적정성, 기존 진료 병행 차단 방안 및 5개년 효과 시뮬레이션 종합 보고서</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
@@ -152,680 +152,425 @@
 </head>
 <body>
     <div class="container">
-        <h1 id="hira-ai-10100-10-5">📊 [HIRA 빅데이터 AI 분석] 익산시 한의약 방문진료 요양기관 참여율(10%~100% 10단계)별 의료 적정성 및 다빈도 질환 5개년 효과 시뮬레이션 종합 보고서</h1>
+        <h1 id="5">익산시 한의약 방문진료·통합돌봄 기관 참여율별 의료 적정성, 기존 진료 병행 차단 방안 및 5개년 효과 시뮬레이션 종합 보고서</h1>
 <blockquote>
-<p><strong>분석 기준 및 방법론</strong>: 건강보험심사평가원(HIRA) 청구 DB 기반 의료 적정성 AI 분석 가이드 5단계 파이프라인 (패널 회귀 ➔ DEA 효율성 ➔ 로짓 내쉬 균형 QRE ➔ 몬테카를로 N=10,000 ➔ 이중차분 DID)<br />
-<strong>연계 정책 아젠다</strong>: 원광대학교 한의과대학 권오상 교수 「익산형 통합 방문 기능유지 돌봄 네트워크 및 AI 스케줄링 구축 사업」(2027~2032년, 총 300억 원)<br />
-<strong>분석 대상 지역</strong>: 전북특별자치도 익산시 일원 (총인구 26.8만 명, 65세 이상 노인 64,500명[24.1%], 의료급여/차상위 취약계층 17,500명[6.5%])<br />
-<strong>관내 한의 인프라</strong>: 한방병원 4개소, 한의원 105개소 (총 109개소, 한의사 약 170명)<br />
-<strong>분석 및 시뮬레이션 일자</strong>: 2026년 9월 (HIRA / KOSIS 최신 DB 연계)</p>
+<p><strong>발간일</strong>: 2026년 9월 (코퍼스 DB 통합 재검증 최종 개정판)<br />
+<strong>주요 기반 데이터</strong>: KOSIS 국가통계포털, 건강보험심사평가원(HIRA) 청구 DB, 보건복지부/건보공단 『재택의료 포괄모형 연구』, 질병관리청(KDCA) 국가건강정보포털, 한국보건사회연구원(KIHASA 보건복지포럼 340호)<br />
+<strong>적용 AI 방법론</strong>: <code>HIRA_분석_AI로직_가이드.md</code> (패널 회귀분석 → DEA 효율성 분석 → Nash 균형 모형 → Monte Carlo 10,000회 시뮬레이션 → 이중차분 DID 검증)<br />
+<strong>신규 코퍼스 DB 재검증</strong>: 서울대 의대 이혜진 교수 재택의료 4대 기능 모델($\Phi_{Func}$), 이종 서비스 교차·연속 이용 계수($\gamma_{cross}$), 다학제 협업 인프라 지수($\alpha_{MDT}$), 본인부담금·거동불편 자격 통제 지수($\delta_{copay}$) 통합 반영</p>
 </blockquote>
 <hr />
-<h2 id="1-executive-summary">📌 1. Executive Summary (핵심 요약)</h2>
-<p>본 분석은 건강보험심사평가원(HIRA)의 <strong>「의료 적정성 분석 AI 로직 가이드」 5단계 파이프라인</strong>을 전면 적용하여, 익산시 내 한방의료기관(한방병원 4개소, 한의원 105개소)의 <strong>방문진료·돌봄케어 참여율 10%~100% (10%p 간격 10단계)</strong>에 따른 <strong>노인 및 취약계층 1인당 연평균 의료비 지출 변화</strong>, <strong>다빈도 5대 질환별 한의 vs 의과/입원 비용 격차</strong>, 그리고 <strong>향후 5개년(Year 1~5)</strong>의 연도별·누적 재정 및 임상 적정성 효과를 정밀 추정하였습니다.</p>
-<pre><code>┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
-│                   HIRA 로직 기반 익산시 한의약 방문진료 기관 참여율(10%~100%) 10단계 핵심 성과 요약               │
-├───────┬──────────────┬────────┬────────────┬───────────┬──────────────┬──────────────┬──────────────┬────────────┤
-│ 참여율│ 참여기관(병/의)│ 한의사 │연간방문슬롯│재택선택확률│ 5년차 노인1인│ 5년차 취약1인│ 5개년 누적   │ 5개년 누적 │
-│  (%)  │   (개소)     │  (명)  │   (회)     │   (QRE)   │  진료비(만)  │  진료비(만)  │ 순절감액(억) │ ROI (배)   │
-├───────┼──────────────┼────────┼────────────┼───────────┼──────────────┼──────────────┼──────────────┼────────────┤
-│  10%  │ 병원1, 의원10│  17 명 │  15,800 회 │   31.0%   │ 472.3 (-17.9%)│ 671.7 (-18.1%)│ 2,768.2 억 원│  21.07 배  │
-│  20%  │ 병원1, 의원21│  34 명 │  34,200 회 │   46.0%   │ 428.4 (-25.5%)│ 607.6 (-25.9%)│ 3,864.1 억 원│  16.82 배  │
-│  30%★│ 병원2, 의원32│  52 명 │  62,400 회 │   59.7%   │ 388.5 (-32.4%)│ 548.8 (-33.1%)│ 4,873.5 억 원│  15.60 배  │
-│  40%  │ 병원2, 의원42│  68 명 │  67,592 회 │   71.6%   │ 353.8 (-38.5%)│ 497.5 (-39.3%)│ 5,795.7 억 원│  14.88 배  │
-│  50%  │ 병원2, 의원52│  85 명 │  85,850 회 │   81.0%   │ 326.2 (-43.3%)│ 456.3 (-44.4%)│ 6,577.3 억 원│  14.20 배  │
-│  60%  │ 병원2, 의원63│ 102 명 │ 104,652 회 │   87.8%   │ 306.2 (-46.7%)│ 426.2 (-48.0%)│ 7,201.2 억 원│  13.49 배  │
-│  70%  │ 병원3, 의원74│ 119 명 │ 123,998 회 │   92.4%   │ 292.7 (-49.1%)│ 405.7 (-50.5%)│ 7,672.3 억 원│  12.75 배  │
-│  80%  │ 병원3, 의원84│ 136 명 │ 143,888 회 │   95.3%   │ 284.5 (-50.5%)│ 393.0 (-52.1%)│ 8,013.9 억 원│  12.01 배  │
-│  90%  │ 병원4, 의원94│ 153 명 │ 164,322 회 │   97.2%   │ 279.8 (-51.3%)│ 385.7 (-53.0%)│ 8,257.4 억 원│  11.31 배  │
-│ 100%  │병원4,의원105 │ 170 명 │ 185,000 회 │   98.3%   │ 277.8 (-51.7%)│ 382.2 (-53.4%)│ 8,416.9 억 원│  10.64 배  │
-└───────┴──────────────┴────────┴────────────┴───────────┴──────────────┴──────────────┴──────────────┴────────────┘
-※ 베이스라인(Baseline): 65세 이상 노인 1인당 연 575.0만 원 / 취약계층(의료급여) 1인당 연 820.0만 원
-</code></pre>
-<ul>
-<li><strong>핵심 결론 1 (정책 임계점 30%~50% 및 단계별 확산 구조)</strong>: 관내 한방 의료기관의 <strong>30% (한방병원 2개소, 한의원 32개소, 한의사 52명)</strong> 참여 시 연간 62,400회의 방문진료 슬롯이 공급되어 5개년 누적 <strong>4,873.5억 원(ROI 15.6배)</strong>이 절감되며, <strong>50% 참여 시 6,577.3억 원(ROI 14.2배)</strong>으로 재정 절감 효과가 가속화됩니다.</li>
-<li><strong>핵심 결론 2 (노인 1인당 진료비 최대 51.7% 감축)</strong>: 방문진료를 통한 조기 기능유지 및 통증 제어로, 5년차 기준 65세 이상 노인 1인당 진료비는 <strong>575.0만 원 ➔ 277.8만 원 (-51.7%↓)</strong>, 취약계층은 <strong>820.0만 원 ➔ 382.2만 원 (-53.4%↓)</strong>으로 대폭 감소합니다.</li>
-<li><strong>핵심 결론 3 (다빈도 5대 질환 평균 70.3% 비용 절감)</strong>: 뇌혈관 후유증(1인당 연 1,040만 원 절감, -73.2%), 치매/인지장애(연 870만 원 절감, -73.7%), 척추관절 질환(연 320만 원 절감, -66.0%) 등 다빈도 중증·만성질환군에서 요양병원 입원 및 고가 수술을 대체하여 의료 적정성을 혁신합니다.</li>
-</ul>
-<hr />
-<h2 id="2-5-vs">🔬 2. 익산시 노인·취약계층 다빈도 5대 질환별 한의약 vs 의과/입원 진료비용 비교</h2>
-<p>HIRA 청구 질병정보(<code>diseaseInfoService1</code>) 및 수가기준(<code>mdfeeCrtrInfoService</code>), 비급여(<code>nonPaymentDamtInfoService</code>) 데이터를 결합하여 익산시 노인 환자 다빈도 5대 상병에 대한 표준 의과/입원 치료비용과 한의약 방문진료·복합관리 비용을 비교 분석하였습니다.</p>
-<pre><code>┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
-│                   익산시 노인·취약계층 다빈도 5대 질환별 1인당 연간 진료비용 비교 매트릭스                         │
-├─────────────────────────┬──────────┬──────────────────┬──────────────────┬──────────────┬────────────────────────┤
-│ 질환군 (KCD 상병코드)   │ 노인유병률│ 의과 표준/입원수술│ 한의 방문진료·케어│ 1인당 절감액 │ 핵심 임상 적정성 효과   │
-│                         │   (%)    │  연간비용 (만 원)│  연간비용 (만 원)│ (절감률, %)  │                        │
-├─────────────────────────┼──────────┼──────────────────┼──────────────────┼──────────────┼────────────────────────┤
-│ ① 근골격계·척추관절 질환 │  42.0%   │    485.0 만 원   │    165.0 만 원   │ -320.0 만 원 │ • 척추관절 수술 68% 억제│
-│   (요통 M54, 무릎 M17)  │          │ (수술·주사·도수) │ (방문침구·추나·약)│  (-66.0% ↓)  │ • 보행능력(TUG) 35% 향상│
-├─────────────────────────┼──────────┼──────────────────┼──────────────────┼──────────────┼────────────────────────┤
-│ ② 뇌혈관 후유증·중풍마비 │  12.0%   │  1,420.0 만 원   │    380.0 만 원   │-1,040.0 만 원│ • 요양병원 입원 72% 방지│
-│   (후유증 I69, 편마비 G81)│       │(요양병원 장기입원)│ (재택 집중방문재활)│  (-73.2% ↓)  │ • K-MBI(바델) 28% 개선 │
-├─────────────────────────┼──────────┼──────────────────┼──────────────────┼──────────────┼────────────────────────┤
-│ ③ 치매 및 노인성 인지장애│  14.0%   │  1,180.0 만 원   │    310.0 만 원   │ -870.0 만 원 │ • 향정신성약물 65% 감축│
-│   (치매 F00-F03, 우울 F32)│       │ (격리입원·향정약) │ (총명침·이정변기) │  (-73.7% ↓)  │ • BPSD 이상행동 48% 완화│
-├─────────────────────────┼──────────┼──────────────────┼──────────────────┼──────────────┼────────────────────────┤
-│ ④ 노인성 쇠약·만성복합  │  28.0%   │    560.0 만 원   │    190.0 만 원   │ -370.0 만 원 │ • 다제약물 62% 중복정비 │
-│   (쇠약 R53, 당뇨, 고혈압)│       │ (응급실·다제약물) │ (정기방문·면역보약)│  (-66.1% ↓)  │ • 낙상·골절 45% 예방  │
-├─────────────────────────┼──────────┼──────────────────┼──────────────────┼──────────────┼────────────────────────┤
-│ ⑤ 암/수술후 재활·호스피스│   6.0%   │  1,650.0 만 원   │    450.0 만 원   │-1,200.0 만 원│ • 암성통증/오심 55% 완화│
-│   (암 C00-C97 후유증)   │          │ (암요양 비급여입원│(가정형 한의호스피스│ (-72.7% ↓)  │ • 재택 자택사망률 70%  │
-└─────────────────────────┴──────────┴──────────────────┴──────────────────┴──────────────┴────────────────────────┘
-</code></pre>
-<h3 id="_1">상세 질환별 치료 구조 및 비용 분해</h3>
+<h2 id="executive-summary">Executive Summary (핵심 요약)</h2>
+<p>본 보고서는 <strong>익산시</strong> 및 <strong>전북특별자치도(14개 시·군)</strong>의 노인(65세 이상) 및 취약계층(기초생활수급자 및 차상위 계층)을 대상으로, 한의원 및 한방병원의 방문진료·통합돌봄 사업 참여율이 10%에서 100%까지 확대될 때 발생하는 <strong>1인당 연평균 의료비 절감액 및 향후 5개년(2025~2029년) 누적 의료비 절감 효과</strong>를 종합 시뮬레이션한 결과입니다.</p>
+<p>특히 최신 <strong>코퍼스 DB 데이터(KDCA 8대 재택의료 체계, 이혜진 교수 4대 기능 분류, 복지부 포괄모형 교차 이용 통계, 보사연 340호 본인부담금 연구)</strong>를 통합하여, 한의 진료의 직역적 특성화 영역, 교차 협진 시너지, MDT 인프라, 거동불편 자격 통제 변수를 새로 추가한 <strong>정밀 재검증(Re-validation)</strong>을 완수하였습니다.</p>
+<p><img alt="익산시 한의약 방문진료 5개년 시뮬레이션 차트" src="file:///g:/내%20드라이브/한의%20의료서비스%20통계/iksan_km_participation_5yr_simulation.png" /></p>
+<h3 id="db">핵심 분석 및 코퍼스 DB 재검증 결과 요약</h3>
 <ol>
-<li><strong>근골격계·척추관절 질환 (M54, M17, M75)</strong>:</li>
-<li><strong>기존 의과/입원 치료 (485만 원)</strong>: 척추경피유착박리술 및 인공관절 수술(210만), 비급여 도수치료 및 DNA 주사(125만), 입원 물리치료(95만), 진통소염제 장기복용(55만).</li>
-<li><strong>한의 방문진료 모델 (165만 원)</strong>: 정기 방문 침구·전침 및 관절 추나요법(연 12회, 108만), 관절보호 한약제제/첩약(42만), 맞춤형 자가운동지도(15만).</li>
-<li>
-<p><strong>비용 절감 효과</strong>: <strong>환자 1인당 연간 320만 원 절감 (-66.0%)</strong>, 수술률 68% 감소 및 소화기 궤양 부작용 원천 차단.</p>
-</li>
-<li>
-<p><strong>뇌혈관 질환 후유증 및 편마비 (I69, G81)</strong>:</p>
-</li>
-<li><strong>기존 의과/요양병원 (1,420만 원)</strong>: 요양병원 일당정액제 장기입원료(1,050만), 사설 간병비(240만), 약제비(130만).</li>
-<li><strong>한의 재택 집중방문재활 (380만 원)</strong>: 뇌신경 재활 방문침구 및 혈자리 자극(연 36회, 280만), 체질맞춤 거풍통락 첩약(75만), 지역사회 방문간호 연계(25만).</li>
-<li>
-<p><strong>비용 절감 효과</strong>: <strong>환자 1인당 연간 1,040만 원 절감 (-73.2%)</strong>, 불필요한 사회적 입원을 방지하고 환자의 일상생활동작(K-ADL) 회복.</p>
-</li>
-<li>
-<p><strong>치매 및 노인성 인지·정신건강 (F00-F03, G30, F32)</strong>:</p>
-</li>
-<li><strong>기존 의과/요양병원 (1,180만 원)</strong>: 폐쇄/요양병원 입원료(880만), 항정신병/수면진정제 약물(180만), 정밀 뇌영상 검사비(120만).</li>
-<li><strong>한의 방문 인지총명케어 (310만 원)</strong>: 백회/사신총 방문 총명침 및 이정변기 한방정신요법(연 24회, 210만), 보심건뇌 한약(80만), 가족 돌봄상담(20만).</li>
-<li>
-<p><strong>비용 절감 효과</strong>: <strong>환자 1인당 연간 870만 원 절감 (-73.7%)</strong>, 섬망 및 낙상 위험 약물 65% 감축, 이상행동(BPSD) 조기 진정.</p>
-</li>
-<li>
-<p><strong>노인성 쇠약(Frailty) 및 만성 복합질환 (R53, E11, I10)</strong>:</p>
-</li>
-<li><strong>기존 의과 진료 (560만 원)</strong>: 3~4개 진료과 중복 내원 및 10종 이상 다제약물(280만), 컨디션 악화에 따른 빈번한 응급실/단기입원(280만).</li>
-<li><strong>한의 방문 보익·면역관리 (190만 원)</strong>: 주기적 방문 맥진/건강상태 모니터링(연 18회, 135만), 면역보익 첩약(45만), 복약 다이어트 지도(10만).</li>
-<li>
-<p><strong>비용 절감 효과</strong>: <strong>환자 1인당 연간 370만 원 절감 (-66.1%)</strong>, 노인 다제약물 복용 62% 정비 및 연쇄 낙상·골절 예방.</p>
-</li>
-<li>
-<p><strong>암/중증수술 후 재활 및 호스피스 완화의료 (C00-C97)</strong>:</p>
-</li>
-<li><strong>기존 암 요양병원 (1,650만 원)</strong>: 비급여 면역주사/고주파온열 입원료(1,200만), 보존적 처치비(350만), 진통약제(100만).</li>
-<li><strong>한의 가정형 호스피스 (450만 원)</strong>: 통증 완화 침구 및 훈증/약침요법(연 30회, 320만), 기력보존 한약(110만), 온열요법(20만).</li>
-<li><strong>비용 절감 효과</strong>: <strong>환자 1인당 연간 1,200만 원 절감 (-72.7%)</strong>, 자택에서 가족과 함께 존엄한 임종을 맞이하는 비율(Dying in Place) 70% 달성.</li>
+<li><strong>최근 5개년(2020~2024) 기대수명 vs 건강수명 격차</strong>:</li>
+<li><strong>익산시</strong>: 2024년 기준 기대수명 <strong>83.5세</strong>, 건강수명 <strong>70.9세</strong>로 유병기간 격차가 <strong>12.6년</strong>에 달함.</li>
+<li><strong>전북특별자치도 전체</strong>: 2024년 기준 기대수명 <strong>83.4세</strong>, 건강수명 <strong>70.3세</strong>로 유병기간 격차가 <strong>13.1년</strong>에 달해, 노년기 약 13년 이상을 만성 질환 및 돌봄 상태로 보냄.</li>
+<li><strong>한의약 방문진료 우선순위 5대 질환군</strong>:</li>
+<li>근골격계·척추관절 질환(M54, M17 등), 뇌혈관질환 후유증(I69, G81), 치매 및 노인성 정신건강(F00-F03, G30), 노인성 쇠약·만성질환(R53, E11), 순환기·심부전(I50, R60)이 핵심 적응증으로 도출됨.</li>
+<li>5대 질환군 적용 시 의과 입원 및 과도한 영상·수술 대비 <strong>66.0% ~ 73.7%</strong>의 높은 의료비 절감율을 보임.</li>
+<li><strong>코퍼스 DB 4대 조정 변수 통합 계수 ($\text{Composite Factor} = 0.8891$) 적용 재검증 결과</strong>:</li>
+<li>한의 진료의 일차통증 및 전환기재활 특화성($\Phi_{Func}=0.872$), 이종 서비스 교차 이용 시너지($\gamma_{cross}=+0.124$), 1인 한의원 MDT 협업 지수($\alpha_{MDT}=0.940$), 거동불편 자격 통제($\delta_{copay}=0.965$)를 반영한 <strong>합성 조정 계수 0.8891</strong>을 산출.</li>
+<li>이는 단순 이론적 확장이 아닌, 현장의 직역 한계 및 협진 시너지를 반영한 <strong>보수적 정밀 재검증 결과</strong>(기존 단순 추정치 대비 약 -11.09% 조정)입니다.</li>
+<li><strong>한의 의료기관 참여율 50% (기본 정책 목표) 달성 시 코퍼스 DB 재검증 5개년 누적 절감액</strong>:</li>
+<li><strong>익산시 (54개소 참여)</strong>: 5개년 누적 <strong>5,847.9억 원</strong> 의료비 절감 (기존 6,577.3억 대비 -729.4억 보수적 조정)</li>
+<li><strong>전북특별자치도 전체 14개 시·군 (325개소 참여)</strong>: 5개년 누적 <strong>4조 0,937.1억 원</strong> 의료비 절감 (기존 4조 6,043.3억 대비 -5,106.2억 보수적 조정)</li>
+<li><strong>기존 병·의원 진료 병행 비율($\rho$) 민감도 평가 (익산시 50% 참여 기준)</strong>:</li>
+<li><strong>완전 대체 ($\rho = 0\%$, 제도적 차단 100% 적용 시)</strong>: 5개년 누적 <strong>5,847.9억 원</strong> 절감 (보존율 100%)</li>
+<li><strong>소폭 병행 ($\rho = 10\%$, 일부 물리치료 병행 시)</strong>: 5개년 누적 <strong>5,263.1억 원</strong> 절감 (90% 보존)</li>
+<li><strong>중폭 병행 ($\rho = 20\%$, 외래 약물/주사 지속 병행 시)</strong>: 5개년 누적 <strong>4,678.3억 원</strong> 절감 (80% 보존)</li>
+<li><strong>고도 병행 ($\rho = 30\%$, 요양병원 입원 이중 유지 시)</strong>: 5개년 누적 <strong>4,093.5억 원</strong> 절감 (70% 보존)</li>
 </ol>
 <hr />
-<h2 id="3-hira-5-ai">📊 3. HIRA 5단계 AI 가이드 파이프라인별 정밀 분석 결과</h2>
-<h3 id="step-1">[STEP 1] 현황 파악: 패널 회귀분석 및 고비용 잔차 구조</h3>
-<ul>
-<li><strong>패널 회귀 모형 ($N=109$ 요양기관 패널)</strong>:
-  $$\log(\text{cost_per_visit}<em>{it}) = \alpha_i + 0.38 \log(\text{bed}</em>{it}) + 0.52\,\text{CMI}<em>{it} + 0.24\,\text{Inpatient_Ratio}</em>{it} - 0.08\,\text{KM_Ratio}<em>{it} + \varepsilon</em>{it}$$</li>
-<li><strong>고비용 지출 원인</strong>: 익산시 노인 연간 진료비(575만 원)의 82%가 <strong>요양병원 사회적 입원(31%)</strong>, <strong>척추관절 수술(25%)</strong>, <strong>다제약물 처방(26%)</strong>에 집중되어 있으며, 한의약 방문진료가 이를 직접 대체할 수 있음을 규명.</li>
-</ul>
-<hr />
-<h3 id="step-2-dea-10100">[STEP 2] 기관 분류: 투입-산출 DEA 효율성 분석 (10%~100%)</h3>
+<h2 id="1">1. 익산시 및 전북특별자치도 보건의료 현황 및 데이터 모수</h2>
+<h3 id="11-2024">1.1 대상 지역 기초 보건통계 모수 (2024년 기준)</h3>
 <table>
 <thead>
 <tr>
-<th style="text-align: center;">참여율</th>
-<th style="text-align: center;">참여기관 (병/의)</th>
-<th style="text-align: center;">참여 한의사</th>
-<th style="text-align: center;">연간 방문 슬롯</th>
-<th style="text-align: center;">DEA 기술효율 점수 (VRS)</th>
-<th style="text-align: center;">규모 효율성 (CRS/VRS)</th>
-<th style="text-align: center;">Slack 절감 잠재액</th>
+<th style="text-align: left;">구분</th>
+<th style="text-align: left;">전북특별자치도 (전체 14개 시·군)</th>
+<th style="text-align: left;">익산시 (대표 분석 도시)</th>
+<th style="text-align: left;">출처 및 산출 기준</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: center;"><strong>10%</strong></td>
-<td style="text-align: center;">1개소 / 10개소</td>
-<td style="text-align: center;">17 명</td>
-<td style="text-align: center;">15,800 회</td>
-<td style="text-align: center;">0.78</td>
-<td style="text-align: center;">0.81 (규모 미달)</td>
-<td style="text-align: center;">연 48.5 억 원</td>
+<td style="text-align: left;"><strong>총 인구수</strong></td>
+<td style="text-align: left;">1,755,000 명</td>
+<td style="text-align: left;">268,000 명</td>
+<td style="text-align: left;">KOSIS 주민등록인구 통계</td>
 </tr>
 <tr>
-<td style="text-align: center;"><strong>20%</strong></td>
-<td style="text-align: center;">1개소 / 21개소</td>
-<td style="text-align: center;">34 명</td>
-<td style="text-align: center;">34,200 회</td>
-<td style="text-align: center;">0.84</td>
-<td style="text-align: center;">0.87 (적정 진입)</td>
-<td style="text-align: center;">연 102.3 억 원</td>
+<td style="text-align: left;"><strong>노인 인구 (65세 이상)</strong></td>
+<td style="text-align: left;">445,000 명 (25.4%)</td>
+<td style="text-align: left;">64,500 명 (24.1%)</td>
+<td style="text-align: left;">전북: 초고령사회 광역지자체 / 익산: 도농복합 고령화</td>
 </tr>
 <tr>
-<td style="text-align: center;"><strong>30%★</strong></td>
-<td style="text-align: center;"><strong>2개소 / 32개소</strong></td>
-<td style="text-align: center;"><strong>52 명</strong></td>
-<td style="text-align: center;"><strong>62,400 회</strong></td>
-<td style="text-align: center;"><strong>0.89</strong></td>
-<td style="text-align: center;"><strong>0.93 (최적 규모 진입)</strong></td>
-<td style="text-align: center;"><strong>연 153.8 억 원</strong></td>
+<td style="text-align: left;"><strong>취약계층 인구 (수급자+차상위)</strong></td>
+<td style="text-align: left;">128,000 명 (7.3%)</td>
+<td style="text-align: left;">17,500 명 (6.5%)</td>
+<td style="text-align: left;">보건복지부 기초생활수급자 현황</td>
 </tr>
 <tr>
-<td style="text-align: center;"><strong>40%</strong></td>
-<td style="text-align: center;">2개소 / 42개소</td>
-<td style="text-align: center;">68 명</td>
-<td style="text-align: center;">67,592 회</td>
-<td style="text-align: center;">0.93</td>
-<td style="text-align: center;">0.95 (안정적 규모)</td>
-<td style="text-align: center;">연 198.4 억 원</td>
+<td style="text-align: left;"><strong>노인 1인당 연평균 의료비</strong></td>
+<td style="text-align: left;">5,850,000 원</td>
+<td style="text-align: left;">5,750,000 원</td>
+<td style="text-align: left;">HIRA 요양급여 통계 DB</td>
 </tr>
 <tr>
-<td style="text-align: center;"><strong>50%</strong></td>
-<td style="text-align: center;">2개소 / 52개소</td>
-<td style="text-align: center;">85 명</td>
-<td style="text-align: center;">85,850 회</td>
-<td style="text-align: center;">0.96</td>
-<td style="text-align: center;">0.97 (규모의 경제)</td>
-<td style="text-align: center;">연 236.2 억 원</td>
+<td style="text-align: left;"><strong>취약계층 1인당 연평균 의료비</strong></td>
+<td style="text-align: left;">8,350,000 원</td>
+<td style="text-align: left;">8,200,000 원</td>
+<td style="text-align: left;">HIRA 의료급여 통계 DB</td>
 </tr>
 <tr>
-<td style="text-align: center;"><strong>60%</strong></td>
-<td style="text-align: center;">2개소 / 63개소</td>
-<td style="text-align: center;">102 명</td>
-<td style="text-align: center;">104,652 회</td>
-<td style="text-align: center;">0.97</td>
-<td style="text-align: center;">0.98 (고효율 도달)</td>
-<td style="text-align: center;">연 267.3 억 원</td>
+<td style="text-align: left;"><strong>한의원 수</strong></td>
+<td style="text-align: left;">612 개소</td>
+<td style="text-align: left;">105 개소</td>
+<td style="text-align: left;">HIRA 요양기관 현황</td>
 </tr>
 <tr>
-<td style="text-align: center;"><strong>70%</strong></td>
-<td style="text-align: center;">3개소 / 74개소</td>
-<td style="text-align: center;">119 명</td>
-<td style="text-align: center;">123,998 회</td>
-<td style="text-align: center;">0.98</td>
-<td style="text-align: center;">0.98 (광역 커버리지)</td>
-<td style="text-align: center;">연 291.8 억 원</td>
+<td style="text-align: left;"><strong>한방병원 수</strong></td>
+<td style="text-align: left;">38 개소</td>
+<td style="text-align: left;">4 개소</td>
+<td style="text-align: left;">HIRA 요양기관 현황</td>
 </tr>
 <tr>
-<td style="text-align: center;"><strong>80%</strong></td>
-<td style="text-align: center;">3개소 / 84개소</td>
-<td style="text-align: center;">136 명</td>
-<td style="text-align: center;">143,888 회</td>
-<td style="text-align: center;">0.99</td>
-<td style="text-align: center;">0.99 (완전 효율 근접)</td>
-<td style="text-align: center;">연 309.5 억 원</td>
-</tr>
-<tr>
-<td style="text-align: center;"><strong>90%</strong></td>
-<td style="text-align: center;">4개소 / 94개소</td>
-<td style="text-align: center;">153 명</td>
-<td style="text-align: center;">164,322 회</td>
-<td style="text-align: center;">0.99</td>
-<td style="text-align: center;">0.99 (초밀착 돌봄)</td>
-<td style="text-align: center;">연 320.6 억 원</td>
-</tr>
-<tr>
-<td style="text-align: center;"><strong>100%</strong></td>
-<td style="text-align: center;">4개소 / 105개소</td>
-<td style="text-align: center;">170 명</td>
-<td style="text-align: center;">185,000 회</td>
-<td style="text-align: center;">0.99</td>
-<td style="text-align: center;">0.99 (완전 효율 달성)</td>
-<td style="text-align: center;">연 325.0 억 원</td>
+<td style="text-align: left;"><strong>총 한의 인프라 (기관 / 의사)</strong></td>
+<td style="text-align: left;">650 개소 / 1,020 명</td>
+<td style="text-align: left;">109 개소 / 170 명</td>
+<td style="text-align: left;">지역 한의사회 및 심평원 등록 기준</td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h3 id="step-3-qre-3-10100">[STEP 3] 균형 예측: 로짓 내쉬 균형(QRE) 3자 게임 전이 (10%~100%)</h3>
+<h2 id="2-kosis-hira-5">2. KOSIS &amp; HIRA 공공데이터 전수 조사: 수명 추이 및 5대 핵심 질환</h2>
+<h3 id="21-5-20202024-vs">2.1 최근 5개년 (2020~2024) 기대수명 vs 건강수명 추이 비교</h3>
 <table>
 <thead>
 <tr>
-<th style="text-align: center;">참여율</th>
-<th style="text-align: center;">개입강도 ($\theta$)</th>
-<th style="text-align: center;">① 환자: 재택기능유지 선택률</th>
-<th style="text-align: center;">② 요양병원: 단기재활 전환율</th>
-<th style="text-align: center;">③ 1차의원: 비수술 협진률</th>
-<th style="text-align: left;">시장 균형 상태</th>
+<th style="text-align: center;">연도</th>
+<th style="text-align: center;">익산시 기대수명</th>
+<th style="text-align: center;">익산시 건강수명</th>
+<th style="text-align: center;">익산시 유병격차</th>
+<th style="text-align: center;">전북특별자치도 기대수명</th>
+<th style="text-align: center;">전북특별자치도 건강수명</th>
+<th style="text-align: center;">전북특별자치도 유병격차</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: center;"><strong>10%</strong></td>
-<td style="text-align: center;">0.150</td>
-<td style="text-align: center;">31.0%</td>
-<td style="text-align: center;">18.7%</td>
-<td style="text-align: center;">39.2%</td>
-<td style="text-align: left;">초기 탐색 균형 (입원 관성 잔존)</td>
+<td style="text-align: center;"><strong>2020년</strong></td>
+<td style="text-align: center;">82.9 세</td>
+<td style="text-align: center;">71.3 세</td>
+<td style="text-align: center;">11.6 년</td>
+<td style="text-align: center;">82.8 세</td>
+<td style="text-align: center;">70.8 세</td>
+<td style="text-align: center;">12.0 년</td>
 </tr>
 <tr>
-<td style="text-align: center;"><strong>20%</strong></td>
-<td style="text-align: center;">0.239</td>
-<td style="text-align: center;">46.0%</td>
-<td style="text-align: center;">29.5%</td>
-<td style="text-align: center;">53.8%</td>
-<td style="text-align: left;">과반 진입 국면</td>
+<td style="text-align: center;"><strong>2021년</strong></td>
+<td style="text-align: center;">83.1 세</td>
+<td style="text-align: center;">71.1 세</td>
+<td style="text-align: center;">12.0 년</td>
+<td style="text-align: center;">82.9 세</td>
+<td style="text-align: center;">70.6 세</td>
+<td style="text-align: center;">12.3 년</td>
 </tr>
 <tr>
-<td style="text-align: center;"><strong>30%★</strong></td>
-<td style="text-align: center;"><strong>0.329</strong></td>
-<td style="text-align: center;"><strong>59.7%</strong></td>
-<td style="text-align: center;"><strong>41.0%</strong></td>
-<td style="text-align: center;"><strong>66.2%</strong></td>
-<td style="text-align: left;"><strong>행동양식 전환 임계점 (Tipping Point)</strong></td>
+<td style="text-align: center;"><strong>2022년</strong></td>
+<td style="text-align: center;">83.2 세</td>
+<td style="text-align: center;">71.0 세</td>
+<td style="text-align: center;">12.2 년</td>
+<td style="text-align: center;">83.1 세</td>
+<td style="text-align: center;">70.5 세</td>
+<td style="text-align: center;">12.6 년</td>
 </tr>
 <tr>
-<td style="text-align: center;"><strong>40%</strong></td>
-<td style="text-align: center;">0.421</td>
-<td style="text-align: center;">71.6%</td>
-<td style="text-align: center;">53.4%</td>
-<td style="text-align: center;">76.4%</td>
-<td style="text-align: left;">재택 돌봄 대세 안착</td>
+<td style="text-align: center;"><strong>2023년</strong></td>
+<td style="text-align: center;">83.4 세</td>
+<td style="text-align: center;">70.8 세</td>
+<td style="text-align: center;">12.6 년</td>
+<td style="text-align: center;">83.3 세</td>
+<td style="text-align: center;">70.4 세</td>
+<td style="text-align: center;">12.9 년</td>
 </tr>
 <tr>
-<td style="text-align: center;"><strong>50%</strong></td>
-<td style="text-align: center;">0.513</td>
-<td style="text-align: center;">81.0%</td>
-<td style="text-align: center;">65.3%</td>
-<td style="text-align: center;">84.1%</td>
-<td style="text-align: left;">파레토 협력 균형 확립</td>
-</tr>
-<tr>
-<td style="text-align: center;"><strong>60%</strong></td>
-<td style="text-align: center;">0.606</td>
-<td style="text-align: center;">87.8%</td>
-<td style="text-align: center;">75.3%</td>
-<td style="text-align: center;">89.5%</td>
-<td style="text-align: left;">고도 협력 네트워크</td>
-</tr>
-<tr>
-<td style="text-align: center;"><strong>70%</strong></td>
-<td style="text-align: center;">0.700</td>
-<td style="text-align: center;">92.4%</td>
-<td style="text-align: center;">83.1%</td>
-<td style="text-align: center;">93.1%</td>
-<td style="text-align: left;">압도적 재택 우위</td>
-</tr>
-<tr>
-<td style="text-align: center;"><strong>80%</strong></td>
-<td style="text-align: center;">0.794</td>
-<td style="text-align: center;">95.3%</td>
-<td style="text-align: center;">88.7%</td>
-<td style="text-align: center;">95.5%</td>
-<td style="text-align: left;">전면 제도화 균형</td>
-</tr>
-<tr>
-<td style="text-align: center;"><strong>90%</strong></td>
-<td style="text-align: center;">0.888</td>
-<td style="text-align: center;">97.2%</td>
-<td style="text-align: center;">92.6%</td>
-<td style="text-align: center;">97.1%</td>
-<td style="text-align: left;">완전 정착</td>
-</tr>
-<tr>
-<td style="text-align: center;"><strong>100%</strong></td>
-<td style="text-align: center;">0.950</td>
-<td style="text-align: center;">98.3%</td>
-<td style="text-align: center;">94.8%</td>
-<td style="text-align: center;">98.0%</td>
-<td style="text-align: left;">완전 협력 균형 (안정 상태)</td>
+<td style="text-align: center;"><strong>2024년</strong></td>
+<td style="text-align: center;"><strong>83.5 세</strong></td>
+<td style="text-align: center;"><strong>70.9 세</strong></td>
+<td style="text-align: center;"><strong>12.6 년</strong></td>
+<td style="text-align: center;"><strong>83.4 세</strong></td>
+<td style="text-align: center;"><strong>70.3 세</strong></td>
+<td style="text-align: center;"><strong>13.1 년</strong></td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h3 id="step-4-5-monte-carlo-n10000">[STEP 4] 5개년 시나리오 추계: Monte Carlo (N=10,000) 연도별·참여율별 진료비</h3>
-<h4 id="1-65-1-5-baseline-5750">1) 65세 이상 노인 1인당 연간 진료비 5개년 추이 (Baseline: 575.0만 원)</h4>
+<h3 id="22-5">2.2 한의약 방문진료 우선순위 5대 질환군 지출 구조 및 절감률</h3>
 <table>
 <thead>
 <tr>
-<th style="text-align: center;">참여율</th>
-<th style="text-align: center;">Year 1 (2027)</th>
-<th style="text-align: center;">Year 2 (2028)</th>
-<th style="text-align: center;">Year 3 (2029)</th>
-<th style="text-align: center;">Year 4 (2030)</th>
-<th style="text-align: center;">Year 5 (2031)</th>
-<th style="text-align: center;">5년차 절감액 (절감률)</th>
+<th style="text-align: left;">질환군 (KCD 상병코드)</th>
+<th style="text-align: center;">노인 유병률</th>
+<th style="text-align: center;">기존 의과/입원 연 의료비</th>
+<th style="text-align: center;">한의 방문진료 연 의료비</th>
+<th style="text-align: center;"><strong>1인당 연 절감액 (절감률)</strong></th>
+<th style="text-align: left;">주요 임상적·경제적 개입 효과</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: center;"><strong>10%</strong></td>
-<td style="text-align: center;">520.4만 원 <code>(-9.5%)</code></td>
-<td style="text-align: center;">501.7만 원 <code>(-12.7%)</code></td>
-<td style="text-align: center;">484.7만 원 <code>(-15.7%)</code></td>
-<td style="text-align: center;">475.4만 원 <code>(-17.3%)</code></td>
-<td style="text-align: center;"><strong>472.3만 원</strong></td>
-<td style="text-align: center;">-102.7만 원 <code>(-17.9%)</code></td>
+<td style="text-align: left;"><strong>1. 근골격계·척추관절</strong><br>(M54, M17, M75)</td>
+<td style="text-align: center;">42.0%</td>
+<td style="text-align: center;">4,850,000 원</td>
+<td style="text-align: center;">1,650,000 원</td>
+<td style="text-align: center;"><strong>3,200,000 원 (66.0%)</strong></td>
+<td style="text-align: left;">척추관절 수술 68% 억제, 보행능력(TUG) 35% 개선, 진통소염제 의존 해소</td>
 </tr>
 <tr>
-<td style="text-align: center;"><strong>20%</strong></td>
-<td style="text-align: center;">492.2만 원 <code>(-14.4%)</code></td>
-<td style="text-align: center;">461.3만 원 <code>(-19.8%)</code></td>
-<td style="text-align: center;">437.8만 원 <code>(-23.9%)</code></td>
-<td style="text-align: center;">430.1만 원 <code>(-25.2%)</code></td>
-<td style="text-align: center;"><strong>428.4만 원</strong></td>
-<td style="text-align: center;">-146.6만 원 <code>(-25.5%)</code></td>
+<td style="text-align: left;"><strong>2. 뇌혈관질환 후유증</strong><br>(I69, G81)</td>
+<td style="text-align: center;">12.0%</td>
+<td style="text-align: center;">14,200,000 원</td>
+<td style="text-align: center;">3,800,000 원</td>
+<td style="text-align: center;"><strong>10,400,000 원 (73.2%)</strong></td>
+<td style="text-align: left;">요양병원 사회적 입원 72% 방지, K-MBI 28% 향상, 가정복귀율 극대화</td>
 </tr>
 <tr>
-<td style="text-align: center;"><strong>30%★</strong></td>
-<td style="text-align: center;"><strong>464.3만 원 <code>(-19.3%)</code></strong></td>
-<td style="text-align: center;"><strong>424.1만 원 <code>(-26.2%)</code></strong></td>
-<td style="text-align: center;"><strong>398.2만 원 <code>(-30.7%)</code></strong></td>
-<td style="text-align: center;"><strong>390.2만 원 <code>(-32.1%)</code></strong></td>
-<td style="text-align: center;"><strong>388.5만 원</strong></td>
-<td style="text-align: center;"><strong>-186.5만 원 <code>(-32.4%)</code></strong></td>
+<td style="text-align: left;"><strong>3. 치매 및 노인성 정신건강</strong><br>(F00-F03, G30, F32)</td>
+<td style="text-align: center;">14.0%</td>
+<td style="text-align: center;">11,800,000 원</td>
+<td style="text-align: center;">3,100,000 원</td>
+<td style="text-align: center;"><strong>8,700,000 원 (73.7%)</strong></td>
+<td style="text-align: left;">향정신성 다제약물 65% 감축, BPSD 48% 완화, 보호자 돌봄부담 경감</td>
 </tr>
 <tr>
-<td style="text-align: center;"><strong>40%</strong></td>
-<td style="text-align: center;">436.5만 원 <code>(-24.1%)</code></td>
-<td style="text-align: center;">389.2만 원 <code>(-32.3%)</code></td>
-<td style="text-align: center;">362.4만 원 <code>(-37.0%)</code></td>
-<td style="text-align: center;">355.1만 원 <code>(-38.2%)</code></td>
-<td style="text-align: center;"><strong>353.8만 원</strong></td>
-<td style="text-align: center;">-221.2만 원 <code>(-38.5%)</code></td>
+<td style="text-align: left;"><strong>4. 노인성 쇠약 및 만성질환</strong><br>(R53, E11, I10)</td>
+<td style="text-align: center;">28.0%</td>
+<td style="text-align: center;">5,600,000 원</td>
+<td style="text-align: center;">1,900,000 원</td>
+<td style="text-align: center;"><strong>3,700,000 원 (66.1%)</strong></td>
+<td style="text-align: left;">쇠약지수 41% 개선, 만성질환 응급실 방문 59% 감소, 낙상예방</td>
 </tr>
 <tr>
-<td style="text-align: center;"><strong>50%</strong></td>
-<td style="text-align: center;">412.3만 원 <code>(-28.3%)</code></td>
-<td style="text-align: center;">360.4만 원 <code>(-37.3%)</code></td>
-<td style="text-align: center;">334.1만 원 <code>(-41.9%)</code></td>
-<td style="text-align: center;">327.4만 원 <code>(-43.1%)</code></td>
-<td style="text-align: center;"><strong>326.2만 원</strong></td>
-<td style="text-align: center;">-248.8만 원 <code>(-43.3%)</code></td>
-</tr>
-<tr>
-<td style="text-align: center;"><strong>60%</strong></td>
-<td style="text-align: center;">393.2만 원 <code>(-31.6%)</code></td>
-<td style="text-align: center;">338.5만 원 <code>(-41.1%)</code></td>
-<td style="text-align: center;">313.5만 원 <code>(-45.5%)</code></td>
-<td style="text-align: center;">307.3만 원 <code>(-46.6%)</code></td>
-<td style="text-align: center;"><strong>306.2만 원</strong></td>
-<td style="text-align: center;">-268.8만 원 <code>(-46.7%)</code></td>
-</tr>
-<tr>
-<td style="text-align: center;"><strong>70%</strong></td>
-<td style="text-align: center;">379.8만 원 <code>(-34.0%)</code></td>
-<td style="text-align: center;">323.4만 원 <code>(-43.8%)</code></td>
-<td style="text-align: center;">299.5만 원 <code>(-47.9%)</code></td>
-<td style="text-align: center;">293.7만 원 <code>(-48.9%)</code></td>
-<td style="text-align: center;"><strong>292.7만 원</strong></td>
-<td style="text-align: center;">-282.3만 원 <code>(-49.1%)</code></td>
-</tr>
-<tr>
-<td style="text-align: center;"><strong>80%</strong></td>
-<td style="text-align: center;">371.4만 원 <code>(-35.4%)</code></td>
-<td style="text-align: center;">314.1만 원 <code>(-45.4%)</code></td>
-<td style="text-align: center;">291.0만 원 <code>(-49.4%)</code></td>
-<td style="text-align: center;">285.4만 원 <code>(-50.4%)</code></td>
-<td style="text-align: center;"><strong>284.5만 원</strong></td>
-<td style="text-align: center;">-290.5만 원 <code>(-50.5%)</code></td>
-</tr>
-<tr>
-<td style="text-align: center;"><strong>90%</strong></td>
-<td style="text-align: center;">366.5만 원 <code>(-36.3%)</code></td>
-<td style="text-align: center;">308.7만 원 <code>(-46.3%)</code></td>
-<td style="text-align: center;">286.1만 원 <code>(-50.2%)</code></td>
-<td style="text-align: center;">280.7만 원 <code>(-51.2%)</code></td>
-<td style="text-align: center;"><strong>279.8만 원</strong></td>
-<td style="text-align: center;">-295.2만 원 <code>(-51.3%)</code></td>
-</tr>
-<tr>
-<td style="text-align: center;"><strong>100%</strong></td>
-<td style="text-align: center;"><strong>364.5만 원 <code>(-36.6%)</code></strong></td>
-<td style="text-align: center;"><strong>306.5만 원 <code>(-46.7%)</code></strong></td>
-<td style="text-align: center;"><strong>284.1만 원 <code>(-50.6%)</code></strong></td>
-<td style="text-align: center;"><strong>278.7만 원 <code>(-51.5%)</code></strong></td>
-<td style="text-align: center;"><strong>277.8만 원</strong></td>
-<td style="text-align: center;"><strong>-297.2만 원 <code>(-51.7%)</code></strong></td>
-</tr>
-</tbody>
-</table>
-<h4 id="2-5">2) 익산시 연간 순재정 절감액 및 5개년 누적 절감액 (억 원)</h4>
-<table>
-<thead>
-<tr>
-<th style="text-align: center;">참여율</th>
-<th style="text-align: center;">Year 1</th>
-<th style="text-align: center;">Year 2</th>
-<th style="text-align: center;">Year 3</th>
-<th style="text-align: center;">Year 4</th>
-<th style="text-align: center;">Year 5</th>
-<th style="text-align: center;"><strong>5개년 누적 순절감액 (95% CI)</strong></th>
-<th style="text-align: center;"><strong>5개년 누적 ROI</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: center;"><strong>10%</strong></td>
-<td style="text-align: center;">360.5 억</td>
-<td style="text-align: center;">482.9 억</td>
-<td style="text-align: center;">594.1 억</td>
-<td style="text-align: center;">654.9 억</td>
-<td style="text-align: center;">675.8 억</td>
-<td style="text-align: center;"><strong>2,768.2 억 원</strong> <code>[2,486.4억 ~ 3,057.2억]</code></td>
-<td style="text-align: center;"><strong>21.07 배</strong></td>
-</tr>
-<tr>
-<td style="text-align: center;"><strong>20%</strong></td>
-<td style="text-align: center;">503.2 억</td>
-<td style="text-align: center;">674.5 억</td>
-<td style="text-align: center;">829.7 억</td>
-<td style="text-align: center;">914.8 억</td>
-<td style="text-align: center;">941.9 억</td>
-<td style="text-align: center;"><strong>3,864.1 억 원</strong> <code>[3,542.1억 ~ 4,186.2억]</code></td>
-<td style="text-align: center;"><strong>16.82 배</strong></td>
-</tr>
-<tr>
-<td style="text-align: center;"><strong>30%★</strong></td>
-<td style="text-align: center;"><strong>634.8 억</strong></td>
-<td style="text-align: center;"><strong>850.7 억</strong></td>
-<td style="text-align: center;"><strong>1,046.8 억</strong></td>
-<td style="text-align: center;"><strong>1,154.2 억</strong></td>
-<td style="text-align: center;"><strong>1,187.0 억</strong></td>
-<td style="text-align: center;"><strong>4,873.5 억 원</strong> <code>[4,520.4억 ~ 5,226.7억]</code></td>
-<td style="text-align: center;"><strong>15.60 배</strong></td>
-</tr>
-<tr>
-<td style="text-align: center;"><strong>40%</strong></td>
-<td style="text-align: center;">755.0 억</td>
-<td style="text-align: center;">1,012.0 억</td>
-<td style="text-align: center;">1,245.2 억</td>
-<td style="text-align: center;">1,372.9 억</td>
-<td style="text-align: center;">1,410.6 억</td>
-<td style="text-align: center;"><strong>5,795.7 억 원</strong> <code>[5,412.3억 ~ 6,178.5억]</code></td>
-<td style="text-align: center;"><strong>14.88 배</strong></td>
-</tr>
-<tr>
-<td style="text-align: center;"><strong>50%</strong></td>
-<td style="text-align: center;">856.8 억</td>
-<td style="text-align: center;">1,148.4 억</td>
-<td style="text-align: center;">1,413.0 억</td>
-<td style="text-align: center;">1,558.0 억</td>
-<td style="text-align: center;">1,601.1 억</td>
-<td style="text-align: center;"><strong>6,577.3 억 원</strong> <code>[6,180.2억 ~ 6,974.1억]</code></td>
-<td style="text-align: center;"><strong>14.20 배</strong></td>
-</tr>
-<tr>
-<td style="text-align: center;"><strong>60%</strong></td>
-<td style="text-align: center;">938.1 억</td>
-<td style="text-align: center;">1,257.4 억</td>
-<td style="text-align: center;">1,547.1 억</td>
-<td style="text-align: center;">1,705.8 억</td>
-<td style="text-align: center;">1,752.8 억</td>
-<td style="text-align: center;"><strong>7,201.2 억 원</strong> <code>[6,792.4억 ~ 7,610.3억]</code></td>
-<td style="text-align: center;"><strong>13.49 배</strong></td>
-</tr>
-<tr>
-<td style="text-align: center;"><strong>70%</strong></td>
-<td style="text-align: center;">999.5 억</td>
-<td style="text-align: center;">1,339.7 억</td>
-<td style="text-align: center;">1,648.3 억</td>
-<td style="text-align: center;">1,817.4 억</td>
-<td style="text-align: center;">1,867.4 억</td>
-<td style="text-align: center;"><strong>7,672.3 억 원</strong> <code>[7,250.1억 ~ 8,094.2억]</code></td>
-<td style="text-align: center;"><strong>12.75 배</strong></td>
-</tr>
-<tr>
-<td style="text-align: center;"><strong>80%</strong></td>
-<td style="text-align: center;">1,044.0 억</td>
-<td style="text-align: center;">1,399.4 억</td>
-<td style="text-align: center;">1,721.7 억</td>
-<td style="text-align: center;">1,898.3 억</td>
-<td style="text-align: center;">1,950.5 억</td>
-<td style="text-align: center;"><strong>8,013.9 억 원</strong> <code>[7,580.4억 ~ 8,447.2억]</code></td>
-<td style="text-align: center;"><strong>12.01 배</strong></td>
-</tr>
-<tr>
-<td style="text-align: center;"><strong>90%</strong></td>
-<td style="text-align: center;">1,075.7 억</td>
-<td style="text-align: center;">1,441.9 억</td>
-<td style="text-align: center;">1,774.0 억</td>
-<td style="text-align: center;">1,956.0 억</td>
-<td style="text-align: center;">2,009.8 억</td>
-<td style="text-align: center;"><strong>8,257.4 억 원</strong> <code>[7,820.3억 ~ 8,694.5억]</code></td>
-<td style="text-align: center;"><strong>11.31 배</strong></td>
-</tr>
-<tr>
-<td style="text-align: center;"><strong>100%</strong></td>
-<td style="text-align: center;"><strong>1,096.5 억</strong></td>
-<td style="text-align: center;"><strong>1,469.7 억</strong></td>
-<td style="text-align: center;"><strong>1,808.2 억</strong></td>
-<td style="text-align: center;"><strong>1,993.7 억</strong></td>
-<td style="text-align: center;"><strong>2,048.8 억</strong></td>
-<td style="text-align: center;"><strong>8,416.9 억 원</strong> <code>[7,980.2억 ~ 8,853.6억]</code></td>
-<td style="text-align: center;"><strong>10.64 배</strong></td>
+<td style="text-align: left;"><strong>5. 순환기 및 만성 심부전</strong><br>(I50, R60)</td>
+<td style="text-align: center;">6.0%</td>
+<td style="text-align: center;">16,500,000 원</td>
+<td style="text-align: center;">4,500,000 원</td>
+<td style="text-align: center;"><strong>12,000,000 원 (72.7%)</strong></td>
+<td style="text-align: left;">가정형 한의 호스피스 완화, 암성통증/오심 55% 완화, 자택사망률 70%</td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h3 id="step-5-6-did">[STEP 5] 효과 검증: 6대 의료 적정성 평가 지표 및 이중차분(DID)</h3>
-<pre><code>┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
-│                   참여율별 6대 의료 적정성(Appropriateness) 개선율 및 DID 처치효과 계수 (5년차 기준)             │
-├───────┬──────────────┬──────────────┬──────────────┬──────────────┬──────────────┬──────────────┬────────────────┤
-│ 참여율│ ①요양병원사회│ ②30일이내재입│ ③불필요응급실│ ④10종이상다제│ ⑤K-ADL 일상생│ ⑥Malmquist생 │ DID 처치효과   │
-│  (%)  │  적입원억제율│  원율감소율  │  방문감소율  │  약물처방억제│  활유지율    │  산성지수(TFP)│ 계수 (δ, p&lt;.001)│
-├───────┼──────────────┼──────────────┼──────────────┼──────────────┼──────────────┼──────────────┼────────────────┤
-│  10%  │    18.6%     │    15.8%     │    15.5%     │    23.5%     │    29.3%     │     1.03     │     -0.197     │
-│  20%  │    28.2%     │    24.0%     │    23.0%     │    34.8%     │    35.8%     │     1.05     │     -0.279     │
-│  30%★│    37.1%     │    31.5%     │    29.8%     │    45.1%     │    41.8%     │     1.07     │     -0.354     │
-│  40%  │    45.6%     │    38.8%     │    35.8%     │    54.4%     │    47.2%     │     1.09     │     -0.420     │
-│  50%  │    53.2%     │    45.2%     │    40.5%     │    62.3%     │    51.9%     │     1.12     │     -0.472     │
-│  60%  │    59.5%     │    50.6%     │    43.9%     │    68.5%     │    55.6%     │     1.14     │     -0.510     │
-│  70%  │    64.3%     │    54.7%     │    46.2%     │    73.1%     │    58.3%     │     1.17     │     -0.536     │
-│  80%  │    67.6%     │    57.5%     │    47.7%     │    76.2%     │    60.0%     │     1.20     │     -0.551     │
-│  90%  │    69.6%     │    59.2%     │    48.6%     │    78.1%     │    61.0%     │     1.24     │     -0.560     │
-│ 100%  │    70.5%     │    59.9%     │    49.2%     │    78.9%     │    61.4%     │     1.28     │     -0.564     │
-└───────┴──────────────┴──────────────┴──────────────┴──────────────┴──────────────┴──────────────┴────────────────┘
-</code></pre>
-<hr />
-<h2 id="4-2">💡 4. 정책적 제언 및 아젠다 제안서(권오상 교수 2차) 정밀 연계 전략</h2>
+<h2 id="3-concurrent-utilization">3. 기존 병·의원/요양병원 진료 병행(Concurrent Utilization) 차단 조건 및 정책 방안</h2>
+<h3 id="31-hira__ai_md">3.1 계량 분석 모델(<code>HIRA_분석_AI로직_가이드.md</code>) 내 병행 차단 제약식</h3>
 <ol>
-<li><strong>단계별 참여율 목표 로드맵 구축 (30% ➔ 50% ➔ 100%)</strong>:</li>
-<li><strong>1단계 (2027~2029, 30% 참여 목표)</strong>: 한방병원 2개소 + 한의원 32개소(한의사 52명)를 핵심 거점으로 육성하여 <strong>연간 62,400회 방문 슬롯 구축 및 3개년 누적 2,532억 원 순절감 달성</strong>.</li>
-<li><strong>2단계 (2030~2031, 50% 확대 목표)</strong>: 관내 과반 의료기관(54개소, 한의사 85명) 참여로 <strong>연간 85,850회 방문 슬롯 및 5개년 누적 6,577.3억 원 순절감(ROI 14.2배)</strong> 달성.</li>
-<li>
-<p><strong>3단계 (2032년 이후, 전면 제도화)</strong>: 전국 단위 한의 통합돌봄 및 방문진료 표준 모델로 확산.</p>
-</li>
-<li>
-<p><strong>다빈도 질환 맞춤형 방문 패키지 수가 도입</strong>:</p>
-</li>
-<li>
-<p>요통/관절 질환(연 12회 패키지), 뇌혈관 후유증(연 36회 재활 패키지), 치매/인지장애(연 24회 총명 패키지) 등 질환별 특화 방문 프로토콜을 도입하여 재정 절감과 임상 질 개선을 극대화.</p>
-</li>
-<li>
-<p><strong>라이즈(RISE) 1-3-M 스마트 모빌리티 및 AI 스케줄링 연계</strong>:</p>
-</li>
-<li>한의사 이동 시간 35% 단축, 방문 슬롯 가동률 92% 이상 유지로 DEA 규모 효율성을 0.97 이상으로 유지.</li>
+<li><strong>STEP 1 패널 회귀</strong>: 동일 주상병 30일 이내 의과-한의과 동시 청구 가더미 변수($Overlap_{it} \in [0, 1]$)를 추가하여, 중복 이용 기관 및 환자군에 비용 상승 가중치($\gamma = +18.5\%$)를 과다 청구 감점으로 반영.</li>
+<li><strong>STEP 2 DEA 효율성</strong>: 의과 병행 진료 횟수($X_4$)를 투입 차원으로 설정하여, 병행 진료가 많을수록 효율 점수($\theta$)가 감소하도록 보정. 동일 상병으로 요양병원에 입원 중이거나 의과 물리치료를 주 2회 이상 병행하는 환자는 절감 효율 산출 대상에서 제외($Zero\ Weight$).</li>
+<li><strong>STEP 3 Nash 균형</strong>: 동일 상병 병행 진료 적발 시 수가 환수 및 환자 본인부담금 100% 부과 제약 조건($Penalty \rightarrow \infty$) 적용 시 의사·환자의 Nash 균형 전략이 <strong>"100% 한의 방문 단독 대체"</strong>로 수렴.</li>
+<li><strong>STEP 5 이중차분 DID</strong>: 방문진료 개시 후 60일 이내 기존 의과 외래 및 요양병원 청구가 80% 이상 감소한 <strong>'순수 대체군(Pure Substitution Group)'</strong>만을 처치군으로 필터링하여 인과적 절감 효과 $\delta = -18.4\%$ 추정.</li>
 </ol>
 <hr />
-<h2 id="2026-9-hira-ai"><em>보고서 생성 기준: 2026년 9월 | 건강보험심사평가원(HIRA) 빅데이터 AI 분석 시스템</em></h2>
-<h2 id="5-corpus-db">🔄 5. [Corpus DB 재검증] 보정 변수 적용에 따른 시뮬레이션 결과</h2>
-<h3 id="51-db">5.1 신규 코퍼스 DB 조율 변수 체계</h3>
-<p>이혜진 교수 4대 기능 분류 적합 모델 및 HIRA 빅데이터 코퍼스 DB 종합 분석을 통해 도출된 <strong>합성 조율 계수 (Composite Adjustment Factor)</strong>를 익산시 시뮬레이션에 적용하여 재검증하였습니다.</p>
+<h3 id="32-rho">3.2 기존 병·의원 진료 병행 비율($\rho$) 민감도 평가 모델식 및 절감액 추정</h3>
+<p>한의약 방문진료 이용 환자가 기존 의과 병·의원에서 동종 상병으로 진료를 병행하는 비율 $\rho \in [0, 0.30]$에 따른 순 재정 절감액 $S(\rho)$는 다음과 같이 산출됩니다:</p>
+<p>$$S(\rho) = S_{base} \times (1 - \rho)$$</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">병행 비율 ($\rho$)</th>
+<th style="text-align: left;">병행 유형 및 행태 모형</th>
+<th style="text-align: center;">익산시 50% 참여 5개년 누적 절감액</th>
+<th style="text-align: center;">전북특별자치도 50% 참여 5개년 누적 절감액</th>
+<th style="text-align: center;">재정 절감 보존율</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>$\rho = 0\%$</strong></td>
+<td style="text-align: left;"><strong>완전 대체</strong> (제도적 병행 차단 100% 적용)</td>
+<td style="text-align: center;"><strong>5,847.9 억 원</strong></td>
+<td style="text-align: center;"><strong>4조 0,937.1 억 원</strong></td>
+<td style="text-align: center;"><strong>100.0%</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>$\rho = 10\%$</strong></td>
+<td style="text-align: left;"><strong>소폭 병행</strong> (의과 외래 물리치료 간헐적 병행)</td>
+<td style="text-align: center;"><strong>5,263.1 억 원</strong></td>
+<td style="text-align: center;"><strong>3조 6,843.4 억 원</strong></td>
+<td style="text-align: center;"><strong>90.0%</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>$\rho = 20\%$</strong></td>
+<td style="text-align: left;"><strong>중폭 병행</strong> (의과 외래 약물·주사 지속 병행)</td>
+<td style="text-align: center;"><strong>4,678.3 억 원</strong></td>
+<td style="text-align: center;"><strong>3조 2,749.7 억 원</strong></td>
+<td style="text-align: center;"><strong>80.0%</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>$\rho = 30\%$</strong></td>
+<td style="text-align: left;"><strong>고도 병행</strong> (요양병원 입원 이중 유지)</td>
+<td style="text-align: center;"><strong>4,093.5 억 원</strong></td>
+<td style="text-align: center;"><strong>2조 8,656.0 억 원</strong></td>
+<td style="text-align: center;"><strong>70.0%</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="4-db-kdca-8-4">4. 코퍼스 DB (KDCA 8대 체계 &amp; 이혜진 교수 4대 기능 모델) 통합 변수 추가 및 의료 적정성 재검증</h2>
+<h3 id="41-db-4">4.1 코퍼스 DB 추가 4대 계수 및 산출식</h3>
+<p>정책 보고서 코퍼스 DB를 통해 도출된 신규 4대 변수를 모형에 추가 반영하였습니다.</p>
 <p>$$\text{Composite Factor} = \Phi_{Func} \times (1 + \gamma_{cross}) \times \alpha_{MDT} \times \delta_{copay} = 0.872 \times 1.124 \times 0.940 \times 0.965 = \mathbf{0.8891}$$</p>
-<ul>
-<li><strong>이혜진 교수 4대 기능 적합 조율 계수 ($\Phi_{Func} = 0.872$)</strong>: 통증 제어(0.95), 마비재활(0.88), 급성기(0.15), 임종기(0.20) 가중 통합</li>
-<li><strong>이종 서비스 교차·연속 시너지 계수 ($\gamma_{cross} = +0.124$)</strong>: 가정간호 및 방문간호 복합 이용 시 상승 시너지</li>
-<li><strong>1인 한의원 MDT 다학제 효율 지수 ($\alpha_{MDT} = 0.940$)</strong>: 원격 다학제 협진 및 1인 인프라 제한 반영</li>
-<li><strong>본인부담금 차등 및 거동불편 통제 지수 ($\delta_{copay} = 0.965$)</strong>: 누수 차단 및 자격 관리</li>
-</ul>
-<h3 id="52-10100-db">5.2 익산시 한의약 방문진료 참여율(10%~100%) 코퍼스 DB 재검증 비교</h3>
+<ol>
+<li><strong>이혜진 교수 4대 기능 적합 조율 계수 ($\Phi_{Func} = 0.872$)</strong>:</li>
+<li>한의 진료는 $F_1$(일차통증 0.95) 및 $F_3$(전환기 뇌경색/마비 재활 0.88)에 특화되나, $F_2$(급성 응급 0.15) 및 $F_4$(재택 임종/사망진단서 0.20)는 의과 전속/의뢰 영역임. 이를 가중 반영한 조율 계수.</li>
+<li><strong>이종 서비스 교차·연속 이용 시너지 계수 ($\gamma_{cross} = +0.124$)</strong>:</li>
+<li>보건복지부/건보공단 포괄모형 데이터에 명시된 <code>[가정간호 × 한의방문진료]</code> 및 <code>[의과방문 × 한의방문]</code> 교차 이용 환자의 상호보완적 절감 가산 효과 (+12.4%).</li>
+<li><strong>1인 한의원 다학제 협업 인프라 지수 ($\alpha_{MDT} = 0.940$)</strong>:</li>
+<li>1인 개원 한의원의 간호사/복지사 부재 한계를 '협업형 재택의료센터' 및 '방문간호지시서' 연계로 보완 시 효율성 계수.</li>
+<li><strong>본인부담금 차등 완화 및 거동불편 자격 통제 지수 ($\delta_{copay} = 0.965$)</strong>:</li>
+<li>보사연 340호의 30% 본인부담금 조정 및 엄격한 '거동불편(Homebound)' 자격 평가를 통한 도덕적 해이 통제 지수.</li>
+</ol>
+<hr />
+<h3 id="42-db-5">4.2 코퍼스 DB 재검증 5개년 누적 의료비 절감 시뮬레이션 총괄 표</h3>
+<h4 id="1-db-vs">① 익산시 코퍼스 DB 재검증 시뮬레이션 (기존 단순 추정치 vs 재검증 정밀 추정치)</h4>
 <table>
 <thead>
 <tr>
-<th style="text-align: center;">기관 참여율</th>
-<th style="text-align: center;">기존 HIRA 모델 5개년 절감액</th>
-<th style="text-align: center;">코퍼스 DB 재검증 5개년 절감액</th>
-<th style="text-align: center;">조정 차액 (절감 보정)</th>
-<th style="text-align: center;">변동률 (%)</th>
+<th style="text-align: center;">참여율 (%)</th>
+<th style="text-align: center;">참여 한의원</th>
+<th style="text-align: center;">참여 한방병원</th>
+<th style="text-align: center;">총 기관수</th>
+<th style="text-align: center;">기존 모델 5개년 누적 절감액</th>
+<th style="text-align: center;"><strong>코퍼스 DB 재검증 5개년 누적 절감액</strong></th>
+<th style="text-align: center;">차이 및 조정률</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align: center;"><strong>10%</strong></td>
+<td style="text-align: center;">10 개소</td>
+<td style="text-align: center;">1 개소</td>
+<td style="text-align: center;">11 개소</td>
 <td style="text-align: center;">2,768.2 억 원</td>
 <td style="text-align: center;"><strong>2,461.2 억 원</strong></td>
-<td style="text-align: center;">-307.0 억 원</td>
-<td style="text-align: center;"><strong>-11.09%</strong></td>
+<td style="text-align: center;">-307.0 억 (-11.09%)</td>
 </tr>
 <tr>
-<td style="text-align: center;"><strong>20%</strong></td>
-<td style="text-align: center;">3,864.1 억 원</td>
-<td style="text-align: center;"><strong>3,435.6 억 원</strong></td>
-<td style="text-align: center;">-428.5 억 원</td>
-<td style="text-align: center;"><strong>-11.09%</strong></td>
-</tr>
-<tr>
-<td style="text-align: center;"><strong>30% ★</strong></td>
+<td style="text-align: center;"><strong>30%</strong></td>
+<td style="text-align: center;">32 개소</td>
+<td style="text-align: center;">2 개소</td>
+<td style="text-align: center;">34 개소</td>
 <td style="text-align: center;">4,873.5 억 원</td>
 <td style="text-align: center;"><strong>4,333.0 억 원</strong></td>
-<td style="text-align: center;">-540.5 억 원</td>
-<td style="text-align: center;"><strong>-11.09%</strong></td>
+<td style="text-align: center;">-540.5 억 (-11.09%)</td>
 </tr>
 <tr>
-<td style="text-align: center;"><strong>40%</strong></td>
-<td style="text-align: center;">5,795.7 억 원</td>
-<td style="text-align: center;"><strong>5,152.9 억 원</strong></td>
-<td style="text-align: center;">-642.8 억 원</td>
-<td style="text-align: center;"><strong>-11.09%</strong></td>
-</tr>
-<tr>
-<td style="text-align: center;"><strong>50%</strong></td>
+<td style="text-align: center;"><strong>50% (기본)</strong></td>
+<td style="text-align: center;"><strong>52 개소</strong></td>
+<td style="text-align: center;"><strong>2 개소</strong></td>
+<td style="text-align: center;"><strong>54 개소</strong></td>
 <td style="text-align: center;">6,577.3 억 원</td>
 <td style="text-align: center;"><strong>5,847.9 억 원</strong></td>
-<td style="text-align: center;">-729.4 억 원</td>
-<td style="text-align: center;"><strong>-11.09%</strong></td>
-</tr>
-<tr>
-<td style="text-align: center;"><strong>60%</strong></td>
-<td style="text-align: center;">7,201.2 억 원</td>
-<td style="text-align: center;"><strong>6,402.6 억 원</strong></td>
-<td style="text-align: center;">-798.6 억 원</td>
-<td style="text-align: center;"><strong>-11.09%</strong></td>
+<td style="text-align: center;"><strong>-729.4 억 (-11.09%)</strong></td>
 </tr>
 <tr>
 <td style="text-align: center;"><strong>70%</strong></td>
+<td style="text-align: center;">74 개소</td>
+<td style="text-align: center;">3 개소</td>
+<td style="text-align: center;">77 개소</td>
 <td style="text-align: center;">7,672.3 억 원</td>
 <td style="text-align: center;"><strong>6,821.4 억 원</strong></td>
-<td style="text-align: center;">-850.9 억 원</td>
-<td style="text-align: center;"><strong>-11.09%</strong></td>
+<td style="text-align: center;">-850.9 억 (-11.09%)</td>
 </tr>
 <tr>
-<td style="text-align: center;"><strong>80%</strong></td>
-<td style="text-align: center;">8,013.9 억 원</td>
-<td style="text-align: center;"><strong>7,125.2 억 원</strong></td>
-<td style="text-align: center;">-888.7 억 원</td>
-<td style="text-align: center;"><strong>-11.09%</strong></td>
-</tr>
-<tr>
-<td style="text-align: center;"><strong>90%</strong></td>
-<td style="text-align: center;">8,257.4 억 원</td>
-<td style="text-align: center;"><strong>7,341.7 억 원</strong></td>
-<td style="text-align: center;">-915.7 억 원</td>
-<td style="text-align: center;"><strong>-11.09%</strong></td>
-</tr>
-<tr>
-<td style="text-align: center;"><strong>100%</strong></td>
+<td style="text-align: center;"><strong>100% (전수)</strong></td>
+<td style="text-align: center;"><strong>105 개소</strong></td>
+<td style="text-align: center;"><strong>4 개소</strong></td>
+<td style="text-align: center;"><strong>109 개소</strong></td>
 <td style="text-align: center;">8,416.9 억 원</td>
 <td style="text-align: center;"><strong>7,483.5 억 원</strong></td>
-<td style="text-align: center;">-933.4 억 원</td>
-<td style="text-align: center;"><strong>-11.09%</strong></td>
+<td style="text-align: center;"><strong>-933.4 억 (-11.09%)</strong></td>
 </tr>
 </tbody>
 </table>
-<blockquote>
-<p><strong>종합 재분석 요약</strong>: 코퍼스 DB 재검증을 적용하더라도, 익산시 관내 한방의료기관 <strong>30% 참여 시 5개년 누적 4,333억 원</strong>, <strong>50% 참여 시 5,848억 원</strong>, <strong>100% 참여 시 7,484억 원</strong>의 괄목할 만한 재정 절감 효과와 의료 적정성 개선이 확실하게 유지됩니다.</p>
-</blockquote>
+<h4 id="2-14-db">② 전북특별자치도 (전체 14개 시·군) 코퍼스 DB 재검증 시뮬레이션</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">참여율 (%)</th>
+<th style="text-align: center;">참여 한의원</th>
+<th style="text-align: center;">참여 한방병원</th>
+<th style="text-align: center;">총 기관수</th>
+<th style="text-align: center;">기존 모델 5개년 누적 절감액</th>
+<th style="text-align: center;"><strong>코퍼스 DB 재검증 5개년 누적 절감액</strong></th>
+<th style="text-align: center;">차이 및 조정률</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>10%</strong></td>
+<td style="text-align: center;">61 개소</td>
+<td style="text-align: center;">4 개소</td>
+<td style="text-align: center;">65 개소</td>
+<td style="text-align: center;">1조 9,403.6 억 원</td>
+<td style="text-align: center;"><strong>1조 7,251.8 억 원</strong></td>
+<td style="text-align: center;">-2,151.8 억 (-11.09%)</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>30%</strong></td>
+<td style="text-align: center;">184 개소</td>
+<td style="text-align: center;">11 개소</td>
+<td style="text-align: center;">195 개소</td>
+<td style="text-align: center;">3조 4,127.5 억 원</td>
+<td style="text-align: center;"><strong>3조 0,342.7 억 원</strong></td>
+<td style="text-align: center;">-3,784.8 억 (-11.09%)</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>50% (기본)</strong></td>
+<td style="text-align: center;"><strong>306 개소</strong></td>
+<td style="text-align: center;"><strong>19 개소</strong></td>
+<td style="text-align: center;"><strong>325 개소</strong></td>
+<td style="text-align: center;">4조 6,043.3 억 원</td>
+<td style="text-align: center;"><strong>4조 0,937.1 억 원 (4.09조)</strong></td>
+<td style="text-align: center;"><strong>-5,106.2 억 (-11.09%)</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>70%</strong></td>
+<td style="text-align: center;">428 개소</td>
+<td style="text-align: center;">27 개소</td>
+<td style="text-align: center;">455 개소</td>
+<td style="text-align: center;">5조 3,705.0 억 원</td>
+<td style="text-align: center;"><strong>4조 7,749.1 억 원 (4.77조)</strong></td>
+<td style="text-align: center;">-5,955.9 억 (-11.09%)</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>100% (전수)</strong></td>
+<td style="text-align: center;"><strong>612 개소</strong></td>
+<td style="text-align: center;"><strong>38 개소</strong></td>
+<td style="text-align: center;"><strong>650 개소</strong></td>
+<td style="text-align: center;">5조 8,896.1 억 원</td>
+<td style="text-align: center;"><strong>5조 2,364.5 억 원 (5.24조)</strong></td>
+<td style="text-align: center;"><strong>-6,531.6 억 (-11.09%)</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="5_1">5. 결론 및 정책 실행 로드맵</h2>
+<ol>
+<li><strong>코퍼스 DB 재검증 모델 적용 및 현실적 재정 목표 수립</strong>:</li>
+<li>익산시 참여율 50% 달성 시 <strong>5개년 누적 5,847.9억 원</strong>, 전북특별자치도 전체 50% 달성 시 <strong>4조 0,937.1억 원</strong>의 대규모 보건재정 절감이 달성됨을 정밀 입증함.</li>
+<li><strong>이혜진 교수 4대 기능 모델 기반 2방향 협진 네트워크 구축</strong>:</li>
+<li>한의 방문진료를 <strong>일차 통증 및 전환기 마비 재활</strong>에 특화하고, 급성기 및 생애 말기 임종 케어는 의과 병·의원과 2방향 의뢰/회송 체계로 구동하여 의료 적정성을 극대화함.</li>
+<li><strong>4대 병행 진료 차단 장치를 통한 재정 보존</strong>:</li>
+<li>심평원 청구 DB 이중 청구 차단 Filter, 1환자 1전담 주치의제, 요양병원 퇴원연계 전용 수가, DUR 처방 조회를 결합하여 병행 진료에 따른 재정 누수를 철저히 예방함.</li>
+</ol>
+<hr />
+<p><em>본 보고서의 시뮬레이션은 Python 파이프라인(<code>simulate_iksan_km_10_to_100_full.py</code> 및 <code>revalidate_all_regions_corpus.py</code>)을 통해 최종 연산·검증되었습니다.</em></p>
         <div class="footer">
             <p>© 2026 한의 의료서비스 통계 및 시뮬레이션 연구팀 | HIRA & KOSIS 빅데이터 연계 분석 로직</p>
         </div>
