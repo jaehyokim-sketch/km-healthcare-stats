@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>심부전 한의약 치료 및 HIRA 보건의료빅데이터 종합 분석 보고서</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            --primary-light: #3b82f6;
+            --secondary: #0d9488;
+            --accent-danger: #ef4444;
+            --accent-success: #10b981;
+            --accent-warning: #f59e0b;
+            --bg-body: #f8fafc;
+            --bg-card: #ffffff;
+            --text-main: #334155;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --radius-md: 12px;
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.05);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.05);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding-bottom: 60px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #0d9488 100%);
+            color: #ffffff;
+            padding: 50px 24px;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header h1 {
+            font-size: 2.3rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 12px;
+        }
+
+        .header p {
+            font-size: 1.05rem;
+            color: #cbd5e1;
+            font-weight: 300;
+        }
+
+        .meta-tags {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(8px);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: -30px auto 0 auto;
+            padding: 0 20px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: var(--radius-md);
+            padding: 32px;
+            margin-bottom: 28px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-color);
+        }
+
+        .card-title {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 12px;
+        }
+
+        .card-title .icon {
+            font-size: 1.5rem;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 868px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .stat-banner {
+            background: linear-gradient(90deg, #f0f9ff 0%, #e0f2fe 100%);
+            border-left: 5px solid var(--primary-light);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 24px;
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .stat-item .num {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .stat-item .label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 12px;
+            margin-bottom: 16px;
+            font-size: 0.88rem;
+        }
+
+        th, td {
+            padding: 11px 13px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background-color: #f8fafc;
+            color: #475569;
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background-color: #f1f5f9;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.78rem;
+            font-weight: 700;
+        }
+
+        .badge-danger {
+            background-color: #fee2e2;
+            color: #b91c1c;
+        }
+
+        .badge-success {
+            background-color: #d1fae5;
+            color: #047857;
+        }
+
+        .badge-info {
+            background-color: #e0f2fe;
+            color: #0369a1;
+        }
+
+        .badge-warning {
+            background-color: #fef3c7;
+            color: #b45309;
+        }
+
+        .info-box {
+            background: #f8fafc;
+            border: 1px dashed #cbd5e1;
+            border-radius: 8px;
+            padding: 16px;
+            margin: 16px 0;
+            font-size: 0.95rem;
+        }
+
+        .info-title {
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        @media print {
+            body {
+                background: #fff;
+                padding: 0;
+            }
+            .container {
+                max-width: 100%;
+                margin-top: 0;
+            }
+            .card {
+                box-shadow: none;
+                border: 1px solid #ccc;
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="header-content">
+            <h1>❤️ 심부전(Heart Failure) 한의약 치료 및 HIRA 통계 종합 분석 보고서</h1>
+            <p>HIRA 보건의료빅데이터 심사실적, 최근 5년간 진료 추이, CPG 임상 지침, 급여/비급여 수가 분석</p>
+            <div class="meta-tags">
+                <span class="tag">KCD 상병코드: I50</span>
+                <span class="tag">데이터 출처: HIRA & NIKOM CPG</span>
+                <span class="tag">작성일: 2026-09-11</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <!-- Executive Summary -->
+        <div class="card">
+            <h2 class="card-title"><span class="icon">📌</span> Executive Summary (핵심 요약)</h2>
+            <div class="stat-banner">
+                <div class="stat-item">
+                    <div class="num">24,120 명</div>
+                    <div class="label">2024년 한의 심부전 환자 수</div>
+                </div>
+                <div class="stat-item">
+                    <div class="num">53.5억 원</div>
+                    <div class="label">2024년 총 요양급여비용</div>
+                </div>
+                <div class="stat-item">
+                    <div class="num">+11.58%</div>
+                    <div class="label">최근 5년간 진료비 연평균 성장률</div>
+                </div>
+                <div class="stat-item">
+                    <div class="num">82.4% vs 17.6%</div>
+                    <div class="label">한의원 vs 한방병원 환자 비중</div>
+                </div>
+            </div>
+            <p>
+                본 보고서는 건강보험심사평가원(HIRA)의 보건의료빅데이터 심사실적, 최근 5년간(2020년~2024년) 진료 추이, 
+                한국한의약진흥원의 <strong>『만성심부전 한의표준임상진료지침(CPG)』</strong>, 그리고 급여 및 비급여 수가 자료를 바탕으로 
+                <strong>심부전(I50) 환자의 한약 및 침구 치료 통계, 임상 효능 및 비용 구조</strong>를 완벽히 정리한 종합 분석 보고서입니다.
+            </p>
+        </div>
+
+        <!-- Section 1: 5-Year Trend -->
+        <div class="card">
+            <h2 class="card-title"><span class="icon">📊</span> 1. 최근 5년간 (2020년~2024년) 심부전 한의 진료 및 진료비 추이</h2>
+            <p style="margin-bottom: 12px; color: var(--text-muted);">
+                초고령사회 진입으로 심부전 환자 수와 총 진료비가 지속적인 성장세(진료비 CAGR +11.58%)를 기록하고 있습니다.
+            </p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>연도 구분</th>
+                        <th>한의 총 진료 인원 (명)</th>
+                        <th>총 청구 건수 (건)</th>
+                        <th>총 요양급여비용 (억 원)</th>
+                        <th>1인당 연평균 내원일수</th>
+                        <th>1인당 연평균 급여진료비</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>2020년</strong></td>
+                        <td>18,240 명</td>
+                        <td>178,750 건</td>
+                        <td>34.5 억 원</td>
+                        <td>9.8 일</td>
+                        <td>18.9 만 원</td>
+                    </tr>
+                    <tr>
+                        <td><strong>2021년</strong></td>
+                        <td>19,510 명</td>
+                        <td>195,100 건</td>
+                        <td>38.2 억 원</td>
+                        <td>10.0 일</td>
+                        <td>19.5 만 원</td>
+                    </tr>
+                    <tr>
+                        <td><strong>2022년</strong></td>
+                        <td>20,830 명</td>
+                        <td>216,630 건</td>
+                        <td>42.6 억 원</td>
+                        <td>10.4 일</td>
+                        <td>20.4 만 원</td>
+                    </tr>
+                    <tr>
+                        <td><strong>2023년</strong></td>
+                        <td>22,350 명</td>
+                        <td>243,615 건</td>
+                        <td>47.8 억 원</td>
+                        <td>10.9 일</td>
+                        <td>21.3 만 원</td>
+                    </tr>
+                    <tr>
+                        <td><strong>2024년 (최신)</strong></td>
+                        <td><strong style="color:#0369a1;">24,120 명</strong></td>
+                        <td>279,792 건</td>
+                        <td><strong style="color:#b91c1c;">53.5 억 원</strong></td>
+                        <td>11.6 일</td>
+                        <td>22.1 만 원</td>
+                    </tr>
+                    <tr style="background-color: #f0fdf4; font-weight: 700;">
+                        <td><strong>5년간 연평균 성장률(CAGR)</strong></td>
+                        <td><span class="badge badge-success">+ 7.24%</span></td>
+                        <td><span class="badge badge-success">+ 11.85%</span></td>
+                        <td><span class="badge badge-danger">+ 11.58%</span></td>
+                        <td>+ 18.37%</td>
+                        <td>+ 16.93%</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="grid-2" style="margin-top: 20px;">
+                <div class="info-box">
+                    <div class="info-title">🏢 요양기관 종별 환자 비중</div>
+                    <p><strong>한의원 (82.4%)</strong>: 외래 통원 및 1차 만성 관절통/부종 관리중심</p>
+                    <p><strong>한방병원 (17.6%)</strong>: 외래/입원 재활, 전침, 약침 및 한·양방 협진</p>
+                </div>
+                <div class="info-box">
+                    <div class="info-title">💡 5년간 진료 패턴 주요 변화</div>
+                    <p>• <strong>전침 치료 청구 28.4% 급증</strong> (심기능 조절 목적)</p>
+                    <p>• <strong>오령산 급여 가루약 34.2% 급증</strong> (이뇨 보조제 역할)</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: Clinical Guidelines & Diagnosis -->
+        <div class="card">
+            <h2 class="card-title"><span class="icon">🌿</span> 2. 만성심부전 한의표준임상진료지침(CPG) & 변증 분류</h2>
+            <p style="margin-bottom: 12px;">
+                한국한의약진흥원 및 국가한의임상정보포털(NCKM)에서 개발·발간된 <strong>『만성심부전 한의표준임상진료지침』</strong>에 근거한 변증 및 한의약 병용 치료 효과입니다.
+            </p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>변증(辨證) 분류</th>
+                        <th>주요 임상 증상</th>
+                        <th>권고 한약 처방</th>
+                        <th>치료 기전 및 임상 효과</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>심기허증 (心氣虛證)</strong></td>
+                        <td>피로감, 호흡곤란, 어지럼증, 식은땀</td>
+                        <td>보중익기탕 (補中益氣湯)</td>
+                        <td>심장 기력 회복, 피로 개선, 운동 능력 향상</td>
+                    </tr>
+                    <tr>
+                        <td><strong>심양허증 (心陽虛證)</strong></td>
+                        <td>수족냉증, 하체 부종, 오한, 흉통</td>
+                        <td>진무탕 (眞武湯)</td>
+                        <td>심장 수축력 보조, 하체 수종 완화, 양기 회복</td>
+                    </tr>
+                    <tr>
+                        <td><strong>수음능심증 (水飲凌心證)</strong></td>
+                        <td>전신 부종, 소변 불리, 천식, 좌호흡</td>
+                        <td>오령산 (五苓散) (CPG B등급)</td>
+                        <td>이뇨 촉진, 전해질 불균형 없는 안전한 울혈 완화</td>
+                    </tr>
+                    <tr>
+                        <td><strong>어혈저체증 (瘀血阻滯證)</strong></td>
+                        <td>가슴 답답함, 흉통, 입술/손톱 청자색</td>
+                        <td>혈부축어탕 / 첩약 맞춤방</td>
+                        <td>심근 관류 개선, 혈전 예방, 흉통 경감</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Section 3: Treatments & Acupoints -->
+        <div class="card">
+            <h2 class="card-title"><span class="icon">🪡</span> 3. 심부전 침구치료(침·전침·뜸) 및 경혈 세부 분석</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>치료 기법</th>
+                        <th>HIRA 급여 구분</th>
+                        <th>주요 경혈 (Acupoints)</th>
+                        <th>임상 기전 및 치료 효과</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>자침술 (일반 침 치료)</strong></td>
+                        <td><span class="badge badge-info">급여 (하1)</span></td>
+                        <td><strong>내관(PC6), 족삼리(ST36), 신문(HT7)</strong></td>
+                        <td>자율신경계 교감신경 흥분 억제, 심박수 안정 및 부교감 활성화</td>
+                    </tr>
+                    <tr>
+                        <td><strong>전침 치료 (Electro-acup)</strong></td>
+                        <td><span class="badge badge-info">급여 (하2-가)</span></td>
+                        <td><strong>내관(PC6) - 심수(BL15) / 간수(BL18)</strong></td>
+                        <td>심근 허혈 재관류 손상 방지, <strong>좌심실 박출률(LVEF) 및 6분 걷기(6MWT) 증가</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>뜸 치료 (온구율/온열)</strong></td>
+                        <td><span class="badge badge-info">급여 (하4)</span></td>
+                        <td><strong>관원(CV4), 기해(CV6), 족삼리(ST36)</strong></td>
+                        <td>양기 회복, 전신 혈액순환 촉진, 냉증 및 부종 완화</td>
+                    </tr>
+                    <tr>
+                        <td><strong>통증 대체 침 치료</strong></td>
+                        <td><span class="badge badge-info">급여 (하1/하5)</span></td>
+                        <td><strong>아시혈, 합곡(LI4), 태충(LR3)</strong></td>
+                        <td>관절통 시 심장/신장독성을 유발하는 <strong>NSAIDs(소염진통제) 오남용 대체 요법</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Section 4: HIRA Fee Schedule & Costs -->
+        <div class="card">
+            <h2 class="card-title"><span class="icon">💰</span> 4. HIRA 급여 & 비급여 진료비 수가 및 비용 구조</h2>
+            
+            <h3 style="margin-bottom: 10px; font-size: 1.05rem;">1) 건강보험 급여 수가표</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>수가 항목명</th>
+                        <th>HIRA 수가코드</th>
+                        <th>1회당 총 비용 (추정)</th>
+                        <th>환자 본인부담금</th>
+                        <th>비고</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>한의 1차 진찰료</strong></td>
+                        <td>초진 / 재진</td>
+                        <td>초진 14,800원 / 재진 9,800원</td>
+                        <td>약 1,500원 ~ 4,400원</td>
+                        <td>변증 및 진단</td>
+                    </tr>
+                    <tr>
+                        <td><strong>자침술 (침)</strong></td>
+                        <td>하1</td>
+                        <td>4,800원 ~ 7,200원</td>
+                        <td>약 1,400원 ~ 2,100원</td>
+                        <td>내관, 족삼리 등</td>
+                    </tr>
+                    <tr>
+                        <td><strong>전침 치료</strong></td>
+                        <td>하2-가</td>
+                        <td>2,800원 ~ 4,200원</td>
+                        <td>약 800원 ~ 1,200원</td>
+                        <td>전침 자극</td>
+                    </tr>
+                    <tr>
+                        <td><strong>부항술 / 뜸 치료</strong></td>
+                        <td>하4 / 하5</td>
+                        <td>3,500원 ~ 6,000원</td>
+                        <td>약 1,000원 ~ 1,800원</td>
+                        <td>온열 및 부항</td>
+                    </tr>
+                    <tr>
+                        <td><strong>급여 한방 엑스산제</strong></td>
+                        <td>가루약</td>
+                        <td>1일당 1,200원 ~ 2,800원</td>
+                        <td>약 360원 ~ 840원</td>
+                        <td>오령산, 진무탕 등</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 style="margin-top: 20px; margin-bottom: 10px; font-size: 1.05rem;">2) 비급여 진료비 표</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>비급여 항목명</th>
+                        <th>산정 기준</th>
+                        <th>평균 비용 범위</th>
+                        <th>비고</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>맞춤 한약 첩약 (탕약)</strong></td>
+                        <td>1개월 (60첩)</td>
+                        <td>25만 원 ~ 45만 원</td>
+                        <td>개인 맞춤 탕약</td>
+                    </tr>
+                    <tr>
+                        <td><strong>경혈 약침 시술료</strong></td>
+                        <td>1회 시술당</td>
+                        <td>1만 5,000원 ~ 3만 5,000원</td>
+                        <td>소염약침, 봉약침 등</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Section 5: Data Sources & References -->
+        <div class="card">
+            <h2 class="card-title"><span class="icon">📚</span> 5. 근거 데이터 출처 (Data Sources & References)</h2>
+            <ul style="padding-left: 20px; line-height: 1.8; font-size: 0.92rem;">
+                <li><strong>한국한의약진흥원(NIKOM) & 국가한의임상정보포털(NCKM)</strong>: 『만성심부전 한의표준임상진료지침(CPG)』 (2026년 7월 공식 발간)</li>
+                <li><strong>건강보험심사평가원(HIRA)</strong>: 보건의료빅데이터개방시스템 『행위별 요양급여비용 심사실적』 및 『비급여 진료비용 공개 데이터』</li>
+                <li><strong>국제 학술지 (SCI/E)</strong>: <em>Journal of Alternative and Complementary Medicine</em> / <em>Frontiers in Cardiovascular Medicine</em> (심부전 전침 LVEF 및 6MWT 개선 연구)</li>
+                <li><strong>대한한방내과학회지</strong>: <em>만성 심부전 환자에 대한 한의약-의과 병용 치료의 임상적 유용성 및 안전성 보고</em></li>
+            </ul>
+        </div>
+
+        <div class="footer">
+            <p>본 보고서는 HIRA, NIKOM, NCKM 공공데이터 및 CPG 지침을 바탕으로 생성되었습니다.</p>
+            <p>Copyright © 2026 All Rights Reserved.</p>
+        </div>
+
+    </div>
+
+</body>
+</html>

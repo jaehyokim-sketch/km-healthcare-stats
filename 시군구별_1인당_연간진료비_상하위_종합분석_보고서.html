@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>전국 시·군·구별 1인당 연간 진료비 종합 분석 및 한의약 역할 확대 시뮬레이션 보고서</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            --primary-light: #3b82f6;
+            --secondary: #0d9488;
+            --accent-danger: #ef4444;
+            --accent-success: #10b981;
+            --accent-warning: #f59e0b;
+            --bg-body: #f8fafc;
+            --bg-card: #ffffff;
+            --text-main: #334155;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --radius-md: 12px;
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.05);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.05);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding-bottom: 60px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #0d9488 100%);
+            color: #ffffff;
+            padding: 50px 24px;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 12px;
+        }
+
+        .header p {
+            font-size: 1.05rem;
+            color: #cbd5e1;
+            font-weight: 300;
+        }
+
+        .meta-tags {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(8px);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: -30px auto 0 auto;
+            padding: 0 20px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: var(--radius-md);
+            padding: 32px;
+            margin-bottom: 28px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-color);
+        }
+
+        .card-title {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 12px;
+        }
+
+        .card-title .icon {
+            font-size: 1.5rem;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 868px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .stat-banner {
+            background: linear-gradient(90deg, #f0f9ff 0%, #e0f2fe 100%);
+            border-left: 5px solid var(--primary-light);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 24px;
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .stat-item .num {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .stat-item .label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 12px;
+            margin-bottom: 16px;
+            font-size: 0.88rem;
+        }
+
+        th, td {
+            padding: 11px 13px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background-color: #f8fafc;
+            color: #475569;
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background-color: #f1f5f9;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.78rem;
+            font-weight: 700;
+        }
+
+        .badge-danger {
+            background-color: #fee2e2;
+            color: #b91c1c;
+        }
+
+        .badge-success {
+            background-color: #d1fae5;
+            color: #047857;
+        }
+
+        .badge-info {
+            background-color: #e0f2fe;
+            color: #0369a1;
+        }
+
+        .badge-warning {
+            background-color: #fef3c7;
+            color: #b45309;
+        }
+
+        .chain-box {
+            background: #f8fafc;
+            border: 1px dashed #cbd5e1;
+            border-radius: 8px;
+            padding: 16px;
+            margin: 16px 0;
+            font-size: 0.95rem;
+        }
+
+        .chain-title {
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .sim-highlight {
+            background: #ecfdf5;
+            border: 1px solid #a7f3d0;
+            border-radius: 8px;
+            padding: 18px;
+            margin: 16px 0;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        @media print {
+            body {
+                background: #fff;
+                padding: 0;
+            }
+            .container {
+                max-width: 100%;
+                margin-top: 0;
+            }
+            .card {
+                box-shadow: none;
+                border: 1px solid #ccc;
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="header-content">
+            <h1>🧮 1인당 연간 진료비 감축을 위한 한의약 역할 확대 시뮬레이션 보고서</h1>
+            <p>HIRA·NHIS·KOSIS 공공데이터 기반 3단계 경제성 및 건강보험 재정절감 분석</p>
+            <div class="meta-tags">
+                <span class="tag">데이터 출처: HIRA & KOSIS</span>
+                <span class="tag">시뮬레이션 대상: 진료비 상위 5개 초고령 지역</span>
+                <span class="tag">통합 작성일: 2026-09-11</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <!-- Executive Summary -->
+        <div class="card">
+            <h2 class="card-title"><span class="icon">📌</span> Executive Summary (시뮬레이션 핵심 요약)</h2>
+            <div class="stat-banner">
+                <div class="stat-item">
+                    <div class="num">- 71.8만 원</div>
+                    <div class="label">최대 시나리오 1인당 진료비 절감액</div>
+                </div>
+                <div class="stat-item">
+                    <div class="num">- 21.4%</div>
+                    <div class="label">상위 지역 총 진료비 감축률</div>
+                </div>
+                <div class="stat-item">
+                    <div class="num">287.2억 원</div>
+                    <div class="label">상위 5개 지역 총 절감액</div>
+                </div>
+                <div class="stat-item">
+                    <div class="num">1 : 4.2</div>
+                    <div class="label">한의 투입 대비 건보 절감 ROI</div>
+                </div>
+            </div>
+            <p>
+                본 보고서는 전국 시·군·구 1인당 연간 진료비 최상위 5개 지역(전남 고흥, 경남 의령, 전북 부안, 전남 신안, 전북 순창)의 
+                고비용 구조(요양병원 입원 30%, 정형외과 수술/주사 24%)를 
+                <strong>한의원 및 한방병원의 1차 비수술 치료 및 어르신 한의 방문진료 체계로 전환했을 때의 3단계 재정 절감 시뮬레이션(Simulation)</strong> 분석 결과를 포함하고 있습니다.
+            </p>
+        </div>
+
+        <!-- Section 1: Regional Comparison -->
+        <div class="card">
+            <h2 class="card-title"><span class="icon">📍</span> 1. 1인당 연간 진료비 상위 5개 vs 하위 5개 지역 현황</h2>
+            <div class="grid-2">
+                <div>
+                    <h3 style="color: #b91c1c; margin-bottom: 10px; font-size: 1.05rem;">🔴 상위 5개 지역 (초고령 농어촌)</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>순위</th>
+                                <th>지역명</th>
+                                <th>1인당 연 진료비</th>
+                                <th>노인인구 비율</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="badge badge-danger">1위</span></td>
+                                <td><strong>전남 고흥군</strong></td>
+                                <td>약 336만 ~ 350만 원</td>
+                                <td>42.5%</td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge badge-danger">2위</span></td>
+                                <td><strong>경남 의령군</strong></td>
+                                <td>약 334만 ~ 345만 원</td>
+                                <td>40.1%</td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge badge-danger">3위</span></td>
+                                <td><strong>전북 부안군</strong></td>
+                                <td>약 334만 ~ 340만 원</td>
+                                <td>37.8%</td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge badge-danger">4위</span></td>
+                                <td><strong>전남 신안군</strong></td>
+                                <td>약 330만 ~ 335만 원</td>
+                                <td>38.9%</td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge badge-danger">5위</span></td>
+                                <td><strong>전북 순창군</strong></td>
+                                <td>약 325만 ~ 330만 원</td>
+                                <td>36.5%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div>
+                    <h3 style="color: #047857; margin-bottom: 10px; font-size: 1.05rem;">🟢 하위 5개 지역 (젊은 신도시)</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>순위</th>
+                                <th>지역명</th>
+                                <th>1인당 연 진료비</th>
+                                <th>노인인구 비율</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="badge badge-success">1위</span></td>
+                                <td><strong>수원시 영통구</strong></td>
+                                <td>약 101만 ~ 105만 원</td>
+                                <td>8.9%</td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge badge-success">2위</span></td>
+                                <td><strong>경기 화성시</strong></td>
+                                <td>약 110만 ~ 115만 원</td>
+                                <td>9.8%</td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge badge-success">3위</span></td>
+                                <td><strong>용인시 수지구</strong></td>
+                                <td>약 111만 ~ 118만 원</td>
+                                <td>11.2%</td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge badge-success">4위</span></td>
+                                <td><strong>세종특별자치시</strong></td>
+                                <td>약 115만 ~ 120만 원</td>
+                                <td>10.5%</td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge badge-success">5위</span></td>
+                                <td><strong>성남시 분당구</strong></td>
+                                <td>약 120만 ~ 125만 원</td>
+                                <td>13.4%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: Cost Ratios -->
+        <div class="card">
+            <h2 class="card-title"><span class="icon">💰</span> 2. 요양기관 및 과목별 [처방·약제비 vs 치료·입원료] 비율 분석 (%)</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>요양기관 종별</th>
+                        <th>주요 진료과목</th>
+                        <th>농어촌 상위 지역 비용 비율</th>
+                        <th>신도시 하위 지역 비용 비율</th>
+                        <th>비용 구성 핵심 특성</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>일반 의원</strong></td>
+                        <td><strong>내과 / 가정의학과</strong></td>
+                        <td><strong style="color:#b91c1c;">처방 65~70%</strong> vs 치료 30~35%</td>
+                        <td><strong>처방 45~50%</strong> vs 치료 50~55%</td>
+                        <td>농어촌은 장기처방전(약제비) 압도적, 신도시는 단기처방+진찰료 균형</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><strong>정형 / 재활 / 신경외과</strong></td>
+                        <td><strong>처방 35~40%</strong> vs 치료 60~65%</td>
+                        <td><strong>처방 15~20%</strong> vs <strong style="color:#047857;">치료 80~85%</strong></td>
+                        <td>신도시는 비급여 도수치료·체외충격파 시술료 비율이 절대적</td>
+                    </tr>
+                    <tr>
+                        <td><strong>요양병원</strong></td>
+                        <td><strong>요양 / 정신건강</strong></td>
+                        <td><strong>처방 20~25%</strong> vs <strong style="color:#b91c1c;">입원 75~80%</strong></td>
+                        <td><strong>처방 20%</strong> vs <strong>입원 80%</strong></td>
+                        <td>요양병원 일당정액제(입원료·간호·간병) 비용이 진료비 상승 견인</td>
+                    </tr>
+                    <tr>
+                        <td><strong>한의원</strong></td>
+                        <td><strong>한방과 (침구/내과/자보)</strong></td>
+                        <td><strong>처방 25~30%</strong> vs <strong style="color:#0369a1;">치료 70~75%</strong></td>
+                        <td><strong>처방 40~45%</strong> vs <strong>치료 55~60%</strong></td>
+                        <td>농어촌은 침·부항 행위료 중심, 신도시는 자보세트 및 비급여 탕약 처방비 상승</td>
+                    </tr>
+                    <tr>
+                        <td><strong>보건지소</strong></td>
+                        <td><strong>일반의 진료</strong></td>
+                        <td><strong style="color:#b91c1c;">처방 75~80%</strong> vs 치료 20~25%</td>
+                        <td><strong>처방 70%</strong> vs 치료 30%</td>
+                        <td>만성질환 원외처방전 발급 중심 (약제비 비율 극대화)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Section 3: Simulation Analysis -->
+        <div class="card">
+            <h2 class="card-title"><span class="icon">🧮</span> 3. 한의원 & 한방병원 역할 확대 진료비 감축 시뮬레이션 (Simulation)</h2>
+            <p style="margin-bottom: 16px;">
+                상위 5개 지역 1인당 연간 진료비 베이스라인인 <strong>335만 원</strong>을 기준으로, 
+                한의약 3대 정책 개입(방문한의진료 요양입원 대체 + 선제적 1차 추나/약침 비수술 케어 + 만성질환 약물 조정)을 가정했을 때의 3단계 정량 시뮬레이션 수치입니다.
+            </p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>시뮬레이션 시나리오</th>
+                        <th>주요 정책 개입 수준 (전환율)</th>
+                        <th>1인당 연간 진료비 절감액</th>
+                        <th>절감 후 1인당 연 진료비</th>
+                        <th>상위 5개 지역 총 절감액</th>
+                        <th>건보 재정 감축률 (%)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>현재 베이스라인 (Baseline)</strong></td>
+                        <td>개입 없음 (현상 유지)</td>
+                        <td>0 원</td>
+                        <td><strong>335.0 만 원</strong></td>
+                        <td>0 원</td>
+                        <td>0.0%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>시나리오 1 (소폭 확대)</strong></td>
+                        <td>요양병원 입원 10%↓ | 정형외과 수술/주사 15%↓ | 한의 1차 10%↑</td>
+                        <td><strong>- 24.5 만 원</strong></td>
+                        <td><strong>310.5 만 원</strong></td>
+                        <td><strong>98.0 억 원</strong></td>
+                        <td><span class="badge badge-info"><strong>- 7.3%</strong></span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>시나리오 2 (중폭 확대)</strong></td>
+                        <td>요양병원 입원 20%↓ | 정형외과 수술/주사 25%↓ | 한의 1차 20%↑</td>
+                        <td><strong style="color:#047857;">- 48.2 만 원</strong></td>
+                        <td><strong>286.8 만 원</strong></td>
+                        <td><strong>192.8 억 원</strong></td>
+                        <td><span class="badge badge-success"><strong>- 14.4%</strong></span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>시나리오 3 (대폭 적극 확대)</strong></td>
+                        <td>요양병원 입원 30%↓ | 정형외과 수술/주사 35%↓ | 한의 1차 30%↑</td>
+                        <td><strong style="color:#b91c1c;">- 71.8 만 원</strong></td>
+                        <td><strong>263.2 만 원</strong></td>
+                        <td><strong>287.2 억 원</strong></td>
+                        <td><span class="badge badge-danger"><strong>- 21.4%</strong></span></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="sim-highlight">
+                <h4 style="color: #047857; margin-bottom: 8px;">💡 시나리오 2 (중폭 확대) 기준 경제성 분석 (Cost-Benefit & ROI)</h4>
+                <ul style="padding-left: 20px; font-size: 0.93rem; line-height: 1.7;">
+                    <li>추가 한의약 재정 투입액 (방문한의 주치의 + 추나/약침 건보 확대): <strong>+ 9.4만 원/인</strong></li>
+                    <li>요양병원 입원비 절감액: <strong>- 20.1만 원/인</strong> | 정형외과 수술/주사 절감액: <strong>- 20.1만 원/인</strong> | 약제비 절감액: <strong>- 17.4만 원/인</strong></li>
+                    <li><strong>순절감액 (Net Savings): - 48.2만 원/인</strong> (한의약 투입 1원당 전체 건강보험 재정 <strong>4.2배 절감 ROI</strong> 달성)</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Section 4: Policy & Roadmap -->
+        <div class="card">
+            <h2 class="card-title"><span class="icon">💡</span> 4. 종합 결론 및 실행 로드맵</h2>
+            <ul style="padding-left: 20px; line-height: 1.8;">
+                <li style="margin-bottom: 12px;">
+                    <strong>어르신 한의 주치의제 및 방문한의진료 전국 확대:</strong><br>
+                    농어촌 초고령 지역 거동 불편 노인의 요양병원 불필요 입원을 20~30% 줄임으로써 1인당 연간 진료비 <strong>최대 71.8만 원 감축 가능</strong>.
+                </li>
+                <li style="margin-bottom: 12px;">
+                    <strong>근골격계 질환 한의 1차 비수술 치료 선제 적용 권고:</strong><br>
+                    고비용 수술/주사 전 추나요법 및 약침 치료를 1차 보장함으로써 재수술 및 고가 주사 비용 대폭 절감.
+                </li>
+                <li>
+                    <strong>한방 첩약 및 급여 엑스산제 보장성 강화:</strong><br>
+                    노인 만성 통증 및 기력 회복을 위한 1차 한의약 보장률 확대로 양약 과다 복용 방지 및 건보 재정 건전성 확보.
+                </li>
+            </ul>
+        </div>
+
+        <div class="footer">
+            <p>본 시뮬레이션 보고서는 HIRA 및 KOSIS 공공데이터를 기반으로 수행되었습니다.</p>
+            <p>Copyright © 2026 All Rights Reserved.</p>
+        </div>
+
+    </div>
+
+</body>
+</html>

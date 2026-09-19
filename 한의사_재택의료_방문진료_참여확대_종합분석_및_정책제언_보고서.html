@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>초고령사회 대비 한의사·한의원 재택의료(방문진료) 참여 확대 종합 보고서</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0f766e;
+            --primary-dark: #0d9488;
+            --primary-light: #ccfbf1;
+            --accent: #0284c7;
+            --dark-bg: #0f172a;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --info: #3b82f6;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: var(--text-main);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .header-banner {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f766e 100%);
+            color: #ffffff;
+            padding: 3.5rem 2rem;
+            text-align: center;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2);
+        }
+
+        .header-banner .badge {
+            display: inline-block;
+            background: rgba(204, 251, 241, 0.15);
+            color: #99f6e4;
+            border: 1px solid rgba(153, 246, 228, 0.3);
+            padding: 0.35rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1.25rem;
+            letter-spacing: 0.05em;
+        }
+
+        .header-banner h1 {
+            font-size: 2.25rem;
+            font-weight: 900;
+            line-height: 1.3;
+            margin-bottom: 1rem;
+            word-break: keep-all;
+        }
+
+        .header-banner p {
+            font-size: 1.1rem;
+            color: #cbd5e1;
+            max-width: 800px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2.5rem 1.5rem;
+        }
+
+        /* Citation Badge */
+        .cite-badge {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #0284c7;
+            background: #e0f2fe;
+            border: 1px solid #bae6fd;
+            padding: 0.1rem 0.4rem;
+            border-radius: 4px;
+            margin-left: 0.2rem;
+            vertical-align: middle;
+        }
+
+        /* KPI Cards Grid */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .kpi-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 1.75rem;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .kpi-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .kpi-title {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+
+        .kpi-value {
+            font-size: 2.1rem;
+            font-weight: 900;
+            color: var(--primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .kpi-desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Section Layout */
+        .section-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 1rem;
+            margin-bottom: 1.75rem;
+        }
+
+        .section-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            background: var(--primary-light);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.2rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--dark-bg);
+        }
+
+        h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--dark-bg);
+            margin: 1.5rem 0 0.75rem 0;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: #334155;
+        }
+
+        /* 4-Function Table */
+        .func-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.25rem;
+            margin: 1.5rem 0;
+        }
+
+        .func-card {
+            background: #f8fafc;
+            border: 1px solid var(--border-color);
+            border-top: 4px solid var(--primary);
+            border-radius: 10px;
+            padding: 1.25rem;
+        }
+
+        .func-title {
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: var(--dark-bg);
+            margin-bottom: 0.5rem;
+        }
+
+        /* SWOT Grid */
+        .swot-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .swot-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .swot-box {
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .swot-s { background: #f0fdf4; border-color: #bbf7d0; }
+        .swot-w { background: #fef2f2; border-color: #fecaca; }
+        .swot-o { background: #f0f9ff; border-color: #bae6fd; }
+        .swot-t { background: #fffbeb; border-color: #fde68a; }
+
+        .swot-box-header {
+            font-size: 1.15rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .swot-s .swot-box-header { color: #166534; }
+        .swot-w .swot-box-header { color: #991b1b; }
+        .swot-o .swot-box-header { color: #075985; }
+        .swot-t .swot-box-header { color: #92400e; }
+
+        .swot-list {
+            list-style: none;
+        }
+
+        .swot-list li {
+            position: relative;
+            padding-left: 1.25rem;
+            margin-bottom: 0.6rem;
+            font-size: 0.95rem;
+            color: #1e293b;
+        }
+
+        .swot-list li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        /* Table Styling */
+        .styled-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.25rem 0;
+            font-size: 0.95rem;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.02);
+        }
+
+        .styled-table thead tr {
+            background-color: #0f172a;
+            color: #ffffff;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .styled-table th, .styled-table td {
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .styled-table tbody tr:nth-of-type(even) {
+            background-color: #f8fafc;
+        }
+
+        .styled-table tbody tr:hover {
+            background-color: #f1f5f9;
+        }
+
+        /* Strategy Cards */
+        .strategy-card {
+            background: #ffffff;
+            border-left: 5px solid var(--primary);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.25rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+            border-top: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .strategy-num {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .strategy-title {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--dark-bg);
+            margin-bottom: 0.5rem;
+        }
+
+        .alert-box {
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            border-radius: 12px;
+            padding: 1.25rem;
+            margin: 1.5rem 0;
+            color: #1e40af;
+        }
+
+        .ref-list {
+            list-style: none;
+            font-size: 0.9rem;
+            color: #475569;
+        }
+
+        .ref-list li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.5rem;
+            text-indent: -1.5rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2.5rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+            background: #ffffff;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header-banner">
+        <span class="badge">POLICY & HEALTHCARE STATISTICS REPORT</span>
+        <h1>초고령사회 대비 한의사·한의원 재택의료(방문진료)<br>참여 확대 종합 보고서</h1>
+        <p>KDCA 8대 체계, 이혜진 교수 4대 기능 모델, KAHM·복지부·건보공단 실태 분석, SWOT, 5대 추진 전략</p>
+    </header>
+
+    <div class="container">
+
+        <!-- KPI Metrics Grid -->
+        <div class="kpi-grid">
+            <div class="kpi-card">
+                <div class="kpi-title">전국 재택기관 참여율 1위</div>
+                <div class="kpi-value">48.3% ~ 60.5%</div>
+                <div class="kpi-desc">2024년 전체 재택의료 참여 1,960개소 중 한의 방문진료 713개소(60.5%) <span class="cite-badge">출처2</span></div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-title">대한민국 초고령사회 진입</div>
+                <div class="kpi-value">2024. 12. 23</div>
+                <div class="kpi-desc">65세 이상 인구 20% 초과 공식 진입, 돌봄통합지원법(2026.03) 본격화 <span class="cite-badge">출처4</span></div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-title">재택의료 4대 기능 모델</div>
+                <div class="kpi-value">이혜진 교수 정립</div>
+                <div class="kpi-desc">일차의료·급성기대응·전환기치료·재택임종 체계화 <span class="cite-badge">출처7</span></div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-title">교차/연속 이용 1위 조합</div>
+                <div class="kpi-value">가정간호 × 한의방문</div>
+                <div class="kpi-desc">양방 간호/진료와 높은 상호보완성 실증 (암, 치매, 재활 환자 다수 이용) <span class="cite-badge">출처2</span></div>
+            </div>
+        </div>
+
+        <!-- Section 1: 배경 및 8대 체계 -->
+        <div class="section-card">
+            <div class="section-header">
+                <div class="section-icon">1</div>
+                <h2 class="section-title">추진 배경 및 대한민국 재택의료 8대 사업 체계</h2>
+            </div>
+            
+            <p>초고령사회 도래에 따른 거동불편 환자의 폭증은 기존의 입원·외래 중심 의료체계에 심각한 과부하를 초래하고 있습니다 <span class="cite-badge">출처4.1</span>. 정부는 2026년 3월 시행된 「지역돌봄통합지원법」에 맞추어 지역사회 중심 의료-돌봄 통합 체계로의 전환을 추진 중입니다 <span class="cite-badge">출처4.2</span>.</p>
+
+            <h3>1.2 질병관리청(KDCA) 기준 8대 재택의료 사업 체계 <span class="cite-badge">출처6</span></h3>
+            <p>질병관리청 국가건강정보포털에 따르면, 재택의료는 거동이 불편한 환자의 거주지에서 <strong>진료, 간호, 재활치료, 약물·영양 상담, 돌봄 연계</strong>까지 제공하는 포괄적 의료 개념입니다. 장기요양 재택의료센터, 장애인 건강주치의, 일차의료 방문진료, 장기요양 방문간호 등 8개 영역으로 분류됩니다.</p>
+        </div>
+
+        <!-- Section 2: 이혜진 교수 4대 기능 모델 -->
+        <div class="section-card">
+            <div class="section-header">
+                <div class="section-icon">2</div>
+                <h2 class="section-title">학계 리더십(서울대 이혜진 교수) 연구 분석 및 4대 기능 모델 <span class="cite-badge">출처7</span></h2>
+            </div>
+
+            <p>서울대학교 의과대학 가정의학과 부교수이자 <strong>한국재택의료협회 정책위원장</strong>, <strong>보건복지부 장관상(2019)</strong> 수상자인 이혜진 교수는 재택의료를 4가지 기능 축으로 구분하며, 이를 기반으로 직역별 역할 분담을 제언합니다.</p>
+
+            <div class="func-grid">
+                <div class="func-card">
+                    <div class="func-title">① 일차의료 방문진료</div>
+                    <div>거동불편 만성질환자의 정기 방문 관리. 의사/한의사 주치의 적합도 <strong>매우 높음</strong>.</div>
+                </div>
+                <div class="func-card">
+                    <div class="func-title">② 급성기 대응</div>
+                    <div>급성 악화 비상 시 현장 신속 출동. 의사+간호사 중심 (의과 연계 필요).</div>
+                </div>
+                <div class="func-card">
+                    <div class="func-title">③ 전환기 치료 (Transitional)</div>
+                    <div>퇴원 환자 재입원 방지 단기 케어. 한의약 적합도 <strong>높음</strong> (뇌경색 마비/재활).</div>
+                </div>
+                <div class="func-card">
+                    <div class="func-title">④ 재택 임종 (End-of-Life)</div>
+                    <div>자택 내 임종기 완화케어 및 사망진단서 발급. 의사 전속 역할 (한의 단독 제한).</div>
+                </div>
+            </div>
+
+            <div class="alert-box">
+                <strong>💡 이혜진 교수의 직역별 평가 및 한의약 시사점 <span class="cite-badge">출처7</span></strong><br>
+                이혜진 교수는 한의원의 재택의료 참여 자체를 전면 부정하지 않으나, 재택 임종기 관리 및 사망진단서 발급 등 법적·의학적 고위험 영역의 한의 단독 수행에는 반대하는 '영역별 차등 접근론'을 제시합니다. 한의계는 일차의료(만성통증) 및 전환기 재활 치료 영역에 집중하고, 급성기 및 임종기는 의과와의 2방향 협진 체계로 정립하는 것이 설득력을 극대화하는 길입니다.
+            </div>
+        </div>
+
+        <!-- Section 3: 한의 실태 및 우수사례 -->
+        <div class="section-card">
+            <div class="section-header">
+                <div class="section-icon">3</div>
+                <h2 class="section-title">한의 재택의료 현황 및 주요 우수사례 분석</h2>
+            </div>
+
+            <h3>3.1 KAHM 및 국민건강보험공단 우수사례 <span class="cite-badge">출처1</span></h3>
+            <p>국민건강보험공단 주관 <strong>장기요양 재택의료센터 시범사업</strong>에서 한의원은 종별 최우수 모범기관으로 2년 연속 선정되었습니다.</p>
+            <ul style="margin-left: 1.5rem; margin-bottom: 1rem; color: #334155;">
+                <li><strong>2024년 우수사례</strong>: <em>전주의료복지사회적협동조합 건강한마을한의원</em> (다학제 팀 운영 및 돌봄 네트워크 구축) [kahm.net/data/1597]</li>
+                <li><strong>2025년 우수사례</strong>: <em>중동한의원</em> (의과 연세송내과의원, 파주병원과 함께 3대 우수사례 대표 선정) [kahm.net/data/3120]</li>
+            </ul>
+
+            <h3>3.2 건보공단 포괄모형 연구 실태 통계 <span class="cite-badge">출처2</span></h3>
+            <p>보건복지부·건보공단의 연구 데이터에 따르면, 전체 재택의료 참여 기관 1,960개소 중 <strong>일차의료 한의 방문진료 수가 시범사업 기관 비중이 48.3%~53.3%</strong>로 1위입니다. 단일 사업 기준으로는 <strong>60.5%(713개소)</strong>를 차지합니다.</p>
+        </div>
+
+        <!-- Section 4: 부정적 평가 및 한계 -->
+        <div class="section-card">
+            <div class="section-header">
+                <div class="section-icon">4</div>
+                <h2 class="section-title">부정적 평가 및 현장 제약요인 진단</h2>
+            </div>
+            
+            <p>한의 방문진료의 높은 공급 능력에도 불구하고 현장과 의학계로부터 지적되는 한계점은 다음과 같습니다 <span class="cite-badge">출처3, 5.1</span>.</p>
+
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>구분</th>
+                        <th>핵심 내용</th>
+                        <th>영향 및 지적사항</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>임상적 한계</strong></td>
+                        <td>전문의약품 처방, 욕창 드레싱, L-tube/Foley관 교체, 임상 진단검사 부재</td>
+                        <td>중증 재택환자 단독 케어의 한계 발생. 환자가 의과 방문진료/병원 이송을 추가 이용해야 하는 불편함.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>안전성 논란 <span class="cite-badge">출처5.1</span></strong></td>
+                        <td>자택 환경 내 약침·침구 시술 시 감염 및 응급 대처 역량 비판</td>
+                        <td>대한의사협회 한방특위 등의 무균 위생 감염 우려 및 관절강 주사 등 약침에 대한 면허 범위 공방.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>경제적·구조적 제약 <span class="cite-badge">출처3</span></strong></td>
+                        <td>환자 본인부담금(30%, 약 3.9만 원) 부담 및 1인 한의원 인력 제약</td>
+                        <td>의과적 처치가 포함되지 않은 한의 진료 체감 가치 불만 및 간호사/사회복지사 동반 가산 수가 미비.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Section 5: 유관단체 입장 -->
+        <div class="section-card">
+            <div class="section-header">
+                <div class="section-icon">5</div>
+                <h2 class="section-title">유관단체별 입장 분석 (Stakeholder Matrix) <span class="cite-badge">출처5, 7</span></h2>
+            </div>
+
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>유관단체</th>
+                        <th>기본 입장</th>
+                        <th>주요 명분 및 요구사항</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>정부 / 보건복지부</strong></td>
+                        <td><span style="color:#0284c7; font-weight:bold;">조건부 찬성 및 활용</span></td>
+                        <td>지역돌봄통합지원법 수단으로 활용하나, 거동불편(Homebound) 기준 수립 및 건보-장기요양 재정 정합성, 포괄 협진 체계 유도를 조건으로 제시 <span class="cite-badge">출처2, 3, 6</span>.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>대한의사협회</strong></td>
+                        <td><span style="color:#dc2626; font-weight:bold;">강력 반대 및 제한</span></td>
+                        <td>응급 대처 미흡, 현대의학적 진단/처치 한계, 감염 및 면허 범위 위반 위험을 이유로 단독 재택의료 참여 거부 <span class="cite-badge">출처5.1</span>.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>대한간호협회</strong></td>
+                        <td><span style="color:#059669; font-weight:bold;">조건부 수용</span></td>
+                        <td>법적 한의사 방문간호 지시서 권한은 수용하나, 한의원 내 간호인력 부족을 지적하며 독립적 방문간호센터와의 대등한 협력 요구 <span class="cite-badge">출처5.3, 6</span>.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>대한한의사협회</strong></td>
+                        <td><span style="color:#059669; font-weight:bold;">전면 확대 강력 찬성</span></td>
+                        <td>전체 재택 기관 50% 이상 담당 실적 및 높은 만족도를 바탕으로, 장기요양 재택의료센터 차별 철폐 및 동반 인력 수가 가산 요구 <span class="cite-badge">출처5.2</span>.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>학계 (서울대 이혜진 교수)</strong></td>
+                        <td><span style="color:#f59e0b; font-weight:bold;">영역별 차등 접근</span></td>
+                        <td>4대 기능 중 일차의료·전환기 치료 참여는 수용하되, 재택 임종·사망진단서 작성 등 고위험 영역 한의 단독 수행 반대 <span class="cite-badge">출처7</span>.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>시민단체 / 소비자</strong></td>
+                        <td><span style="color:#0284c7; font-weight:bold;">선택권 찬성</span></td>
+                        <td>거동불편 노인의 치료 선택권 확대를 찬성하나, 본인부담금 대비 의과 처치(처방/드레싱) 불가능에 따른 이중 이용 불편 개선 희망.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Section 6: SWOT 분석 -->
+        <div class="section-card">
+            <div class="section-header">
+                <div class="section-icon">6</div>
+                <h2 class="section-title">한의 재택의료 종합 SWOT 분석</h2>
+            </div>
+
+            <div class="swot-grid">
+                <div class="swot-box swot-s">
+                    <div class="swot-box-header">💪 Strengths (강점)</div>
+                    <ul class="swot-list">
+                        <li>일차의료 개원가 높은 참여율 (전체 재택 기관의 48~60%) <span class="cite-badge">출처2</span></li>
+                        <li>전국적 고른 분포 및 우수한 현장 접근성</li>
+                        <li>만성 통증, 재활(마비), 근골격계 비침습 치료 강점</li>
+                        <li>가정간호 대비 낮은 진입장벽 및 높은 환자 친화성 <span class="cite-badge">출처3</span></li>
+                    </ul>
+                </div>
+
+                <div class="swot-box swot-w">
+                    <div class="swot-box-header">⚠️ Weaknesses (약점)</div>
+                    <ul class="swot-list">
+                        <li>필수 의과 처치(드레싱·L-tube/Foley관·처방·검사) 불가능</li>
+                        <li>1인 원장 체제로 다학제 인력(간호사/복지사) 동반 한계</li>
+                        <li>높은 본인부담금(30%, 약 3.9만원) 대비 체감 서비스 한계 <span class="cite-badge">출처3</span></li>
+                        <li>응급 상황 및 재택 임종(사망진단서) 대처 한계 <span class="cite-badge">출처7</span></li>
+                    </ul>
+                </div>
+
+                <div class="swot-box swot-o">
+                    <div class="swot-box-header">🚀 Opportunities (기회)</div>
+                    <ul class="swot-list">
+                        <li>초고령사회 진입(2024.12) 및 돌봄통합지원법(2026.03) 시행 <span class="cite-badge">출처4</span></li>
+                        <li>이혜진 교수 4대 기능 중 '일차의료·전환기재활' 역할 명확화 <span class="cite-badge">출처7</span></li>
+                        <li>[가정간호/의과방문진료 × 한의방문진료] 교차 이용 공식화 <span class="cite-badge">출처2</span></li>
+                        <li>건보공단 시범사업 내 한의원 우수사례 증명 <span class="cite-badge">출처1</span></li>
+                    </ul>
+                </div>
+
+                <div class="swot-box swot-t">
+                    <div class="swot-box-header">🛡️ Threats (위협)</div>
+                    <ul class="swot-list">
+                        <li>의과 중심 재택의료 포괄모형 재편 시 배제/위축 우려</li>
+                        <li>엄격한 '거동불편(Homebound)' 기준 도입 시 남용 규제 <span class="cite-badge">출처3, 6</span></li>
+                        <li>의-한 직역 갈등 및 약침 등 안전성/면허 범위 논란 <span class="cite-badge">출처5.1</span></li>
+                        <li>건보-장기요양보험 간 수가 비정합성 및 가산 수가 차별</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 7: 5대 실행 전략 -->
+        <div class="section-card">
+            <div class="section-header">
+                <div class="section-icon">7</div>
+                <h2 class="section-title">한의사 재택의료 참여 확대를 위한 5대 핵심 실행 전략</h2>
+            </div>
+
+            <div class="strategy-card">
+                <span class="strategy-num">전략 1</span>
+                <div class="strategy-title">수가·제도 차별 해소 및 본인부담금 인하</div>
+                <p>의과와 동일하게 한의사가 간호사, 물리·작업치료사와 동반 진료 시 수가 가산(3.3만 원 수준)을 적용받도록 제도 개정을 추진하고, 중증 장애인·기초생활수급자 대상 본인부담금을 30%에서 10~20%로 인하하여 환자의 경제적 장벽을 해소합니다.</p>
+            </div>
+
+            <div class="strategy-card">
+                <span class="strategy-num">전략 2</span>
+                <div class="strategy-title">'의과-한의과-방문간호' 2방향 다학제 포괄 협진 래포(MDT) 구축</div>
+                <p>이혜진 교수 4대 기능 모델에 부합하도록 한의 진료를 <strong>'일차의료(통증관리)' 및 '전환기 치료(뇌경색 마비·재활)'</strong>에 특화하고, 급성기 및 임종기 관리는 의과 병·의원과 2방향 의뢰/회송 체계를 수립합니다 <span class="cite-badge">출처2, 7</span>.</p>
+            </div>
+
+            <div class="strategy-card">
+                <span class="strategy-num">전략 3</span>
+                <div class="strategy-title">가정 방문 한의 임상 가이드라인 및 응급 대처 매뉴얼 제정</div>
+                <p>자택 내 약침, 침, 부항 시술 시 무균 위생 감염 예방 수칙(단회용 도구 사용 지침)을 제작하고, 심뇌혈관 급성 발작, 호흡곤란, 기흉 발생 시 지정 의과 병·의원으로 신속 이송하는 응급 핫라인 체계를 수립합니다 <span class="cite-badge">출처6</span>.</p>
+            </div>
+
+            <div class="strategy-card">
+                <span class="strategy-num">전략 4</span>
+                <div class="strategy-title">'협업형 재택의료센터' 모델 및 재택의료 전문 한의사 인증제 확산</div>
+                <p>1인 한의원의 인력 한계를 극복하기 위해 지역 한의사회 또는 복지관 연계 형태의 '공동 방문간호·돌봄 지원 센터'를 구축하고, 노인의학·재택 임상 교육을 이수한 '재택의료 전문 한의사 인증제'를 도입하여 사회적 신뢰를 확보합니다.</p>
+            </div>
+
+            <div class="strategy-card">
+                <span class="strategy-num">전략 5</span>
+                <div class="strategy-title">RWE 기반 의료비 절감 및 ADL 개선 실증 빅데이터 축적</div>
+                <p>건강보험 청구 빅데이터(HIRA/건보공단) 및 임상 연구를 연계하여 한의 방문진료가 환자의 재입원율 감소, 일상생활 수행능력(ADL) 개선, 응급실 방문 빈도 감소, 총 의료비 절감에 기여함을 과학적으로 실증합니다.</p>
+            </div>
+        </div>
+
+        <!-- Section 8: 참고문헌 및 출처 -->
+        <div class="section-card">
+            <div class="section-header">
+                <div class="section-icon">📚</div>
+                <h2 class="section-title">참고문헌 및 데이터 출처 (References)</h2>
+            </div>
+            
+            <ul class="ref-list">
+                <li><strong>[출처 1] 한국재택의료학회/협회 (KAHM) 데이터 베이스</strong>: 
+                    <ul>
+                        <li>국민건강보험공단 (2024), <em>2024년 장기요양 재택의료센터 시범사업 우수사례 (전주 건강한마을한의원)</em>, kahm.net/data/1597</li>
+                        <li>국민건강보험공단 (2025), <em>2025년 장기요양 재택의료센터 시범사업 우수사례 (중동한의원)</em>, kahm.net/data/3120</li>
+                        <li>대한한의사협회 (2025), <em>돌봄통합지원법과 한의약의 역할 국회 토론회 발표집</em>, kahm.net/data/2673</li>
+                        <li>한의재택의료학회 (2026), <em>제1회 학술대회: 사람 중심의 일차의료를 위한 다직종 협력과 한의학</em>, kahm.net/data/18913</li>
+                    </ul>
+                </li>
+                <li><strong>[출처 2] 보건복지부 / 국민건강보험공단 연구 보고서</strong>: 지영건 외 (2024), 『환자중심의 건강보험 재택의료 포괄모형 개발』, 보건복지부·국민건강보험공단·건강보험심사평가원.</li>
+                <li><strong>[출처 3] 한국보건사회연구원 (KIHASA) 학술 논문 및 포럼</strong>: 김희년 (2025. 02), 「방문진료 및 재택의료 사업 현황과 제도화를 위한 제언」, 『보건복지포럼』 No. 340, pp. 24-37. DOI: 10.23062/2025.02.3. KIHASA 학술검색시스템(www.kihasa.re.kr).</li>
+                <li><strong>[출처 4] 국가 통계 및 관련 법령</strong>: 통계청 (2024), 『장래인구추계』 (2024.12.23 초고령사회 공식 진입 발표); 대한민국 국회 (2024/2026), 『의료·요양 등 지역돌봄통합지원에 관한 법률 (지역돌봄통합지원법)』 (2026.03.27 시행).</li>
+                <li><strong>[출처 5] 유관단체 정책 자료 및 성명서</strong>:
+                    <ul>
+                        <li>[5.1 대한의사협회] 한방대책특별위원회 (2024-2025), <em>한의사 방문진료 및 약침 시술 관련 감염·안전성 우려 및 면허 범위 성명서</em></li>
+                        <li>[5.2 대한한의사협회] (2024-2025), <em>초고령사회 커뮤니티케어 내 한의 방문진료 수가 및 참여 확대를 위한 정책 제언집</em></li>
+                        <li>[5.3 대한간호협회] (2024-2025), <em>장기요양 방문간호 지시서 및 재택간호 다학제 팀 구성 관련 정책 요구서</em></li>
+                    </ul>
+                </li>
+                <li><strong>[출처 6] 질병관리청 국가건강정보포털 (KDCA)</strong>: 질병관리청 (2025), <em>건강정보 - 재택의료/방문진료 사업 현황 및 이용 지침</em>, 국가건강정보포털 (콘텐츠 번호: 6753), URL: `https://health.kdca.go.kr/healthinfo/biz/health/gnrlzHealthInfo/gnrlzHealthInfo/gnrlzHealthInfoView.do?cntnts_sn=6753`</li>
+                <li><strong>[출처 7] 서울대학교 의과대학 / 한국재택의료협회 이혜진 교수 연구 보고서</strong>: 이혜진 (2024-2026), 『재택의료 4대 기능 분류(일차의료, 급성기대응, 전환기치료, 재택임종) 및 팀 기반 지역사회 통합돌봄 연구』, 서울대학교 의과대학 가정의학교실 / 한국재택의료협회. (`g:\내 드라이브\한의 의료서비스 통계\이혜진교수_재택의료_분석보고서.md`)</li>
+            </ul>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>© 2026 한의 의료서비스 통계 분석 보고서 | 데이터 출처: 국민건강보험공단, 보건복지부, 한국보건사회연구원(KIHASA), KAHM(한국재택의료학회), KDCA(질병관리청), 서울대학교 의과대학</p>
+    </footer>
+
+</body>
+</html>

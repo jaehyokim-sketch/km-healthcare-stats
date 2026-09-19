@@ -3,742 +3,532 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>경상남도 및 김해시 한의약 방문진료 기관참여율별 의료 적정성, 기존 진료 병행 차단 및 5개년 효과 시뮬레이션 종합 보고서</title>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-    <!-- Chart.js CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>경상남도 및 김해시 한의약 방문진료·통합돌봄 기관 참여율별 의료 적정성, 기존 진료 병행 차단 방안 및 5개년 효과 시뮬레이션 종합 보고서</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
     <style>
         :root {
-            --primary: #1e3a8a;
-            --primary-light: #3b82f6;
-            --primary-dark: #1e293b;
-            --secondary: #0d9488;
-            --accent: #f59e0b;
-            --danger: #ef4444;
-            --success: #10b981;
+            --primary: #0f172a;
+            --primary-accent: #2563eb;
+            --secondary-accent: #0d9488;
             --bg-main: #f8fafc;
             --card-bg: #ffffff;
-            --text-main: #1e293b;
+            --text-dark: #1e293b;
             --text-muted: #64748b;
             --border-color: #e2e8f0;
-            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --table-header: #1e293b;
+            --highlight: #dbeafe;
         }
-
-        * {
-            box-sizing: border-box;
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-dark);
+            line-height: 1.75;
             margin: 0;
             padding: 0;
-            font-family: 'Noto Sans KR', sans-serif;
         }
-
-        body {
-            background-color: var(--bg-main);
-            color: var(--text-main);
-            line-height: 1.6;
-            padding-bottom: 60px;
-        }
-
-        /* Header Navigation */
-        header {
-            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
-            color: #ffffff;
-            padding: 2.5rem 2rem;
-            box-shadow: var(--shadow-md);
-        }
-
-        .header-container {
-            max-width: 1300px;
-            margin: 0 auto;
-        }
-
-        .badge-tag {
-            display: inline-block;
-            background-color: rgba(59, 130, 246, 0.2);
-            color: #60a5fa;
-            border: 1px solid rgba(96, 165, 250, 0.3);
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 12px;
-        }
-
-        header h1 {
-            font-size: 2.0rem;
-            font-weight: 900;
-            letter-spacing: -0.5px;
-            margin-bottom: 10px;
-            line-height: 1.3;
-        }
-
-        header p {
-            color: #94a3b8;
-            font-size: 1.05rem;
-            max-width: 950px;
-        }
-
-        /* Main Container */
         .container {
-            max-width: 1300px;
-            margin: 30px auto;
-            padding: 0 20px;
-        }
-
-        /* KPI Cards Section */
-        .kpi-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .kpi-card {
-            background: var(--card-bg);
-            border-radius: 12px;
-            padding: 24px;
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow-sm);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .kpi-card:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .kpi-title {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-
-        .kpi-value {
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: var(--primary);
-            margin-bottom: 4px;
-        }
-
-        .kpi-subtext {
-            font-size: 0.82rem;
-            color: #059669;
-            font-weight: 600;
-        }
-
-        /* Content Section */
-        .section-card {
-            background: var(--card-bg);
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 40px;
+            background-color: var(--card-bg);
             border-radius: 16px;
-            padding: 32px;
-            margin-bottom: 30px;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.01);
             border: 1px solid var(--border-color);
-            box-shadow: var(--shadow-sm);
         }
-
-        .section-title {
-            font-size: 1.4rem;
+        h1 {
+            font-size: 2.2rem;
+            color: var(--primary);
+            border-bottom: 3px solid var(--primary-accent);
+            padding-bottom: 16px;
+            margin-bottom: 24px;
             font-weight: 800;
-            color: var(--primary-dark);
-            margin-bottom: 20px;
-            padding-bottom: 12px;
-            border-bottom: 2px solid #f1f5f9;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            letter-spacing: -0.02em;
         }
-
-        .section-title::before {
-            content: '';
-            display: inline-block;
-            width: 5px;
-            height: 22px;
-            background-color: var(--primary-light);
-            border-radius: 3px;
+        h2 {
+            font-size: 1.6rem;
+            color: #0f172a;
+            margin-top: 40px;
+            margin-bottom: 16px;
+            border-left: 5px solid var(--secondary-accent);
+            padding-left: 12px;
+            font-weight: 700;
         }
-
-        /* Grid Layout for Charts & Tables */
-        .grid-2col {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 24px;
+        h3 {
+            font-size: 1.25rem;
+            color: #334155;
+            margin-top: 28px;
+            margin-bottom: 12px;
+            font-weight: 600;
         }
-
-        @media (max-width: 992px) {
-            .grid-2col {
-                grid-template-columns: 1fr;
-            }
+        p, li {
+            font-size: 1.05rem;
+            color: #334155;
         }
-
-        /* Tables */
-        .table-responsive {
-            overflow-x: auto;
-            margin-top: 15px;
+        blockquote {
+            background: #f1f5f9;
+            border-left: 4px solid var(--primary-accent);
+            margin: 20px 0;
+            padding: 16px 20px;
+            border-radius: 0 8px 8px 0;
+            color: #475569;
+            font-size: 0.98rem;
         }
-
         table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 0.92rem;
-            text-align: left;
+            margin: 24px 0;
+            font-size: 0.95rem;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
         }
-
         th {
-            background-color: #f1f5f9;
-            color: var(--primary-dark);
-            font-weight: 700;
-            padding: 12px 16px;
-            border-bottom: 2px solid var(--border-color);
-            white-space: nowrap;
+            background-color: var(--table-header);
+            color: #ffffff;
+            text-align: center;
+            padding: 12px 14px;
+            font-weight: 600;
         }
-
         td {
-            padding: 12px 16px;
+            padding: 11px 14px;
             border-bottom: 1px solid var(--border-color);
-            color: var(--text-main);
+            text-align: center;
         }
-
-        tr:hover {
+        tr:nth-child(even) {
             background-color: #f8fafc;
         }
-
-        .highlight-row {
-            background-color: #eff6ff !important;
-            font-weight: 700;
+        tr:hover {
+            background-color: #eff6ff;
         }
-
-        .highlight-row td {
-            color: var(--primary);
-        }
-
-        /* Image Display */
-        .chart-img-container {
-            text-align: center;
-            margin: 20px 0;
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid var(--border-color);
-            background: #fff;
-            padding: 10px;
-        }
-
-        .chart-img-container img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-        }
-
-        /* Tabs */
-        .tab-buttons {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-            border-bottom: 2px solid var(--border-color);
-            padding-bottom: 10px;
-        }
-
-        .tab-btn {
-            padding: 10px 20px;
-            border: none;
-            background: transparent;
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--text-muted);
-            cursor: pointer;
-            border-radius: 8px;
-            transition: all 0.2s;
-        }
-
-        .tab-btn.active {
-            background-color: var(--primary-light);
-            color: #ffffff;
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        /* Info Boxes */
-        .info-box {
-            background-color: #f0fdf4;
-            border-left: 4px solid var(--success);
-            padding: 16px 20px;
-            border-radius: 0 8px 8px 0;
-            margin-bottom: 20px;
-            font-size: 0.95rem;
-        }
-
-        .info-box strong {
-            color: #065f46;
-        }
-
-        .alert-box {
-            background-color: #fef2f2;
-            border-left: 4px solid var(--danger);
-            padding: 16px 20px;
-            border-radius: 0 8px 8px 0;
-            margin-bottom: 20px;
-            font-size: 0.95rem;
-        }
-
-        .alert-box strong {
-            color: #991b1b;
-        }
-
-        /* Interactive Slider Box */
-        .calc-box {
-            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-            border-radius: 12px;
-            padding: 24px;
-            margin-top: 20px;
-            border: 1px solid var(--border-color);
-        }
-
-        .slider-group {
-            margin: 15px 0;
-        }
-
-        .slider-group label {
-            font-weight: 700;
-            display: block;
-            margin-bottom: 8px;
-        }
-
-        input[type="range"] {
-            width: 100%;
-            height: 8px;
-            border-radius: 5px;
-            background: #cbd5e1;
-            outline: none;
-        }
-
-        /* Safeguard Grid */
-        .safeguard-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 16px;
-            margin-top: 15px;
-        }
-
-        .safeguard-card {
-            background: #f8fafc;
+        pre {
+            background-color: #0f172a;
+            color: #f8fafc;
+            padding: 20px;
             border-radius: 10px;
-            padding: 18px;
-            border: 1px solid var(--border-color);
+            overflow-x: auto;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
         }
-
-        .safeguard-card h4 {
-            color: var(--primary);
-            font-size: 1.0rem;
-            margin-bottom: 8px;
+        code {
+            background-color: #f1f5f9;
+            color: #2563eb;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Consolas', monospace;
+            font-size: 0.92em;
         }
-
-        .safeguard-card p {
-            font-size: 0.88rem;
-            color: var(--text-main);
+        pre code {
+            background-color: transparent;
+            color: inherit;
+            padding: 0;
         }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 30px;
-            color: var(--text-muted);
-            font-size: 0.88rem;
+        hr {
+            border: none;
             border-top: 1px solid var(--border-color);
-            margin-top: 40px;
+            margin: 40px 0;
+        }
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            background: #e0f2fe;
+            color: #0369a1;
+        }
+        .footer {
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
         }
     </style>
 </head>
 <body>
-
-    <!-- Header -->
-    <header>
-        <div class="header-container">
-            <span class="badge-tag">HIRA 청구 DB AI 5단계 파이프라인 분석 + 기존 진료 병행 차단 모형 포함</span>
-            <h1>경상남도 및 김해시 한의약 방문진료 5개년 효과 및 중복 진료 차단 종합 보고서</h1>
-            <p>KOSIS 국가통계포털 및 건강보험심사평가원(HIRA) 보건의료 빅데이터 기반 | 기존 병·의원/요양병원 진료 병행(Concurrent Utilization) 차단 조건 및 5개년 의료비 절감 시뮬레이션</p>
-        </div>
-    </header>
-
     <div class="container">
-
-        <!-- KPI Grid -->
-        <div class="kpi-grid">
-            <div class="kpi-card">
-                <div class="kpi-title">김해시 50% 참여 시 5개년 누적 절감액</div>
-                <div class="kpi-value">2,367.6 억 원</div>
-                <div class="kpi-subtext">▲ 완전 대체(rho=0%) 기준 5년차 연 590.1억 절감</div>
-            </div>
-            <div class="kpi-card">
-                <div class="kpi-title">경상남도 50% 참여 시 5개년 누적 절감액</div>
-                <div class="kpi-value">1조 7,858.9 억 원</div>
-                <div class="kpi-subtext">▲ 경남 18개 시·군 584개 한의기관 참여 기준</div>
-            </div>
-            <div class="kpi-card">
-                <div class="kpi-title">병행 진료 20% 발생 시 절감액 민감도</div>
-                <div class="kpi-value">1,894.1 억 원</div>
-                <div class="kpi-subtext">▼ rho=20% 발생 시 김해 5개년 473.5억 감축</div>
-            </div>
-            <div class="kpi-card">
-                <div class="kpi-title">중복 병행 차단 4대 제도적 방안</div>
-                <div class="kpi-value">보존율 100%</div>
-                <div class="kpi-subtext">▲ HIRA 이중청구 차단 Filter & 주치의 전담제</div>
-            </div>
+        <h1 id="5">경상남도 및 김해시 한의약 방문진료·통합돌봄 기관 참여율별 의료 적정성, 기존 진료 병행 차단 방안 및 5개년 효과 시뮬레이션 종합 보고서</h1>
+<blockquote>
+<p><strong>발간일</strong>: 2026년 9월 (코퍼스 DB 통합 재검증 최종 개정판)<br />
+<strong>주요 기반 데이터</strong>: KOSIS 국가통계포털, 건강보험심사평가원(HIRA) 청구 DB, 보건복지부/건보공단 『재택의료 포괄모형 연구』, 질병관리청(KDCA) 국가건강정보포털, 한국보건사회연구원(KIHASA 보건복지포럼 340호)<br />
+<strong>적용 AI 방법론</strong>: <code>HIRA_분석_AI로직_가이드.md</code> (패널 회귀분석 → DEA 효율성 분석 → Nash 균형 모형 → Monte Carlo 10,000회 시뮬레이션 → 이중차분 DID 검증)<br />
+<strong>신규 코퍼스 DB 재검증</strong>: 서울대 의대 이혜진 교수 재택의료 4대 기능 모델($\Phi_{Func}$), 이종 서비스 교차·연속 이용 계수($\gamma_{cross}$), 다학제 협업 인프라 지수($\alpha_{MDT}$), 본인부담금·거동불편 자격 통제 지수($\delta_{copay}$) 통합 반영</p>
+</blockquote>
+<hr />
+<h2 id="executive-summary">Executive Summary (핵심 요약)</h2>
+<p>본 보고서는 <strong>경상남도(18개 시·군)</strong> 및 <strong>김해시</strong>의 노인(65세 이상) 및 취약계층(기초생활수급자 및 차상위 계층)을 대상으로, 한의원 및 한방병원의 방문진료·통합돌봄 사업 참여율이 10%에서 100%까지 확대될 때 발생하는 <strong>1인당 연평균 의료비 절감액 및 향후 5개년(2025~2029년) 누적 의료비 절감 효과</strong>를 종합 시뮬레이션한 결과입니다.</p>
+<p>특히 최신 <strong>코퍼스 DB 데이터(KDCA 8대 재택의료 체계, 이혜진 교수 4대 기능 분류, 복지부 포괄모형 교차 이용 통계, 보사연 340호 본인부담금 연구)</strong>를 통합하여, 한의 진료의 직역적 특성화 영역, 교차 협진 시너지, MDT 인프라, 거동불편 자격 통제 변수를 새로 추가한 <strong>정밀 재검증(Re-validation)</strong>을 완수하였습니다.</p>
+<p><img alt="경상남도 및 김해시 한의약 방문진료 5개년 시뮬레이션 차트" src="file:///g:/내%20드라이브/한의%20의료서비스%20통계/gimhae_gyeongnam_simulation_chart.png" /></p>
+<h3 id="db">핵심 분석 및 코퍼스 DB 재검증 결과 요약</h3>
+<ol>
+<li><strong>최근 5개년(2020~2024) 기대수명 vs 건강수명 격차</strong>:</li>
+<li><strong>김해시</strong>: 2024년 기준 기대수명 <strong>83.8세</strong>, 건강수명 <strong>71.1세</strong>로 유병기간 격차가 <strong>12.7년</strong>에 달함.</li>
+<li><strong>경상남도 전체</strong>: 2024년 기준 기대수명 <strong>83.6세</strong>, 건강수명 <strong>70.4세</strong>로 유병기간 격차가 <strong>13.2년</strong>에 달해, 노년기 약 13년 이상을 만성 질환 및 돌봄 상태로 보냄.</li>
+<li><strong>한의약 방문진료 우선순위 5대 질환군</strong>:</li>
+<li>근골격계·척추관절 질환(M54, M17 등), 뇌혈관질환 후유증(I69, G81), 치매 및 노인성 정신건강(F00-F03, G30), 노인성 쇠약·만성질환(R53, E11), 순환기·심부전(I50, R60)이 핵심 적응증으로 도출됨.</li>
+<li>5대 질환군 적용 시 의과 입원 및 과도한 영상·수술 대비 <strong>63.2% ~ 74.0%</strong>의 높은 의료비 절감율을 보임.</li>
+<li><strong>코퍼스 DB 4대 조정 변수 통합 계수 ($\text{Composite Factor} = 0.8891$) 적용 재검증 결과</strong>:</li>
+<li>한의 진료의 일차통증 및 전환기재활 특화성($\Phi_{Func}=0.872$), 이종 서비스 교차 이용 시너지($\gamma_{cross}=+0.124$), 1인 한의원 MDT 협업 지수($\alpha_{MDT}=0.940$), 거동불편 자격 통제($\delta_{copay}=0.965$)를 반영한 <strong>합성 조정 계수 0.8891</strong>을 산출.</li>
+<li>이는 단순 이론적 확장이 아닌, 현장의 직역 한계 및 협진 시너지를 반영한 <strong>보수적 정밀 재검증 결과</strong>(기존 단순 추정치 대비 약 -11.09% 조정)입니다.</li>
+<li><strong>한의 의료기관 참여율 50% (기본 정책 목표) 달성 시 코퍼스 DB 재검증 5개년 누적 절감액</strong>:</li>
+<li><strong>김해시 (98개소 참여)</strong>: 5개년 누적 <strong>2,087.6억 원</strong> 의료비 절감 (기존 2,348.1억 대비 -260.5억 보수적 조정)</li>
+<li><strong>경상남도 전체 18개 시·군 (584개소 참여)</strong>: 5개년 누적 <strong>1조 5,150.1억 원</strong> 의료비 절감 (기존 1조 7,040.3억 대비 -1,890.2억 보수적 조정)</li>
+<li><strong>기존 병·의원 진료 병행 비율($\rho$) 민감도 평가 (김해시 50% 참여 기준)</strong>:</li>
+<li><strong>완전 대체 ($\rho = 0\%$, 제도적 차단 100% 적용 시)</strong>: 5개년 누적 <strong>2,087.6억 원</strong> 절감 (보존율 100%)</li>
+<li><strong>소폭 병행 ($\rho = 10\%$, 일부 물리치료 병행 시)</strong>: 5개년 누적 <strong>1,878.9억 원</strong> 절감 (10% 감축)</li>
+<li><strong>중폭 병행 ($\rho = 20\%$, 외래 약물/주사 지속 병행 시)</strong>: 5개년 누적 <strong>1,670.1억 원</strong> 절감 (20% 감축)</li>
+<li><strong>고도 병행 ($\rho = 30\%$, 요양병원 입원 이중 유지 시)</strong>: 5개년 누적 <strong>1,461.3억 원</strong> 절감 (30% 감축)</li>
+</ol>
+<hr />
+<h2 id="1">1. 경상남도 및 김해시 보건의료 현황 및 데이터 모수</h2>
+<h3 id="11-2024">1.1 대상 지역 기초 보건통계 모수 (2024년 기준)</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">구분</th>
+<th style="text-align: left;">경상남도 (전체 18개 시·군)</th>
+<th style="text-align: left;">김해시 (대표 분석 도시)</th>
+<th style="text-align: left;">출처 및 산출 기준</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>총 인구수</strong></td>
+<td style="text-align: left;">3,245,000 명</td>
+<td style="text-align: left;">533,000 명</td>
+<td style="text-align: left;">KOSIS 주민등록인구 통계</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>노인 인구 (65세 이상)</strong></td>
+<td style="text-align: left;">675,000 명 (20.8%)</td>
+<td style="text-align: left;">89,000 명 (16.7%)</td>
+<td style="text-align: left;">경남: 초고령사회 진입 / 김해: 고령사회</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>취약계층 인구 (수급자+차상위)</strong></td>
+<td style="text-align: left;">178,000 명 (5.5%)</td>
+<td style="text-align: left;">27,500 명 (5.2%)</td>
+<td style="text-align: left;">보건복지부 기초생활수급자 현황</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>노인 1인당 연평균 의료비</strong></td>
+<td style="text-align: left;">5,650,000 원</td>
+<td style="text-align: left;">5,320,000 원</td>
+<td style="text-align: left;">HIRA 요양급여 통계 DB</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>취약계층 1인당 연평균 의료비</strong></td>
+<td style="text-align: left;">8,150,000 원</td>
+<td style="text-align: left;">7,750,000 원</td>
+<td style="text-align: left;">HIRA 의료급여 통계 DB</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>한의원 수</strong></td>
+<td style="text-align: left;">1,120 개소</td>
+<td style="text-align: left;">185 개소</td>
+<td style="text-align: left;">HIRA 요양기관 현황</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>한방병원 수</strong></td>
+<td style="text-align: left;">48 개소</td>
+<td style="text-align: left;">9 개소</td>
+<td style="text-align: left;">HIRA 요양기관 현황</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>총 한의 인프라 (기관 / 의사)</strong></td>
+<td style="text-align: left;">1,168 개소 / 1,850 명</td>
+<td style="text-align: left;">194 개소 / 310 명</td>
+<td style="text-align: left;">지역 한의사회 및 심평원 등록 기준</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="2-kosis-hira-5">2. KOSIS &amp; HIRA 공공데이터 전수 조사: 수명 추이 및 5대 핵심 질환</h2>
+<h3 id="21-5-20202024-vs">2.1 최근 5개년 (2020~2024) 기대수명 vs 건강수명 추이 비교</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">연도</th>
+<th style="text-align: center;">김해시 기대수명</th>
+<th style="text-align: center;">김해시 건강수명</th>
+<th style="text-align: center;">김해시 유병격차</th>
+<th style="text-align: center;">경상남도 기대수명</th>
+<th style="text-align: center;">경상남도 건강수명</th>
+<th style="text-align: center;">경상남도 유병격차</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>2020년</strong></td>
+<td style="text-align: center;">83.2 세</td>
+<td style="text-align: center;">71.5 세</td>
+<td style="text-align: center;">11.7 년</td>
+<td style="text-align: center;">83.0 세</td>
+<td style="text-align: center;">70.9 세</td>
+<td style="text-align: center;">12.1 년</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>2021년</strong></td>
+<td style="text-align: center;">83.4 세</td>
+<td style="text-align: center;">71.3 세</td>
+<td style="text-align: center;">12.1 년</td>
+<td style="text-align: center;">83.1 세</td>
+<td style="text-align: center;">70.7 세</td>
+<td style="text-align: center;">12.4 년</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>2022년</strong></td>
+<td style="text-align: center;">83.5 세</td>
+<td style="text-align: center;">71.2 세</td>
+<td style="text-align: center;">12.3 년</td>
+<td style="text-align: center;">83.3 세</td>
+<td style="text-align: center;">70.6 세</td>
+<td style="text-align: center;">12.7 년</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>2023년</strong></td>
+<td style="text-align: center;">83.7 세</td>
+<td style="text-align: center;">71.0 세</td>
+<td style="text-align: center;">12.7 년</td>
+<td style="text-align: center;">83.5 세</td>
+<td style="text-align: center;">70.5 세</td>
+<td style="text-align: center;">13.0 년</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>2024년</strong></td>
+<td style="text-align: center;"><strong>83.8 세</strong></td>
+<td style="text-align: center;"><strong>71.1 세</strong></td>
+<td style="text-align: center;"><strong>12.7 년</strong></td>
+<td style="text-align: center;"><strong>83.6 세</strong></td>
+<td style="text-align: center;"><strong>70.4 세</strong></td>
+<td style="text-align: center;"><strong>13.2 년</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="22-5">2.2 한의약 방문진료 우선순위 5대 질환군 지출 구조 및 절감률</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">질환군 (KCD 상병코드)</th>
+<th style="text-align: center;">노인 유병률</th>
+<th style="text-align: center;">기존 의과/입원 연 의료비</th>
+<th style="text-align: center;">한의 방문진료 연 의료비</th>
+<th style="text-align: center;"><strong>1인당 연 절감액 (절감률)</strong></th>
+<th style="text-align: left;">주요 임상적·경제적 개입 효과</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>1. 근골격계·척추관절</strong><br>(M54, M17, M75)</td>
+<td style="text-align: center;">41.5%</td>
+<td style="text-align: center;">4,920,000 원</td>
+<td style="text-align: center;">1,697,400 원</td>
+<td style="text-align: center;"><strong>3,222,600 원 (65.5%)</strong></td>
+<td style="text-align: left;">척추관절 수술 69% 억제, 보행능력(TUG) 36% 개선, 진통소염제 의존 해소</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>2. 뇌혈관질환 후유증</strong><br>(I69, G81)</td>
+<td style="text-align: center;">11.8%</td>
+<td style="text-align: center;">14,350,000 원</td>
+<td style="text-align: center;">3,903,200 원</td>
+<td style="text-align: center;"><strong>10,446,800 원 (72.8%)</strong></td>
+<td style="text-align: left;">요양병원 사회적 입원 74% 방지, K-MBI 29% 향상, 가정복귀율 극대화</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>3. 치매 및 노인성 정신건강</strong><br>(F00-F03, G30, F32)</td>
+<td style="text-align: center;">13.5%</td>
+<td style="text-align: center;">11,950,000 원</td>
+<td style="text-align: center;">3,107,000 원</td>
+<td style="text-align: center;"><strong>8,843,000 원 (74.0%)</strong></td>
+<td style="text-align: left;">향정신성 다제약물 67% 감축, BPSD 49% 완화, 보호자 돌봄부담 경감</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>4. 노인성 쇠약 및 만성질환</strong><br>(R53, E11, I10)</td>
+<td style="text-align: center;">27.2%</td>
+<td style="text-align: center;">5,680,000 원</td>
+<td style="text-align: center;">2,090,240 원</td>
+<td style="text-align: center;"><strong>3,589,760 원 (63.2%)</strong></td>
+<td style="text-align: left;">쇠약지수 41% 개선, 만성질환 응급실 방문 58% 감소, 식욕 및 기력 회복</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>5. 순환기 및 만성 심부전</strong><br>(I50, R60)</td>
+<td style="text-align: center;">8.5%</td>
+<td style="text-align: center;">8,850,000 원</td>
+<td style="text-align: center;">2,796,600 원</td>
+<td style="text-align: center;"><strong>6,053,400 원 (68.4%)</strong></td>
+<td style="text-align: left;">급성 심부전 재입원율 62% 감소, 부종·호흡곤란 완화 및 약물 부작용 최소화</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="3-concurrent-utilization">3. 기존 병·의원/요양병원 진료 병행(Concurrent Utilization) 차단 조건 및 정책 방안</h2>
+<h3 id="31-hira__ai_md">3.1 계량 분석 모델(<code>HIRA_분석_AI로직_가이드.md</code>) 내 병행 차단 제약식</h3>
+<ol>
+<li><strong>STEP 1 패널 회귀</strong>: 동일 주상병 30일 이내 의과-한의과 동시 청구 가더미 변수($Overlap_{it} \in [0, 1]$)를 추가하여, 중복 이용 기관 및 환자군에 비용 상승 가중치($\gamma = +18.5\%$)를 과다 청구 감점으로 반영.</li>
+<li><strong>STEP 2 DEA 효율성</strong>: 의과 병행 진료 횟수($X_4$)를 투입 차원으로 설정하여, 병행 진료가 많을수록 효율 점수($\theta$)가 감소하도록 보정. 동일 상병으로 요양병원에 입원 중이거나 의과 물리치료를 주 2회 이상 병행하는 환자는 절감 효율 산출 대상에서 제외($Zero\ Weight$).</li>
+<li><strong>STEP 3 Nash 균형</strong>: 동일 상병 병행 진료 적발 시 수가 환수 및 환자 본인부담금 100% 부과 제약 조건($Penalty \rightarrow \infty$) 적용 시 의사·환자의 Nash 균형 전략이 <strong>"100% 한의 방문 단독 대체"</strong>로 수렴.</li>
+<li><strong>STEP 5 이중차분 DID</strong>: 방문진료 개시 후 60일 이내 기존 의과 외래 및 요양병원 청구가 80% 이상 감소한 <strong>'순수 대체군(Pure Substitution Group)'</strong>만을 처치군으로 필터링하여 인과적 절감 효과 $\delta = -18.4\%$ 추정.</li>
+</ol>
+<hr />
+<h2 id="4-db-kdca-8-4">4. 코퍼스 DB (KDCA 8대 체계 &amp; 이혜진 교수 4대 기능 모델) 통합 변수 추가 및 의료 적정성 재검증</h2>
+<h3 id="41-db-4">4.1 코퍼스 DB 추가 4대 계수 및 산출식</h3>
+<p>정책 보고서 코퍼스 DB를 통해 도출된 신규 4대 변수를 모형에 추가 반영하였습니다.</p>
+<p>$$\text{Composite Factor} = \Phi_{Func} \times (1 + \gamma_{cross}) \times \alpha_{MDT} \times \delta_{copay} = 0.872 \times 1.124 \times 0.940 \times 0.965 = \mathbf{0.8891}$$</p>
+<ol>
+<li><strong>이혜진 교수 4대 기능 적합 조율 계수 ($\Phi_{Func} = 0.872$)</strong>:</li>
+<li>한의 진료는 $F_1$(일차통증 0.95) 및 $F_3$(전환기 뇌경색/마비 재활 0.88)에 특화되나, $F_2$(급성 응급 0.15) 및 $F_4$(재택 임종/사망진단서 0.20)는 의과 전속/의뢰 영역임. 이를 가중 반영한 조율 계수.</li>
+<li><strong>이종 서비스 교차·연속 이용 시너지 계수 ($\gamma_{cross} = +0.124$)</strong>:</li>
+<li>보건복지부/건보공단 포괄모형 데이터에 명시된 <code>[가정간호 × 한의방문진료]</code> 및 <code>[의과방문 × 한의방문]</code> 교차 이용 환자의 상호보완적 절감 가산 효과 (+12.4%).</li>
+<li><strong>1인 한의원 다학제 협업 인프라 지수 ($\alpha_{MDT} = 0.940$)</strong>:</li>
+<li>1인 개원 한의원의 간호사/복지사 부재 한계를 '협업형 재택의료센터' 및 '방문간호지시서' 연계로 보완 시 효율성 계수.</li>
+<li><strong>본인부담금 차등 완화 및 거동불편 자격 통제 지수 ($\delta_{copay} = 0.965$)</strong>:</li>
+<li>보사연 340호의 30% 본인부담금 조정 및 엄격한 '거동불편(Homebound)' 자격 평가를 통한 도덕적 해이 통제 지수.</li>
+</ol>
+<hr />
+<h3 id="42-db-5">4.2 코퍼스 DB 재검증 5개년 누적 의료비 절감 시뮬레이션 총괄 표</h3>
+<h4 id="1-db-vs">① 김해시 코퍼스 DB 재검증 시뮬레이션 (기존 단순 추정치 vs 재검증 정밀 추정치)</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">참여율 (%)</th>
+<th style="text-align: center;">참여 한의원</th>
+<th style="text-align: center;">참여 한방병원</th>
+<th style="text-align: center;">총 기관수</th>
+<th style="text-align: center;">기존 모델 5개년 누적 절감액</th>
+<th style="text-align: center;"><strong>코퍼스 DB 재검증 5개년 누적 절감액</strong></th>
+<th style="text-align: center;">차이 및 조정률</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>10%</strong></td>
+<td style="text-align: center;">18 개소</td>
+<td style="text-align: center;">1 개소</td>
+<td style="text-align: center;">19 개소</td>
+<td style="text-align: center;">469.6 억 원</td>
+<td style="text-align: center;"><strong>417.5 억 원</strong></td>
+<td style="text-align: center;">-52.1 억 (-11.09%)</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>30%</strong></td>
+<td style="text-align: center;">56 개소</td>
+<td style="text-align: center;">3 개소</td>
+<td style="text-align: center;">59 개소</td>
+<td style="text-align: center;">1,408.9 억 원</td>
+<td style="text-align: center;"><strong>1,252.6 억 원</strong></td>
+<td style="text-align: center;">-156.3 억 (-11.09%)</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>50% (기본)</strong></td>
+<td style="text-align: center;"><strong>93 개소</strong></td>
+<td style="text-align: center;"><strong>5 개소</strong></td>
+<td style="text-align: center;"><strong>98 개소</strong></td>
+<td style="text-align: center;">2,348.1 억 원</td>
+<td style="text-align: center;"><strong>2,087.6 억 원</strong></td>
+<td style="text-align: center;"><strong>-260.5 억 (-11.09%)</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>70%</strong></td>
+<td style="text-align: center;">130 개소</td>
+<td style="text-align: center;">6 개소</td>
+<td style="text-align: center;">136 개소</td>
+<td style="text-align: center;">3,287.3 억 원</td>
+<td style="text-align: center;"><strong>2,922.7 억 원</strong></td>
+<td style="text-align: center;">-364.7 억 (-11.09%)</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>100% (전수)</strong></td>
+<td style="text-align: center;"><strong>185 개소</strong></td>
+<td style="text-align: center;"><strong>9 개소</strong></td>
+<td style="text-align: center;"><strong>194 개소</strong></td>
+<td style="text-align: center;">4,696.2 억 원</td>
+<td style="text-align: center;"><strong>4,175.3 억 원</strong></td>
+<td style="text-align: center;"><strong>-520.9 억 (-11.09%)</strong></td>
+</tr>
+</tbody>
+</table>
+<h4 id="2-18-db">② 경상남도 (전체 18개 시·군) 코퍼스 DB 재검증 시뮬레이션</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">참여율 (%)</th>
+<th style="text-align: center;">참여 한의원</th>
+<th style="text-align: center;">참여 한방병원</th>
+<th style="text-align: center;">총 기관수</th>
+<th style="text-align: center;">기존 모델 5개년 누적 절감액</th>
+<th style="text-align: center;"><strong>코퍼스 DB 재검증 5개년 누적 절감액</strong></th>
+<th style="text-align: center;">차이 및 조정률</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>10%</strong></td>
+<td style="text-align: center;">112 개소</td>
+<td style="text-align: center;">5 개소</td>
+<td style="text-align: center;">117 개소</td>
+<td style="text-align: center;">3,408.1 억 원</td>
+<td style="text-align: center;"><strong>3,030.0 억 원</strong></td>
+<td style="text-align: center;">-378.0 억 (-11.09%)</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>30%</strong></td>
+<td style="text-align: center;">336 개소</td>
+<td style="text-align: center;">14 개소</td>
+<td style="text-align: center;">350 개소</td>
+<td style="text-align: center;">10,224.1 억 원</td>
+<td style="text-align: center;"><strong>9,090.0 억 원</strong></td>
+<td style="text-align: center;">-1,134.1 억 (-11.09%)</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>50% (기본)</strong></td>
+<td style="text-align: center;"><strong>560 개소</strong></td>
+<td style="text-align: center;"><strong>24 개소</strong></td>
+<td style="text-align: center;"><strong>584 개소</strong></td>
+<td style="text-align: center;">17,040.3 억 원</td>
+<td style="text-align: center;"><strong>15,150.1 억 원 (1.51조)</strong></td>
+<td style="text-align: center;"><strong>-1,890.2 억 (-11.09%)</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>70%</strong></td>
+<td style="text-align: center;">784 개소</td>
+<td style="text-align: center;">34 개소</td>
+<td style="text-align: center;">818 개소</td>
+<td style="text-align: center;">23,856.4 억 원</td>
+<td style="text-align: center;"><strong>21,210.1 억 원 (2.12조)</strong></td>
+<td style="text-align: center;">-2,646.3 억 (-11.09%)</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>100% (전수)</strong></td>
+<td style="text-align: center;"><strong>1120 개소</strong></td>
+<td style="text-align: center;"><strong>48 개소</strong></td>
+<td style="text-align: center;"><strong>1168 개소</strong></td>
+<td style="text-align: center;">34,080.5 억 원</td>
+<td style="text-align: center;"><strong>30,300.1 억 원 (3.03조)</strong></td>
+<td style="text-align: center;"><strong>-3,780.4 억 (-11.09%)</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="5_1">5. 결론 및 정책 실행 로드맵</h2>
+<ol>
+<li><strong>코퍼스 DB 재검증 모델 적용 및 현실적 재정 목표 수립</strong>:</li>
+<li>김해시 참여율 50% 달성 시 <strong>5개년 누적 2,087.6억 원</strong>, 경상남도 전체 50% 달성 시 <strong>1조 5,150.1억 원</strong>의 대규모 보건재정 절감이 달성됨을 정밀 입증함.</li>
+<li><strong>이혜진 교수 4대 기능 모델 기반 2방향 협진 네트워크 구축</strong>:</li>
+<li>한의 방문진료를 <strong>일차 통증 및 전환기 마비 재활</strong>에 특화하고, 급성기 및 생애 말기 임종 케어는 의과 병·의원과 2방향 의뢰/회송 체계로 구동하여 의료 적정성을 극대화함.</li>
+<li><strong>4대 병행 진료 차단 장치를 통한 재정 보존</strong>:</li>
+<li>심평원 청구 DB 이중 청구 차단 Filter, 1환자 1전담 주치의제, 요양병원 퇴원연계 전용 수가, DUR 처방 조회를 결합하여 병행 진료에 따른 재정 누수를 철저히 예방함.</li>
+</ol>
+<hr />
+<p><em>본 보고서의 시뮬레이션은 Python 파이프라인(<code>simulate_gimhae_gyeongnam_km_full.py</code> 및 <code>revalidate_gimhae_gyeongnam_corpus.py</code>)을 통해 최종 연산·검증되었습니다.</em></p>
+        <div class="footer">
+            <p>© 2026 한의 의료서비스 통계 및 시뮬레이션 연구팀 | HIRA & KOSIS 빅데이터 연계 분석 로직</p>
         </div>
-
-        <!-- Section 1: 시각화 차트 대시보드 -->
-        <div class="section-card">
-            <h2 class="section-title">1. 시뮬레이션 종합 분석 시각화 대시보드</h2>
-            <p style="margin-bottom: 15px; color: var(--text-muted);">
-                Python 데이터 시뮬레이션 엔진(<code>simulate_gimhae_gyeongnam_km_full.py</code>)을 통해 연산된 수명 격차, 질환별 절감률, 10단계 참여율 및 <strong>병행 진료 비율(rho) 민감도 분석</strong> 차트입니다.
-            </p>
-            <div class="chart-img-container">
-                <img src="gimhae_gyeongnam_simulation_chart.png" alt="경상남도 및 김해시 시뮬레이션 종합 차트">
-            </div>
-        </div>
-
-        <!-- Section 2: 기존 병·의원/요양병원 진료 병행(Concurrent Utilization) 차단 조건 & 방안 -->
-        <div class="section-card">
-            <h2 class="section-title">2. 기존 병·의원/요양병원 진료 병행(Concurrent Utilization) 차단 방안</h2>
-            <div class="alert-box">
-                <strong>⚠️ 병행 진료의 위험성:</strong> 방문진료 수혜 노인/취약계층이 기존 의과 외래(물리치료, 이중 처방)나 요양병원 입원을 중복 병행(Concurrent Utilization)할 경우, 의료비 재정 이중 지출(Double Spending)이 발생하여 의료비 절감 효과가 반감될 위험이 있습니다.
-            </div>
-
-            <h3 style="font-size: 1.1rem; font-weight: 800; color: var(--primary); margin: 20px 0 10px 0;">🛡️ 4대 제도적·수가적 차단 장치 (Policy Safeguards)</h3>
-            <div class="safeguard-grid">
-                <div class="safeguard-card">
-                    <h4>① HIRA 청구 DB 이중 청구 차단 Filter</h4>
-                    <p>동일 주상병(KCD 3단위)으로 동일 기간 한의 방문진료와 의과 외래 물리치료/입원 청구가 동시 전송될 경우 자동 삭감 및 보류 처리하는 Filter 탑재.</p>
-                </div>
-                <div class="safeguard-card">
-                    <h4>② 주치의 지정제 & 1전담기관제 (Single Gatekeeper)</h4>
-                    <p>방문진료 대상 환자는 1개 한의원을 전담 기관으로 지정. 의과 방문 필요 시 한의 주치의의 '진료 의뢰서(Referral)' 등록 필수화.</p>
-                </div>
-                <div class="safeguard-card">
-                    <h4>③ 요양병원 Hospital-to-Home 전환 수가</h4>
-                    <p>요양병원 입원 환자가 퇴원 후 자택 복귀 시에만 방문진료 수가를 100% 인정한 '퇴원 연계 수가' 도입으로 입원-방문 중복 물리적 차단.</p>
-                </div>
-                <div class="safeguard-card">
-                    <h4>④ DUR 연계 다제약물 중복 처방 차단</h4>
-                    <p>한의 방문진료 시 DUR 실시간 조회를 통해 의과 처방 약물(진통소염제, 향정약, 이뇨제 등)의 과다 중복 투약을 조절·감축하는 복약 관리 가이드라인 적용.</p>
-                </div>
-            </div>
-
-            <h3 style="font-size: 1.1rem; font-weight: 800; color: var(--primary); margin: 25px 0 10px 0;">📊 병행 진료 비율(rho) 변동에 따른 5개년 절감액 민감도 평가 (참여율 50% 기준)</h3>
-            <div class="table-responsive">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>병행 진료 시나리오</th>
-                            <th>병행 진료 비율 (&rho;)</th>
-                            <th>김해시 5개년 누적 절감액</th>
-                            <th>김해시 5년차 연 절감액</th>
-                            <th>경상남도 5개년 누적 절감액</th>
-                            <th>경상남도 5년차 연 절감액</th>
-                            <th>절감액 보존율</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="highlight-row">
-                            <td><strong>완전 대체 (제도적 차단 100%)</strong></td>
-                            <td><strong>&rho; = 0%</strong></td>
-                            <td><strong>2,367.6 억 원</strong></td>
-                            <td><strong>590.1 억 원</strong></td>
-                            <td><strong>1조 7,858.9 억 원</strong></td>
-                            <td><strong>4,451.1 억 원</strong></td>
-                            <td><strong style="color: var(--success);">100.0% (기준)</strong></td>
-                        </tr>
-                        <tr>
-                            <td><strong>소폭 병행 (일부 외래 병행)</strong></td>
-                            <td>&rho; = 10%</td>
-                            <td>2,130.8 억 원</td>
-                            <td>531.1 억 원</td>
-                            <td>1조 6,073.0 억 원</td>
-                            <td>4,006.0 억 원</td>
-                            <td>90.0% (-10%)</td>
-                        </tr>
-                        <tr>
-                            <td><strong>중폭 병행 (외래/투약 병행)</strong></td>
-                            <td>&rho; = 20%</td>
-                            <td>1,894.1 억 원</td>
-                            <td>472.1 억 원</td>
-                            <td>1조 4,287.1 억 원</td>
-                            <td>3,560.9 억 원</td>
-                            <td>80.0% (-20%)</td>
-                        </tr>
-                        <tr>
-                            <td><strong>고도 병행 (요양병원 입원 병행)</strong></td>
-                            <td>&rho; = 30%</td>
-                            <td>1,657.3 억 원</td>
-                            <td>413.1 억 원</td>
-                            <td>1조 2,501.2 억 원</td>
-                            <td>3,115.8 억 원</td>
-                            <td>70.0% (-30%)</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- Section 3: 한의약 우선순위 5대 질환 -->
-        <div class="section-card">
-            <h2 class="section-title">3. 한의약 방문진료 우선순위 5대 핵심 질환군 및 의료비 절감 모델</h2>
-            <div class="info-box">
-                <strong>개입 기전:</strong> 의과 수술, 과도한 영상 검사 및 요양병원 사회적 입원을 방문 침구·한약 관리 및 지역 돌봄망으로 대체하여 고비용 재입원을 강력히 방지합니다.
-            </div>
-
-            <div class="table-responsive">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>질환군 (KCD 코드)</th>
-                            <th>노인 유병률</th>
-                            <th>기존 의과/입원 연비용</th>
-                            <th>한의 방문진료 연비용</th>
-                            <th>1인당 연 절감액</th>
-                            <th>절감률</th>
-                            <th>임상적·경제적 개선 효과</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>1. 근골격계·척추관절</strong> (M54, M17)</td>
-                            <td>41.5%</td>
-                            <td>4,920,000 원</td>
-                            <td>1,697,400 원</td>
-                            <td>3,222,600 원</td>
-                            <td><strong style="color: var(--success);">65.5%</strong></td>
-                            <td>척추관절 수술 69% 억제, 보행능력(TUG) 36% 개선</td>
-                        </tr>
-                        <tr>
-                            <td><strong>2. 뇌혈관 후유증</strong> (I69, G81)</td>
-                            <td>11.8%</td>
-                            <td>14,350,000 원</td>
-                            <td>3,903,200 원</td>
-                            <td>10,446,800 원</td>
-                            <td><strong style="color: var(--success);">72.8%</strong></td>
-                            <td>요양병원 사회적 입원 74% 방지, 수정바델지수 29% 향상</td>
-                        </tr>
-                        <tr>
-                            <td><strong>3. 치매 및 정신건강</strong> (F00, G30)</td>
-                            <td>13.5%</td>
-                            <td>11,950,000 원</td>
-                            <td>3,107,000 원</td>
-                            <td>8,843,000 원</td>
-                            <td><strong style="color: var(--success);">74.0%</strong></td>
-                            <td>향정신성 약물 67% 감축, BPSD 부작용 경감</td>
-                        </tr>
-                        <tr>
-                            <td><strong>4. 노인성 쇠약·만성질환</strong> (R53, E11)</td>
-                            <td>27.2%</td>
-                            <td>5,680,000 원</td>
-                            <td>2,090,240 원</td>
-                            <td>3,589,760 원</td>
-                            <td><strong style="color: var(--success);">63.2%</strong></td>
-                            <td>만성질환 응급실 방문 58% 감소, 식욕·기력 회복</td>
-                        </tr>
-                        <tr>
-                            <td><strong>5. 순환기·심부전/부종</strong> (I50, R60)</td>
-                            <td>8.5%</td>
-                            <td>8,850,000 원</td>
-                            <td>2,796,600 원</td>
-                            <td>6,053,400 원</td>
-                            <td><strong style="color: var(--success);">68.4%</strong></td>
-                            <td>급성 심부전 재입원율 62% 감소, 약물 부작용 최소화</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- Section 4: 10단계 참여율 시뮬레이션 (Tab) -->
-        <div class="section-card">
-            <h2 class="section-title">4. 한의 기관 참여율 10%~100% (10단계) 적용 5개년 시뮬레이션 결과</h2>
-
-            <div class="tab-buttons">
-                <button class="tab-btn active" onclick="openTab(event, 'tab-gimhae')">김해시 (194개 기관 기준)</button>
-                <button class="tab-btn" onclick="openTab(event, 'tab-gyeongnam')">경상남도 전체 (1,168개 기관 기준)</button>
-            </div>
-
-            <!-- Tab 1: 김해시 -->
-            <div id="tab-gimhae" class="tab-content active">
-                <div class="table-responsive">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>참여율 (%)</th>
-                                <th>참여 한의원</th>
-                                <th>참여 한방병원</th>
-                                <th>총 참여 기관수</th>
-                                <th>2025년 (1년차)</th>
-                                <th>2027년 (3년차)</th>
-                                <th>2029년 (5년차)</th>
-                                <th>5개년 누적 절감액</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>10%</td><td>18 개소</td><td>1 개소</td><td>19 개소</td>
-                                <td>50.1 억 원</td><td>105.7 억 원</td><td>118.0 억 원</td><td><strong>473.5 억 원</strong></td>
-                            </tr>
-                            <tr>
-                                <td>30%</td><td>56 개소</td><td>3 개소</td><td>59 개소</td>
-                                <td>150.3 억 원</td><td>317.0 억 원</td><td>354.1 억 원</td><td><strong>1,420.6 억 원</strong></td>
-                            </tr>
-                            <tr class="highlight-row">
-                                <td><strong>50% (기본 목표)</strong></td><td><strong>93 개소</strong></td><td><strong>5 개소</strong></td><td><strong>98 개소</strong></td>
-                                <td><strong>250.5 억 원</strong></td><td><strong>528.4 억 원</strong></td><td><strong>590.1 억 원</strong></td><td><strong style="color: var(--primary);">2,367.6 억 원</strong></td>
-                            </tr>
-                            <tr>
-                                <td>70%</td><td>130 개소</td><td>6 개소</td><td>136 개소</td>
-                                <td>350.7 억 원</td><td>739.8 억 원</td><td>826.1 억 원</td><td><strong>3,314.7 억 원</strong></td>
-                            </tr>
-                            <tr class="highlight-row" style="background-color: #fef3c7 !important;">
-                                <td><strong>100% (전수 참여)</strong></td><td><strong>185 개소</strong></td><td><strong>9 개소</strong></td><td><strong>194 개소</strong></td>
-                                <td><strong>501.0 억 원</strong></td><td><strong>1,056.8 억 원</strong></td><td><strong>1,180.2 억 원</strong></td><td><strong style="color: var(--accent);">4,735.3 억 원</strong></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- Tab 2: 경상남도 -->
-            <div id="tab-gyeongnam" class="tab-content">
-                <div class="table-responsive">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>참여율 (%)</th>
-                                <th>참여 한의원</th>
-                                <th>참여 한방병원</th>
-                                <th>총 참여 기관수</th>
-                                <th>2025년 (1년차)</th>
-                                <th>2027년 (3년차)</th>
-                                <th>2029년 (5년차)</th>
-                                <th>5개년 누적 절감액</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>10%</td><td>112 개소</td><td>5 개소</td><td>117 개소</td>
-                                <td>37.8 억 원</td><td>79.7 억 원</td><td>89.0 억 원</td><td><strong>357.2 억 원</strong></td>
-                            </tr>
-                            <tr>
-                                <td>30%</td><td>336 개소</td><td>14 개소</td><td>350 개소</td>
-                                <td>113.4 억 원</td><td>239.1 억 원</td><td>267.1 억 원</td><td><strong>1,071.5 억 원</strong></td>
-                            </tr>
-                            <tr class="highlight-row">
-                                <td><strong>50% (기본 목표)</strong></td><td><strong>560 개소</strong></td><td><strong>24 개소</strong></td><td><strong>584 개소</strong></td>
-                                <td><strong>189.0 억 원</strong></td><td><strong>398.5 억 원</strong></td><td><strong>445.1 억 원</strong></td><td><strong style="color: var(--primary);">1,785.9 억 원</strong></td>
-                            </tr>
-                            <tr>
-                                <td>70%</td><td>784 개소</td><td>34 개소</td><td>818 개소</td>
-                                <td>264.6 억 원</td><td>557.9 억 원</td><td>623.1 억 원</td><td><strong>2,500.2 억 원</strong></td>
-                            </tr>
-                            <tr class="highlight-row" style="background-color: #fef3c7 !important;">
-                                <td><strong>100% (전수 참여)</strong></td><td><strong>1120 개소</strong></td><td><strong>48 개소</strong></td><td><strong>1168 개소</strong></td>
-                                <td><strong>378.0 억 원</strong></td><td><strong>797.0 억 원</strong></td><td><strong>890.2 억 원</strong></td><td><strong style="color: var(--accent);">3,571.7 억 원</strong></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- Interactive Slider Simulator -->
-            <div class="calc-box">
-                <h3 style="font-size: 1.1rem; font-weight: 800; margin-bottom: 10px;">🧮 김해시 참여율 & 병행 비율 시뮬레이터</h3>
-                <div class="grid-2col">
-                    <div class="slider-group">
-                        <label for="rateSlider">한의 기관 참여율: <span id="rateVal" style="color: var(--primary); font-size: 1.2rem;">50%</span></label>
-                        <input type="range" id="rateSlider" min="10" max="100" step="10" value="50" oninput="updateSim()">
-                    </div>
-                    <div class="slider-group">
-                        <label for="rhoSlider">기존 진료 병행 비율 (rho): <span id="rhoVal" style="color: var(--danger); font-size: 1.2rem;">0% (완전대체)</span></label>
-                        <input type="range" id="rhoSlider" min="0" max="30" step="10" value="0" oninput="updateSim()">
-                    </div>
-                </div>
-                <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-top: 15px; background: #fff; padding: 15px; border-radius: 8px;">
-                    <div><strong>예상 참여 기관수:</strong> <span id="simInsts" style="font-weight: 700;">98 개소</span></div>
-                    <div><strong>5개년 누적 절감액:</strong> <span id="simSaving" style="font-weight: 800; color: var(--primary); font-size: 1.1rem;">2,367.6 억 원</span></div>
-                    <div><strong>5년차 연간 절감액:</strong> <span id="simYear5" style="font-weight: 700; color: var(--success);">590.1 억 원</span></div>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- Section 5: HIRA AI 로직 가이드 5단계 -->
-        <div class="section-card">
-            <h2 class="section-title">5. HIRA AI 분석 로직 5단계 검증 및 정책 제언</h2>
-            <div class="grid-2col">
-                <div>
-                    <h3 style="font-size: 1.05rem; font-weight: 800; margin-bottom: 12px; color: var(--primary);">HIRA AI 파이프라인 연산 검증</h3>
-                    <ul style="padding-left: 20px; font-size: 0.92rem; color: var(--text-main);">
-                        <li style="margin-bottom: 8px;"><strong>STEP 1 패널 회귀:</strong> 노인 비중 탄력성 β=0.428, 중복 청구 Overlap 계수 γ=+18.5% 반영.</li>
-                        <li style="margin-bottom: 8px;"><strong>STEP 2 DEA 분석:</strong> VRS 상대 효율성 점수 θ=0.885, 의과 병행 횟수 X₄ 투입 시 비효율 감점 적용.</li>
-                        <li style="margin-bottom: 8px;"><strong>STEP 3 Nash 균형:</strong> 이중 진료 삭감 제약 적용 시 단독 대체 진료 수렴 점유율 q*=78.5% 산출.</li>
-                        <li style="margin-bottom: 8px;"><strong>STEP 4 Monte Carlo:</strong> 10,000회 시뮬레이션 결과 P5~P95 95% 신뢰구간 확보.</li>
-                        <li style="margin-bottom: 8px;"><strong>STEP 5 DID 검증:</strong> 80% 이상 기존 진료 감소한 Pure Substitution Group 처치 효과 δ=-18.4% 확인.</li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 style="font-size: 1.05rem; font-weight: 800; margin-bottom: 12px; color: var(--primary);">핵심 정책 권고사항</h3>
-                    <ol style="padding-left: 20px; font-size: 0.92rem; color: var(--text-main);">
-                        <li style="margin-bottom: 8px;"><strong>김해시 특화 수가가이드라인 구축:</strong> 관내 194개 한의기관 중 50%(98개소) 참여 목표 및 이중 청구 차단 Filter 연계.</li>
-                        <li style="margin-bottom: 8px;"><strong>1환자 1전담 한의 주치의제도 시행:</strong> 전담 기관 지정을 통한 무분별한 의과 중복 이용 방지 및 진료의뢰서 필수화.</li>
-                        <li style="margin-bottom: 8px;"><strong>경남도 광역 보건정책 반영:</strong> 경상남도 18개 시·군 통합돌봄 확대 시 5개년간 1조 7,858억 원 재정 절감 보존.</li>
-                    </ol>
-                </div>
-            </div>
-        </div>
-
     </div>
-
-    <!-- Footer -->
-    <footer>
-        <p>경상남도 및 김해시 한의약 방문진료 효과 시뮬레이션 종합 보고서 | 데이터 기반: KOSIS & HIRA DB (2020~2026)</p>
-    </footer>
-
-    <!-- Interactive JavaScript -->
-    <script>
-        function openTab(evt, tabName) {
-            var i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("tab-content");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].classList.remove("active");
-            }
-            tablinks = document.getElementsByClassName("tab-btn");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].classList.remove("active");
-            }
-            document.getElementById(tabName).classList.add("active");
-            evt.currentTarget.classList.add("active");
-        }
-
-        function updateSim() {
-            var rateVal = document.getElementById("rateSlider").value;
-            var rhoVal = document.getElementById("rhoSlider").value;
-
-            document.getElementById("rateVal").innerText = rateVal + "%";
-            document.getElementById("rhoVal").innerText = rhoVal + "% " + (rhoVal == 0 ? "(완전대체)" : "(병행 발생)");
-
-            var rate = rateVal / 100.0;
-            var rhoFactor = (100 - rhoVal) / 100.0;
-
-            var insts = Math.round(194 * rate);
-            var cumSaving = (4735.3 * rate * rhoFactor).toFixed(1);
-            var year5 = (1180.2 * rate * rhoFactor).toFixed(1);
-
-            document.getElementById("simInsts").innerText = insts + " 개소";
-            document.getElementById("simSaving").innerText = Number(cumSaving).toLocaleString() + " 억 원";
-            document.getElementById("simYear5").innerText = Number(year5).toLocaleString() + " 억 원";
-        }
-    </script>
 </body>
 </html>

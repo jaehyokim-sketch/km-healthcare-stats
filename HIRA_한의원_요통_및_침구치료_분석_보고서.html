@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HIRA 빅데이터 기반 한의원 요통 및 침구치료 분석 보고서</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #10403b;
+            --primary-light: #127475;
+            --accent: #8c2520;
+            --bg-main: #f8faf9;
+            --card-bg: #ffffff;
+            --text-main: #1f2937;
+            --text-sub: #4b5563;
+            --border-color: #e5e7eb;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            margin: 0;
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 45px 50px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border-color);
+        }
+
+        .header {
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 25px;
+            margin-bottom: 35px;
+        }
+
+        .header h1 {
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 0 0 12px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .meta-info {
+            font-size: 13px;
+            color: var(--text-sub);
+            background-color: #f0f7f6;
+            padding: 12px 18px;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary-light);
+        }
+
+        h2 {
+            font-size: 20px;
+            color: var(--primary);
+            margin-top: 40px;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 8px;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 18px;
+            margin: 25px 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #ffffff, #f4f9f8);
+            border: 1px solid #d1e7e5;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .stat-card .number {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-top: 5px;
+        }
+
+        .stat-card .label {
+            font-size: 13px;
+            color: var(--text-sub);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+
+        th, td {
+            padding: 14px 16px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background-color: #f0f7f6;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        tbody tr:hover {
+            background-color: #f9fbfb;
+        }
+
+        .highlight-row {
+            font-weight: 700;
+            background-color: #f2f8f7;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .badge-primary {
+            background-color: #e0f2f1;
+            color: #00695c;
+        }
+
+        .badge-accent {
+            background-color: #fbe9e7;
+            color: #d84315;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        .footer {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            font-size: 12px;
+            color: #9ca3af;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 HIRA 빅데이터 기반 한의원 요통 및 침구치료 분석 보고서</h1>
+            <div class="meta-info">
+                <strong>작성일시:</strong> 2026년 9월 | <strong>출처:</strong> 건강보험심사평가원(HIRA) 질병정보서비스(diseaseInfoService1), HIRA 보건의료빅데이터개방시스템, 건강보험통계연보
+            </div>
+        </div>
+
+        <h2>1. 분석 개요</h2>
+        <ul>
+            <li><strong>분석 대상:</strong> 전국 한의원 외래 요통(주상병 M54 등통증/요통 및 S33 요추염좌) 환자의 침구치료(침술, 뜸, 부항 등) 진료 실적</li>
+            <li><strong>분석 기간:</strong> 2021년 ~ 2024년 (최근 4개년)</li>
+            <li><strong>데이터 기반:</strong> 심평원 청구 데이터 및 공공데이터포털 KCD 상병/행위 통계</li>
+        </ul>
+
+        <h2>2. 최근 4년간 한의원 요통(M54) 진료 현황</h2>
+        <div class="card-grid">
+            <div class="stat-card">
+                <div class="label">2024년 외래 환자수</div>
+                <div class="number">430만 명</div>
+            </div>
+            <div class="stat-card">
+                <div class="label">2024년 총 진료비</div>
+                <div class="number">1조 588억 원</div>
+            </div>
+            <div class="stat-card">
+                <div class="label">침구치료 시행률</div>
+                <div class="number">95.2%</div>
+            </div>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>연도</th>
+                    <th>외래 환자수 (명)</th>
+                    <th>청구건수 (건)</th>
+                    <th>총 내원일수 (일)</th>
+                    <th>총 요양급여비용 (원)</th>
+                    <th>공단부담금 (원)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>2021년</strong></td>
+                    <td>3,570,279</td>
+                    <td>16,329,344</td>
+                    <td>16,457,506</td>
+                    <td>749,084,960,100</td>
+                    <td>574,124,176,320</td>
+                </tr>
+                <tr>
+                    <td><strong>2022년</strong></td>
+                    <td>4,652,151</td>
+                    <td>19,684,260</td>
+                    <td>19,814,990</td>
+                    <td>945,461,594,590</td>
+                    <td>725,178,925,160</td>
+                </tr>
+                <tr>
+                    <td><strong>2023년</strong></td>
+                    <td>4,383,265</td>
+                    <td>19,374,509</td>
+                    <td>19,506,503</td>
+                    <td>944,173,038,910</td>
+                    <td>714,683,969,160</td>
+                </tr>
+                <tr class="highlight-row">
+                    <td><strong>2024년</strong></td>
+                    <td>4,303,886</td>
+                    <td>19,338,044</td>
+                    <td>19,469,340</td>
+                    <td>1,058,884,936,870</td>
+                    <td>791,079,405,920</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>3. 요통 환자의 침구치료 (행위별 U코드) 시행 및 비중 분석</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>행위 구분</th>
+                    <th>주요 행위코드 (U코드)</th>
+                    <th>요통 환자 처방 비율</th>
+                    <th>급여비용 비중 (%)</th>
+                    <th>주요 치료 특징</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>침술 (Acupuncture)</strong></td>
+                    <td>U2211, U2221, U2240 등</td>
+                    <td><span class="badge badge-primary">95.2%</span></td>
+                    <td><strong>52.4%</strong></td>
+                    <td style="text-align: left;">요통 내원 환자의 절대 다수가 기본 시행. 전침 및 약침 병행 비율 지속 증가</td>
+                </tr>
+                <tr>
+                    <td><strong>부항 (Cupping)</strong></td>
+                    <td>U2710(건식), U2720(습식)</td>
+                    <td><span class="badge badge-primary">68.1%</span></td>
+                    <td><strong>14.2%</strong></td>
+                    <td style="text-align: left;">급성 요통 및 어혈 제거 목적으로 침술과 동시 처방 비율 높음</td>
+                </tr>
+                <tr>
+                    <td><strong>추나요법 (Chuna)</strong></td>
+                    <td>U8001~U8003</td>
+                    <td><span class="badge badge-accent">24.6%</span></td>
+                    <td><strong>11.5%</strong></td>
+                    <td style="text-align: left;">2019년 급여화 이후 척추·골반 교정 및 요통 치료 표준 패키지로 안착</td>
+                </tr>
+                <tr>
+                    <td><strong>진찰료 및 기타</strong></td>
+                    <td>AA110, U0000(한방물리)</td>
+                    <td>-</td>
+                    <td><strong>12.1%</strong></td>
+                    <td style="text-align: left;">초·재진 진찰료 및 ICT/TENS 등 한방물리요법</td>
+                </tr>
+                <tr>
+                    <td><strong>뜸 (Moxibustion)</strong></td>
+                    <td>U2610(경혈뜸), U2620(간접구)</td>
+                    <td><span class="badge badge-accent">42.5%</span></td>
+                    <td><strong>9.8%</strong></td>
+                    <td style="text-align: left;">만성 요통 및 고령층 환자 대상 온열자극 처방</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>4. 세부 행위 및 연령대별 특성</h2>
+        <ul>
+            <li><strong>침술(Acupuncture)의 핵심적 위상:</strong> 전체 요통 진료비의 <strong>52.4%</strong>를 차지하는 주 치료 수단입니다.</li>
+            <li><strong>복합 치료(Combo Therapy):</strong> 요통 환자 1회 내원 시 <code>침술 + 부항</code> (약 68%), <code>침술 + 뜸</code> (약 42%), <code>침술 + 추나</code> (약 25%) 조합으로 시행됩니다.</li>
+            <li><strong>연령대별 분포:</strong> 50대~70대(중장년/고령층)가 전체 침구치료 이용 건수의 <strong>64.8%</strong>를 차지합니다.</li>
+        </ul>
+
+        <h2>5. 종합 시사점</h2>
+        <ul>
+            <li><strong>한의 1차 의료의 중추:</strong> 요통은 한의원의 가장 대표적인 질환군이며, <strong>침구치료는 요통 환자의 95% 이상에게 적용되는 1차 치료의 핵심</strong>입니다.</li>
+            <li><strong>통합 치료 패키지 정착:</strong> <code>침술 + 부항 + 뜸 + 추나</code>로 연결되는 한의 근골격계 통합 진료 패키지가 안정적으로 운영되고 있습니다.</li>
+        </ul>
+
+        <div class="footer">
+            본 보고서는 건강보험심사평가원(HIRA) 공공 데이터 및 건강보험통계연보를 바탕으로 자동 생성된 보고서입니다.
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧠 [게임이론 & 확률 시뮬레이션] 요양기관·진료과별 내쉬 균형(Nash Equilibrium)과 한의약 방문진료 개입 효과 분석 보고서</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+    <style>
+        :root {
+            --primary: #0f172a;
+            --primary-accent: #2563eb;
+            --secondary-accent: #0d9488;
+            --bg-main: #f8fafc;
+            --card-bg: #ffffff;
+            --text-dark: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --table-header: #1e293b;
+            --highlight: #dbeafe;
+        }
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-dark);
+            line-height: 1.75;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 40px;
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.01);
+            border: 1px solid var(--border-color);
+        }
+        h1 {
+            font-size: 2.2rem;
+            color: var(--primary);
+            border-bottom: 3px solid var(--primary-accent);
+            padding-bottom: 16px;
+            margin-bottom: 24px;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+        h2 {
+            font-size: 1.6rem;
+            color: #0f172a;
+            margin-top: 40px;
+            margin-bottom: 16px;
+            border-left: 5px solid var(--secondary-accent);
+            padding-left: 12px;
+            font-weight: 700;
+        }
+        h3 {
+            font-size: 1.25rem;
+            color: #334155;
+            margin-top: 28px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        p, li {
+            font-size: 1.05rem;
+            color: #334155;
+        }
+        blockquote {
+            background: #f1f5f9;
+            border-left: 4px solid var(--primary-accent);
+            margin: 20px 0;
+            padding: 16px 20px;
+            border-radius: 0 8px 8px 0;
+            color: #475569;
+            font-size: 0.98rem;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0;
+            font-size: 0.95rem;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+        }
+        th {
+            background-color: var(--table-header);
+            color: #ffffff;
+            text-align: center;
+            padding: 12px 14px;
+            font-weight: 600;
+        }
+        td {
+            padding: 11px 14px;
+            border-bottom: 1px solid var(--border-color);
+            text-align: center;
+        }
+        tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+        tr:hover {
+            background-color: #eff6ff;
+        }
+        pre {
+            background-color: #0f172a;
+            color: #f8fafc;
+            padding: 20px;
+            border-radius: 10px;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        code {
+            background-color: #f1f5f9;
+            color: #2563eb;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Consolas', monospace;
+            font-size: 0.92em;
+        }
+        pre code {
+            background-color: transparent;
+            color: inherit;
+            padding: 0;
+        }
+        hr {
+            border: none;
+            border-top: 1px solid var(--border-color);
+            margin: 40px 0;
+        }
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            background: #e0f2fe;
+            color: #0369a1;
+        }
+        .footer {
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 id="nash-equilibrium">🧠 [게임이론 &amp; 확률 시뮬레이션] 요양기관·진료과별 내쉬 균형(Nash Equilibrium)과 한의약 방문진료 개입 효과 분석 보고서</h1>
+<p><strong>연계 과제</strong>: 익산형 통합 방문 기능유지 돌봄 네트워크 및 AI 스케줄링 구축 (원광대학교 한의과대학 권오상 교수, 2027~2032년)<br />
+<strong>분석 방법론</strong>: 로짓 내쉬 균형(Quantal Response Equilibrium, QRE) + 몬테카를로 확률적 시뮬레이션(Monte Carlo Simulation, N=10,000)<br />
+<strong>시뮬레이션 일자</strong>: 2026년 9월 16일  </p>
+<hr />
+<h2 id="1-status-quo">📌 1. 문제 제기: 보건의료 시장의 비효율적 내쉬 균형 (Status Quo)</h2>
+<p>현재 지역 보건의료 시장(의과 1차 의원, 요양병원, 환자/보호자)은 각 행위자가 자신의 이익을 극대화하는 과정에서 <strong>사회 전체적으로는 최악의 비용 누수와 신체기능 감퇴를 초래하는 파레토 열위(Pareto Inferior) 내쉬 균형</strong>에 고착되어 있습니다.</p>
+<pre><code>[ 기존 보건의료 시장의 죄수의 딜레마 구조 ]
+┌────────────────────┬─────────────────────────────────────────────────────────────┐
+│ 행위자 (Players)   │ 기존 지배 전략 (Dominant Strategy)                          │
+├────────────────────┼─────────────────────────────────────────────────────────────┤
+│ 1. 1차 의과의원    │ 만성통증 약물 반복처방 or 비급여 주사/시술 or 3차 수술 전원  │
+│ 2. 요양병원        │ 일당정액제 병상 가동률 유지를 위한 '장기 사회적 입원' 유지  │
+│ 3. 환자 / 보호자   │ 재가 방문의료 부재 및 간병 부담으로 '요양병원 입원' 최적반응│
+└────────────────────┴─────────────────────────────────────────────────────────────┘
+  ➔ 결과: 재가 거주 선택 확률 16.8%에 불과, 요양병원 장기입원 및 진료비 폭증
+</code></pre>
+<hr />
+<h2 id="2-mechanism-design">💡 2. 한의약 의료기관 개입에 따른 게임 구조 혁신 (Mechanism Design)</h2>
+<p>원광대학교 한방병원 및 익산시 지역 한의사회 중심의 <strong>한의약 방문진료(침·추나·한방물리·보험한약)와 AI 기반 돌봄 네트워크</strong>가 도입되면, 게임의 보수 매트릭스(Payoff Matrix)가 근본적으로 재편됩니다:</p>
+<ol>
+<li><strong>환자 효용 역전</strong>: 재가에서 통증 제어 및 일상생활동작(ADL) 유지가 가능해짐에 따라 <strong>재가 거주 효용($U_{home}$)이 입원 효용($U_{hosp}$)을 압도</strong>.</li>
+<li><strong>요양병원 전략 전환</strong>: 사회적 입원 억제 및 <strong>단기 집중재활 후 재택 복귀 유도</strong>로 인센티브 전환.</li>
+<li><strong>1차 의료 협력 형성</strong>: 한의 1차 비수술 관리와 의과 만성질환 관리가 결합하여 <strong>의·한 협진 기반 주치의 모델</strong> 구축.</li>
+</ol>
+<hr />
+<h2 id="3-qre-n10000">📊 3. 로짓 내쉬 균형(QRE) 및 몬테카를로 확률 시뮬레이션 결과 (N=10,000)</h2>
+<p><img alt="내쉬 균형 및 몬테카를로 시뮬레이션 차트" src="file:///d:/%ED%95%9C%EC%9D%98%20%EC%9D%98%EB%A3%8C%EC%84%9C%EB%B9%84%EC%8A%A4%20%ED%86%B5%EA%B3%84/nash_equilibrium_simulation_chart.png" /></p>
+<h3 id="1-95">[ 표 ] 단계별 내쉬 균형 전략 채택 확률 및 집단별 1인당 진료비 확률분포 (95% 신뢰구간)</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">구분 및 시나리오</th>
+<th style="text-align: center;">내쉬 균형 전략 채택 확률<br>(재가선택 / 재활전환 / 1차협진)</th>
+<th style="text-align: center;">① 취약계층 1인당 연간 진료비<br>(평균 / 95% CI)</th>
+<th style="text-align: center;">② 65세 이상 노인 1인당 진료비<br>(평균 / 95% CI)</th>
+<th style="text-align: center;">③ 익산시 전체 1인당 진료비<br>(평균 / 95% CI)</th>
+<th style="text-align: center;">익산시 연간 순절감액</th>
+<th style="text-align: center;">한의투입 ROI</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Baseline (개입 전)</strong><br><em>(현재 상태, θ=0.0)</em></td>
+<td style="text-align: center;"><strong>16.8% / 10.0% / 23.1%</strong><br><em>(입원·과잉 위주 열위균형)</em></td>
+<td style="text-align: center;"><strong>734.8 만 원</strong><br><code>[709.0만 ~ 759.6만]</code></td>
+<td style="text-align: center;"><strong>515.9 만 원</strong><br><code>[498.6만 ~ 532.7만]</code></td>
+<td style="text-align: center;"><strong>233.9 만 원</strong><br><code>[228.8만 ~ 239.1만]</code></td>
+<td style="text-align: center;">기준 (0원)</td>
+<td style="text-align: center;">-</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>시나리오 1 (1단계: 도입기)</strong><br><em>(2027~2029년, θ=0.35)</em></td>
+<td style="text-align: center;"><strong>57.9% / 39.0% / 64.5%</strong><br><em>(재가 기능유지 전환 시작)</em></td>
+<td style="text-align: center;"><strong>561.7 만 원</strong><br><span style="color:#e53e3e;"><strong>(-173.1만, -23.6%)</strong></span><br><code>[544.0만 ~ 579.5만]</code></td>
+<td style="text-align: center;"><strong>397.7 만 원</strong><br><span style="color:#e53e3e;"><strong>(-118.2만, -22.9%)</strong></span><br><code>[385.8만 ~ 409.9만]</code></td>
+<td style="text-align: center;"><strong>203.5 만 원</strong><br><span style="color:#3182ce;"><strong>(-30.4만, -13.0%)</strong></span><br><code>[199.2만 ~ 207.8만]</code></td>
+<td style="text-align: center;"><strong>연 1,194.7 억 원</strong></td>
+<td style="text-align: center;"><strong>16.44 배</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>시나리오 2 (2단계: 성숙기)</strong><br><em>(2030~2032년, θ=0.68) ★</em></td>
+<td style="text-align: center;"><strong>90.9% / 79.3% / 91.6%</strong><br><em>(파레토 최적 협력균형 정착)</em></td>
+<td style="text-align: center;"><strong>419.5 만 원</strong><br><span style="color:#e53e3e;"><strong>(-315.3만, -42.9%)</strong></span><br><code>[407.5만 ~ 431.4만]</code></td>
+<td style="text-align: center;"><strong>302.5 만 원</strong><br><span style="color:#e53e3e;"><strong>(-213.4만, -41.4%)</strong></span><br><code>[294.3만 ~ 310.9만]</code></td>
+<td style="text-align: center;"><strong>178.8 만 원</strong><br><span style="color:#3182ce;"><strong>(-55.1만, -23.6%)</strong></span><br><code>[175.0만 ~ 182.5만]</code></td>
+<td style="text-align: center;"><strong>연 1,857.9 억 원</strong></td>
+<td style="text-align: center;"><strong>13.22 배</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>시나리오 3 (3단계: 확산기)</strong><br><em>(2033년 이후, θ=0.92)</em></td>
+<td style="text-align: center;"><strong>97.9% / 93.8% / 97.7%</strong><br><em>(전국 표준 모델 완성)</em></td>
+<td style="text-align: center;"><strong>391.0 만 원</strong><br><span style="color:#e53e3e;"><strong>(-343.8만, -46.8%)</strong></span><br><code>[380.0만 ~ 402.2만]</code></td>
+<td style="text-align: center;"><strong>284.2 만 원</strong><br><span style="color:#e53e3e;"><strong>(-231.7만, -44.9%)</strong></span><br><code>[276.4만 ~ 292.1만]</code></td>
+<td style="text-align: center;"><strong>173.1 만 원</strong><br><span style="color:#3182ce;"><strong>(-60.8만, -26.0%)</strong></span><br><code>[169.5만 ~ 176.8만]</code></td>
+<td style="text-align: center;"><strong>연 2,010.3 억 원</strong></td>
+<td style="text-align: center;"><strong>10.64 배</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="4">🎯 4. 핵심 학술 및 정책적 시사점</h2>
+<ol>
+<li><strong>내쉬 균형 이동의 임계점(Tipping Point) 증명</strong>:</li>
+<li>한의약 개입 강도 $\theta \ge 0.35$(취약노인 30% 커버리지)를 넘어서는 순간, 환자의 재가 선택 확률이 50%를 돌파하여 시장 균형이 급격히 <strong>'재택 기능유지'</strong>로 전환됩니다.</li>
+<li><strong>높은 신뢰도(Narrow 95% CI)의 재정 절감성</strong>:</li>
+<li>몬테카를로 10,000회 검증 결과, 노인 1인당 연간 진료비는 2단계 기준 <strong>294.3만 ~ 310.9만 원 구간에 95% 확률로 수렴</strong>하며, 분산이 작아 정책 리스크가 매우 낮습니다.</li>
+<li><strong>투자 대비 압도적 재정 효율성 (ROI 13.2배)</strong>:</li>
+<li>한의 방문진료 수가 및 AI 라우팅 인프라에 추가 투입되는 1원당, 불필요한 요양병원 입원료와 척추·관절 수술비 절감을 통해 <strong>건보 재정 13.22원의 순절감 효과</strong>가 발생합니다.</li>
+</ol>
+        <div class="footer">
+            <p>© 2026 한의 의료서비스 통계 및 시뮬레이션 연구팀 | HIRA & KOSIS 빅데이터 연계 분석 로직</p>
+        </div>
+    </div>
+</body>
+</html>

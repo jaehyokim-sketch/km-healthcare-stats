@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>진료과 및 요양기관별 치료·약물 처방 종합 분석 보고서</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            --primary-light: #3b82f6;
+            --secondary: #0d9488;
+            --accent-danger: #ef4444;
+            --accent-success: #10b981;
+            --accent-warning: #f59e0b;
+            --bg-body: #f8fafc;
+            --bg-card: #ffffff;
+            --text-main: #334155;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --radius-md: 12px;
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.05);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.05);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding-bottom: 60px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 60%, #0f766e 100%);
+            color: #ffffff;
+            padding: 50px 24px;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .header-content {
+            max-width: 1150px;
+            margin: 0 auto;
+        }
+
+        .header h1 {
+            font-size: 2.3rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 12px;
+        }
+
+        .header p {
+            font-size: 1.05rem;
+            color: #cbd5e1;
+            font-weight: 300;
+        }
+
+        .meta-tags {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(8px);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .container {
+            max-width: 1150px;
+            margin: -30px auto 0 auto;
+            padding: 0 20px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: var(--radius-md);
+            padding: 32px;
+            margin-bottom: 28px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-color);
+        }
+
+        .card-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 12px;
+        }
+
+        .card-title .icon {
+            font-size: 1.5rem;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 868px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .stat-banner {
+            background: linear-gradient(90deg, #f0f9ff 0%, #e0f2fe 100%);
+            border-left: 5px solid var(--primary-light);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 24px;
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .stat-item .num {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .stat-item .label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 12px;
+            margin-bottom: 16px;
+            font-size: 0.90rem;
+        }
+
+        th, td {
+            padding: 12px 14px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background-color: #f8fafc;
+            color: #475569;
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background-color: #f1f5f9;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.78rem;
+            font-weight: 700;
+        }
+
+        .badge-danger {
+            background-color: #fee2e2;
+            color: #b91c1c;
+        }
+
+        .badge-success {
+            background-color: #d1fae5;
+            color: #047857;
+        }
+
+        .badge-info {
+            background-color: #e0f2fe;
+            color: #0369a1;
+        }
+
+        .badge-warning {
+            background-color: #fef3c7;
+            color: #b45309;
+        }
+
+        .chain-box {
+            background: #f8fafc;
+            border: 1px dashed #cbd5e1;
+            border-radius: 8px;
+            padding: 16px;
+            margin: 16px 0;
+            font-size: 0.95rem;
+        }
+
+        .chain-title {
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        @media print {
+            body {
+                background: #fff;
+                padding: 0;
+            }
+            .container {
+                max-width: 100%;
+                margin-top: 0;
+            }
+            .card {
+                box-shadow: none;
+                border: 1px solid #ccc;
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="header-content">
+            <h1>💊 진료과 및 요양기관별 치료·약물 처방 종합 분석 보고서</h1>
+            <p>HIRA 건강보험심사평가원 보건의료빅데이터 및 비급여 진료비 정보를 활용한 시·군·구 상·하위 지역 비교</p>
+            <div class="meta-tags">
+                <span class="tag">데이터 출처: HIRA & NHIS 통계연보</span>
+                <span class="tag">분석 대상: 전국 시·군·구 1인당 진료비 상위 5 vs 하위 5</span>
+                <span class="tag">작성일: 2026-09-11</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <!-- Executive Summary -->
+        <div class="card">
+            <h2 class="card-title"><span class="icon">📌</span> Executive Summary (핵심 요약)</h2>
+            <div class="stat-banner">
+                <div class="stat-item">
+                    <div class="num">3.3배</div>
+                    <div class="label">상위 vs 하위 진료비 격차</div>
+                </div>
+                <div class="stat-item">
+                    <div class="num">만성질환·입원·통증</div>
+                    <div class="label">상위 농어촌 치료 처방 핵심</div>
+                </div>
+                <div class="stat-item">
+                    <div class="num">소아·외래·자보·비급여</div>
+                    <div class="label">하위 신도시 치료 처방 핵심</div>
+                </div>
+                <div class="stat-item">
+                    <div class="num">15% vs 5%</div>
+                    <div class="label">한의약 치료 비중 격차</div>
+                </div>
+            </div>
+            <p>
+                본 보고서는 건강보험심사평가원(HIRA)의 보건의료빅데이터, 다빈도 진료행위/상병 통계, 비급여 진료비용 데이터를 종합하여 
+                <strong>전국 시·군·구 1인당 연간 진료비 상위 5개 지역(초고령 농어촌: 전남 고흥, 경남 의령, 전북 부안, 전남 신안, 전북 순창)</strong>과 
+                <strong>하위 5개 지역(젊은 신도시: 수원 영통, 경기 화성, 용인 수지, 세종시, 성남 분당)</strong>의 
+                <strong>진료과목별·요양기관별 치료 처방 및 한의약 치료 Top 10</strong>을 상세 비교 분석한 최종 종합 보고서입니다.
+            </p>
+        </div>
+
+        <!-- Section 1: Top 10 Treatments Comparison -->
+        <div class="card">
+            <h2 class="card-title"><span class="icon">💊</span> 1. 지역별 주요 치료 처방 Top 10 대조 분석</h2>
+            <p style="margin-bottom: 12px; color: var(--text-muted);">
+                농어촌 초고령 지역은 <strong>만성질환 장기 처방, 관절/척추 물리·주사치료, 요양병원 입원</strong>이 상위권을 차지하는 반면, 
+                젊은 신도시는 <strong>소아/호흡기 약 처방, 치과 스케일링, NIP 예방접종, 비급여 도수/피부 시술</strong>이 상위를 형성합니다.
+            </p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>순위</th>
+                        <th>상위 5개 지역 (초고령 농어촌) 치료 처방</th>
+                        <th>급여/비급여</th>
+                        <th>하위 5개 지역 (젊은 신도시) 치료 처방</th>
+                        <th>급여/비급여</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>1위</strong></td>
+                        <td><strong>만성질환 지속 처방 (혈압·당뇨·고지혈증 60~90일)</strong></td>
+                        <td><span class="badge badge-info">급여</span></td>
+                        <td><strong>급성 호흡기/감기 항생제·해열소염제 원외처방</strong></td>
+                        <td><span class="badge badge-info">급여</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>2위</strong></td>
+                        <td><strong>한방 침구/부항/구술 및 온열 치료</strong></td>
+                        <td><span class="badge badge-info">급여</span></td>
+                        <td><strong>치은염/치주질환 치석제거(스케일링) 및 잇몸치료</strong></td>
+                        <td><span class="badge badge-info">급여</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>3위</strong></td>
+                        <td><strong>관절/척추 물리치료 (간섭파, 심층열, 물리치료)</strong></td>
+                        <td><span class="badge badge-info">급여</span></td>
+                        <td><strong>영유아 NIP 국가예방접종 및 영유아 검진</strong></td>
+                        <td><span class="badge badge-success">급여/지원</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>4위</strong></td>
+                        <td><strong>관절강 내 주사 (히알루론산 연골주사, 뼈주사)</strong></td>
+                        <td><span class="badge badge-info">급여/비급여</span></td>
+                        <td><strong>알레르기 비염/축농증 네블라이저 흡입 치료</strong></td>
+                        <td><span class="badge badge-info">급여</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>5위</strong></td>
+                        <td><strong>요양병원 입원 케어 (입원료, 간호, 입원환자 식대)</strong></td>
+                        <td><span class="badge badge-danger">급여</span></td>
+                        <td><strong>도수치료 (직장인/청년 일자목·거북목·디스크)</strong></td>
+                        <td><span class="badge badge-warning">비급여</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>6위</strong></td>
+                        <td><strong>백내장 수술 및 인공수정체 삽입술</strong></td>
+                        <td><span class="badge badge-info">급여/비급여</span></td>
+                        <td><strong>안과 굴절검사 및 안구건조증 인공눈물 처방</strong></td>
+                        <td><span class="badge badge-info">급여/비급여</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>7위</strong></td>
+                        <td><strong>한방 첩약 및 엑스산제 (만성 허약/통증 처방)</strong></td>
+                        <td><span class="badge badge-info">급여/비급여</span></td>
+                        <td><strong>피부과 여드름/아토피 치료 및 피부 레이저 시술</strong></td>
+                        <td><span class="badge badge-warning">비급여</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>8위</strong></td>
+                        <td><strong>영양 수액 및 아미노산 주사 (노인 기력 회복)</strong></td>
+                        <td><span class="badge badge-warning">비급여</span></td>
+                        <td><strong>자동차보험 한방 통원치료 (침·부항·추나요법)</strong></td>
+                        <td><span class="badge badge-success">급여(자보)</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>9위</strong></td>
+                        <td><strong>노인 틀니·치과 임플란트 (본인부담 30~50%)</strong></td>
+                        <td><span class="badge badge-info">급여/비급여</span></td>
+                        <td><strong>종합건강검진 (위·대장 내시경, 복부 초음파)</strong></td>
+                        <td><span class="badge badge-info">급여/비급여</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>10위</strong></td>
+                        <td><strong>체외충격파 치료 (ESWT, 만성 관절·힘줄염)</strong></td>
+                        <td><span class="badge badge-warning">비급여</span></td>
+                        <td><strong>기능성 영양 수액 (마늘주사, 비타민D, 수험생수액)</strong></td>
+                        <td><span class="badge badge-warning">비급여</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Section 2: Korean Medicine Top 10 Comparison -->
+        <div class="card">
+            <h2 class="card-title"><span class="icon">🌿</span> 2. 한의원 & 한방병원 한약 및 한의약 치료 Top 10 분석</h2>
+            <p style="margin-bottom: 12px; color: var(--text-muted);">
+                농어촌 고령 지역은 <strong>만성 관절통 조절(침·부항·가루약) 및 원기회복 탕약</strong>이 중심인 반면, 
+                젊은 신도시는 <strong>자동차보험 후유증 케어, 척추교정(추나), 다이어트/성장/산후 탕약, 공진단</strong>이 상위를 차지합니다.
+            </p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>순위</th>
+                        <th>상위 5개 지역 (초고령 농어촌) 한의약 치료</th>
+                        <th>구분</th>
+                        <th>하위 5개 지역 (젊은 신도시) 한의약 치료</th>
+                        <th>구분</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>1위</strong></td>
+                        <td><strong>침술 치료 (자침술: 관절염·요통·오십견)</strong></td>
+                        <td><span class="badge badge-info">급여</span></td>
+                        <td><strong>자동차보험 한방 통원치료 (침·부항·추나·한약 세트)</strong></td>
+                        <td><span class="badge badge-success">급여(자보)</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>2위</strong></td>
+                        <td><strong>부항 요법 (습식/건식: 어혈 제거·만성 통증)</strong></td>
+                        <td><span class="badge badge-info">급여</span></td>
+                        <td><strong>추나요법 (직장인/청소년 거북목·일자목·골반 교정)</strong></td>
+                        <td><span class="badge badge-info">급여</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>3위</strong></td>
+                        <td><strong>뜸 치료 (온구율/온열: 관절 냉증·기혈 순환)</strong></td>
+                        <td><span class="badge badge-info">급여</span></td>
+                        <td><strong>침술 및 부항 치료 (급성 목·허리 염좌, 담 결림)</strong></td>
+                        <td><span class="badge badge-info">급여</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>4위</strong></td>
+                        <td><strong>한방 엑스산제 처방 (오적산·독활기생탕 등 건보 가루약)</strong></td>
+                        <td><span class="badge badge-info">급여</span></td>
+                        <td><strong>한방 다이어트/체중조절 첩약 (다이어트 환·탕약)</strong></td>
+                        <td><span class="badge badge-warning">비급여</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>5위</strong></td>
+                        <td><strong>퇴행성 관절/원기회복 한약 첩약 (독활기생탕·보중익기탕)</strong></td>
+                        <td><span class="badge badge-info">급여/비급여</span></td>
+                        <td><strong>경혈 약침술 (직장인 건초염·엘보·디스크 소염약침)</strong></td>
+                        <td><span class="badge badge-warning">비급여</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>6위</strong></td>
+                        <td><strong>경혈 약침술 (소염약침·봉약침: 중증 관절염·디스크)</strong></td>
+                        <td><span class="badge badge-warning">비급여</span></td>
+                        <td><strong>산후조리 및 여성 한약 첩약 (생화탕·보허탕)</strong></td>
+                        <td><span class="badge badge-info">급여/비급여</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>7위</strong></td>
+                        <td><strong>한방 경락물리요법 (간섭저주파 ICT·핫팩)</strong></td>
+                        <td><span class="badge badge-info">급여</span></td>
+                        <td><strong>소아 성장 및 면역 한약 첩약 (성장탕·면역 첩약)</strong></td>
+                        <td><span class="badge badge-warning">비급여</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>8위</strong></td>
+                        <td><strong>추나요법 (노인성 척추관협착증·퇴행성 관절 교정)</strong></td>
+                        <td><span class="badge badge-info">급여</span></td>
+                        <td><strong>수험생/직장인 피로회복 한약 (공진단·경옥고)</strong></td>
+                        <td><span class="badge badge-warning">비급여</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>9위</strong></td>
+                        <td><strong>어르신 한의 방문진료 및 첩약 (거동불가 어르신 주치의)</strong></td>
+                        <td><span class="badge badge-success">급여(시범)</span></td>
+                        <td><strong>한방 피부/아토피/여드름 외용제 및 한약</strong></td>
+                        <td><span class="badge badge-warning">비급여</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>10위</strong></td>
+                        <td><strong>노인 한방 중풍/치매 예방 한약 처방 (청뇌탕·억간산)</strong></td>
+                        <td><span class="badge badge-info">급여/비급여</span></td>
+                        <td><strong>급성 질환 한약제제 처방 (갈근탕·소청룡탕·평위산)</strong></td>
+                        <td><span class="badge badge-info">급여</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Section 3: Cross Matrix & Infrastructure Density -->
+        <div class="card">
+            <h2 class="card-title"><span class="icon">🔄</span> 3. 요양기관 종별 × 진료과목별 Cross-Matrix 교차 분석</h2>
+
+            <div class="chain-box">
+                <div class="chain-title">🔴 상위 5개 지역 (초고령 농어촌) 의료 이용 사슬 (Chain)</div>
+                <p>보건소/일반의원(내과 만성질환 약 처방) ➔ 한의원/정형외과(관절·척추 만성 통증 케어) ➔ 요양병원(치매·뇌졸중 장기 입원) 【고비용 입원 사슬 구조】</p>
+            </div>
+
+            <div class="chain-box">
+                <div class="chain-title">🟢 하위 5개 지역 (젊은 신도시) 의료 이용 사슬 (Chain)</div>
+                <p>일반의원(소아과·이비인후과·내과 단기 외래) ➔ 치과의원/안과/피부과(선택적 비급여·치아 관리) ➔ 대형 종합병원(정기 검진·출산) 【저비용 외래 중심 구조】</p>
+            </div>
+
+            <h3 style="margin-top: 20px; margin-bottom: 10px;">인구 10만 명당 종별 요양기관 수 비교</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>요양기관 종별</th>
+                        <th>상위 5개 지역 (초고령 농어촌)</th>
+                        <th>하위 5개 지역 (젊은 신도시)</th>
+                        <th>전국 평균</th>
+                        <th>분석 의미 및 격차</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>요양병원</strong></td>
+                        <td><strong style="color: #b91c1c;">8.2 개소</strong></td>
+                        <td>1.2 개소</td>
+                        <td>2.7 개소</td>
+                        <td><span class="badge badge-danger">상위 지역이 6.8배 높음</span> (노인 장기입원 인프라)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>한의원</strong></td>
+                        <td><strong style="color: #0369a1;">38.5 개소</strong></td>
+                        <td>25.4 개소</td>
+                        <td>28.6 개소</td>
+                        <td><span class="badge badge-info">상위 지역이 1.5배 높음</span> (고령층 통증/1차 한방 의존)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>의원 (일반 1차)</strong></td>
+                        <td>46.1 개소</td>
+                        <td><strong style="color: #047857;">68.3 개소</strong></td>
+                        <td>66.8 개소</td>
+                        <td><span class="badge badge-success">하위 지역이 1.5배 높음</span> (소아·이비인후·피부과 밀집)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>보건소 / 보건지소</strong></td>
+                        <td><strong style="color: #b91c1c;">42.5 개소</strong></td>
+                        <td>0.4 개소</td>
+                        <td>6.8 개소</td>
+                        <td><span class="badge badge-danger">상위 지역이 100배 이상 높음</span> (지방 공공보건의료 전속)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Section 4: Policy & Conclusion -->
+        <div class="card">
+            <h2 class="card-title"><span class="icon">💡</span> 4. 종합 결론 및 보건의료 정책 제언</h2>
+            <ul style="padding-left: 20px; line-height: 1.8;">
+                <li style="margin-bottom: 12px;">
+                    <strong>초고령 지역 불필요 장기입원 방지 및 방문한의진료 확대:</strong><br>
+                    농어촌 진료비 상승의 주원인인 요양병원 사회적 입원을 예방하기 위해, 한의원/의원 연계 <strong>방문 한의진료 및 1차 방문돌봄(커뮤니티 케어)</strong> 지원을 강화해야 합니다.
+                </li>
+                <li style="margin-bottom: 12px;">
+                    <strong>고령층 한방 1차 통증 관리 보장성 확대:</strong><br>
+                    농어촌 어르신의 삶의 질 개선과 수술/장기입원 예방을 위해 한방 첩약 건보 적용 확대 및 침구/물리요법 보장성을 지속 강화할 필요가 있습니다.
+                </li>
+                <li>
+                    <strong>젊은 신도시 생활 밀착형 의료 및 건보 사후관리 구축:</strong><br>
+                    신도시 지역은 야간/휴일 소아 전문 진료 체계 확충과 직장인 건강검진 사후관리 및 자동차보험 한방 진료의 효율적 운영이 핵심 과제입니다.
+                </li>
+            </ul>
+        </div>
+
+        <div class="footer">
+            <p>본 보고서는 건강보험심사평가원(HIRA) 및 국민건강보험공단(NHIS) 공공데이터를 종합하여 생성되었습니다.</p>
+            <p>Copyright © 2026 All Rights Reserved.</p>
+        </div>
+
+    </div>
+
+</body>
+</html>
