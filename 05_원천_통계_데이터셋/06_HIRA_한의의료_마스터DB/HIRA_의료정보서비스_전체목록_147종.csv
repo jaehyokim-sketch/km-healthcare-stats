@@ -1,0 +1,147 @@
+﻿번호,대분류,대분류_href,중분류,중분류_href,소분류,시트,차트,링크,파일,소분류_href
+1,주요 의료 통계,/op/opc/olapJdgeChargeInfo.do,총진료비 현황,/op/opc/olapJdgeChargeInfo.do,,시트 제공,차트 미제공,링크 미제공,파일 제공,
+2,주요 의료 통계,/op/opc/olapHthInsRvStatInfoTab1.do?docNo=03-001,건강보험 진료 통계,/op/opc/olapHthInsRvStatInfoTab1.do?docNo=03-001,입원/외래별 청구현황,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapHthInsRvStatInfoTab1.do?docNo=03-001
+3,주요 의료 통계,/op/opc/olapHthInsRvStatInfoTab2.do?docNo=03-002,건강보험 진료 통계,/op/opc/olapHthInsRvStatInfoTab2.do?docNo=03-002,입원/외래별 종별 주요지표,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapHthInsRvStatInfoTab2.do?docNo=03-002
+4,주요 의료 통계,/op/opc/olapHthInsRvStatInfoTab3.do?docNo=03-003,건강보험 진료 통계,/op/opc/olapHthInsRvStatInfoTab3.do?docNo=03-003,종별건수,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapHthInsRvStatInfoTab3.do?docNo=03-003
+5,주요 의료 통계,/op/opc/olapHthInsRvStatInfoTab4.do?docNo=03-004,건강보험 진료 통계,/op/opc/olapHthInsRvStatInfoTab4.do?docNo=03-004,종별 입(내)원 일수,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapHthInsRvStatInfoTab4.do?docNo=03-004
+6,주요 의료 통계,/op/opc/olapHthInsRvStatInfoTab5.do?docNo=03-005,건강보험 진료 통계,/op/opc/olapHthInsRvStatInfoTab5.do?docNo=03-005,종별 진료인원,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapHthInsRvStatInfoTab5.do?docNo=03-005
+7,주요 의료 통계,/op/opc/olapHthInsRvStatInfoTab6.do?docNo=03-006,건강보험 진료 통계,/op/opc/olapHthInsRvStatInfoTab6.do?docNo=03-006,종별 요양급여비용,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapHthInsRvStatInfoTab6.do?docNo=03-006
+8,주요 의료 통계,/op/opc/olapHthInsRvStatInfoTab7.do?docNo=03-007,건강보험 진료 통계,/op/opc/olapHthInsRvStatInfoTab7.do?docNo=03-007,의원 표시과목별 주요 지표,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapHthInsRvStatInfoTab7.do?docNo=03-007
+9,주요 의료 통계,/op/opc/olapHthInsRvStatInfoTab8.do?docNo=03-008,건강보험 진료 통계,/op/opc/olapHthInsRvStatInfoTab8.do?docNo=03-008,의원 표시과목별 건수,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapHthInsRvStatInfoTab8.do?docNo=03-008
+10,주요 의료 통계,/op/opc/olapHthInsRvStatInfoTab9.do?docNo=03-009,건강보험 진료 통계,/op/opc/olapHthInsRvStatInfoTab9.do?docNo=03-009,의원 표시과목별 입(내)원일수,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapHthInsRvStatInfoTab9.do?docNo=03-009
+11,주요 의료 통계,/op/opc/olapHthInsRvStatInfoTab10.do?docNo=03-010,건강보험 진료 통계,/op/opc/olapHthInsRvStatInfoTab10.do?docNo=03-010,의원 표시과목별 진료인원,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapHthInsRvStatInfoTab10.do?docNo=03-010
+12,주요 의료 통계,/op/opc/olapHthInsRvStatInfoTab11.do?docNo=03-011,건강보험 진료 통계,/op/opc/olapHthInsRvStatInfoTab11.do?docNo=03-011,의원 표시과목별 요양급여비용,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapHthInsRvStatInfoTab11.do?docNo=03-011
+13,주요 의료 통계,/op/opc/olapHthInsRvStatInfoTab12.do?docNo=03-012,건강보험 진료 통계,/op/opc/olapHthInsRvStatInfoTab12.do?docNo=03-012,의원 표시과목별 원외처방횟수,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapHthInsRvStatInfoTab12.do?docNo=03-012
+14,주요 의료 통계,/op/opc/olapHthInsRvStatInfoTab13.do?docNo=03-013,건강보험 진료 통계,/op/opc/olapHthInsRvStatInfoTab13.do?docNo=03-013,의원 표시과목별 원외처방일수,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapHthInsRvStatInfoTab13.do?docNo=03-013
+15,주요 의료 통계,/op/opc/olapHthInsRvStatInfoTab14.do?docNo=03-021,건강보험 진료 통계,/op/opc/olapHthInsRvStatInfoTab14.do?docNo=03-021,다빈도 상병별 현황,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapHthInsRvStatInfoTab14.do?docNo=03-021
+16,주요 의료 통계,/op/opc/olapHthInsRvStatInfoTab15.do?docNo=03-022,건강보험 진료 통계,/op/opc/olapHthInsRvStatInfoTab15.do?docNo=03-022,암질환 상병별 현황,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapHthInsRvStatInfoTab15.do?docNo=03-022
+17,주요 의료 통계,/op/opc/olapHthInsRvStatInfoTab16.do?docNo=03-031,건강보험 진료 통계,/op/opc/olapHthInsRvStatInfoTab16.do?docNo=03-031,입원/외래별 노인 진료 청구 현황,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapHthInsRvStatInfoTab16.do?docNo=03-031
+18,주요 의료 통계,/op/opc/olapHthInsRvStatInfoTab17.do?docNo=03-033,건강보험 진료 통계,/op/opc/olapHthInsRvStatInfoTab17.do?docNo=03-033,건강보험 적용대상자 현황,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapHthInsRvStatInfoTab17.do?docNo=03-033
+19,주요 의료 통계,/op/opc/olapHthInsRvStatInfoTab18.do?docNo=03-034,건강보험 진료 통계,/op/opc/olapHthInsRvStatInfoTab18.do?docNo=03-034,건강보험 적용대상자 1인당 진료현황,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapHthInsRvStatInfoTab18.do?docNo=03-034
+20,주요 의료 통계,/op/opc/olapHthInsRvStatInfoTab19.do?docNo=03-035,건강보험 진료 통계,/op/opc/olapHthInsRvStatInfoTab19.do?docNo=03-035,연령별 건강보험 적용대상자 1인당 진료현황,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapHthInsRvStatInfoTab19.do?docNo=03-035
+21,주요 의료 통계,/op/opc/olapHthInsRvStatInfoTab20.do?docNo=03-036,건강보험 진료 통계,/op/opc/olapHthInsRvStatInfoTab20.do?docNo=03-036,진료항목 4대 분류별 요양급여비용,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapHthInsRvStatInfoTab20.do?docNo=03-036
+22,주요 의료 통계,/op/opc/olapHthInsRvStatInfoTab21.do?docNo=03-037,건강보험 진료 통계,/op/opc/olapHthInsRvStatInfoTab21.do?docNo=03-037,진료항목 4대 분류별 요양기관 종별요양급여비용,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapHthInsRvStatInfoTab21.do?docNo=03-037
+23,주요 의료 통계,/op/opc/olapMdclCaAsisStatsInfoTab1.do?docNo=04-001,의료급여 진료 통계,/op/opc/olapMdclCaAsisStatsInfoTab1.do?docNo=04-001,입원/외래별 청구 현황,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapMdclCaAsisStatsInfoTab1.do?docNo=04-001
+24,주요 의료 통계,/op/opc/olapMdclCaAsisStatsInfoTab2.do?docNo=04-002,의료급여 진료 통계,/op/opc/olapMdclCaAsisStatsInfoTab2.do?docNo=04-002,입원/외래별 종별 주요 지표,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapMdclCaAsisStatsInfoTab2.do?docNo=04-002
+25,주요 의료 통계,/op/opc/olapMdclCaAsisStatsInfoTab3.do?docNo=04-003,의료급여 진료 통계,/op/opc/olapMdclCaAsisStatsInfoTab3.do?docNo=04-003,종별 건수,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapMdclCaAsisStatsInfoTab3.do?docNo=04-003
+26,주요 의료 통계,/op/opc/olapMdclCaAsisStatsInfoTab4.do?docNo=04-004,의료급여 진료 통계,/op/opc/olapMdclCaAsisStatsInfoTab4.do?docNo=04-004,종별 입(내)원 일수,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapMdclCaAsisStatsInfoTab4.do?docNo=04-004
+27,주요 의료 통계,/op/opc/olapMdclCaAsisStatsInfoTab5.do?docNo=04-005,의료급여 진료 통계,/op/opc/olapMdclCaAsisStatsInfoTab5.do?docNo=04-005,종별 진료인원,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapMdclCaAsisStatsInfoTab5.do?docNo=04-005
+28,주요 의료 통계,/op/opc/olapMdclCaAsisStatsInfoTab6.do?docNo=04-006,의료급여 진료 통계,/op/opc/olapMdclCaAsisStatsInfoTab6.do?docNo=04-006,종별 의료급여비용,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapMdclCaAsisStatsInfoTab6.do?docNo=04-006
+29,주요 의료 통계,/op/opc/olapAdscDamtInfoTab1.do?docNo=10-001,자동차보험 진료비 통계,/op/opc/olapAdscDamtInfoTab1.do?docNo=10-001,자동차보험 청구기관 현황,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapAdscDamtInfoTab1.do?docNo=10-001
+30,주요 의료 통계,/op/opc/olapAdscDamtInfoTab2.do?docNo=10-002,자동차보험 진료비 통계,/op/opc/olapAdscDamtInfoTab2.do?docNo=10-002,연도별 자동차보험 진료비 현황,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapAdscDamtInfoTab2.do?docNo=10-002
+31,주요 의료 통계,/op/opc/olapAdscDamtInfoTab3.do?docNo=10-005,자동차보험 진료비 통계,/op/opc/olapAdscDamtInfoTab3.do?docNo=10-005,의료기관 종별 자동차보험 심사실적,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapAdscDamtInfoTab3.do?docNo=10-005
+32,주요 의료 통계,/op/opc/olapAdscDamtInfoTab4.do?docNo=10-006,자동차보험 진료비 통계,/op/opc/olapAdscDamtInfoTab4.do?docNo=10-006,보험회사등 자동차보험 심사실적,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapAdscDamtInfoTab4.do?docNo=10-006
+33,주요 의료 통계,/op/opc/olapAdscDamtInfoTab5.do?docNo=10-007,자동차보험 진료비 통계,/op/opc/olapAdscDamtInfoTab5.do?docNo=10-007,의료기관 종별 진료내역 항목별 자동차보험 심사실적,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapAdscDamtInfoTab5.do?docNo=10-007
+34,주요 의료 통계,/op/opc/olapAdscDamtInfoTab6.do?docNo=10-008,자동차보험 진료비 통계,/op/opc/olapAdscDamtInfoTab6.do?docNo=10-008,연령별 자동차보험 심사실적,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapAdscDamtInfoTab6.do?docNo=10-008
+35,주요 의료 통계,/op/opc/olapAdscDamtInfoTab7.do?docNo=10-009,자동차보험 진료비 통계,/op/opc/olapAdscDamtInfoTab7.do?docNo=10-009,시도별 자동차보험 심사실적,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapAdscDamtInfoTab7.do?docNo=10-009
+36,주요 의료 통계,/op/opc/olapEvaInfoTab1.do?docNo=05-003,평가결과 통계,/op/opc/olapEvaInfoTab1.do?docNo=05-003,급성상기도감염 항생제 처방률,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapEvaInfoTab1.do?docNo=05-003
+37,주요 의료 통계,/op/opc/olapEvaInfoTab2.do?docNo=05-004,평가결과 통계,/op/opc/olapEvaInfoTab2.do?docNo=05-004,주사제 처방률,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapEvaInfoTab2.do?docNo=05-004
+38,주요 의료 통계,/op/opc/olapEvaInfoTab3.do?docNo=05-010,평가결과 통계,/op/opc/olapEvaInfoTab3.do?docNo=05-010,수술의 예방적 항생제 투여율,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapEvaInfoTab3.do?docNo=05-010
+39,주요 의료 통계,/op/opc/olapEvaInfoTab7.do?docNo=05-014,평가결과 통계,/op/opc/olapEvaInfoTab7.do?docNo=05-014,고혈압·당뇨병 평가 결과(~'21년),시트 제공,차트 미제공,링크 미제공,파일 미제공,/op/opc/olapEvaInfoTab7.do?docNo=05-014
+40,주요 의료 통계,/op/opc/olapEvaInfoTab8.do?docNo=05-015,평가결과 통계,/op/opc/olapEvaInfoTab8.do?docNo=05-015,고혈압·당뇨병 평가 결과('23년~),시트 제공,차트 미제공,링크 미제공,파일 미제공,/op/opc/olapEvaInfoTab8.do?docNo=05-015
+41,주요 의료 통계,/op/opc/olapEvaInfoTab6.do?docNo=05-020,평가결과 통계,/op/opc/olapEvaInfoTab6.do?docNo=05-020,난임시술 통계,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapEvaInfoTab6.do?docNo=05-020
+42,주요 의료 통계,/op/opc/olapMdcnStatsInfoTab1.do?docNo=06-001,의약품 현황,/op/opc/olapMdcnStatsInfoTab1.do?docNo=06-001,약제 급여 목록 현황,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapMdcnStatsInfoTab1.do?docNo=06-001
+43,주요 의료 통계,/op/opc/olapMdcnStatsInfoTab2.do?docNo=06-002,의약품 현황,/op/opc/olapMdcnStatsInfoTab2.do?docNo=06-002,약품비현황,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapMdcnStatsInfoTab2.do?docNo=06-002
+44,주요 의료 통계,/op/opc/olapMdcnStatsInfoTab3.do?docNo=06-004,의약품 현황,/op/opc/olapMdcnStatsInfoTab3.do?docNo=06-004,원내 처방 및 약국조제 약품비 현황,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapMdcnStatsInfoTab3.do?docNo=06-004
+45,주요 의료 통계,/op/opc/olapMdcnStatsInfoTab4.do?docNo=06-015,의약품 현황,/op/opc/olapMdcnStatsInfoTab4.do?docNo=06-015,완제의약품 공급실적 현황,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapMdcnStatsInfoTab4.do?docNo=06-015
+46,주요 의료 통계,/op/opc/olapMdcnStatsInfoTab5.do?docNo=06-011,의약품 현황,/op/opc/olapMdcnStatsInfoTab5.do?docNo=06-011,건강보험 마약류 청구현황,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapMdcnStatsInfoTab5.do?docNo=06-011
+47,주요 의료 통계,/op/opc/olapMdcnStatsInfoTab6.do?docNo=06-012,의약품 현황,/op/opc/olapMdcnStatsInfoTab6.do?docNo=06-012,건강보험 노인진료비 및 노인의약품 비중,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapMdcnStatsInfoTab6.do?docNo=06-012
+48,주요 의료 통계,/op/opc/olapMdcnStatsInfoTab7.do?docNo=06-013,의약품 현황,/op/opc/olapMdcnStatsInfoTab7.do?docNo=06-013,투여경로별 의약품 청구 현황,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapMdcnStatsInfoTab7.do?docNo=06-013
+49,주요 의료 통계,/op/opc/olapMdcnStatsInfoTab8.do?docNo=06-014,의약품 현황,/op/opc/olapMdcnStatsInfoTab8.do?docNo=06-014,전문/일반 의약품 청구 현황,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapMdcnStatsInfoTab8.do?docNo=06-014
+50,주요 의료 통계,/op/opc/olapMdcnStatsInfoTab9.do?docNo=06-016,의약품 현황,/op/opc/olapMdcnStatsInfoTab9.do?docNo=06-016,DUR 점검 현황,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapMdcnStatsInfoTab9.do?docNo=06-016
+51,주요 의료 통계,/op/opc/olapEtcStatsInfoTab1.do?docNo=07-004,포괄수가제 통계,/op/opc/olapEtcStatsInfoTab1.do?docNo=07-004,포괄수가제 주요 지표,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapEtcStatsInfoTab1.do?docNo=07-004
+52,주요 의료 통계,/op/opc/olapEtcStatsInfoTab2.do?docNo=07-005,포괄수가제 통계,/op/opc/olapEtcStatsInfoTab2.do?docNo=07-005,포괄수가제 종별 청구건수,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapEtcStatsInfoTab2.do?docNo=07-005
+53,주요 의료 통계,/op/opc/olapEtcStatsInfoTab3.do?docNo=07-006,포괄수가제 통계,/op/opc/olapEtcStatsInfoTab3.do?docNo=07-006,포괄수가제 종별 진료비,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapEtcStatsInfoTab3.do?docNo=07-006
+54,주요 의료 통계,/op/opc/olapMaterialTab1.do,치료재료 청구 정보(통계),/op/opc/olapMaterialTab1.do,청구통계,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapMaterialTab1.do
+55,주요 의료 통계,/op/opc/olapMaterialTab2.do,치료재료 청구 정보(통계),/op/opc/olapMaterialTab2.do,대분류별 청구현황,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapMaterialTab2.do
+56,주요 의료 통계,/op/opc/olapMaterialTab3.do,치료재료 청구 정보(통계),/op/opc/olapMaterialTab3.do,중분류별 청구현황,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapMaterialTab3.do
+57,주요 의료 통계,/op/opc/olapMaterialTab4.do,치료재료 청구 정보(통계),/op/opc/olapMaterialTab4.do,중분류별 청구현황(100대 금액/개수 기준),시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapMaterialTab4.do
+58,국가승인 통계(KOSIS 바로가기),/op/opc/selectHinsuStcInfo.do,건강보험통계,/op/opc/selectHinsuStcInfo.do,,시트 미제공,차트 미제공,링크 제공,파일 미제공,
+59,국가승인 통계(KOSIS 바로가기),/op/opc/selectMedPayStcInfo.do,의료급여통계,/op/opc/selectMedPayStcInfo.do,,시트 미제공,차트 미제공,링크 제공,파일 미제공,
+60,국가승인 통계(KOSIS 바로가기),/op/opc/selectMadmOptmAsmInfo.do,의료기관별 적정성평가현황,/op/opc/selectMadmOptmAsmInfo.do,,시트 미제공,차트 미제공,링크 제공,파일 미제공,
+61,국가승인 통계(KOSIS 바로가기),/op/opc/selectCmspDstbInfo.do,완제의약품 유통정보통계,/op/opc/selectCmspDstbInfo.do,,시트 미제공,차트 미제공,링크 제공,파일 미제공,
+62,국가승인 통계(KOSIS 바로가기),/op/opc/selectPayMsupDmdInfo.do,급여의약품·치료재료청구현황,/op/opc/selectPayMsupDmdInfo.do,,시트 미제공,차트 미제공,링크 제공,파일 미제공,
+63,국가승인 통계(KOSIS 바로가기),/op/opc/selectAdscDamtStcSvcInfo.do,자동차보험 진료비 통계,/op/opc/selectAdscDamtStcSvcInfo.do,,시트 미제공,차트 미제공,링크 제공,파일 미제공,
+64,국가승인 통계(KOSIS 바로가기),/op/opc/selectNonReimburseInfo.do,비급여 진료비용 및 제증명수수료 통계,/op/opc/selectNonReimburseInfo.do,,시트 미제공,차트 미제공,링크 제공,파일 미제공,
+65,국가승인 통계(KOSIS 바로가기),/op/opc/selectMentalHealthInfo.do,국가정신건강현황,/op/opc/selectMentalHealthInfo.do,,시트 미제공,차트 미제공,링크 제공,파일 미제공,
+66,질병/행위별 의료 통계,/op/opc/olapMfrnIntrsIlnsInfoTab1.do,국민관심질병통계,/op/opc/olapMfrnIntrsIlnsInfoTab1.do,입원/외래별,시트 제공,차트 제공,링크 미제공,파일 제공,/op/opc/olapMfrnIntrsIlnsInfoTab1.do
+67,질병/행위별 의료 통계,/op/opc/olapMfrnIntrsIlnsInfoTab2.do,국민관심질병통계,/op/opc/olapMfrnIntrsIlnsInfoTab2.do,성별/연령5세구간별,시트 제공,차트 제공,링크 미제공,파일 제공,/op/opc/olapMfrnIntrsIlnsInfoTab2.do
+68,질병/행위별 의료 통계,/op/opc/olapMfrnIntrsIlnsInfoTab3.do,국민관심질병통계,/op/opc/olapMfrnIntrsIlnsInfoTab3.do,성별/연령10세구간별,시트 제공,차트 제공,링크 미제공,파일 제공,/op/opc/olapMfrnIntrsIlnsInfoTab3.do
+69,질병/행위별 의료 통계,/op/opc/olapMfrnIntrsIlnsInfoTab4.do,국민관심질병통계,/op/opc/olapMfrnIntrsIlnsInfoTab4.do,요양기관종별,시트 제공,차트 제공,링크 미제공,파일 제공,/op/opc/olapMfrnIntrsIlnsInfoTab4.do
+70,질병/행위별 의료 통계,/op/opc/olapMfrnIntrsIlnsInfoTab5.do,국민관심질병통계,/op/opc/olapMfrnIntrsIlnsInfoTab5.do,요양기관소재지별(시도),시트 제공,차트 제공,링크 미제공,파일 제공,/op/opc/olapMfrnIntrsIlnsInfoTab5.do
+71,질병/행위별 의료 통계,/op/opc/olapMfrnIntrsIlnsInfoTab7.do,국민관심질병통계,/op/opc/olapMfrnIntrsIlnsInfoTab7.do,요양기관소재지별(시군구),시트 제공,차트 제공,링크 미제공,파일 제공,/op/opc/olapMfrnIntrsIlnsInfoTab7.do
+72,질병/행위별 의료 통계,/op/opc/olapMfrnIntrsDiagBhvInfoTab1.do,국민관심진료행위(검사/수술 등)통계,/op/opc/olapMfrnIntrsDiagBhvInfoTab1.do,성별/연령5세구간별,시트 제공,차트 제공,링크 미제공,파일 제공,/op/opc/olapMfrnIntrsDiagBhvInfoTab1.do
+73,질병/행위별 의료 통계,/op/opc/olapMfrnIntrsDiagBhvInfoTab2.do,국민관심진료행위(검사/수술 등)통계,/op/opc/olapMfrnIntrsDiagBhvInfoTab2.do,성별/연령10세구간별,시트 제공,차트 제공,링크 미제공,파일 제공,/op/opc/olapMfrnIntrsDiagBhvInfoTab2.do
+74,질병/행위별 의료 통계,/op/opc/olapMfrnIntrsDiagBhvInfoTab3.do,국민관심진료행위(검사/수술 등)통계,/op/opc/olapMfrnIntrsDiagBhvInfoTab3.do,요양기관종별,시트 제공,차트 제공,링크 미제공,파일 제공,/op/opc/olapMfrnIntrsDiagBhvInfoTab3.do
+75,질병/행위별 의료 통계,/op/opc/olapMfrnIntrsDiagBhvInfoTab4.do,국민관심진료행위(검사/수술 등)통계,/op/opc/olapMfrnIntrsDiagBhvInfoTab4.do,요양기관소재지별(시도),시트 제공,차트 제공,링크 미제공,파일 제공,/op/opc/olapMfrnIntrsDiagBhvInfoTab4.do
+76,질병/행위별 의료 통계,/op/opc/olapMfrnIntrsDiagBhvInfoTab6.do,국민관심진료행위(검사/수술 등)통계,/op/opc/olapMfrnIntrsDiagBhvInfoTab6.do,요양기관소재지별(시군구),시트 제공,차트 제공,링크 미제공,파일 제공,/op/opc/olapMfrnIntrsDiagBhvInfoTab6.do
+77,질병/행위별 의료 통계,/op/opc/olapMfrnIntrsIlnsBhvInfoTab1.do,국민관심질병&행위 통계,/op/opc/olapMfrnIntrsIlnsBhvInfoTab1.do,성별/연령5세구간별,시트 제공,차트 제공,링크 미제공,파일 제공,/op/opc/olapMfrnIntrsIlnsBhvInfoTab1.do
+78,질병/행위별 의료 통계,/op/opc/olapMfrnIntrsIlnsBhvInfoTab2.do,국민관심질병&행위 통계,/op/opc/olapMfrnIntrsIlnsBhvInfoTab2.do,성별/연령10세구간별,시트 제공,차트 제공,링크 미제공,파일 제공,/op/opc/olapMfrnIntrsIlnsBhvInfoTab2.do
+79,질병/행위별 의료 통계,/op/opc/olapMfrnIntrsIlnsBhvInfoTab3.do,국민관심질병&행위 통계,/op/opc/olapMfrnIntrsIlnsBhvInfoTab3.do,요양기관종별 현황,시트 제공,차트 제공,링크 미제공,파일 제공,/op/opc/olapMfrnIntrsIlnsBhvInfoTab3.do
+80,질병/행위별 의료 통계,/op/opc/olapMfrnIntrsIlnsBhvInfoTab4.do,국민관심질병&행위 통계,/op/opc/olapMfrnIntrsIlnsBhvInfoTab4.do,요양기관소재지별(시도),시트 제공,차트 제공,링크 미제공,파일 제공,/op/opc/olapMfrnIntrsIlnsBhvInfoTab4.do
+81,질병/행위별 의료 통계,/op/opc/olapMfrnIntrsIlnsBhvInfoTab6.do,국민관심질병&행위 통계,/op/opc/olapMfrnIntrsIlnsBhvInfoTab6.do,요양기관소재지별(시군구),시트 제공,차트 제공,링크 미제공,파일 제공,/op/opc/olapMfrnIntrsIlnsBhvInfoTab6.do
+82,질병/행위별 의료 통계,/op/opc/olapHifrqSickInfoTab1.do,다빈도질병 통계,/op/opc/olapHifrqSickInfoTab1.do,전체,시트 제공,차트 제공,링크 미제공,파일 제공,/op/opc/olapHifrqSickInfoTab1.do
+83,질병/행위별 의료 통계,/op/opc/olapHifrqSickInfoTab2.do,다빈도질병 통계,/op/opc/olapHifrqSickInfoTab2.do,질병/연령5세구간별,시트 제공,차트 제공,링크 미제공,파일 제공,/op/opc/olapHifrqSickInfoTab2.do
+84,질병/행위별 의료 통계,/op/opc/olapHifrqSickInfoTab3.do,다빈도질병 통계,/op/opc/olapHifrqSickInfoTab3.do,질병/연령10세구간별,시트 제공,차트 제공,링크 미제공,파일 제공,/op/opc/olapHifrqSickInfoTab3.do
+85,질병/행위별 의료 통계,/op/opc/olap3thDsInfoTab1.do,질병 소분류(3단 상병) 통계,/op/opc/olap3thDsInfoTab1.do,입원외래별,시트 제공,차트 제공,링크 미제공,파일 제공,/op/opc/olap3thDsInfoTab1.do
+86,질병/행위별 의료 통계,/op/opc/olap3thDsInfoTab2.do,질병 소분류(3단 상병) 통계,/op/opc/olap3thDsInfoTab2.do,성별/연령5세구간별,시트 제공,차트 제공,링크 미제공,파일 제공,/op/opc/olap3thDsInfoTab2.do
+87,질병/행위별 의료 통계,/op/opc/olap3thDsInfoTab3.do,질병 소분류(3단 상병) 통계,/op/opc/olap3thDsInfoTab3.do,성별/연령10세구간별,시트 제공,차트 제공,링크 미제공,파일 제공,/op/opc/olap3thDsInfoTab3.do
+88,질병/행위별 의료 통계,/op/opc/olap3thDsInfoTab4.do,질병 소분류(3단 상병) 통계,/op/opc/olap3thDsInfoTab4.do,요양기관종별,시트 제공,차트 제공,링크 미제공,파일 제공,/op/opc/olap3thDsInfoTab4.do
+89,질병/행위별 의료 통계,/op/opc/olap3thDsInfoTab5.do,질병 소분류(3단 상병) 통계,/op/opc/olap3thDsInfoTab5.do,요양기관소재지별,시트 제공,차트 제공,링크 미제공,파일 제공,/op/opc/olap3thDsInfoTab5.do
+90,질병/행위별 의료 통계,/op/opc/olap4thDsInfoTab1.do,질병 세분류(4단 상병) 통계,/op/opc/olap4thDsInfoTab1.do,입원외래별,시트 제공,차트 제공,링크 미제공,파일 제공,/op/opc/olap4thDsInfoTab1.do
+91,질병/행위별 의료 통계,/op/opc/olap4thDsInfoTab2.do,질병 세분류(4단 상병) 통계,/op/opc/olap4thDsInfoTab2.do,성별/연령5세구간별,시트 제공,차트 제공,링크 미제공,파일 제공,/op/opc/olap4thDsInfoTab2.do
+92,질병/행위별 의료 통계,/op/opc/olap4thDsInfoTab3.do,질병 세분류(4단 상병) 통계,/op/opc/olap4thDsInfoTab3.do,성별/연령10세구간별,시트 제공,차트 제공,링크 미제공,파일 제공,/op/opc/olap4thDsInfoTab3.do
+93,질병/행위별 의료 통계,/op/opc/olap4thDsInfoTab4.do,질병 세분류(4단 상병) 통계,/op/opc/olap4thDsInfoTab4.do,요양기관종별,시트 제공,차트 제공,링크 미제공,파일 제공,/op/opc/olap4thDsInfoTab4.do
+94,질병/행위별 의료 통계,/op/opc/olap4thDsInfoTab5.do,질병 세분류(4단 상병) 통계,/op/opc/olap4thDsInfoTab5.do,요양기관소재지별,시트 제공,차트 제공,링크 미제공,파일 제공,/op/opc/olap4thDsInfoTab5.do
+95,질병/행위별 의료 통계,/op/opc/olapDiagBhvInfoTab1.do,진료행위(검사/수술 등) 통계,/op/opc/olapDiagBhvInfoTab1.do,입원외래별,시트 제공,차트 제공,링크 미제공,파일 제공,/op/opc/olapDiagBhvInfoTab1.do
+96,질병/행위별 의료 통계,/op/opc/olapDiagBhvInfoTab2.do,진료행위(검사/수술 등) 통계,/op/opc/olapDiagBhvInfoTab2.do,성별/연령5세구간별,시트 제공,차트 제공,링크 미제공,파일 제공,/op/opc/olapDiagBhvInfoTab2.do
+97,질병/행위별 의료 통계,/op/opc/olapDiagBhvInfoTab3.do,진료행위(검사/수술 등) 통계,/op/opc/olapDiagBhvInfoTab3.do,성별/연령10세구간별,시트 제공,차트 제공,링크 미제공,파일 제공,/op/opc/olapDiagBhvInfoTab3.do
+98,질병/행위별 의료 통계,/op/opc/olapDiagBhvInfoTab4.do,진료행위(검사/수술 등) 통계,/op/opc/olapDiagBhvInfoTab4.do,요양기관종별,시트 제공,차트 제공,링크 미제공,파일 제공,/op/opc/olapDiagBhvInfoTab4.do
+99,질병/행위별 의료 통계,/op/opc/olapDiagBhvInfoTab5.do,진료행위(검사/수술 등) 통계,/op/opc/olapDiagBhvInfoTab5.do,요양기관소재지별,시트 제공,차트 제공,링크 미제공,파일 제공,/op/opc/olapDiagBhvInfoTab5.do
+100,질병/행위별 의료 통계,/op/opc/olapGanriJiroTab1.do,상대가치(관리진료과)통계,/op/opc/olapGanriJiroTab1.do,관리진료과,시트 제공,차트 제공,링크 미제공,파일 제공,/op/opc/olapGanriJiroTab1.do
+101,질병/행위별 의료 통계,/op/opc/olapGanriJiroTab2.do,상대가치(관리진료과)통계,/op/opc/olapGanriJiroTab2.do,장/절분류,시트 제공,차트 제공,링크 미제공,파일 제공,/op/opc/olapGanriJiroTab2.do
+102,의약품 통계,/op/opc/olapMsupInfoTab1.do,의약품 사용 통계,/op/opc/olapMsupInfoTab1.do,요양기관소재지별/병상규모별,시트 제공,차트 제공,링크 미제공,파일 제공,/op/opc/olapMsupInfoTab1.do
+103,의약품 통계,/op/opc/olapMsupInfoTab2.do,의약품 사용 통계,/op/opc/olapMsupInfoTab2.do,요양기관소재지별/요양기관종별,시트 제공,차트 제공,링크 미제공,파일 제공,/op/opc/olapMsupInfoTab2.do
+104,의약품 통계,/op/opc/olapMsupInfoTab3.do,의약품 사용 통계,/op/opc/olapMsupInfoTab3.do,의료기관 원내/원외,시트 제공,차트 제공,링크 미제공,파일 제공,/op/opc/olapMsupInfoTab3.do
+105,의약품 통계,/op/opc/olapMsupInfoTab4.do,의약품 사용 통계,/op/opc/olapMsupInfoTab4.do,약국 직접/처방 조제,시트 제공,차트 제공,링크 미제공,파일 제공,/op/opc/olapMsupInfoTab4.do
+106,의약품 통계,/op/opc/olapMsupInfoTab5.do,의약품 사용 통계,/op/opc/olapMsupInfoTab5.do,약효분류별,시트 제공,차트 제공,링크 미제공,파일 제공,/op/opc/olapMsupInfoTab5.do
+107,의약품 통계,/op/opc/olapMsupInfoTab6.do,의약품 사용 통계,/op/opc/olapMsupInfoTab6.do,약효분류별/연령5세구간별,시트 제공,차트 제공,링크 미제공,파일 제공,/op/opc/olapMsupInfoTab6.do
+108,의약품 통계,/op/opc/olapMsupInfoTab7.do,의약품 사용 통계,/op/opc/olapMsupInfoTab7.do,약효분류별/요양기관종별,시트 제공,차트 제공,링크 미제공,파일 제공,/op/opc/olapMsupInfoTab7.do
+109,의약품 통계,/op/opc/olapMsupInfoTab8.do,의약품 사용 통계,/op/opc/olapMsupInfoTab8.do,요양기관소재지별/연령5세구간별,시트 제공,차트 제공,링크 미제공,파일 제공,/op/opc/olapMsupInfoTab8.do
+110,의약품 통계,/op/opc/olapMjDiseaseInfoTab1.do,질병별 의약품 통계,/op/opc/olapMjDiseaseInfoTab1.do,의료기관 주질병별,시트 제공,차트 제공,링크 미제공,파일 제공,/op/opc/olapMjDiseaseInfoTab1.do
+111,의약품 통계,/op/opc/olapMjDiseaseInfoTab2.do,질병별 의약품 통계,/op/opc/olapMjDiseaseInfoTab2.do,주질병 의료기관종별/병상규모별,시트 제공,차트 제공,링크 미제공,파일 제공,/op/opc/olapMjDiseaseInfoTab2.do
+112,의약품 통계,/op/opc/olapMjDiseaseInfoTab3.do,질병별 의약품 통계,/op/opc/olapMjDiseaseInfoTab3.do,의료기관 주질병 연령5세구간별 원내/원외,시트 제공,차트 제공,링크 미제공,파일 제공,/op/opc/olapMjDiseaseInfoTab3.do
+113,의약품 통계,/op/opc/olapMeftDivTab1.do,약효분류군 사용실적,/op/opc/olapMeftDivTab1.do,약효분류군의 시군구별,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapMeftDivTab1.do
+114,의약품 통계,/op/opc/olapMeftDivTab2.do,약효분류군 사용실적,/op/opc/olapMeftDivTab2.do,약효분류군의 시군구별 요양기관종별,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapMeftDivTab2.do
+115,의약품 통계,/op/opc/olapMeftDivTab3.do,약효분류군 사용실적,/op/opc/olapMeftDivTab3.do,약효분류군의 상병별,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapMeftDivTab3.do
+116,의약품 통계,/op/opc/olapGnlInfoTab1.do,성분 사용실적,/op/opc/olapGnlInfoTab1.do,성분의 시군구별,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapGnlInfoTab1.do
+117,의약품 통계,/op/opc/olapGnlInfoTab2.do,성분 사용실적,/op/opc/olapGnlInfoTab2.do,성분의 시군구별 요양기관종별,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapGnlInfoTab2.do
+118,의약품 통계,/op/opc/olapGnlInfoTab3.do,성분 사용실적,/op/opc/olapGnlInfoTab3.do,성분의 상병별,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapGnlInfoTab3.do
+119,의약품 통계,/op/opc/olapAtc4InfoTab1.do,"ATC코드 4단계별 사용(시군구별,종별,상병별) 통계",/op/opc/olapAtc4InfoTab1.do,ATC 코드 4단계의 시군구별,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapAtc4InfoTab1.do
+120,의약품 통계,/op/opc/olapAtc4InfoTab2.do,"ATC코드 4단계별 사용(시군구별,종별,상병별) 통계",/op/opc/olapAtc4InfoTab2.do,ATC 코드 4단계의 시군구별 요양기관종별,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapAtc4InfoTab2.do
+121,의약품 통계,/op/opc/olapAtc4InfoTab3.do,"ATC코드 4단계별 사용(시군구별,종별,상병별) 통계",/op/opc/olapAtc4InfoTab3.do,ATC 코드 4단계의 상병별,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapAtc4InfoTab3.do
+122,의약품 통계,/op/opc/olapAtc3InfoTab1.do,"ATC코드 3단계별 사용(시군구별,종별,상병별) 통계",/op/opc/olapAtc3InfoTab1.do,ATC 코드 3단계의 시군구별,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapAtc3InfoTab1.do
+123,의약품 통계,/op/opc/olapAtc3InfoTab2.do,"ATC코드 3단계별 사용(시군구별,종별,상병별) 통계",/op/opc/olapAtc3InfoTab2.do,ATC 코드 3단계의 시군구별 요양기관종별,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapAtc3InfoTab2.do
+124,의약품 통계,/op/opc/olapAtc3InfoTab3.do,"ATC코드 3단계별 사용(시군구별,종별,상병별) 통계",/op/opc/olapAtc3InfoTab3.do,ATC 코드 3단계의 상병별,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapAtc3InfoTab3.do
+125,의료자원 통계,/op/opc/olapYadmStatInfoTab1.do,기관수현황,/op/opc/olapYadmStatInfoTab1.do,종별 요양기관수,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapYadmStatInfoTab1.do
+126,의료자원 통계,/op/opc/olapYadmStatInfoTab2.do,기관수현황,/op/opc/olapYadmStatInfoTab2.do,지역별 종별 요양기관수,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapYadmStatInfoTab2.do
+127,의료자원 통계,/op/opc/olapYadmStatInfoTab3.do,기관수현황,/op/opc/olapYadmStatInfoTab3.do,지역별 종별 설립구분별 기관수,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapYadmStatInfoTab3.do
+128,의료자원 통계,/op/opc/olapYadmStatInfoTab4.do,기관수현황,/op/opc/olapYadmStatInfoTab4.do,지역별 의원 표시과목별 기관수,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapYadmStatInfoTab4.do
+129,의료자원 통계,/op/opc/olapHumanResourceStatInfoTab1.do,인력 현황,/op/opc/olapHumanResourceStatInfoTab1.do,지역별 종별 의료인력Ⅰ(의사 등),시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapHumanResourceStatInfoTab1.do
+130,의료자원 통계,/op/opc/olapHumanResourceStatInfoTab2.do,인력 현황,/op/opc/olapHumanResourceStatInfoTab2.do,지역별 종별 의료인력Ⅱ(간호사 등),시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapHumanResourceStatInfoTab2.do
+131,의료자원 통계,/op/opc/olapHumanResourceStatInfoTab3.do,인력 현황,/op/opc/olapHumanResourceStatInfoTab3.do,지역별 종별 전문과목별 전문의수,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapHumanResourceStatInfoTab3.do
+132,의료자원 통계,/op/opc/olapInfraEquipmentStatInfoTab1.do,시설 및 장비 현황,/op/opc/olapInfraEquipmentStatInfoTab1.do,지역별 종별 입원실 현황,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapInfraEquipmentStatInfoTab1.do
+133,의료자원 통계,/op/opc/olapInfraEquipmentStatInfoTab2.do,시설 및 장비 현황,/op/opc/olapInfraEquipmentStatInfoTab2.do,지역별 종별 특수진료실 현황,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapInfraEquipmentStatInfoTab2.do
+134,의료자원 통계,/op/opc/olapInfraEquipmentStatInfoTab3.do,시설 및 장비 현황,/op/opc/olapInfraEquipmentStatInfoTab3.do,진단방사선·특수의료장비 현황,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapInfraEquipmentStatInfoTab3.do
+135,의료자원 통계,/op/opc/olapMdclRcStatsInfoTab1.do?docNo=02-001,의료자원(인력/시설/장비) 현황(2018년이전),/op/opc/olapMdclRcStatsInfoTab1.do?docNo=02-001,종별 요양기관수,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapMdclRcStatsInfoTab1.do?docNo=02-001
+136,의료자원 통계,/op/opc/olapMdclRcStatsInfoTab2.do?docNo=02-002,의료자원(인력/시설/장비) 현황(2018년이전),/op/opc/olapMdclRcStatsInfoTab2.do?docNo=02-002,종별 시도별 요양기관수,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapMdclRcStatsInfoTab2.do?docNo=02-002
+137,의료자원 통계,/op/opc/olapMdclRcStatsInfoTab3.do?docNo=02-003,의료자원(인력/시설/장비) 현황(2018년이전),/op/opc/olapMdclRcStatsInfoTab3.do?docNo=02-003,종별 설립구분별 요양기관수,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapMdclRcStatsInfoTab3.do?docNo=02-003
+138,의료자원 통계,/op/opc/olapMdclRcStatsInfoTab4.do?docNo=02-004,의료자원(인력/시설/장비) 현황(2018년이전),/op/opc/olapMdclRcStatsInfoTab4.do?docNo=02-004,의원급  표시과목별 시도별 요양기관수,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapMdclRcStatsInfoTab4.do?docNo=02-004
+139,의료자원 통계,/op/opc/olapMdclRcStatsInfoTab5.do?docNo=02-005,의료자원(인력/시설/장비) 현황(2018년이전),/op/opc/olapMdclRcStatsInfoTab5.do?docNo=02-005,종별 의료 종사자수,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapMdclRcStatsInfoTab5.do?docNo=02-005
+140,의료자원 통계,/op/opc/olapMdclRcStatsInfoTab6.do?docNo=02-006,의료자원(인력/시설/장비) 현황(2018년이전),/op/opc/olapMdclRcStatsInfoTab6.do?docNo=02-006,종별 전문과목별 전문의 수,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapMdclRcStatsInfoTab6.do?docNo=02-006
+141,의료자원 통계,/op/opc/olapMdclRcStatsInfoTab7.do?docNo=02-007,의료자원(인력/시설/장비) 현황(2018년이전),/op/opc/olapMdclRcStatsInfoTab7.do?docNo=02-007,종별 입원실 현황,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapMdclRcStatsInfoTab7.do?docNo=02-007
+142,의료자원 통계,/op/opc/olapMdclRcStatsInfoTab8.do?docNo=02-008,의료자원(인력/시설/장비) 현황(2018년이전),/op/opc/olapMdclRcStatsInfoTab8.do?docNo=02-008,종별 특수진료실 현황,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapMdclRcStatsInfoTab8.do?docNo=02-008
+143,의료자원 통계,/op/opc/olapMdclRcStatsInfoTab9.do?docNo=02-009,의료자원(인력/시설/장비) 현황(2018년이전),/op/opc/olapMdclRcStatsInfoTab9.do?docNo=02-009,종별 의료장비 현황,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapMdclRcStatsInfoTab9.do?docNo=02-009
+144,의료자원 통계,/op/opc/olapCliNhstPrsntInfmTab1.do?docNo=11-001,임상간호인력 현황정보,/op/opc/olapCliNhstPrsntInfmTab1.do?docNo=11-001,간호사 및 간호조무사 현황,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapCliNhstPrsntInfmTab1.do?docNo=11-001
+145,의료자원 통계,/op/opc/olapCliNhstPrsntInfmTab2.do?docNo=11-002,임상간호인력 현황정보,/op/opc/olapCliNhstPrsntInfmTab2.do?docNo=11-002,의과병원급 이상 의료기관 간호사 현황,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapCliNhstPrsntInfmTab2.do?docNo=11-002
+146,의료자원 통계,/op/opc/olapCliNhstPrsntInfmTab3.do?docNo=11-003,임상간호인력 현황정보,/op/opc/olapCliNhstPrsntInfmTab3.do?docNo=11-003,요양병원 의료기관 간호조무사 현황,시트 제공,차트 미제공,링크 미제공,파일 제공,/op/opc/olapCliNhstPrsntInfmTab3.do?docNo=11-003

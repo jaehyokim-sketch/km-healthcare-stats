@@ -1,0 +1,9 @@
+# Temporary and scratch files
+step_*.txt
+scratch_*.txt
+*.pyc
+__pycache__/
+*.sqlite
+.agents/
+04_CLI_대화세션_아카이브/
+04_CLI_*/

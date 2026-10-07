@@ -1,0 +1,20 @@
+[
+  {
+    "year": "2024",
+    "kind": "한방병원",
+    "patients": 51027,
+    "claims": 230174,
+    "days": 573062,
+    "benefit_paid": 44079299180,
+    "total_cost": 61497630820
+  },
+  {
+    "year": "2024",
+    "kind": "한의원",
+    "patients": 427074,
+    "claims": 3307291,
+    "days": 3307744,
+    "benefit_paid": 84396365540,
+    "total_cost": 110313180370
+  }
+]

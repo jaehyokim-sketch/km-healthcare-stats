@@ -1,0 +1,338 @@
+{
+  "nat_age_summary": [
+    {
+      "연령군": "01_0~4세",
+      "환자수": 377620,
+      "명세서청구건수": 901957,
+      "입내원일수": 3799241,
+      "보험자부담금(선별포함)": 1406073886990,
+      "요양급여비용총액(선별포함)": 1465218575380,
+      "1인당_연평균_진료비": 3880140.2875377364,
+      "1인당_보험자부담금": 3723515.404348287,
+      "1인당_본인부담금": 156624.8831894497,
+      "1인당_연평균_내원일수": 10.061016365658599,
+      "1건당_진료비": 1624488.2797960434
+    },
+    {
+      "연령군": "02_5~9세",
+      "환자수": 267294,
+      "명세서청구건수": 425053,
+      "입내원일수": 1594571,
+      "보험자부담금(선별포함)": 425436738880,
+      "요양급여비용총액(선별포함)": 477879620380,
+      "1인당_연평균_진료비": 1787842.6765284669,
+      "1인당_보험자부담금": 1591643.4296317913,
+      "1인당_본인부담금": 196199.24689667558,
+      "1인당_연평균_내원일수": 5.965607159158081,
+      "1건당_진료비": 1124282.4315555943
+    },
+    {
+      "연령군": "03_10~14세",
+      "환자수": 189981,
+      "명세서청구건수": 285880,
+      "입내원일수": 1232458,
+      "보험자부담금(선별포함)": 354112454120,
+      "요양급여비용총액(선별포함)": 399520713160,
+      "1인당_연평균_진료비": 2102950.890668014,
+      "1인당_보험자부담금": 1863936.1521415298,
+      "1인당_본인부담금": 239014.73852648423,
+      "1인당_연평균_내원일수": 6.48726977960954,
+      "1건당_진료비": 1397511.9391353016
+    },
+    {
+      "연령군": "04_15~19세",
+      "환자수": 162193,
+      "명세서청구건수": 247763,
+      "입내원일수": 1190321,
+      "보험자부담금(선별포함)": 339452538590,
+      "요양급여비용총액(선별포함)": 424863735920,
+      "1인당_연평균_진료비": 2619494.897560314,
+      "1인당_보험자부담금": 2092892.656218209,
+      "1인당_본인부담금": 526602.2413421047,
+      "1인당_연평균_내원일수": 7.338917215909441,
+      "1건당_진료비": 1714798.9648171843
+    }
+  ],
+  "iksan_age_summary": [
+    {
+      "연령군": "01_0~4세",
+      "주민등록인구": 6200,
+      "실진료환자수": 6107,
+      "의료이용률": 98.5,
+      "1인당_연평균_진료비": 4132349.4062276892,
+      "총진료비_억원": 252.36257823832497
+    },
+    {
+      "연령군": "02_5~9세",
+      "주민등록인구": 9400,
+      "실진료환자수": 8760,
+      "의료이용률": 93.2,
+      "1인당_연평균_진료비": 1904052.450502817,
+      "총진료비_억원": 166.79499466404675
+    },
+    {
+      "연령군": "03_10~14세",
+      "주민등록인구": 11800,
+      "실진료환자수": 10207,
+      "의료이용률": 86.5,
+      "1인당_연평균_진료비": 2239642.6985614346,
+      "총진료비_억원": 228.60033024216565
+    },
+    {
+      "연령군": "04_15~19세",
+      "주민등록인구": 13600,
+      "실진료환자수": 10852,
+      "의료이용률": 79.80000000000001,
+      "1인당_연평균_진료비": 2789762.065901734,
+      "총진료비_억원": 302.74497939165616
+    }
+  ],
+  "iksan_total_stat": {
+    "total_pop": 41000,
+    "total_patients": 35926,
+    "total_cost_billion": 950.5028825361935,
+    "avg_cost_per_patient": 2645724.217937409
+  },
+  "top20_diseases": [
+    {
+      "rank": 1,
+      "kcd": "J20",
+      "name": "급성 기관지염 (Acute Bronchitis)",
+      "dept": "소아청소년과 / 이비인후과 / 내과",
+      "patient_share": 38.5,
+      "claims_per_patient": 4.2,
+      "cost_per_patient": 148000,
+      "desc": "소아청소년기 최다 빈도 호흡기 감염 질환, 환절기 급증",
+      "iksan_patients": 13831,
+      "total_cost_iksan_million": 2046.988
+    },
+    {
+      "rank": 2,
+      "kcd": "J30",
+      "name": "혈관운동성 및 알레르기성 비염 (Allergic Rhinitis)",
+      "dept": "이비인후과 / 소아청소년과 / 한의과",
+      "patient_share": 32.4,
+      "claims_per_patient": 4.8,
+      "cost_per_patient": 162000,
+      "desc": "소아청소년 만성 질환 1위, 학업 및 수면장애 유발, 한방/양방 다빈도",
+      "iksan_patients": 11640,
+      "total_cost_iksan_million": 1885.68
+    },
+    {
+      "rank": 3,
+      "kcd": "J06",
+      "name": "다발성 및 상세불명 부위의 급성 상기도 감염 (감기)",
+      "dept": "소아청소년과 / 이비인후과 / 일반의",
+      "patient_share": 31.0,
+      "claims_per_patient": 3.6,
+      "cost_per_patient": 98000,
+      "desc": "영유아 및 학령기 기본 호흡기 감염증",
+      "iksan_patients": 11137,
+      "total_cost_iksan_million": 1091.426
+    },
+    {
+      "rank": 4,
+      "kcd": "K02",
+      "name": "치아우식증 (Dental Caries)",
+      "dept": "치과 / 소아치과",
+      "patient_share": 26.5,
+      "claims_per_patient": 2.8,
+      "cost_per_patient": 195000,
+      "desc": "유치 및 영구치 충치 치료 및 레진/불소도포 등 치과 다빈도",
+      "iksan_patients": 9520,
+      "total_cost_iksan_million": 1856.4
+    },
+    {
+      "rank": 5,
+      "kcd": "J02",
+      "name": "급성 인두염 (Acute Pharyngitis)",
+      "dept": "소아청소년과 / 이비인후과",
+      "patient_share": 24.8,
+      "claims_per_patient": 3.1,
+      "cost_per_patient": 105000,
+      "desc": "발열 및 인후통을 동반하는 급성 인후두 질환",
+      "iksan_patients": 8909,
+      "total_cost_iksan_million": 935.445
+    },
+    {
+      "rank": 6,
+      "kcd": "J03",
+      "name": "급성 편도염 (Acute Tonsillitis)",
+      "dept": "이비인후과 / 소아청소년과",
+      "patient_share": 21.2,
+      "claims_per_patient": 2.9,
+      "cost_per_patient": 118000,
+      "desc": "고열 및 연하곤란 유발, 반복 재발 시 편도절제술 고려",
+      "iksan_patients": 7616,
+      "total_cost_iksan_million": 898.688
+    },
+    {
+      "rank": 7,
+      "kcd": "A09",
+      "name": "감염성 및 상세불명 기원의 위장염 및 결장염 (장염)",
+      "dept": "소아청소년과 / 내과 / 응급의학과",
+      "patient_share": 19.5,
+      "claims_per_patient": 2.5,
+      "cost_per_patient": 235000,
+      "desc": "로타/노로바이러스 및 세균성 장염, 탈수 시 입원 및 수액 치료 비중 높음",
+      "iksan_patients": 7005,
+      "total_cost_iksan_million": 1646.175
+    },
+    {
+      "rank": 8,
+      "kcd": "H10",
+      "name": "결막염 (Conjunctivitis)",
+      "dept": "안과 / 소아청소년과",
+      "patient_share": 16.8,
+      "claims_per_patient": 2.3,
+      "cost_per_patient": 89000,
+      "desc": "유행성 각결막염 및 알레르기성 결막염, 단체생활 감염 빈번",
+      "iksan_patients": 6035,
+      "total_cost_iksan_million": 537.115
+    },
+    {
+      "rank": 9,
+      "kcd": "H65_H66",
+      "name": "삼출성 및 화농성 중이염 (Otitis Media)",
+      "dept": "이비인후과 / 소아청소년과",
+      "patient_share": 15.2,
+      "claims_per_patient": 3.8,
+      "cost_per_patient": 175000,
+      "desc": "영유아 이관 구조적 특성으로 인한 감기 합병증, 청력 저하 예방 필요",
+      "iksan_patients": 5460,
+      "total_cost_iksan_million": 955.5
+    },
+    {
+      "rank": 10,
+      "kcd": "L20",
+      "name": "아토피성 피부염 (Atopic Dermatitis)",
+      "dept": "피부과 / 소아청소년과 / 한의과",
+      "patient_share": 14.1,
+      "claims_per_patient": 5.2,
+      "cost_per_patient": 285000,
+      "desc": "소아 만성 알레르기 피부질환, 장기 외용제 및 한약/면역관리 수요 큼",
+      "iksan_patients": 5065,
+      "total_cost_iksan_million": 1443.525
+    },
+    {
+      "rank": 11,
+      "kcd": "J01",
+      "name": "급성 부비동염 (축농증, Acute Sinusitis)",
+      "dept": "이비인후과 / 소아청소년과",
+      "patient_share": 13.6,
+      "claims_per_patient": 3.5,
+      "cost_per_patient": 156000,
+      "desc": "감기 및 비염의 합병증, 화농성 콧물 및 두통 유발",
+      "iksan_patients": 4885,
+      "total_cost_iksan_million": 762.06
+    },
+    {
+      "rank": 12,
+      "kcd": "S93",
+      "name": "발목 및 발 부위의 관절 및 인대의 염좌 및 긴장",
+      "dept": "정형외과 / 한의원 / 재활의학과",
+      "patient_share": 12.8,
+      "claims_per_patient": 4.1,
+      "cost_per_patient": 210000,
+      "desc": "학령기 및 청소년기 체육활동/야외활동 중 스포츠 손상 1위",
+      "iksan_patients": 4598,
+      "total_cost_iksan_million": 965.58
+    },
+    {
+      "rank": 13,
+      "kcd": "H52",
+      "name": "굴절 및 조절의 장애 (근시, 난시, 원시)",
+      "dept": "안과",
+      "patient_share": 12.0,
+      "claims_per_patient": 2.1,
+      "cost_per_patient": 112000,
+      "desc": "스마트폰/디지털기기 사용 증가로 소아청소년 근시 유병률 급증",
+      "iksan_patients": 4311,
+      "total_cost_iksan_million": 482.832
+    },
+    {
+      "rank": 14,
+      "kcd": "K05",
+      "name": "치은염 및 치주질환 (Gingivitis)",
+      "dept": "치과",
+      "patient_share": 11.5,
+      "claims_per_patient": 1.8,
+      "cost_per_patient": 95000,
+      "desc": "청소년기 부정교합 및 구강위생 불량으로 인한 잇몸 염증",
+      "iksan_patients": 4131,
+      "total_cost_iksan_million": 392.445
+    },
+    {
+      "rank": 15,
+      "kcd": "L50",
+      "name": "두드러기 (Urticaria)",
+      "dept": "피부과 / 소아청소년과 / 응급의학과",
+      "patient_share": 10.4,
+      "claims_per_patient": 2.2,
+      "cost_per_patient": 125000,
+      "desc": "음식물 알레르기, 감염, 온도변화 등에 의한 급만성 피부 팽진",
+      "iksan_patients": 3736,
+      "total_cost_iksan_million": 467.0
+    },
+    {
+      "rank": 16,
+      "kcd": "J45",
+      "name": "천식 (Asthma)",
+      "dept": "소아청소년과 / 내과 / 호흡기내과",
+      "patient_share": 8.9,
+      "claims_per_patient": 4.6,
+      "cost_per_patient": 340000,
+      "desc": "기도 과민성 만성 호흡기 질환, 흡입제 및 급성 발작 시 응급의료 지출",
+      "iksan_patients": 3197,
+      "total_cost_iksan_million": 1086.98
+    },
+    {
+      "rank": 17,
+      "kcd": "R10_K59",
+      "name": "복통 및 기능성 장장애 (Abdominal Pain & IBS)",
+      "dept": "소아청소년과 / 내과 / 한의과",
+      "patient_share": 8.2,
+      "claims_per_patient": 2.7,
+      "cost_per_patient": 135000,
+      "desc": "소아 반복성 복통 및 수험생 스트레스성 과민대장증후군, 한방 뜸/온열 다빈도",
+      "iksan_patients": 2945,
+      "total_cost_iksan_million": 397.575
+    },
+    {
+      "rank": 18,
+      "kcd": "M41_M54",
+      "name": "척추측만증 및 경요추부 염좌/자세이상",
+      "dept": "정형외과 / 한의원(추나요법) / 재활의학과",
+      "patient_share": 7.5,
+      "claims_per_patient": 5.4,
+      "cost_per_patient": 310000,
+      "desc": "청소년기 장시간 좌식 및 자세 불균형(일자목/측만증), 한방 추나/물리치료 선호",
+      "iksan_patients": 2694,
+      "total_cost_iksan_million": 835.14
+    },
+    {
+      "rank": 19,
+      "kcd": "F90_F95",
+      "name": "운동과다장애(ADHD) 및 틱장애 (Tic Disorders)",
+      "dept": "소아청소년정신과 / 한방신경정신과",
+      "patient_share": 4.8,
+      "claims_per_patient": 7.8,
+      "cost_per_patient": 780000,
+      "desc": "소아청소년 신경발달 및 행동장애, 장기 상담 및 약물/한약 치료로 1인당 고비용",
+      "iksan_patients": 1724,
+      "total_cost_iksan_million": 1344.72
+    },
+    {
+      "rank": 20,
+      "kcd": "E22_E30",
+      "name": "성조숙증 및 내분비계 성장 장애 (Precocious Puberty)",
+      "dept": "소아내분비과 / 소아청소년과 / 한의과",
+      "patient_share": 4.2,
+      "claims_per_patient": 6.2,
+      "cost_per_patient": 890000,
+      "desc": "GnRH 주사치료 및 성장 클리닉, 검사 및 호르몬 치료로 1인당 진료비 최상위권",
+      "iksan_patients": 1508,
+      "total_cost_iksan_million": 1342.12
+    }
+  ]
+}

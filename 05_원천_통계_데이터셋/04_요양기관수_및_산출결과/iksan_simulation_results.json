@@ -1,0 +1,62 @@
+[
+  {
+    "scenario":"Baseline (현재)",
+    "desc":"개입 없음 (현행 유지)",
+    "vul_cost":8200000.0,
+    "vul_diff":0.0,
+    "vul_pct":0.0,
+    "eld_cost":5750000.0,
+    "eld_diff":0.0,
+    "eld_pct":0.0,
+    "total_cost":2481091.4179104478,
+    "total_diff":0.0,
+    "total_pct":0.0,
+    "total_savings_billion":0.0,
+    "roi":0.0
+  },
+  {
+    "scenario":"시나리오 1 (1단계: 도입기)",
+    "desc":"취약노인 30%, 일반재가 15% 커버리지",
+    "vul_cost":7468560.0,
+    "vul_diff":-731440.0,
+    "vul_pct":-8.92,
+    "eld_cost":5265850.0,
+    "eld_diff":-484150.0,
+    "eld_pct":-8.42,
+    "total_cost":2355572.9608208956,
+    "total_diff":-125518.4570895522,
+    "total_pct":-5.0590017032,
+    "total_savings_billion":336.389465,
+    "roi":4.7422222222
+  },
+  {
+    "scenario":"시나리오 2 (2단계: 성숙확대기)",
+    "desc":"취약노인 60%, 일반재가 35% 커버리지",
+    "vul_cost":6765820.0,
+    "vul_diff":-1434180.0,
+    "vul_pct":-17.49,
+    "eld_cost":4801825.0,
+    "eld_diff":-948175.0,
+    "eld_pct":-16.49,
+    "total_cost":2235358.8569029849,
+    "total_diff":-245732.5610074629,
+    "total_pct":-9.9042122847,
+    "total_savings_billion":658.5632635,
+    "roi":4.9261904762
+  },
+  {
+    "scenario":"시나리오 3 (3단계: 전면확산기)",
+    "desc":"취약노인 85%, 일반재가 55% 커버리지",
+    "vul_cost":6158200.0,
+    "vul_diff":-2041800.0,
+    "vul_pct":-24.9,
+    "eld_cost":4402775.0,
+    "eld_diff":-1347225.0,
+    "eld_pct":-23.43,
+    "total_cost":2131989.3453358207,
+    "total_diff":-349102.0725746271,
+    "total_pct":-14.0705042166,
+    "total_savings_billion":935.5935545,
+    "roi":5.1105263158
+  }
+]

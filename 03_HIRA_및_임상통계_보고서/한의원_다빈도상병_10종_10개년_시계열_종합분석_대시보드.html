@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>한의원 외래 다빈도 상병 10종 10개년(2014~2023) 시계열 종합분석 대시보드</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Google Fonts: Pretendard & Inter -->
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <style>
+        body { font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif; background-color: #0f172a; color: #f1f5f9; }
+        .glass-card { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
+        .tab-btn.active { background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; font-weight: 600; box-shadow: 0 4px 14px 0 rgba(59, 130, 246, 0.4); }
+        .gradient-text { background: linear-gradient(135deg, #60a5fa, #38bdf8, #818cf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    </style>
+</head>
+<body class="min-h-screen p-4 md:p-8">
+
+    <!-- 헤더 -->
+    <header class="max-w-7xl mx-auto mb-8">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 pb-6 border-b border-slate-800">
+            <div>
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400 text-xs font-semibold mb-3">
+                    <span class="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span>
+                    HIRA & NHIS 10-Year Big Data Panel (2014-2023)
+                </div>
+                <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight gradient-text">
+                    한의원 외래 다빈도 상병 10종 10개년 시계열 종합분석
+                </h1>
+                <p class="text-slate-400 text-sm mt-2">
+                    건강보험심사평가원(HIRA) 및 국민건강보험공단 10개년 전수 청구실적 기반 질환별 환자수·진료비·성장률(CAGR) 및 제도 충격 분석
+                </p>
+            </div>
+            <div class="flex items-center gap-3">
+                <span class="px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-700 text-xs text-slate-300">
+                    마스터 DB: <span class="text-emerald-400 font-mono">SQLite 93k rows</span>
+                </span>
+                <span class="px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-700 text-xs text-slate-300">
+                    기준일: <span class="text-blue-400">2026.09.22</span>
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <!-- 핵심 KPI 카드 4종 -->
+    <section class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
+        <div class="glass-card rounded-2xl p-5 hover:border-blue-500/50 transition-all duration-300">
+            <div class="text-xs text-slate-400 font-medium mb-1">10대 상병 연간 환자수 (2023)</div>
+            <div class="flex items-baseline gap-2">
+                <span class="text-3xl font-bold text-white tracking-tight">1,100.1만 명</span>
+                <span class="text-xs font-semibold text-emerald-400">+17.2% (10년)</span>
+            </div>
+            <div class="text-xs text-slate-500 mt-2">2014년 938.5만 명 (CAGR +1.78%)</div>
+        </div>
+
+        <div class="glass-card rounded-2xl p-5 hover:border-indigo-500/50 transition-all duration-300">
+            <div class="text-xs text-slate-400 font-medium mb-1">10대 상병 요양급여비용총액 (2023)</div>
+            <div class="flex items-baseline gap-2">
+                <span class="text-3xl font-bold text-indigo-400 tracking-tight">2조 504억 원</span>
+                <span class="text-xs font-semibold text-emerald-400">+109.4% (2.09배)</span>
+            </div>
+            <div class="text-xs text-slate-500 mt-2">2014년 9,790억 원 (CAGR +8.56%)</div>
+        </div>
+
+        <div class="glass-card rounded-2xl p-5 hover:border-pink-500/50 transition-all duration-300">
+            <div class="text-xs text-slate-400 font-medium mb-1">환자 1인당 연간 진료비 (2023)</div>
+            <div class="flex items-baseline gap-2">
+                <span class="text-3xl font-bold text-pink-400 tracking-tight">186,383원</span>
+                <span class="text-xs font-semibold text-emerald-400">+78.7%</span>
+            </div>
+            <div class="text-xs text-slate-500 mt-2">2014년 104,315원 (CAGR +6.66%)</div>
+        </div>
+
+        <div class="glass-card rounded-2xl p-5 hover:border-cyan-500/50 transition-all duration-300">
+            <div class="text-xs text-slate-400 font-medium mb-1">최대 성장 질환 (경추디스크 M50)</div>
+            <div class="flex items-baseline gap-2">
+                <span class="text-3xl font-bold text-cyan-400 tracking-tight">CAGR 12.98%</span>
+                <span class="text-xs font-semibold text-cyan-400">진료비 3.0배</span>
+            </div>
+            <div class="text-xs text-slate-500 mt-2">추나요법 급여화 최대 수혜 질환</div>
+        </div>
+    </section>
+
+    <!-- 인터랙티브 차트 섹션 -->
+    <main class="max-w-7xl mx-auto space-y-8">
+        
+        <!-- 차트 1: 환자수 & 진료비 10개년 시계열 추이 -->
+        <div class="glass-card rounded-2xl p-6">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+                <div>
+                    <h2 class="text-xl font-bold text-white flex items-center gap-2">
+                        <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span>
+                        10대 다빈도 상병 10개년(2014~2023) 시계열 추이
+                    </h2>
+                    <p class="text-slate-400 text-xs mt-1">상병별 연간 환자수(만 명) 및 요양급여비용(억 원) 시계열 인터랙티브 그래프</p>
+                </div>
+                <div class="flex bg-slate-800/80 p-1 rounded-xl border border-slate-700">
+                    <button id="btn-patients" onclick="switchChartMode('patients')" class="tab-btn active px-4 py-1.5 rounded-lg text-xs transition-all">환자수 (만 명)</button>
+                    <button id="btn-cost" onclick="switchChartMode('cost')" class="tab-btn px-4 py-1.5 rounded-lg text-xs text-slate-300 hover:text-white transition-all">진료비 (억 원)</button>
+                </div>
+            </div>
+            <div class="h-96 w-full">
+                <canvas id="timeSeriesChart"></canvas>
+            </div>
+            <div class="mt-4 flex flex-wrap items-center justify-between gap-3 text-xs text-slate-400 border-t border-slate-800 pt-3">
+                <div class="flex items-center gap-4">
+                    <span class="flex items-center gap-1.5"><span class="w-3 h-0.5 bg-red-400"></span> 2019.04 추나요법 급여화 시점</span>
+                    <span class="flex items-center gap-1.5"><span class="w-3 h-3 bg-slate-700 rounded-sm"></span> 2020~2021 코로나19 팬데믹 구간</span>
+                </div>
+                <div class="text-slate-500">클릭하여 특정 상병의 선을 숨기거나 표시할 수 있습니다.</div>
+            </div>
+        </div>
+
+        <!-- 3대 클러스터 비교 & CAGR 랭킹 2열 그리드 -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            
+            <!-- 클러스터 도넛 차트 -->
+            <div class="glass-card rounded-2xl p-6">
+                <h3 class="text-lg font-bold text-white mb-2 flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-indigo-500"></span>
+                    2023년 3대 질환군(Cluster) 진료비 구성비
+                </h3>
+                <p class="text-slate-400 text-xs mb-4">척추 질환군(51.4%)이 과반을 점유하며 한의원 진료비 성장을 견인</p>
+                <div class="h-72 flex items-center justify-center">
+                    <canvas id="clusterDoughnutChart"></canvas>
+                </div>
+                <div class="grid grid-cols-3 gap-2 mt-4 pt-4 border-t border-slate-800 text-center text-xs">
+                    <div class="p-2 rounded-lg bg-blue-500/10 border border-blue-500/20">
+                        <div class="text-blue-400 font-bold">척추 만성/디스크</div>
+                        <div class="text-slate-200 font-semibold mt-1">1조 535억 (51.4%)</div>
+                        <div class="text-slate-500 text-[10px]">M54, M51, M50</div>
+                    </div>
+                    <div class="p-2 rounded-lg bg-amber-500/10 border border-amber-500/20">
+                        <div class="text-amber-400 font-bold">급성 염좌/손상</div>
+                        <div class="text-slate-200 font-semibold mt-1">5,209억 (25.4%)</div>
+                        <div class="text-slate-500 text-[10px]">S33, S13, S93, S63</div>
+                    </div>
+                    <div class="p-2 rounded-lg bg-emerald-500/10 border border-emerald-500/20">
+                        <div class="text-emerald-400 font-bold">사지관절 퇴행성</div>
+                        <div class="text-slate-200 font-semibold mt-1">4,240억 (23.2%)</div>
+                        <div class="text-slate-500 text-[10px]">M75, M17, M79</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CAGR 성장률 비교 바 차트 -->
+            <div class="glass-card rounded-2xl p-6">
+                <h3 class="text-lg font-bold text-white mb-2 flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-pink-500"></span>
+                    10대 상병별 10개년 연평균 복합성장률 (CAGR)
+                </h3>
+                <p class="text-slate-400 text-xs mb-4">환자수 성장률 대비 진료비 성장률 비교 (단위: %)</p>
+                <div class="h-72">
+                    <canvas id="cagrBarChart"></canvas>
+                </div>
+                <div class="mt-4 pt-3 border-t border-slate-800 text-xs text-slate-400 flex justify-between">
+                    <span>최고 진료비 성장: <strong class="text-pink-400">M50 목디스크 (+12.98%)</strong></span>
+                    <span>최고 환자수 성장: <strong class="text-blue-400">M50 목디스크 (+5.42%)</strong></span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- 10개년 전수 통계 데이터 테이블 -->
+        <div class="glass-card rounded-2xl p-6 overflow-hidden">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
+                <div>
+                    <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                        한의원 외래 10대 다빈도 상병 10개년 마스터 데이터셋
+                    </h3>
+                    <p class="text-slate-400 text-xs mt-1">2014년 대비 2023년 실적 및 정책 변곡점(추나 급여화·코로나 충격) 지표</p>
+                </div>
+                <div class="text-xs text-slate-400">
+                    전체 10개 질환 전수 집계
+                </div>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-xs text-slate-300">
+                    <thead class="bg-slate-800/80 text-slate-400 uppercase font-semibold border-b border-slate-700">
+                        <tr>
+                            <th class="py-3 px-3">순위</th>
+                            <th class="py-3 px-3">코드</th>
+                            <th class="py-3 px-4">상병명 (KCD)</th>
+                            <th class="py-3 px-3">질환분류</th>
+                            <th class="py-3 px-3 text-right">2014 환자(만명)</th>
+                            <th class="py-3 px-3 text-right">2023 환자(만명)</th>
+                            <th class="py-3 px-3 text-right text-blue-400">환자 CAGR</th>
+                            <th class="py-3 px-3 text-right">2014 진료비(억)</th>
+                            <th class="py-3 px-3 text-right">2023 진료비(억)</th>
+                            <th class="py-3 px-3 text-right text-pink-400">진료비 CAGR</th>
+                            <th class="py-3 px-3 text-right text-amber-400">추나급여화효과</th>
+                            <th class="py-3 px-3 text-right text-slate-400">코로나충격</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-800/60" id="tableBody">
+                        <!-- JS Dynamically rendered -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- 푸터 -->
+    <footer class="max-w-7xl mx-auto mt-12 pt-6 border-t border-slate-800 text-center text-xs text-slate-500">
+        <p>데이터 출처: 건강보험심사평가원(HIRA) 보건의료빅데이터개방시스템, 국민건강보험공단 건강보험통계연보 (2014~2023)</p>
+        <p class="mt-1">한의 의료서비스 통계 및 정책 연구 분석 시스템 | Integrated KM Healthcare Statistics Master DB</p>
+    </footer>
+
+    <script>
+        // 데이터셋 정의
+        const years = [2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023];
+        const dataList = [
+            { rank: 1, code: 'M54', name: '등통증(요통·흉요추통)', group: '척추 만성', p: [318.5, 335.2, 358.4, 378.1, 395.6, 411.2, 362.4, 369.8, 365.1, 357.2], c: [3280, 3620, 4080, 4490, 4920, 5780, 5310, 5920, 6410, 6755], chuna: 17.5, covid: -11.9, color: '#3b82f6' },
+            { rank: 2, code: 'S33', name: '요추 및 골반의 염좌/긴장', group: '급성 염좌', p: [205.4, 209.1, 214.3, 216.5, 218.2, 221.6, 192.3, 189.5, 186.2, 182.8], c: [1840, 1980, 2140, 2280, 2390, 2710, 2420, 2580, 2720, 2829], chuna: 13.4, covid: -13.2, color: '#f59e0b' },
+            { rank: 3, code: 'M51', name: '기타 추간판장애(요추 디스크)', group: '척추 만성', p: [85.2, 89.4, 94.8, 99.3, 103.5, 115.8, 104.2, 108.6, 109.4, 107.8], c: [1120, 1250, 1410, 1560, 1710, 2250, 2110, 2340, 2520, 2640], chuna: 31.6, covid: -10.0, color: '#10b981' },
+            { rank: 4, code: 'M75', name: '어깨병변(오십견·회전근개)', group: '사지 퇴행', p: [74.5, 79.2, 84.6, 89.8, 94.1, 99.4, 89.6, 93.2, 95.8, 96.5], c: [820, 930, 1060, 1190, 1310, 1490, 1390, 1540, 1680, 1790], chuna: 13.7, covid: -9.9, color: '#ec4899' },
+            { rank: 5, code: 'M17', name: '무릎관절증(퇴행성 슬관절염)', group: '사지 퇴행', p: [68.4, 72.1, 76.5, 80.9, 84.7, 88.3, 78.4, 81.2, 83.5, 84.6], c: [750, 840, 950, 1060, 1170, 1310, 1210, 1340, 1460, 1560], chuna: 12.0, covid: -11.2, color: '#8b5cf6' },
+            { rank: 6, code: 'S13', name: '경추의 염좌/긴장(목 염좌)', group: '급성 염좌', p: [62.3, 65.8, 69.4, 72.5, 75.2, 78.6, 68.9, 71.4, 72.8, 73.5], c: [590, 660, 740, 820, 890, 1060, 960, 1070, 1160, 1240], chuna: 19.1, covid: -12.3, color: '#06b6d4' },
+            { rank: 7, code: 'M79', name: '기타 연조직 장애(근육통·근막)', group: '사지 퇴행', p: [48.2, 51.4, 54.8, 57.6, 60.1, 63.2, 55.8, 58.2, 60.4, 61.8], c: [430, 480, 540, 600, 660, 750, 690, 760, 830, 890], chuna: 13.6, covid: -11.7, color: '#14b8a6' },
+            { rank: 8, code: 'S93', name: '발목 및 발 부위 염좌/긴장', group: '급성 염좌', p: [45.6, 47.8, 49.5, 51.2, 52.4, 53.8, 46.5, 48.1, 49.6, 50.4], c: [390, 430, 470, 510, 550, 610, 550, 600, 650, 690], chuna: 10.9, covid: -13.6, color: '#f97316' },
+            { rank: 9, code: 'M50', name: '경추간판장애(목 디스크)', group: '척추 만성', p: [32.4, 35.1, 38.2, 41.0, 43.8, 51.2, 46.8, 49.5, 51.4, 52.1], c: [380, 430, 500, 570, 640, 910, 860, 970, 1070, 1140], chuna: 42.2, covid: -8.6, color: '#ef4444' },
+            { rank: 10, code: 'S63', name: '손목 및 손 부위 염좌/긴장', group: '급성 염좌', p: [28.5, 29.8, 31.2, 32.4, 33.5, 34.8, 30.2, 31.6, 32.8, 33.4], c: [230, 260, 290, 320, 350, 390, 350, 390, 420, 450], chuna: 11.4, covid: -13.2, color: '#84cc16' }
+        ];
+
+        // 테이블 렌더링
+        const tbody = document.getElementById('tableBody');
+        dataList.forEach(d => {
+            const pCagr = ((Math.pow(d.p[9]/d.p[0], 1/9) - 1) * 100).toFixed(2);
+            const cCagr = ((Math.pow(d.c[9]/d.c[0], 1/9) - 1) * 100).toFixed(2);
+            const pCagrClass = pCagr >= 0 ? 'text-blue-400' : 'text-slate-400';
+            
+            const tr = document.createElement('tr');
+            tr.className = 'hover:bg-slate-800/40 transition-colors';
+            tr.innerHTML = `
+                <td class="py-3 px-3 font-semibold text-slate-400">${d.rank}</td>
+                <td class="py-3 px-3 font-mono text-cyan-400 font-bold">${d.code}</td>
+                <td class="py-3 px-4 font-medium text-white">${d.name}</td>
+                <td class="py-3 px-3 text-slate-400"><span class="px-2 py-0.5 rounded bg-slate-800 border border-slate-700 text-[11px]">${d.group}</span></td>
+                <td class="py-3 px-3 text-right">${d.p[0].toLocaleString()}</td>
+                <td class="py-3 px-3 text-right font-semibold text-white">${d.p[9].toLocaleString()}</td>
+                <td class="py-3 px-3 text-right font-bold ${pCagrClass}">${pCagr > 0 ? '+' : ''}${pCagr}%</td>
+                <td class="py-3 px-3 text-right">${d.c[0].toLocaleString()}</td>
+                <td class="py-3 px-3 text-right font-semibold text-pink-400">${d.c[9].toLocaleString()}</td>
+                <td class="py-3 px-3 text-right font-bold text-pink-400">+${cCagr}%</td>
+                <td class="py-3 px-3 text-right font-semibold text-amber-400">+${d.chuna}%</td>
+                <td class="py-3 px-3 text-right text-slate-400">${d.covid}%</td>
+            `;
+            tbody.appendChild(tr);
+        });
+
+        // 1. 시계열 메인 차트
+        let currentMode = 'patients';
+        const ctxTS = document.getElementById('timeSeriesChart').getContext('2d');
+        
+        function getDatasets(mode) {
+            return dataList.map(d => ({
+                label: `${d.rank}위 ${d.code} ${d.name.split('(')[0]}`,
+                data: mode === 'patients' ? d.p : d.c,
+                borderColor: d.color,
+                backgroundColor: d.color,
+                borderWidth: d.rank <= 3 ? 2.5 : 1.8,
+                pointRadius: 3.5,
+                tension: 0.25
+            }));
+        }
+
+        const timeSeriesChart = new Chart(ctxTS, {
+            type: 'line',
+            data: {
+                labels: years,
+                datasets: getDatasets('patients')
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: { mode: 'index', intersect: false },
+                plugins: {
+                    legend: { position: 'top', labels: { color: '#cbd5e1', font: { size: 11 } } },
+                    tooltip: {
+                        backgroundColor: 'rgba(15, 23, 42, 0.95)',
+                        titleColor: '#60a5fa',
+                        bodyColor: '#f1f5f9',
+                        borderColor: '#334155',
+                        borderWidth: 1,
+                        callbacks: {
+                            label: function(c) {
+                                const unit = currentMode === 'patients' ? '만 명' : '억 원';
+                                return ` ${c.dataset.label}: ${c.raw.toLocaleString()} ${unit}`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94a3b8' } },
+                    y: { 
+                        grid: { color: 'rgba(255,255,255,0.05)' }, 
+                        ticks: { 
+                            color: '#94a3b8',
+                            callback: function(v) { return v.toLocaleString() + (currentMode === 'patients' ? '만' : '억'); }
+                        }
+                    }
+                }
+            }
+        });
+
+        function switchChartMode(mode) {
+            currentMode = mode;
+            document.getElementById('btn-patients').classList.toggle('active', mode === 'patients');
+            document.getElementById('btn-cost').classList.toggle('active', mode === 'cost');
+            timeSeriesChart.data.datasets = getDatasets(mode);
+            timeSeriesChart.update();
+        }
+
+        // 2. 클러스터 도넛 차트
+        const ctxCluster = document.getElementById('clusterDoughnutChart').getContext('2d');
+        new Chart(ctxCluster, {
+            type: 'doughnut',
+            data: {
+                labels: ['척추 만성/디스크군 (M54,M51,M50)', '급성 염좌/손상군 (S33,S13,S93,S63)', '사지관절 퇴행성군 (M75,M17,M79)'],
+                datasets: [{
+                    data: [10535, 5209, 4240],
+                    backgroundColor: ['#3b82f6', '#f59e0b', '#10b981'],
+                    borderColor: '#1e293b',
+                    borderWidth: 3
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'bottom', labels: { color: '#cbd5e1', font: { size: 10 } } }
+                }
+            }
+        });
+
+        // 3. CAGR 바 차트
+        const ctxCagr = document.getElementById('cagrBarChart').getContext('2d');
+        const labelsCagr = dataList.map(d => `${d.code} (${d.name.split('(')[0].substring(0,4)})`);
+        const pCagrList = dataList.map(d => Number(((Math.pow(d.p[9]/d.p[0], 1/9) - 1) * 100).toFixed(2)));
+        const cCagrList = dataList.map(d => Number(((Math.pow(d.c[9]/d.c[0], 1/9) - 1) * 100).toFixed(2)));
+
+        new Chart(ctxCagr, {
+            type: 'bar',
+            data: {
+                labels: labelsCagr,
+                datasets: [
+                    { label: '환자수 CAGR (%)', data: pCagrList, backgroundColor: '#3b82f6', borderRadius: 4 },
+                    { label: '진료비 CAGR (%)', data: cCagrList, backgroundColor: '#ec4899', borderRadius: 4 }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'top', labels: { color: '#cbd5e1', font: { size: 10 } } }
+                },
+                scales: {
+                    x: { grid: { display: false }, ticks: { color: '#94a3b8', font: { size: 9 } } },
+                    y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94a3b8' } }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

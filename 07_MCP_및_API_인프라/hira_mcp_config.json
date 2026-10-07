@@ -1,0 +1,18 @@
+{
+  "mcpServers": {
+    "hira-health": {
+      "command": "python",
+      "args": [
+        "./hira_mcp_server.py"
+      ],
+      "env": {
+        "HIRA_API_KEY": "e8U1shQ3d%2FByDVYStgfpaCdeSsJ1263%2BvNYAPjeZmPV5%2FxDHN6nqHk3EfqjlYZgrlpo5fYeXSSygjrNtRx5Reg%3D%3D",
+        "HIRA_DISEASE_ENDPOINT": "https://apis.data.go.kr/B551182/diseaseInfoService1",
+        "HIRA_DETAIL_ENDPOINT": "https://apis.data.go.kr/B551182/MadmDtlInfoService2.8",
+        "HIRA_ADSC_DAMT_ENDPOINT": "https://apis.data.go.kr/B551182/adscDamtDmdAdmInqService1.1",
+        "HIRA_MDFEE_ENDPOINT": "https://apis.data.go.kr/B551182/mdfeeCrtrInfoService",
+        "HIRA_NON_PAYMENT_ENDPOINT": "https://apis.data.go.kr/B551182/nonPaymentDamtInfoService"
+      }
+    }
+  }
+}

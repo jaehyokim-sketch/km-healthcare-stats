@@ -1,0 +1,506 @@
+{
+  "gimhae": [
+    {
+      "rate_pct": 10,
+      "base_5yr_100m": 320.82,
+      "corpus_5yr_100m": 285.24,
+      "diff_100m": -35.59,
+      "diff_pct": -11.09
+    },
+    {
+      "rate_pct": 20,
+      "base_5yr_100m": 641.63,
+      "corpus_5yr_100m": 570.45,
+      "diff_100m": -71.17,
+      "diff_pct": -11.09
+    },
+    {
+      "rate_pct": 30,
+      "base_5yr_100m": 962.46,
+      "corpus_5yr_100m": 855.7,
+      "diff_100m": -106.76,
+      "diff_pct": -11.09
+    },
+    {
+      "rate_pct": 40,
+      "base_5yr_100m": 1283.24,
+      "corpus_5yr_100m": 1140.89,
+      "diff_100m": -142.34,
+      "diff_pct": -11.09
+    },
+    {
+      "rate_pct": 50,
+      "base_5yr_100m": 1604.05,
+      "corpus_5yr_100m": 1426.12,
+      "diff_100m": -177.93,
+      "diff_pct": -11.09
+    },
+    {
+      "rate_pct": 60,
+      "base_5yr_100m": 1924.84,
+      "corpus_5yr_100m": 1711.33,
+      "diff_100m": -213.52,
+      "diff_pct": -11.09
+    },
+    {
+      "rate_pct": 70,
+      "base_5yr_100m": 2245.67,
+      "corpus_5yr_100m": 1996.56,
+      "diff_100m": -249.1,
+      "diff_pct": -11.09
+    },
+    {
+      "rate_pct": 80,
+      "base_5yr_100m": 2566.48,
+      "corpus_5yr_100m": 2281.79,
+      "diff_100m": -284.69,
+      "diff_pct": -11.09
+    },
+    {
+      "rate_pct": 90,
+      "base_5yr_100m": 2887.3,
+      "corpus_5yr_100m": 2567.03,
+      "diff_100m": -320.28,
+      "diff_pct": -11.09
+    },
+    {
+      "rate_pct": 100,
+      "base_5yr_100m": 3208.11,
+      "corpus_5yr_100m": 2852.25,
+      "diff_100m": -355.86,
+      "diff_pct": -11.09
+    }
+  ],
+  "gyeongnam": [
+    {
+      "rate_pct": 10,
+      "base_5yr_100m": 2328.14,
+      "corpus_5yr_100m": 2069.89,
+      "diff_100m": -258.25,
+      "diff_pct": -11.09
+    },
+    {
+      "rate_pct": 20,
+      "base_5yr_100m": 4656.29,
+      "corpus_5yr_100m": 4139.78,
+      "diff_100m": -516.5,
+      "diff_pct": -11.09
+    },
+    {
+      "rate_pct": 30,
+      "base_5yr_100m": 6984.42,
+      "corpus_5yr_100m": 6209.67,
+      "diff_100m": -774.75,
+      "diff_pct": -11.09
+    },
+    {
+      "rate_pct": 40,
+      "base_5yr_100m": 9312.58,
+      "corpus_5yr_100m": 8279.58,
+      "diff_100m": -1033.01,
+      "diff_pct": -11.09
+    },
+    {
+      "rate_pct": 50,
+      "base_5yr_100m": 11640.74,
+      "corpus_5yr_100m": 10349.48,
+      "diff_100m": -1291.26,
+      "diff_pct": -11.09
+    },
+    {
+      "rate_pct": 60,
+      "base_5yr_100m": 13968.88,
+      "corpus_5yr_100m": 12419.37,
+      "diff_100m": -1549.51,
+      "diff_pct": -11.09
+    },
+    {
+      "rate_pct": 70,
+      "base_5yr_100m": 16297.03,
+      "corpus_5yr_100m": 14489.27,
+      "diff_100m": -1807.76,
+      "diff_pct": -11.09
+    },
+    {
+      "rate_pct": 80,
+      "base_5yr_100m": 18625.17,
+      "corpus_5yr_100m": 16559.15,
+      "diff_100m": -2066.01,
+      "diff_pct": -11.09
+    },
+    {
+      "rate_pct": 90,
+      "base_5yr_100m": 20953.32,
+      "corpus_5yr_100m": 18629.06,
+      "diff_100m": -2324.27,
+      "diff_pct": -11.09
+    },
+    {
+      "rate_pct": 100,
+      "base_5yr_100m": 23281.45,
+      "corpus_5yr_100m": 20698.94,
+      "diff_100m": -2582.52,
+      "diff_pct": -11.09
+    }
+  ],
+  "yeosu": [
+    {
+      "rate_pct": 10,
+      "base_5yr_100m": 222.35,
+      "corpus_5yr_100m": 197.69,
+      "diff_100m": -24.66,
+      "diff_pct": -11.09
+    },
+    {
+      "rate_pct": 20,
+      "base_5yr_100m": 444.7,
+      "corpus_5yr_100m": 395.37,
+      "diff_100m": -49.33,
+      "diff_pct": -11.09
+    },
+    {
+      "rate_pct": 30,
+      "base_5yr_100m": 667.05,
+      "corpus_5yr_100m": 593.06,
+      "diff_100m": -73.99,
+      "diff_pct": -11.09
+    },
+    {
+      "rate_pct": 40,
+      "base_5yr_100m": 889.41,
+      "corpus_5yr_100m": 790.75,
+      "diff_100m": -98.66,
+      "diff_pct": -11.09
+    },
+    {
+      "rate_pct": 50,
+      "base_5yr_100m": 1111.76,
+      "corpus_5yr_100m": 988.44,
+      "diff_100m": -123.32,
+      "diff_pct": -11.09
+    },
+    {
+      "rate_pct": 60,
+      "base_5yr_100m": 1334.13,
+      "corpus_5yr_100m": 1186.14,
+      "diff_100m": -147.99,
+      "diff_pct": -11.09
+    },
+    {
+      "rate_pct": 70,
+      "base_5yr_100m": 1556.48,
+      "corpus_5yr_100m": 1383.82,
+      "diff_100m": -172.65,
+      "diff_pct": -11.09
+    },
+    {
+      "rate_pct": 80,
+      "base_5yr_100m": 1778.87,
+      "corpus_5yr_100m": 1581.55,
+      "diff_100m": -197.32,
+      "diff_pct": -11.09
+    },
+    {
+      "rate_pct": 90,
+      "base_5yr_100m": 2001.2,
+      "corpus_5yr_100m": 1779.21,
+      "diff_100m": -221.98,
+      "diff_pct": -11.09
+    },
+    {
+      "rate_pct": 100,
+      "base_5yr_100m": 2223.55,
+      "corpus_5yr_100m": 1976.9,
+      "diff_100m": -246.65,
+      "diff_pct": -11.09
+    }
+  ],
+  "jeonnam": [
+    {
+      "rate_pct": 10,
+      "base_5yr_100m": 1843.44,
+      "corpus_5yr_100m": 1638.95,
+      "diff_100m": -204.48,
+      "diff_pct": -11.09
+    },
+    {
+      "rate_pct": 20,
+      "base_5yr_100m": 3686.87,
+      "corpus_5yr_100m": 3277.9,
+      "diff_100m": -408.97,
+      "diff_pct": -11.09
+    },
+    {
+      "rate_pct": 30,
+      "base_5yr_100m": 5530.31,
+      "corpus_5yr_100m": 4916.85,
+      "diff_100m": -613.45,
+      "diff_pct": -11.09
+    },
+    {
+      "rate_pct": 40,
+      "base_5yr_100m": 7373.74,
+      "corpus_5yr_100m": 6555.8,
+      "diff_100m": -817.94,
+      "diff_pct": -11.09
+    },
+    {
+      "rate_pct": 50,
+      "base_5yr_100m": 9217.2,
+      "corpus_5yr_100m": 8194.78,
+      "diff_100m": -1022.43,
+      "diff_pct": -11.09
+    },
+    {
+      "rate_pct": 60,
+      "base_5yr_100m": 11060.62,
+      "corpus_5yr_100m": 9833.71,
+      "diff_100m": -1226.91,
+      "diff_pct": -11.09
+    },
+    {
+      "rate_pct": 70,
+      "base_5yr_100m": 12904.04,
+      "corpus_5yr_100m": 11472.64,
+      "diff_100m": -1431.39,
+      "diff_pct": -11.09
+    },
+    {
+      "rate_pct": 80,
+      "base_5yr_100m": 14747.5,
+      "corpus_5yr_100m": 13111.62,
+      "diff_100m": -1635.88,
+      "diff_pct": -11.09
+    },
+    {
+      "rate_pct": 90,
+      "base_5yr_100m": 16590.93,
+      "corpus_5yr_100m": 14750.57,
+      "diff_100m": -1840.36,
+      "diff_pct": -11.09
+    },
+    {
+      "rate_pct": 100,
+      "base_5yr_100m": 18434.37,
+      "corpus_5yr_100m": 16389.52,
+      "diff_100m": -2044.85,
+      "diff_pct": -11.09
+    }
+  ],
+  "jeonju": [
+    {
+      "rate_pct": 10,
+      "base_5yr_100m": 374.59,
+      "corpus_5yr_100m": 333.04,
+      "diff_100m": -41.55,
+      "diff_pct": -11.09
+    },
+    {
+      "rate_pct": 20,
+      "base_5yr_100m": 749.19,
+      "corpus_5yr_100m": 666.08,
+      "diff_100m": -83.1,
+      "diff_pct": -11.09
+    },
+    {
+      "rate_pct": 30,
+      "base_5yr_100m": 1123.78,
+      "corpus_5yr_100m": 999.13,
+      "diff_100m": -124.66,
+      "diff_pct": -11.09
+    },
+    {
+      "rate_pct": 40,
+      "base_5yr_100m": 1498.36,
+      "corpus_5yr_100m": 1332.15,
+      "diff_100m": -166.21,
+      "diff_pct": -11.09
+    },
+    {
+      "rate_pct": 50,
+      "base_5yr_100m": 1872.96,
+      "corpus_5yr_100m": 1665.2,
+      "diff_100m": -207.76,
+      "diff_pct": -11.09
+    },
+    {
+      "rate_pct": 60,
+      "base_5yr_100m": 2247.54,
+      "corpus_5yr_100m": 1998.23,
+      "diff_100m": -249.31,
+      "diff_pct": -11.09
+    },
+    {
+      "rate_pct": 70,
+      "base_5yr_100m": 2622.14,
+      "corpus_5yr_100m": 2331.27,
+      "diff_100m": -290.86,
+      "diff_pct": -11.09
+    },
+    {
+      "rate_pct": 80,
+      "base_5yr_100m": 2996.74,
+      "corpus_5yr_100m": 2664.32,
+      "diff_100m": -332.42,
+      "diff_pct": -11.09
+    },
+    {
+      "rate_pct": 90,
+      "base_5yr_100m": 3371.32,
+      "corpus_5yr_100m": 2997.35,
+      "diff_100m": -373.97,
+      "diff_pct": -11.09
+    },
+    {
+      "rate_pct": 100,
+      "base_5yr_100m": 3745.92,
+      "corpus_5yr_100m": 3330.4,
+      "diff_100m": -415.52,
+      "diff_pct": -11.09
+    }
+  ],
+  "jeonbuk": [
+    {
+      "rate_pct": 10,
+      "base_5yr_100m": 1655.94,
+      "corpus_5yr_100m": 1472.25,
+      "diff_100m": -183.69,
+      "diff_pct": -11.09
+    },
+    {
+      "rate_pct": 20,
+      "base_5yr_100m": 3311.84,
+      "corpus_5yr_100m": 2944.47,
+      "diff_100m": -367.37,
+      "diff_pct": -11.09
+    },
+    {
+      "rate_pct": 30,
+      "base_5yr_100m": 4967.77,
+      "corpus_5yr_100m": 4416.72,
+      "diff_100m": -551.05,
+      "diff_pct": -11.09
+    },
+    {
+      "rate_pct": 40,
+      "base_5yr_100m": 6623.7,
+      "corpus_5yr_100m": 5888.96,
+      "diff_100m": -734.74,
+      "diff_pct": -11.09
+    },
+    {
+      "rate_pct": 50,
+      "base_5yr_100m": 8279.59,
+      "corpus_5yr_100m": 7361.17,
+      "diff_100m": -918.42,
+      "diff_pct": -11.09
+    },
+    {
+      "rate_pct": 60,
+      "base_5yr_100m": 9935.52,
+      "corpus_5yr_100m": 8833.42,
+      "diff_100m": -1102.11,
+      "diff_pct": -11.09
+    },
+    {
+      "rate_pct": 70,
+      "base_5yr_100m": 11591.47,
+      "corpus_5yr_100m": 10305.68,
+      "diff_100m": -1285.79,
+      "diff_pct": -11.09
+    },
+    {
+      "rate_pct": 80,
+      "base_5yr_100m": 13247.4,
+      "corpus_5yr_100m": 11777.92,
+      "diff_100m": -1469.48,
+      "diff_pct": -11.09
+    },
+    {
+      "rate_pct": 90,
+      "base_5yr_100m": 14903.31,
+      "corpus_5yr_100m": 13250.15,
+      "diff_100m": -1653.16,
+      "diff_pct": -11.09
+    },
+    {
+      "rate_pct": 100,
+      "base_5yr_100m": 16559.25,
+      "corpus_5yr_100m": 14722.4,
+      "diff_100m": -1836.85,
+      "diff_pct": -11.09
+    }
+  ],
+  "iksan": [
+    {
+      "rate_pct": 10,
+      "base_5yr_100m": 214.96,
+      "corpus_5yr_100m": 191.12,
+      "diff_100m": -23.85,
+      "diff_pct": -11.09
+    },
+    {
+      "rate_pct": 20,
+      "base_5yr_100m": 429.89,
+      "corpus_5yr_100m": 382.2,
+      "diff_100m": -47.69,
+      "diff_pct": -11.09
+    },
+    {
+      "rate_pct": 30,
+      "base_5yr_100m": 644.85,
+      "corpus_5yr_100m": 573.32,
+      "diff_100m": -71.53,
+      "diff_pct": -11.09
+    },
+    {
+      "rate_pct": 40,
+      "base_5yr_100m": 859.79,
+      "corpus_5yr_100m": 764.42,
+      "diff_100m": -95.37,
+      "diff_pct": -11.09
+    },
+    {
+      "rate_pct": 50,
+      "base_5yr_100m": 1074.76,
+      "corpus_5yr_100m": 955.54,
+      "diff_100m": -119.22,
+      "diff_pct": -11.09
+    },
+    {
+      "rate_pct": 60,
+      "base_5yr_100m": 1289.67,
+      "corpus_5yr_100m": 1146.61,
+      "diff_100m": -143.06,
+      "diff_pct": -11.09
+    },
+    {
+      "rate_pct": 70,
+      "base_5yr_100m": 1504.64,
+      "corpus_5yr_100m": 1337.74,
+      "diff_100m": -166.9,
+      "diff_pct": -11.09
+    },
+    {
+      "rate_pct": 80,
+      "base_5yr_100m": 1719.59,
+      "corpus_5yr_100m": 1528.84,
+      "diff_100m": -190.75,
+      "diff_pct": -11.09
+    },
+    {
+      "rate_pct": 90,
+      "base_5yr_100m": 1934.55,
+      "corpus_5yr_100m": 1719.95,
+      "diff_100m": -214.59,
+      "diff_pct": -11.09
+    },
+    {
+      "rate_pct": 100,
+      "base_5yr_100m": 2149.48,
+      "corpus_5yr_100m": 1911.05,
+      "diff_100m": -238.43,
+      "diff_pct": -11.09
+    }
+  ]
+}

@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>질병관리청 공시 기반 한국 재택의료 진단 및 일본·대만 비교 개선방향 보고서</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      --primary: #1e3a8a;
+      --primary-light: #3b82f6;
+      --accent-jp: #0284c7;
+      --accent-tw: #10b981;
+      --accent-kr: #ef4444;
+      --bg: #0f172a;
+      --card-bg: rgba(30, 41, 59, 0.7);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Pretendard', sans-serif; }
+    body { background-color: var(--bg); color: var(--text); line-height: 1.6; padding: 2rem 1rem; }
+    .container { max-width: 1200px; margin: 0 auto; }
+    
+    header {
+      background: linear-gradient(135deg, rgba(30, 58, 138, 0.8), rgba(15, 23, 42, 0.9));
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--card-border);
+      border-radius: 1.5rem;
+      padding: 2.5rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+    }
+    .badge {
+      display: inline-block;
+      padding: 0.35rem 0.85rem;
+      background: rgba(59, 130, 246, 0.2);
+      border: 1px solid var(--primary-light);
+      color: #93c5fd;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+    h1 { font-size: 2.1rem; font-weight: 800; margin-bottom: 0.75rem; line-height: 1.3; }
+    .subtitle { color: var(--text-muted); font-size: 1.1rem; }
+    
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
+    .card {
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--card-border);
+      border-radius: 1.25rem;
+      padding: 1.75rem;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+    .card:hover { transform: translateY(-3px); border-color: rgba(59, 130, 246, 0.4); }
+    
+    .card-title { font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+    .card-title.kr { color: #f87171; }
+    .card-title.jp { color: #38bdf8; }
+    .card-title.tw { color: #34d399; }
+    
+    .stat-number { font-size: 2rem; font-weight: 800; color: #fff; margin: 0.5rem 0; }
+    .stat-desc { color: var(--text-muted); font-size: 0.9rem; }
+    
+    table { width: 100%; border-collapse: collapse; margin-top: 1rem; font-size: 0.95rem; }
+    th, td { padding: 0.85rem 1rem; text-align: left; border-bottom: 1px solid rgba(255, 255, 255, 0.08); }
+    th { background: rgba(15, 23, 42, 0.6); color: #94a3b8; font-weight: 600; }
+    tr:hover td { background: rgba(255, 255, 255, 0.03); }
+    
+    .tag { display: inline-block; padding: 0.2rem 0.5rem; border-radius: 0.35rem; font-size: 0.75rem; font-weight: 600; }
+    .tag-kr { background: rgba(239, 68, 68, 0.2); color: #fca5a5; }
+    .tag-jp { background: rgba(2, 132, 199, 0.2); color: #7dd3fc; }
+    .tag-tw { background: rgba(16, 185, 129, 0.2); color: #6ee7b7; }
+    
+    .highlight-box {
+      background: rgba(59, 130, 246, 0.1);
+      border-left: 4px solid var(--primary-light);
+      padding: 1.25rem;
+      border-radius: 0.5rem;
+      margin: 1.5rem 0;
+    }
+    
+    .chart-container { position: relative; height: 320px; width: 100%; margin-top: 1rem; }
+    
+    .action-step {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      margin-bottom: 1.25rem;
+      padding-bottom: 1.25rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    .step-num {
+      background: var(--primary-light);
+      color: #fff;
+      font-weight: 800;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .step-content h4 { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.25rem; }
+    .step-content p { font-size: 0.9rem; color: var(--text-muted); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="badge">KDCA Open API & Global Comparative Analysis</div>
+      <h1>질병관리청 국가건강정보 기반 한국 재택의료 현황 진단<br>및 일본·대만 비교를 통한 구조적 개선 방향</h1>
+      <p class="subtitle">질병관리청(KDCA) 공시 8대 시범사업 분석과 일본(漢方)·대만(中醫)의 제도화 성공 모델 벤치마킹</p>
+    </header>
+
+    <!-- KPI Summary Grid -->
+    <div class="grid">
+      <div class="card">
+        <div class="card-title kr">🇰🇷 한국 재택의료 (현주소)</div>
+        <div class="stat-number">8개 분절 시범사업</div>
+        <p class="stat-desc">장기요양재택센터(135개소), 일차의료방문진료 등 칸막이 운영. 출장비 0원 규정으로 참여율 1% 미만.</p>
+      </div>
+      <div class="card">
+        <div class="card-title jp">🇯🇵 일본 재택의료 (성숙 모델)</div>
+        <div class="stat-number">100만 명 + 148종 한방약</div>
+        <p class="stat-desc">개호보험-의료보험 통합. 억간산(치매 BPSD), 반하후박탕(흡인성 폐렴) 등 노년증후군 한방 급여화.</p>
+      </div>
+      <div class="card">
+        <div class="card-title tw">🇹🇼 대만 거가의료 (통합 모델)</div>
+        <div class="stat-number">+866% 폭발 성장</div>
+        <p class="stat-desc">2019년 중의사 iHBMC 공식 합류 후 2년 만에 이용량 급증. 중의사 방문 빈도 2.88회/월로 서의사(1.26회) 상회.</p>
+      </div>
+    </div>
+
+    <!-- Chart & Table Section -->
+    <div class="grid" style="grid-template-columns: 1fr 1fr;">
+      <div class="card">
+        <div class="card-title">📊 3국 월평균 방문 빈도 및 이용 패턴 비교</div>
+        <div class="chart-container">
+          <canvas id="visitChart"></canvas>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">📈 대만 중의사 합류 후 재택의료 서비스 비중</div>
+        <div class="chart-container">
+          <canvas id="serviceChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Comparative Table -->
+    <div class="card" style="margin-bottom: 2rem;">
+      <div class="card-title">📋 3국 재택의료 및 전통의학 통합 비교 매트릭스</div>
+      <table>
+        <thead>
+          <tr>
+            <th>비교 항목</th>
+            <th>한국 (KDCA 현황)</th>
+            <th>일본 (MHLW 개호/의료)</th>
+            <th>대만 (MOHW iHBMC)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>제도 단계</strong></td>
+            <td><span class="tag tag-kr">시범사업 (8개 분절)</span></td>
+            <td><span class="tag tag-jp">정규 본사업 (지역포괄)</span></td>
+            <td><span class="tag tag-tw">정규 본사업 (iHBMC)</span></td>
+          </tr>
+          <tr>
+            <td><strong>전통의학 자격</strong></td>
+            <td>한의사 (별도 면허)</td>
+            <td>일반 의사 (한방 통합)</td>
+            <td>중의사 (별도 면허)</td>
+          </tr>
+          <tr>
+            <td><strong>다학제 팀 체계</strong></td>
+            <td>의사/간호사 개별 분절 방문</td>
+            <td>의사 주도 다직종 연계</td>
+            <td><strong>서의사+중의사+간호사 공동팀</strong></td>
+          </tr>
+          <tr>
+            <td><strong>급여 약제/처방</strong></td>
+            <td>첩약 시범사업 일부 (재택특례 X)</td>
+            <td><strong>148종 엑기스제 전액 급여</strong></td>
+            <td><strong>농축 과립제 및 침구(87%) 급여</strong></td>
+          </tr>
+          <tr>
+            <td><strong>이동/출장비 보상</strong></td>
+            <td><strong>0원 (방문진료료 단일)</strong></td>
+            <td>재택환자방문진료료 가산</td>
+            <td>거가의료 교통 및 지역 가산</td>
+          </tr>
+          <tr>
+            <td><strong>주요 임상 효과</strong></td>
+            <td>지표 축적 중 (참여 저조)</td>
+            <td>흡인성 폐렴 예방, BPSD 완화</td>
+            <td><strong>재입원 38% 감소, 건보 22% 절감</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 5 Reform Pillars -->
+    <div class="card">
+      <div class="card-title">🚀 한국 재택의료 5대 구조적 혁신 과제</div>
+      <div class="highlight-box">
+        <strong>핵심 정책 제언:</strong> 8개 분절 시범사업을 단일 「한국형 통합재택의료(K-iHBMC)」 포괄모형으로 통합하고, 한의사를 다학제 팀의 핵심 구성원으로 공식 편입하여 이동가산 수가 및 노년증후군 한의 CPG를 전면 급여화해야 합니다.
+      </div>
+
+      <div class="action-step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h4>8대 분절 시범사업의 단일 포괄모형(K-iHBMC) 본사업 전환</h4>
+          <p>장기요양재택센터, 일차의료방문진료, 장애인건강주치의를 환자 기능제한 등급에 따른 단일 연속 트랙으로 일원화.</p>
+        </div>
+      </div>
+
+      <div class="action-step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h4>의과-한의과 융합 다학제 방문의료팀(의사+한의사+간호사) 법제화</h4>
+          <p>대만 iHBMC 모델을 벤치마킹하여 의사(전신질환·약제조정)와 한의사(통증제어·마비재활)의 역할 분담 수가 신설.</p>
+        </div>
+      </div>
+
+      <div class="action-step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h4>수가 구조 혁신: 이동거리/시간 비례 출장가산제 도입</h4>
+          <p>KDCA 공시의 '교통비 0원' 규정을 개정하여 권역별 이동시간과 거리를 보상하는 이동가산 수가 신설.</p>
+        </div>
+      </div>
+
+      <div class="action-step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <h4>노년증후군(흡인성 폐렴·치매 BPSD·만성통증) 한의 표준 CPG 급여화</h4>
+          <p>일본의 억간산/반하후박탕 근거를 바탕으로 와상 노인의 흡인성 폐렴 예방 및 치매 행동증상 제어 한약/침구 급여 적용.</p>
+        </div>
+      </div>
+
+      <div class="action-step">
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <h4>시군구 지역사회 통합돌봄(Aging in Place) 거점 연계망 구축</h4>
+          <p>보건소-공단지사-지역 한의사회/의사회를 잇는 다학제 EMR 통합 차트 플랫폼 구축 및 실시간 환자 상태 공유.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Visit Frequency Chart
+    const ctx1 = document.getElementById('visitChart').getContext('2d');
+    new Chart(ctx1, {
+      type: 'bar',
+      data: {
+        labels: ['대만 중의사', '대만 간호사', '대만 서의사', '일본 방문의사', '한국 의사'],
+        datasets: [{
+          label: '월평균 방문 횟수 (회/월)',
+          data: [2.88, 1.59, 1.26, 2.10, 1.00],
+          backgroundColor: ['#10b981', '#6ee7b7', '#38bdf8', '#0284c7', '#ef4444']
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: {
+          y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.1)' }, ticks: { color: '#94a3b8' } },
+          x: { grid: { display: false }, ticks: { color: '#94a3b8' } }
+        }
+      }
+    });
+
+    // Service Type Chart (Taiwan iHBMC)
+    const ctx2 = document.getElementById('serviceChart').getContext('2d');
+    new Chart(ctx2, {
+      type: 'doughnut',
+      data: {
+        labels: ['침술치료(87.1%)', '한약처방(44.0%)', '경혈지압/기타(18.5%)'],
+        datasets: [{
+          data: [87.1, 44.0, 18.5],
+          backgroundColor: ['#10b981', '#3b82f6', '#f59e0b']
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { position: 'bottom', labels: { color: '#f8fafc', font: { size: 12 } } }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

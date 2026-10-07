@@ -1,0 +1,916 @@
+{
+  "gimhae": {
+    "info": {
+      "id": "gimhae",
+      "name": "김해시",
+      "pop_total": 533000,
+      "pop_elderly": 89000,
+      "pop_vulnerable": 27500,
+      "base_eld_cost": 5320000.0,
+      "base_vul_cost": 7750000.0,
+      "km_clinic": 185,
+      "km_hosp": 9,
+      "km_doctors": 310
+    },
+    "composite_factor": 0.8890741088,
+    "rates_detail": [
+      {
+        "rate_pct": 10,
+        "cum_5yr_base_100m": 469.64,
+        "cum_5yr_corpus_100m": 417.54,
+        "diff_100m": -52.09,
+        "diff_pct": -11.09,
+        "yearly": [
+          {
+            "year": 2025,
+            "b_eld": 1473,
+            "b_vul": 455,
+            "t_save_base_100m": 8.59,
+            "t_save_corpus_100m": 7.64
+          },
+          {
+            "year": 2026,
+            "b_eld": 3111,
+            "b_vul": 961,
+            "t_save_base_100m": 38.34,
+            "t_save_corpus_100m": 34.08
+          },
+          {
+            "year": 2027,
+            "b_eld": 4938,
+            "b_vul": 1526,
+            "t_save_base_100m": 96.61,
+            "t_save_corpus_100m": 85.9
+          },
+          {
+            "year": 2028,
+            "b_eld": 6139,
+            "b_vul": 1897,
+            "t_save_base_100m": 149.31,
+            "t_save_corpus_100m": 132.75
+          },
+          {
+            "year": 2029,
+            "b_eld": 6680,
+            "b_vul": 2064,
+            "t_save_base_100m": 176.78,
+            "t_save_corpus_100m": 157.17
+          }
+        ]
+      },
+      {
+        "rate_pct": 20,
+        "cum_5yr_base_100m": 939.25,
+        "cum_5yr_corpus_100m": 835.06,
+        "diff_100m": -104.19,
+        "diff_pct": -11.09,
+        "yearly": [
+          {
+            "year": 2025,
+            "b_eld": 2946,
+            "b_vul": 910,
+            "t_save_base_100m": 17.19,
+            "t_save_corpus_100m": 15.28
+          },
+          {
+            "year": 2026,
+            "b_eld": 6221,
+            "b_vul": 1922,
+            "t_save_base_100m": 76.66,
+            "t_save_corpus_100m": 68.16
+          },
+          {
+            "year": 2027,
+            "b_eld": 9876,
+            "b_vul": 3052,
+            "t_save_base_100m": 193.23,
+            "t_save_corpus_100m": 171.8
+          },
+          {
+            "year": 2028,
+            "b_eld": 12278,
+            "b_vul": 3794,
+            "t_save_base_100m": 298.63,
+            "t_save_corpus_100m": 265.5
+          },
+          {
+            "year": 2029,
+            "b_eld": 13359,
+            "b_vul": 4128,
+            "t_save_base_100m": 353.53,
+            "t_save_corpus_100m": 314.32
+          }
+        ]
+      },
+      {
+        "rate_pct": 30,
+        "cum_5yr_base_100m": 1408.9,
+        "cum_5yr_corpus_100m": 1252.61,
+        "diff_100m": -156.28,
+        "diff_pct": -11.09,
+        "yearly": [
+          {
+            "year": 2025,
+            "b_eld": 4419,
+            "b_vul": 1365,
+            "t_save_base_100m": 25.78,
+            "t_save_corpus_100m": 22.92
+          },
+          {
+            "year": 2026,
+            "b_eld": 9332,
+            "b_vul": 2883,
+            "t_save_base_100m": 115.0,
+            "t_save_corpus_100m": 102.24
+          },
+          {
+            "year": 2027,
+            "b_eld": 14815,
+            "b_vul": 4578,
+            "t_save_base_100m": 289.86,
+            "t_save_corpus_100m": 257.71
+          },
+          {
+            "year": 2028,
+            "b_eld": 18417,
+            "b_vul": 5691,
+            "t_save_base_100m": 447.94,
+            "t_save_corpus_100m": 398.25
+          },
+          {
+            "year": 2029,
+            "b_eld": 20039,
+            "b_vul": 6192,
+            "t_save_base_100m": 530.31,
+            "t_save_corpus_100m": 471.48
+          }
+        ]
+      },
+      {
+        "rate_pct": 40,
+        "cum_5yr_base_100m": 1878.46,
+        "cum_5yr_corpus_100m": 1670.09,
+        "diff_100m": -208.37,
+        "diff_pct": -11.09,
+        "yearly": [
+          {
+            "year": 2025,
+            "b_eld": 5892,
+            "b_vul": 1820,
+            "t_save_base_100m": 34.38,
+            "t_save_corpus_100m": 30.57
+          },
+          {
+            "year": 2026,
+            "b_eld": 12442,
+            "b_vul": 3844,
+            "t_save_base_100m": 153.33,
+            "t_save_corpus_100m": 136.32
+          },
+          {
+            "year": 2027,
+            "b_eld": 19753,
+            "b_vul": 6103,
+            "t_save_base_100m": 386.45,
+            "t_save_corpus_100m": 343.59
+          },
+          {
+            "year": 2028,
+            "b_eld": 24556,
+            "b_vul": 7587,
+            "t_save_base_100m": 597.23,
+            "t_save_corpus_100m": 530.99
+          },
+          {
+            "year": 2029,
+            "b_eld": 26718,
+            "b_vul": 8256,
+            "t_save_base_100m": 707.07,
+            "t_save_corpus_100m": 628.64
+          }
+        ]
+      },
+      {
+        "rate_pct": 50,
+        "cum_5yr_base_100m": 2348.09,
+        "cum_5yr_corpus_100m": 2087.62,
+        "diff_100m": -260.46,
+        "diff_pct": -11.09,
+        "yearly": [
+          {
+            "year": 2025,
+            "b_eld": 7364,
+            "b_vul": 2276,
+            "t_save_base_100m": 42.98,
+            "t_save_corpus_100m": 38.21
+          },
+          {
+            "year": 2026,
+            "b_eld": 15553,
+            "b_vul": 4806,
+            "t_save_base_100m": 191.67,
+            "t_save_corpus_100m": 170.41
+          },
+          {
+            "year": 2027,
+            "b_eld": 24691,
+            "b_vul": 7629,
+            "t_save_base_100m": 483.07,
+            "t_save_corpus_100m": 429.48
+          },
+          {
+            "year": 2028,
+            "b_eld": 30695,
+            "b_vul": 9484,
+            "t_save_base_100m": 746.55,
+            "t_save_corpus_100m": 663.74
+          },
+          {
+            "year": 2029,
+            "b_eld": 33398,
+            "b_vul": 10319,
+            "t_save_base_100m": 883.82,
+            "t_save_corpus_100m": 785.78
+          }
+        ]
+      },
+      {
+        "rate_pct": 60,
+        "cum_5yr_base_100m": 2817.68,
+        "cum_5yr_corpus_100m": 2505.12,
+        "diff_100m": -312.55,
+        "diff_pct": -11.09,
+        "yearly": [
+          {
+            "year": 2025,
+            "b_eld": 8837,
+            "b_vul": 2731,
+            "t_save_base_100m": 51.57,
+            "t_save_corpus_100m": 45.85
+          },
+          {
+            "year": 2026,
+            "b_eld": 18663,
+            "b_vul": 5767,
+            "t_save_base_100m": 230.0,
+            "t_save_corpus_100m": 204.49
+          },
+          {
+            "year": 2027,
+            "b_eld": 29629,
+            "b_vul": 9155,
+            "t_save_base_100m": 579.68,
+            "t_save_corpus_100m": 515.38
+          },
+          {
+            "year": 2028,
+            "b_eld": 36833,
+            "b_vul": 11381,
+            "t_save_base_100m": 895.85,
+            "t_save_corpus_100m": 796.47
+          },
+          {
+            "year": 2029,
+            "b_eld": 40077,
+            "b_vul": 12383,
+            "t_save_base_100m": 1060.58,
+            "t_save_corpus_100m": 942.93
+          }
+        ]
+      },
+      {
+        "rate_pct": 70,
+        "cum_5yr_base_100m": 3287.31,
+        "cum_5yr_corpus_100m": 2922.67,
+        "diff_100m": -364.65,
+        "diff_pct": -11.09,
+        "yearly": [
+          {
+            "year": 2025,
+            "b_eld": 10310,
+            "b_vul": 3186,
+            "t_save_base_100m": 60.17,
+            "t_save_corpus_100m": 53.49
+          },
+          {
+            "year": 2026,
+            "b_eld": 21774,
+            "b_vul": 6728,
+            "t_save_base_100m": 268.34,
+            "t_save_corpus_100m": 238.57
+          },
+          {
+            "year": 2027,
+            "b_eld": 34567,
+            "b_vul": 10681,
+            "t_save_base_100m": 676.3,
+            "t_save_corpus_100m": 601.28
+          },
+          {
+            "year": 2028,
+            "b_eld": 42972,
+            "b_vul": 13278,
+            "t_save_base_100m": 1045.16,
+            "t_save_corpus_100m": 929.23
+          },
+          {
+            "year": 2029,
+            "b_eld": 46757,
+            "b_vul": 14447,
+            "t_save_base_100m": 1237.35,
+            "t_save_corpus_100m": 1100.1
+          }
+        ]
+      },
+      {
+        "rate_pct": 80,
+        "cum_5yr_base_100m": 3756.94,
+        "cum_5yr_corpus_100m": 3340.2,
+        "diff_100m": -416.74,
+        "diff_pct": -11.09,
+        "yearly": [
+          {
+            "year": 2025,
+            "b_eld": 11783,
+            "b_vul": 3641,
+            "t_save_base_100m": 68.76,
+            "t_save_corpus_100m": 61.13
+          },
+          {
+            "year": 2026,
+            "b_eld": 24884,
+            "b_vul": 7689,
+            "t_save_base_100m": 306.66,
+            "t_save_corpus_100m": 272.65
+          },
+          {
+            "year": 2027,
+            "b_eld": 39506,
+            "b_vul": 12207,
+            "t_save_base_100m": 772.93,
+            "t_save_corpus_100m": 687.19
+          },
+          {
+            "year": 2028,
+            "b_eld": 49111,
+            "b_vul": 15175,
+            "t_save_base_100m": 1194.48,
+            "t_save_corpus_100m": 1061.98
+          },
+          {
+            "year": 2029,
+            "b_eld": 53436,
+            "b_vul": 16511,
+            "t_save_base_100m": 1414.11,
+            "t_save_corpus_100m": 1257.25
+          }
+        ]
+      },
+      {
+        "rate_pct": 90,
+        "cum_5yr_base_100m": 4226.57,
+        "cum_5yr_corpus_100m": 3757.74,
+        "diff_100m": -468.84,
+        "diff_pct": -11.09,
+        "yearly": [
+          {
+            "year": 2025,
+            "b_eld": 13256,
+            "b_vul": 4096,
+            "t_save_base_100m": 77.35,
+            "t_save_corpus_100m": 68.77
+          },
+          {
+            "year": 2026,
+            "b_eld": 27995,
+            "b_vul": 8650,
+            "t_save_base_100m": 345.0,
+            "t_save_corpus_100m": 306.73
+          },
+          {
+            "year": 2027,
+            "b_eld": 44444,
+            "b_vul": 13733,
+            "t_save_base_100m": 869.54,
+            "t_save_corpus_100m": 773.09
+          },
+          {
+            "year": 2028,
+            "b_eld": 55250,
+            "b_vul": 17072,
+            "t_save_base_100m": 1343.79,
+            "t_save_corpus_100m": 1194.73
+          },
+          {
+            "year": 2029,
+            "b_eld": 60116,
+            "b_vul": 18575,
+            "t_save_base_100m": 1590.89,
+            "t_save_corpus_100m": 1414.42
+          }
+        ]
+      },
+      {
+        "rate_pct": 100,
+        "cum_5yr_base_100m": 4696.18,
+        "cum_5yr_corpus_100m": 4175.25,
+        "diff_100m": -520.93,
+        "diff_pct": -11.09,
+        "yearly": [
+          {
+            "year": 2025,
+            "b_eld": 14729,
+            "b_vul": 4551,
+            "t_save_base_100m": 85.95,
+            "t_save_corpus_100m": 76.42
+          },
+          {
+            "year": 2026,
+            "b_eld": 31105,
+            "b_vul": 9611,
+            "t_save_base_100m": 383.33,
+            "t_save_corpus_100m": 340.81
+          },
+          {
+            "year": 2027,
+            "b_eld": 49382,
+            "b_vul": 15259,
+            "t_save_base_100m": 966.16,
+            "t_save_corpus_100m": 858.99
+          },
+          {
+            "year": 2028,
+            "b_eld": 61389,
+            "b_vul": 18969,
+            "t_save_base_100m": 1493.1,
+            "t_save_corpus_100m": 1327.48
+          },
+          {
+            "year": 2029,
+            "b_eld": 66795,
+            "b_vul": 20639,
+            "t_save_base_100m": 1767.64,
+            "t_save_corpus_100m": 1571.57
+          }
+        ]
+      }
+    ]
+  },
+  "gyeongnam": {
+    "info": {
+      "id": "gyeongnam",
+      "name": "경상남도 (전체 18개 시·군)",
+      "pop_total": 3245000,
+      "pop_elderly": 675000,
+      "pop_vulnerable": 178000,
+      "base_eld_cost": 5650000.0,
+      "base_vul_cost": 8150000.0,
+      "km_clinic": 1120,
+      "km_hosp": 48,
+      "km_doctors": 1850
+    },
+    "composite_factor": 0.8890741088,
+    "rates_detail": [
+      {
+        "rate_pct": 10,
+        "cum_5yr_base_100m": 3408.05,
+        "cum_5yr_corpus_100m": 3030.0,
+        "diff_100m": -378.04,
+        "diff_pct": -11.09,
+        "yearly": [
+          {
+            "year": 2025,
+            "b_eld": 11171,
+            "b_vul": 2946,
+            "t_save_base_100m": 62.38,
+            "t_save_corpus_100m": 55.46
+          },
+          {
+            "year": 2026,
+            "b_eld": 23591,
+            "b_vul": 6221,
+            "t_save_base_100m": 278.19,
+            "t_save_corpus_100m": 247.33
+          },
+          {
+            "year": 2027,
+            "b_eld": 37453,
+            "b_vul": 9876,
+            "t_save_base_100m": 701.14,
+            "t_save_corpus_100m": 623.37
+          },
+          {
+            "year": 2028,
+            "b_eld": 46559,
+            "b_vul": 12278,
+            "t_save_base_100m": 1083.55,
+            "t_save_corpus_100m": 963.36
+          },
+          {
+            "year": 2029,
+            "b_eld": 50659,
+            "b_vul": 13359,
+            "t_save_base_100m": 1282.79,
+            "t_save_corpus_100m": 1140.5
+          }
+        ]
+      },
+      {
+        "rate_pct": 20,
+        "cum_5yr_base_100m": 6816.09,
+        "cum_5yr_corpus_100m": 6060.01,
+        "diff_100m": -756.08,
+        "diff_pct": -11.09,
+        "yearly": [
+          {
+            "year": 2025,
+            "b_eld": 22341,
+            "b_vul": 5892,
+            "t_save_base_100m": 124.75,
+            "t_save_corpus_100m": 110.91
+          },
+          {
+            "year": 2026,
+            "b_eld": 47182,
+            "b_vul": 12442,
+            "t_save_base_100m": 556.37,
+            "t_save_corpus_100m": 494.66
+          },
+          {
+            "year": 2027,
+            "b_eld": 74905,
+            "b_vul": 19753,
+            "t_save_base_100m": 1402.28,
+            "t_save_corpus_100m": 1246.73
+          },
+          {
+            "year": 2028,
+            "b_eld": 93118,
+            "b_vul": 24556,
+            "t_save_base_100m": 2167.11,
+            "t_save_corpus_100m": 1926.72
+          },
+          {
+            "year": 2029,
+            "b_eld": 101318,
+            "b_vul": 26718,
+            "t_save_base_100m": 2565.58,
+            "t_save_corpus_100m": 2280.99
+          }
+        ]
+      },
+      {
+        "rate_pct": 30,
+        "cum_5yr_base_100m": 10224.13,
+        "cum_5yr_corpus_100m": 9090.01,
+        "diff_100m": -1134.12,
+        "diff_pct": -11.09,
+        "yearly": [
+          {
+            "year": 2025,
+            "b_eld": 33512,
+            "b_vul": 8837,
+            "t_save_base_100m": 187.12,
+            "t_save_corpus_100m": 166.36
+          },
+          {
+            "year": 2026,
+            "b_eld": 70773,
+            "b_vul": 18663,
+            "t_save_base_100m": 834.56,
+            "t_save_corpus_100m": 741.98
+          },
+          {
+            "year": 2027,
+            "b_eld": 112358,
+            "b_vul": 29629,
+            "t_save_base_100m": 2103.42,
+            "t_save_corpus_100m": 1870.1
+          },
+          {
+            "year": 2028,
+            "b_eld": 139677,
+            "b_vul": 36833,
+            "t_save_base_100m": 3250.64,
+            "t_save_corpus_100m": 2890.06
+          },
+          {
+            "year": 2029,
+            "b_eld": 151978,
+            "b_vul": 40077,
+            "t_save_base_100m": 3848.39,
+            "t_save_corpus_100m": 3421.5
+          }
+        ]
+      },
+      {
+        "rate_pct": 40,
+        "cum_5yr_base_100m": 13632.2,
+        "cum_5yr_corpus_100m": 12120.03,
+        "diff_100m": -1512.16,
+        "diff_pct": -11.09,
+        "yearly": [
+          {
+            "year": 2025,
+            "b_eld": 44683,
+            "b_vul": 11783,
+            "t_save_base_100m": 249.5,
+            "t_save_corpus_100m": 221.82
+          },
+          {
+            "year": 2026,
+            "b_eld": 94365,
+            "b_vul": 24884,
+            "t_save_base_100m": 1112.75,
+            "t_save_corpus_100m": 989.32
+          },
+          {
+            "year": 2027,
+            "b_eld": 149811,
+            "b_vul": 39506,
+            "t_save_base_100m": 2804.58,
+            "t_save_corpus_100m": 2493.48
+          },
+          {
+            "year": 2028,
+            "b_eld": 186236,
+            "b_vul": 49111,
+            "t_save_base_100m": 4334.19,
+            "t_save_corpus_100m": 3853.42
+          },
+          {
+            "year": 2029,
+            "b_eld": 202637,
+            "b_vul": 53436,
+            "t_save_base_100m": 5131.18,
+            "t_save_corpus_100m": 4562.0
+          }
+        ]
+      },
+      {
+        "rate_pct": 50,
+        "cum_5yr_base_100m": 17040.26,
+        "cum_5yr_corpus_100m": 15150.05,
+        "diff_100m": -1890.21,
+        "diff_pct": -11.09,
+        "yearly": [
+          {
+            "year": 2025,
+            "b_eld": 55854,
+            "b_vul": 14729,
+            "t_save_base_100m": 311.87,
+            "t_save_corpus_100m": 277.28
+          },
+          {
+            "year": 2026,
+            "b_eld": 117956,
+            "b_vul": 31105,
+            "t_save_base_100m": 1390.94,
+            "t_save_corpus_100m": 1236.65
+          },
+          {
+            "year": 2027,
+            "b_eld": 187264,
+            "b_vul": 49382,
+            "t_save_base_100m": 3505.72,
+            "t_save_corpus_100m": 3116.85
+          },
+          {
+            "year": 2028,
+            "b_eld": 232796,
+            "b_vul": 61389,
+            "t_save_base_100m": 5417.76,
+            "t_save_corpus_100m": 4816.79
+          },
+          {
+            "year": 2029,
+            "b_eld": 253296,
+            "b_vul": 66795,
+            "t_save_base_100m": 6413.97,
+            "t_save_corpus_100m": 5702.49
+          }
+        ]
+      },
+      {
+        "rate_pct": 60,
+        "cum_5yr_base_100m": 20448.31,
+        "cum_5yr_corpus_100m": 18180.06,
+        "diff_100m": -2268.25,
+        "diff_pct": -11.09,
+        "yearly": [
+          {
+            "year": 2025,
+            "b_eld": 67024,
+            "b_vul": 17675,
+            "t_save_base_100m": 374.24,
+            "t_save_corpus_100m": 332.73
+          },
+          {
+            "year": 2026,
+            "b_eld": 141547,
+            "b_vul": 37326,
+            "t_save_base_100m": 1669.12,
+            "t_save_corpus_100m": 1483.97
+          },
+          {
+            "year": 2027,
+            "b_eld": 224716,
+            "b_vul": 59259,
+            "t_save_base_100m": 4206.87,
+            "t_save_corpus_100m": 3740.22
+          },
+          {
+            "year": 2028,
+            "b_eld": 279355,
+            "b_vul": 73667,
+            "t_save_base_100m": 6501.32,
+            "t_save_corpus_100m": 5780.15
+          },
+          {
+            "year": 2029,
+            "b_eld": 303955,
+            "b_vul": 80154,
+            "t_save_base_100m": 7696.76,
+            "t_save_corpus_100m": 6842.99
+          }
+        ]
+      },
+      {
+        "rate_pct": 70,
+        "cum_5yr_base_100m": 23856.36,
+        "cum_5yr_corpus_100m": 21210.08,
+        "diff_100m": -2646.29,
+        "diff_pct": -11.09,
+        "yearly": [
+          {
+            "year": 2025,
+            "b_eld": 78195,
+            "b_vul": 20620,
+            "t_save_base_100m": 436.62,
+            "t_save_corpus_100m": 388.18
+          },
+          {
+            "year": 2026,
+            "b_eld": 165138,
+            "b_vul": 43547,
+            "t_save_base_100m": 1947.31,
+            "t_save_corpus_100m": 1731.3
+          },
+          {
+            "year": 2027,
+            "b_eld": 262169,
+            "b_vul": 69135,
+            "t_save_base_100m": 4908.01,
+            "t_save_corpus_100m": 4363.58
+          },
+          {
+            "year": 2028,
+            "b_eld": 325914,
+            "b_vul": 85945,
+            "t_save_base_100m": 7584.87,
+            "t_save_corpus_100m": 6743.51
+          },
+          {
+            "year": 2029,
+            "b_eld": 354615,
+            "b_vul": 93513,
+            "t_save_base_100m": 8979.57,
+            "t_save_corpus_100m": 7983.5
+          }
+        ]
+      },
+      {
+        "rate_pct": 80,
+        "cum_5yr_base_100m": 27264.4,
+        "cum_5yr_corpus_100m": 24240.07,
+        "diff_100m": -3024.33,
+        "diff_pct": -11.09,
+        "yearly": [
+          {
+            "year": 2025,
+            "b_eld": 89366,
+            "b_vul": 23566,
+            "t_save_base_100m": 498.99,
+            "t_save_corpus_100m": 443.64
+          },
+          {
+            "year": 2026,
+            "b_eld": 188729,
+            "b_vul": 49769,
+            "t_save_base_100m": 2225.5,
+            "t_save_corpus_100m": 1978.64
+          },
+          {
+            "year": 2027,
+            "b_eld": 299622,
+            "b_vul": 79011,
+            "t_save_base_100m": 5609.15,
+            "t_save_corpus_100m": 4986.95
+          },
+          {
+            "year": 2028,
+            "b_eld": 372473,
+            "b_vul": 98222,
+            "t_save_base_100m": 8668.4,
+            "t_save_corpus_100m": 7706.85
+          },
+          {
+            "year": 2029,
+            "b_eld": 405274,
+            "b_vul": 106872,
+            "t_save_base_100m": 10262.36,
+            "t_save_corpus_100m": 9124.0
+          }
+        ]
+      },
+      {
+        "rate_pct": 90,
+        "cum_5yr_base_100m": 30672.46,
+        "cum_5yr_corpus_100m": 27270.09,
+        "diff_100m": -3402.37,
+        "diff_pct": -11.09,
+        "yearly": [
+          {
+            "year": 2025,
+            "b_eld": 100537,
+            "b_vul": 26512,
+            "t_save_base_100m": 561.37,
+            "t_save_corpus_100m": 499.1
+          },
+          {
+            "year": 2026,
+            "b_eld": 212320,
+            "b_vul": 55990,
+            "t_save_base_100m": 2503.69,
+            "t_save_corpus_100m": 2225.97
+          },
+          {
+            "year": 2027,
+            "b_eld": 337075,
+            "b_vul": 88888,
+            "t_save_base_100m": 6310.3,
+            "t_save_corpus_100m": 5610.33
+          },
+          {
+            "year": 2028,
+            "b_eld": 419032,
+            "b_vul": 110500,
+            "t_save_base_100m": 9751.95,
+            "t_save_corpus_100m": 8670.21
+          },
+          {
+            "year": 2029,
+            "b_eld": 455933,
+            "b_vul": 120231,
+            "t_save_base_100m": 11545.15,
+            "t_save_corpus_100m": 10264.49
+          }
+        ]
+      },
+      {
+        "rate_pct": 100,
+        "cum_5yr_base_100m": 34080.49,
+        "cum_5yr_corpus_100m": 30300.08,
+        "diff_100m": -3780.41,
+        "diff_pct": -11.09,
+        "yearly": [
+          {
+            "year": 2025,
+            "b_eld": 111707,
+            "b_vul": 29458,
+            "t_save_base_100m": 623.74,
+            "t_save_corpus_100m": 554.55
+          },
+          {
+            "year": 2026,
+            "b_eld": 235911,
+            "b_vul": 62211,
+            "t_save_base_100m": 2781.88,
+            "t_save_corpus_100m": 2473.29
+          },
+          {
+            "year": 2027,
+            "b_eld": 374527,
+            "b_vul": 98764,
+            "t_save_base_100m": 7011.43,
+            "t_save_corpus_100m": 6233.68
+          },
+          {
+            "year": 2028,
+            "b_eld": 465591,
+            "b_vul": 122778,
+            "t_save_base_100m": 10835.51,
+            "t_save_corpus_100m": 9633.57
+          },
+          {
+            "year": 2029,
+            "b_eld": 506592,
+            "b_vul": 133590,
+            "t_save_base_100m": 12827.94,
+            "t_save_corpus_100m": 11404.99
+          }
+        ]
+      }
+    ]
+  }
+}
