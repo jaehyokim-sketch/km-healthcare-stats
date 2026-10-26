@@ -44,6 +44,17 @@ IGNORE_EXTENSIONS = {
     ".bak"
 }
 
+# Google Drive 정본 원칙(2026-10-26): 최상위 지침 파일(CLAUDE.md·AGENTS.md·GEMINI.md, .claude/·.agents/)은
+# Drive 배포 폴더 쪽이 정본이고 로컬은 미러다(acupoint_anatomy/scripts/sync_claude_skill.py). 배포·prune하지 않는다.
+RULE_FILES = {"CLAUDE.md", "AGENTS.md", "GEMINI.md"}
+RULE_DIRS = {".claude", ".agents"}
+
+
+def is_rule_path(rel_path):
+    parts = rel_path.replace("\\", "/").split("/")
+    return parts[0] in RULE_DIRS or (len(parts) == 1 and parts[0] in RULE_FILES)
+
+
 def sync_to_gdrive(dry_run=False, prune=False):
     mode_str = "[DRY RUN]" if dry_run else "[LIVE DEPLOY]"
     print("=" * 60)
@@ -82,6 +93,8 @@ def sync_to_gdrive(dry_run=False, prune=False):
 
             src_file = os.path.join(root, f)
             dest_file = os.path.join(target_dir, f)
+            if is_rule_path(os.path.relpath(src_file, LOCAL_REPO)):
+                continue
 
             need_copy = False
             if not os.path.exists(dest_file):
@@ -125,6 +138,8 @@ def sync_to_gdrive(dry_run=False, prune=False):
 
                 dest_file = os.path.join(root, f)
                 src_file = os.path.join(local_dir, f)
+                if is_rule_path(os.path.relpath(dest_file, GDRIVE_DEST)):
+                    continue
 
                 if not os.path.exists(src_file):
                     pruned_files += 1
@@ -141,7 +156,7 @@ def sync_to_gdrive(dry_run=False, prune=False):
         for root, dirs, files in os.walk(GDRIVE_DEST, topdown=False):
             dirs[:] = [d for d in dirs if d not in IGNORE_DIRS]
             rel_dir = os.path.relpath(root, GDRIVE_DEST)
-            if rel_dir == ".":
+            if rel_dir == "." or is_rule_path(rel_dir):
                 continue
             local_dir = os.path.join(LOCAL_REPO, rel_dir)
 
