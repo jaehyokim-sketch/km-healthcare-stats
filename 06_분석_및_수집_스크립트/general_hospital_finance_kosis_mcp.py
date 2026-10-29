@@ -14,6 +14,7 @@ import csv
 import json
 import os
 import sys
+import time
 
 import requests
 
@@ -66,8 +67,13 @@ class KoreaStatsMCP:
         """get_statistics_data를 nextCursor 끝까지 따라가며 모은다."""
         rows, cursor = [], None
         while True:
-            d = self.call("get_statistics_data", dict(args, **({"cursor": cursor} if cursor else {})))
-            if not d.get("success") and d.get("data") and "boundary" in (d.get("errorMessage") or ""):
+            for attempt in range(3):  # 원격 서버가 간헐적으로 '알 수 없는 오류'를 돌려준다
+                d = self.call("get_statistics_data", dict(args, **({"cursor": cursor} if cursor else {})))
+                if d.get("success") or d.get("data"):
+                    break
+                time.sleep(2 * (attempt + 1))
+            msg = d.get("errorMessage") or ""
+            if not d.get("success") and d.get("data") and ("boundary" in msg or "missing period" in msg):
                 # 시계열 일부 연도가 비어 있다는 경고: 받은 행은 그대로 쓰고 결측은 분석 단계에서 확인한다
                 print("  경고:", args["tableId"], args.get("objL1"), args.get("itemId"), d["errorMessage"])
             elif not d.get("success"):

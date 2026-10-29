@@ -1,4 +1,9 @@
-"""의료기관 종별 매출액·영업이익률 보고서 .md → 단일 파일 HTML (그림은 base64로 포함)
+"""보고서 .md → 단일 파일 HTML (그림은 base64로 포함)
+
+기본 대상은 의료기관 종별 매출액·영업이익률 보고서다. 다른 보고서는 경로를 넘기고,
+머리글 부제와 태그를 마크다운 주석으로 지정한다.
+  <!-- html-subtitle: 부제 -->
+  <!-- html-tags: 태그1|태그2|태그3 -->
 
 usage: python build_hospital_finance_html.py [보고서.md]
 """
@@ -130,6 +135,11 @@ def build(md_path):
     text = open(md_path, encoding="utf-8").read()
     title = re.search(r"^# (.+)$", text, re.M).group(1).strip()
     text = re.sub(r"^# .+\n", "", text, count=1, flags=re.M)
+    opt = dict(re.findall(r"<!--\s*html-(subtitle|tags):\s*(.*?)\s*-->", text))
+    text = re.sub(r"<!--\s*html-(subtitle|tags):.*?-->\n?", "", text)
+    subtitle = opt.get("subtitle", "상급종합병원·종합병원 · 병원 · 요양병원 · 의원 · 치과 · 한방병원 · 한의원")
+    tag_list = opt["tags"].split("|") if "tags" in opt else [
+        "통계청 서비스업조사", "HIRA 진료비 심사실적", "2014~2024", "KOSIS · korea-stats MCP"]
     md = markdown.Markdown(extensions=["tables", "fenced_code", "toc", "sane_lists"],
                            extension_configs={"toc": {"toc_depth": "2-3"}})
     body = md.convert(text)
@@ -138,8 +148,7 @@ def build(md_path):
     # </div> → </nav> 치환을 먼저 해야 목차 제목의 </div>가 바뀌지 않는다
     toc = md.toc.replace("</div>", "</nav>").replace('<div class="toc">', '<nav class="toc"><div class="toc-title">목차</div>')
     meta = meta.strip().replace("\n", "<br>\n").replace("<p><br>", "<p>").replace("<br>\n</p>", "</p>")
-    tags = "".join(f'<span class="tag">{t}</span>' for t in
-                   ("통계청 서비스업조사", "HIRA 진료비 심사실적", "2014~2024", "KOSIS · korea-stats MCP"))
+    tags = "".join(f'<span class="tag">{html.escape(t.strip())}</span>' for t in tag_list)
     page = f"""<!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -154,7 +163,7 @@ def build(md_path):
 <body>
 <header class="header">
   <h1>{html.escape(title)}</h1>
-  <p class="sub">상급종합병원·종합병원 · 병원 · 요양병원 · 의원 · 치과 · 한방병원 · 한의원</p>
+  <p class="sub">{html.escape(subtitle)}</p>
   <div class="tags">{tags}</div>
 </header>
 <div class="layout">
@@ -164,7 +173,7 @@ def build(md_path):
 {cards}
 </main>
 </div>
-<footer>자료: 통계청(국가데이터처) 「서비스업조사」, 건강보험심사평가원 「요양기관종별 진료비 심사실적」(KOSIS) · 원본 보고서: {html.escape(os.path.basename(md_path))}</footer>
+<footer>자료: {html.escape(" · ".join(tag_list))} · 원본 보고서: {html.escape(os.path.basename(md_path))}</footer>
 </body>
 </html>
 """
