@@ -6,7 +6,7 @@ import os
 
 sys.stdout.reconfigure(encoding='utf-8')
 
-with open('d:/한의 의료서비스 통계/hira_medinfo_page.html', 'r', encoding='utf-8', errors='ignore') as f:
+with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '05_원천_통계_데이터셋', 'hira_medinfo_page.html'), 'r', encoding='utf-8', errors='ignore') as f:
     html = f.read()
 
 tables = re.findall(r'<table[^>]*>([\s\S]*?)</table>', html)

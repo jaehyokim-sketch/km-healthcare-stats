@@ -16,7 +16,7 @@ import sys
 import markdown
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-DEFAULT_MD = os.path.join(HERE, "..", "03_HIRA_및_임상통계_보고서", "종합병원_매출액_및_영업이익률_10개년_분석_보고서.md")
+DEFAULT_MD = os.path.join(HERE, "..", "04_의료기관_경영_및_환자경험", "의료기관_종별_매출_및_영업이익률", "종합병원_매출액_및_영업이익률_10개년_분석_보고서.md")
 
 CSS = """
 :root {

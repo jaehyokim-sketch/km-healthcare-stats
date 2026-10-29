@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.join(HERE, "..", "05_원천_통계_데이터셋", "08_의료서비스경험조사")
-OUT = os.path.join(HERE, "..", "03_HIRA_및_임상통계_보고서")
+OUT = os.path.join(HERE, "..", "04_의료기관_경영_및_환자경험", "환자경험_및_환자중시요소")
 
 SURFACE, INK, INK2, GRID = "#fcfcfb", "#0b0b0b", "#52514e", "#e4e3df"
 BLUE, ORANGE, AQUA, RED, VIOLET = "#2a78d6", "#eb6834", "#1baf7a", "#e34948", "#6250d6"

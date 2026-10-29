@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>지역별 한의약 방문진료 및 통합돌봄 5개년 효과 시뮬레이션 포털</title>
+    <title>한의약 보건의료 빅데이터 연구 포털</title>
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <style>
@@ -29,6 +29,8 @@
             font-family: 'Noto Sans KR', sans-serif;
         }
 
+        html { scroll-behavior: smooth; }
+
         body {
             background-color: var(--bg-main);
             color: var(--text-main);
@@ -39,13 +41,13 @@
         header {
             background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
             color: #ffffff;
-            padding: 3rem 2rem;
+            padding: 3rem 1rem;
             text-align: center;
             box-shadow: var(--shadow-md);
         }
 
         header h1 {
-            font-size: 2.2rem;
+            font-size: clamp(1.5rem, 4vw, 2.2rem);
             font-weight: 900;
             margin-bottom: 12px;
             letter-spacing: -0.5px;
@@ -53,22 +55,57 @@
 
         header p {
             color: #94a3b8;
-            font-size: 1.1rem;
-            max-width: 800px;
+            font-size: 1.05rem;
+            max-width: 820px;
             margin: 0 auto;
         }
+
+        /* 분류 바로가기 */
+        .cat-nav {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background: rgba(248, 250, 252, 0.96);
+            border-bottom: 1px solid var(--border-color);
+            backdrop-filter: blur(6px);
+        }
+
+        .cat-nav ul {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 10px 16px;
+            list-style: none;
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+        }
+
+        .cat-nav a {
+            display: inline-block;
+            white-space: nowrap;
+            padding: 6px 14px;
+            border-radius: 999px;
+            background: #fff;
+            border: 1px solid var(--border-color);
+            color: var(--primary);
+            font-size: 0.88rem;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .cat-nav a:hover { background: var(--primary); color: #fff; }
 
         .container {
             max-width: 1200px;
             margin: 40px auto;
-            padding: 0 20px;
+            padding: 0 16px;
         }
 
         .portal-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
             gap: 24px;
-            margin-top: 30px;
+            margin-top: 20px;
         }
 
         .portal-card {
@@ -94,21 +131,10 @@
             font-size: 1.25rem;
         }
 
-        .header-gimhae {
-            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
-        }
-
-        .header-jeonju {
-            background: linear-gradient(135deg, #0d9488 0%, #14b8a6 100%);
-        }
-
-        .header-yeosu {
-            background: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%);
-        }
-
-        .header-iksan {
-            background: linear-gradient(135deg, #d97706 0%, #f59e0b 100%);
-        }
+        .header-gimhae { background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); }
+        .header-jeonju { background: linear-gradient(135deg, #0d9488 0%, #14b8a6 100%); }
+        .header-yeosu { background: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%); }
+        .header-iksan { background: linear-gradient(135deg, #d97706 0%, #f59e0b 100%); }
 
         .portal-card-body {
             padding: 24px;
@@ -129,13 +155,12 @@
             color: var(--text-main);
             display: flex;
             justify-content: space-between;
+            gap: 10px;
             border-bottom: 1px dashed var(--border-color);
             padding-bottom: 6px;
         }
 
-        .stat-list li strong {
-            color: var(--primary);
-        }
+        .stat-list li strong { color: var(--primary); text-align: right; }
 
         .btn-link {
             display: block;
@@ -149,9 +174,7 @@
             transition: background 0.2s;
         }
 
-        .btn-link:hover {
-            background-color: var(--primary-light);
-        }
+        .btn-link:hover { background-color: var(--primary-light); }
 
         .badge-new {
             background-color: #ef4444;
@@ -163,30 +186,175 @@
             margin-left: 6px;
         }
 
+        /* 분류 섹션 */
+        .cat-section {
+            margin-top: 56px;
+            scroll-margin-top: 64px;
+        }
+
+        .cat-head {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+            flex-wrap: wrap;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+            margin-bottom: 8px;
+        }
+
+        .cat-head .num {
+            font-size: 0.85rem;
+            font-weight: 900;
+            color: #fff;
+            background: var(--primary);
+            border-radius: 8px;
+            padding: 2px 10px;
+        }
+
+        .cat-head h2 {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--primary-dark);
+        }
+
+        .cat-head code {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            background: #f1f5f9;
+            padding: 2px 8px;
+            border-radius: 6px;
+        }
+
+        .cat-desc {
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .sub-title {
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: var(--secondary);
+            margin: 26px 0 4px;
+        }
+
+        .doc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
+            gap: 16px;
+            margin-top: 12px;
+        }
+
+        .doc-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--primary-light);
+            border-radius: 12px;
+            padding: 18px 18px 16px;
+            box-shadow: var(--shadow-md);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .doc-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+
+        .doc-card .kind {
+            align-self: flex-start;
+            font-size: 0.74rem;
+            font-weight: 800;
+            padding: 2px 10px;
+            border-radius: 999px;
+            background: #eff6ff;
+            color: var(--primary);
+        }
+
+        .doc-card .kind.dash { background: #f0fdfa; color: #0f766e; }
+        .doc-card .kind.new { background: #fef2f2; color: #b91c1c; }
+
+        .doc-card h3 {
+            font-size: 1.02rem;
+            font-weight: 800;
+            color: var(--primary-dark);
+            line-height: 1.45;
+        }
+
+        .doc-card p {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            flex-grow: 1;
+        }
+
+        .doc-card a {
+            align-self: flex-start;
+            font-size: 0.9rem;
+            font-weight: 800;
+            color: var(--primary-light);
+            text-decoration: none;
+        }
+
+        .doc-card a:hover { text-decoration: underline; }
+
+        .raw-box {
+            margin-top: 24px;
+            background: #fff;
+            padding: 20px 24px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .raw-box h3 {
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: var(--primary-dark);
+            margin-bottom: 10px;
+        }
+
+        .raw-box ul { padding-left: 20px; font-size: 0.93rem; }
+        .raw-box li { margin-bottom: 6px; overflow-wrap: anywhere; }
+        .raw-box a { color: var(--primary-light); font-weight: 700; }
+
         footer {
             text-align: center;
-            padding: 30px;
+            padding: 30px 16px;
             color: var(--text-muted);
             font-size: 0.88rem;
             margin-top: 50px;
             border-top: 1px solid var(--border-color);
         }
+
+        footer a { color: var(--primary-light); }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>🏛️ 대한민국 지역별 한의약 방문진료 시뮬레이션 포털</h1>
-        <p>KOSIS 국가통계포털 & HIRA 심사평가원 빅데이터 기반 HIRA AI 5단계 파이프라인 분석 결과 통합 보고서</p>
+        <h1>🏛️ 한의약 보건의료 빅데이터 연구 포털</h1>
+        <p>KOSIS 국가통계포털 · HIRA 보건의료빅데이터 기반 재택의료 시뮬레이션, 질환별 한의약 의료서비스, 의료이용·경영·환자경험 분석과 한의학교육 정책 보고서 모음</p>
     </header>
 
+    <nav class="cat-nav" aria-label="분류 바로가기">
+        <ul>
+            <li><a href="#featured">대표 보고서</a></li>
+            <li><a href="#cat-01">01 재택의료·방문진료</a></li>
+            <li><a href="#cat-02">02 질환별 한의약 의료서비스</a></li>
+            <li><a href="#cat-03">03 의료이용·진료비·건강지표</a></li>
+            <li><a href="#cat-04">04 의료기관 경영·환자경험</a></li>
+            <li><a href="#cat-08">08 한의학교육·의료인력 정책</a></li>
+            <li><a href="#cat-09">09 아카이브·서식</a></li>
+        </ul>
+    </nav>
+
     <div class="container">
+
+        <!-- 대표 보고서 -->
+        <section id="featured" style="scroll-margin-top: 64px;">
 
         <!-- Major Milestone: 6-Year Integrated Curriculum 10-Year Roadmap -->
         <div style="background: linear-gradient(135deg, #1e3a8a 0%, #0d9488 50%, #7c3aed 100%); color: #fff; padding: 32px; border-radius: 16px; margin-bottom: 35px; box-shadow: 0 12px 28px -5px rgba(30,58,138,0.4); border: 1px solid rgba(255,255,255,0.2);">
             <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
-                <div style="flex: 1; min-width: 320px;">
-                    <span style="background: rgba(255,255,255,0.2); color: #fff; padding: 4px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; border: 1px solid rgba(255,255,255,0.3);"><i class="fa-solid fa-graduation-cap"></i> 2026-2035 마스터플랜</span>
+                <div style="flex: 1; min-width: min(320px, 100%);">
+                    <span style="background: rgba(255,255,255,0.2); color: #fff; padding: 4px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; border: 1px solid rgba(255,255,255,0.3);">2026-2035 마스터플랜</span>
                     <h2 style="font-size: 1.7rem; font-weight: 900; margin-top: 12px; margin-bottom: 8px; color: #ffffff; letter-spacing: -0.5px;">🎓 초고령사회 대응 통합의료 교육과정(6년제) 구축 및 10개년 혁신 로드맵</h2>
                     <p style="color: #e2e8f0; font-size: 1.02rem; line-height: 1.6; max-width: 850px;">원광대 2024 교육과정 전수분석, HIRA·KOSIS 10개년 빅데이터, AI 30.5학점 감축, 2026 시체해부법 개정(대통령령 제36725호) 및 일본·대만 재택의료 벤치마킹을 집대성한 6년제 통합의료 커리큘럼(218학점) 웹 대시보드</p>
                 </div>
@@ -196,14 +364,13 @@
             </div>
         </div>
 
-        
         <!-- Major Milestone: Anatomy Act Reform Policy Report -->
         <div style="background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #0d9488 100%); color: #fff; padding: 32px; border-radius: 16px; margin-bottom: 30px; box-shadow: 0 12px 28px -5px rgba(15,23,42,0.4); border: 1px solid rgba(255,255,255,0.2);">
             <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
-                <div style="flex: 1; min-width: 320px;">
+                <div style="flex: 1; min-width: min(320px, 100%);">
                     <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px;">
-                        <span style="background: rgba(245, 158, 11, 0.3); color: #fef08a; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 800; border: 1px solid rgba(245, 158, 11, 0.5);"><i class="fa-solid fa-gavel"></i> 법률 제21107호 전면시행</span>
-                        <span style="background: rgba(255,255,255,0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 800; border: 1px solid rgba(255,255,255,0.3);"><i class="fa-solid fa-hospital-user"></i> 대통령령 제36725호</span>
+                        <span style="background: rgba(245, 158, 11, 0.3); color: #fef08a; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 800; border: 1px solid rgba(245, 158, 11, 0.5);">법률 제21107호 전면시행</span>
+                        <span style="background: rgba(255,255,255,0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 800; border: 1px solid rgba(255,255,255,0.3);">대통령령 제36725호</span>
                     </div>
                     <h2 style="font-size: 1.65rem; font-weight: 900; margin-bottom: 8px; color: #ffffff; letter-spacing: -0.5px;">⚖️ 시체해부법 개정에 따른 한의학 교육권 확보 및 한의사 직능 정상화 방안</h2>
                     <p style="color: #e2e8f0; font-size: 1.0rem; line-height: 1.6; max-width: 860px;">법 제1조·제2조 의학(한의학 포함) 명문화, 대통령령 제36725호 '교육목적 시체제공기관' 허가제 신설, 전국 12개 한의과대학 BL2 표준 인프라 구축 및 임상 연구 해부권 확보를 위한 2단계 입법 전략 종합보고서</p>
@@ -217,105 +384,282 @@
         <!-- Main Policy Report Banner -->
         <div style="background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%); color: #fff; padding: 28px; border-radius: 16px; margin-bottom: 30px; box-shadow: 0 10px 25px -5px rgba(15,23,42,0.3);">
             <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
-                <div>
+                <div style="flex: 1; min-width: min(320px, 100%);">
                     <span style="background: #3b82f6; color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase;">종합 정책 보고서</span>
                     <h3 style="font-size: 1.5rem; font-weight: 900; margin-top: 10px; margin-bottom: 8px; color: #ffffff;">📜 한의사 재택의료(방문진료) 참여 확대 종합분석 및 정책제언 보고서</h3>
                     <p style="color: #cbd5e1; font-size: 0.98rem; max-width: 800px;">건강보험심사평가원 빅데이터, 이혜진 교수 재택의료 분석 및 지자체별 코퍼스 DB 시뮬레이션을 종합 연계한 한의 재택의료 확장 전략 보고서</p>
                 </div>
                 <div>
-                    <a href="policy_report.html" class="btn-link" style="background: #0d9488; color: #fff; padding: 14px 28px; font-size: 1.05rem; font-weight: 800; border-radius: 10px; text-decoration: none; display: inline-block;">종합 정책보고서 열람하기 →</a>
+                    <a href="01_재택의료_방문진료/정책_및_국제비교/policy_report.html" class="btn-link" style="background: #0d9488; color: #fff; padding: 14px 28px; font-size: 1.05rem; font-weight: 800; border-radius: 10px; text-decoration: none; display: inline-block;">종합 정책보고서 열람하기 →</a>
                 </div>
             </div>
         </div>
+        </section>
 
-        <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--primary-dark); margin-bottom: 10px;">지역별 연구 대시보드 리스트</h2>
-        <p style="color: var(--text-muted); margin-bottom: 20px;">원하시는 대상 지자체 및 광역자치단체의 한의약 방문진료 5개년 효과 시뮬레이션 대시보드를 선택하세요.</p>
+        <!-- 01 재택의료·방문진료 -->
+        <section id="cat-01" class="cat-section">
+            <div class="cat-head"><span class="num">01</span><h2>재택의료·방문진료</h2><code>01_재택의료_방문진료/</code></div>
+            <p class="cat-desc">지자체별 한의약 방문진료 기관참여율 5개년 효과 시뮬레이션과 재택의료 정책·국제비교</p>
 
-        <div class="portal-grid">
+            <h3 class="sub-title">지역별 시뮬레이션 대시보드</h3>
+            <div class="portal-grid">
 
-            <!-- Card 1: 경상남도 및 김해시 (신규) -->
-            <div class="portal-card">
-                <div class="portal-card-header header-gimhae">
-                    경상남도 & 김해시 <span class="badge-new">NEW</span>
+                <div class="portal-card">
+                    <div class="portal-card-header header-gimhae">경상남도 & 김해시</div>
+                    <div class="portal-card-body">
+                        <ul class="stat-list">
+                            <li><span>분석 대상</span> <strong>김해시 & 경남 18개 시·군</strong></li>
+                            <li><span>2024 유병격차</span> <strong>김해 12.7년 / 경남 13.2년</strong></li>
+                            <li><span>50% 참여 5개년 절감</span> <strong>김해 2,367.6억 / 경남 1.78조</strong></li>
+                            <li><span>특이 분석</span> <strong>기존 진료 병행(rho) 차단 제약식</strong></li>
+                        </ul>
+                        <a href="01_재택의료_방문진료/지역별_시뮬레이션/gimhae_gyeongnam.html" class="btn-link">경상남도 & 김해시 대시보드 열람하기 →</a>
+                    </div>
                 </div>
-                <div class="portal-card-body">
-                    <ul class="stat-list">
-                        <li><span>분석 대상</span> <strong>김해시 & 경남 18개 시·군</strong></li>
-                        <li><span>2024 유병격차</span> <strong>김해 12.7년 / 경남 13.2년</strong></li>
-                        <li><span>50% 참여 5개년 절감</span> <strong>김해 2,367.6억 / 경남 1.78조</strong></li>
-                        <li><span>특이 분석</span> <strong>기존 진료 병행(rho) 차단 제약식</strong></li>
-                    </ul>
-                    <a href="gimhae_gyeongnam.html" class="btn-link">경상남도 & 김해시 대시보드 열람하기 →</a>
-                </div>
-            </div>
 
-            <!-- Card 2: 전주시 및 전북특별자치도 -->
-            <div class="portal-card">
-                <div class="portal-card-header header-jeonju">
-                    전주시 & 전북특별자치도
+                <div class="portal-card">
+                    <div class="portal-card-header header-jeonju">전주시 & 전북특별자치도</div>
+                    <div class="portal-card-body">
+                        <ul class="stat-list">
+                            <li><span>분석 대상</span> <strong>전주시 & 전북 14개 시·군</strong></li>
+                            <li><span>고령화율</span> <strong>전북 25.4% (초고령사회)</strong></li>
+                            <li><span>50% 참여 5개년 절감</span> <strong>전주 2,510억 / 전북 1.84조</strong></li>
+                            <li><span>특이 분석</span> <strong>Nash 균형 & 5대 상병 비교</strong></li>
+                        </ul>
+                        <a href="01_재택의료_방문진료/지역별_시뮬레이션/jeonju_jeonbuk.html" class="btn-link">전주시 & 전북 대시보드 열람하기 →</a>
+                    </div>
                 </div>
-                <div class="portal-card-body">
-                    <ul class="stat-list">
-                        <li><span>분석 대상</span> <strong>전주시 & 전북 14개 시·군</strong></li>
-                        <li><span>고령화율</span> <strong>전북 25.4% (초고령사회)</strong></li>
-                        <li><span>50% 참여 5개년 절감</span> <strong>전주 2,510억 / 전북 1.84조</strong></li>
-                        <li><span>특이 분석</span> <strong>Nash 균형 & 5대 상병 비교</strong></li>
-                    </ul>
-                    <a href="jeonju_jeonbuk.html" class="btn-link">전주시 & 전북 대시보드 열람하기 →</a>
-                </div>
-            </div>
 
-            <!-- Card 3: 전라남도 및 여수시 -->
-            <div class="portal-card">
-                <div class="portal-card-header header-yeosu">
-                    전라남도 & 여수시
+                <div class="portal-card">
+                    <div class="portal-card-header header-yeosu">전라남도 & 여수시</div>
+                    <div class="portal-card-body">
+                        <ul class="stat-list">
+                            <li><span>분석 대상</span> <strong>여수시 & 전남 22개 시·군</strong></li>
+                            <li><span>고령화율</span> <strong>전남 26.6% (전국 최상위)</strong></li>
+                            <li><span>50% 참여 5개년 절감</span> <strong>여수 5,500.6억 / 전남 4.59조</strong></li>
+                            <li><span>특이 분석</span> <strong>도서·산간 방문케어 모델</strong></li>
+                        </ul>
+                        <a href="01_재택의료_방문진료/지역별_시뮬레이션/yeosu_jeonnam.html" class="btn-link">전라남도 & 여수시 대시보드 열람하기 →</a>
+                    </div>
                 </div>
-                <div class="portal-card-body">
-                    <ul class="stat-list">
-                        <li><span>분석 대상</span> <strong>여수시 & 전남 22개 시·군</strong></li>
-                        <li><span>고령화율</span> <strong>전남 26.6% (전국 최상위)</strong></li>
-                        <li><span>50% 참여 5개년 절감</span> <strong>여수 5,500.6억 / 전남 4.59조</strong></li>
-                        <li><span>특이 분석</span> <strong>도서·산간 방문케어 모델</strong></li>
-                    </ul>
-                    <a href="yeosu_jeonnam.html" class="btn-link">전라남도 & 여수시 대시보드 열람하기 →</a>
-                </div>
-            </div>
 
-            <!-- Card 4: 익산시 -->
-            <div class="portal-card">
-                <div class="portal-card-header header-iksan">
-                    익산시 (돌봄 특화)
-                </div>
-                <div class="portal-card-body">
-                    <ul class="stat-list">
-                        <li><span>분석 대상</span> <strong>전북특별자치도 익산시</strong></li>
-                        <li><span>특화 모델</span> <strong>소아청소년 & 통합방문돌봄</strong></li>
-                        <li><span>10%~100% 시뮬레이션</span> <strong>5개년 최대 7,483.5억 절감</strong></li>
-                        <li><span>특이 분석</span> <strong>20세 이하 의료비 추정</strong></li>
-                    </ul>
-                    <a href="iksan.html" class="btn-link">익산시 대시보드 열람하기 →</a>
+                <div class="portal-card">
+                    <div class="portal-card-header header-iksan">익산시 (돌봄 특화)</div>
+                    <div class="portal-card-body">
+                        <ul class="stat-list">
+                            <li><span>분석 대상</span> <strong>전북특별자치도 익산시</strong></li>
+                            <li><span>특화 모델</span> <strong>소아청소년 & 통합방문돌봄</strong></li>
+                            <li><span>10%~100% 시뮬레이션</span> <strong>5개년 최대 7,483.5억 절감</strong></li>
+                            <li><span>특이 분석</span> <strong>20세 이하 의료비 추정</strong></li>
+                        </ul>
+                        <a href="01_재택의료_방문진료/지역별_시뮬레이션/iksan.html" class="btn-link">익산시 대시보드 열람하기 →</a>
+                    </div>
                 </div>
             </div>
 
-        </div>
+            <h3 class="sub-title">익산시 심층 시뮬레이션</h3>
+            <div class="doc-grid">
+                <article class="doc-card">
+                    <span class="kind new">웹 보고서 · 신규 등록</span>
+                    <h3>요양기관·진료과별 내쉬 균형과 한의약 방문진료 개입 효과 분석</h3>
+                    <p>로짓 내쉬 균형(QRE)과 몬테카를로 시뮬레이션(N=10,000)으로 본 익산시 보건의료 시장의 균형과 한의약 개입 효과</p>
+                    <a href="01_재택의료_방문진료/지역별_시뮬레이션/익산시_보건의료_내쉬균형_및_한의약개입_확률시뮬레이션_보고서.html">열람하기 →</a>
+                </article>
+                <article class="doc-card">
+                    <span class="kind new">웹 보고서 · 신규 등록</span>
+                    <h3>익산시 한의약 방문진료·기능유지 돌봄 모델 진료비 시뮬레이션</h3>
+                    <p>방문진료·돌봄 모델 도입 시 인구 집단별 1인당 진료비 변화와 재정 절감 효과</p>
+                    <a href="01_재택의료_방문진료/지역별_시뮬레이션/익산시_한의약_방문진료_돌봄_진료비_시뮬레이션_보고서.html">열람하기 →</a>
+                </article>
+            </div>
 
-        <!-- Raw Files & Dataset Section -->
-        <div style="margin-top: 40px; background: #fff; padding: 24px; border-radius: 12px; border: 1px solid var(--border-color);">
-            <h3 style="font-size: 1.2rem; font-weight: 800; color: var(--primary-dark); margin-bottom: 12px;">📁 종합 정책 보고서 및 지역별 데이터셋 직접 열람/다운로드</h3>
-            <ul style="padding-left: 20px; font-size: 0.95rem;">
-                <li style="margin-bottom: 8px;"><a href="anatomy_act_reform_plan.html" style="color: var(--primary-light); font-weight: 700;">⚖️ 시체해부법 개정에 따른 한의학 교육권 확보 및 직능 정상화 방안 (온라인 웹)</a>: <code>anatomy_act_reform_plan.html</code></li>
-                <li style="margin-bottom: 8px;"><a href="시체해부법_개정에_따른_한의학_교육권_확보_및_한의사_직능_정상화_방안_최종본.md" style="color: var(--primary-light); font-weight: 700;">시체해부법 정책보고서 마크다운 원본 (MD)</a>: <code>시체해부법_개정에_따른_한의학_교육권_확보_및_한의사_직능_정상화_방안_최종본.md</code></li>
-                <li style="margin-bottom: 8px;"><a href="policy_report.html" style="color: var(--primary-light); font-weight: 700;">📜 한의사 재택의료 방문진료 참여확대 종합분석 및 정책제언 보고서 (온라인 웹)</a>: <code>policy_report.html</code></li>
-                <li style="margin-bottom: 8px;"><a href="gimhae_gyeongnam.html" style="color: var(--primary-light); font-weight: 700;">인터랙티브 웹 보고서 (HTML)</a>: <code>gimhae_gyeongnam.html</code></li>
-                <li style="margin-bottom: 8px;"><a href="경상남도_및_김해시_한의약_방문진료_기관참여율별_의료적정성_및_5개년_효과시뮬레이션_보고서.md" style="color: var(--primary-light); font-weight: 700;">마크다운 종합 보고서 (MD)</a>: <code>경상남도_및_김해시_한의약_방문진료_기관참여율별_의료적정성_및_5개년_효과시뮬레이션_보고서.md</code></li>
-                <li style="margin-bottom: 8px;"><a href="gimhae_gyeongnam_full_simulation.json" style="color: var(--primary-light); font-weight: 700;">5개년 시뮬레이션 데이터셋 (JSON)</a>: <code>gimhae_gyeongnam_full_simulation.json</code></li>
-                <li style="margin-bottom: 8px;"><a href="gimhae_gyeongnam_simulation_chart.png" style="color: var(--primary-light); font-weight: 700;">4분할 시각화 차트 이미지 (PNG)</a>: <code>gimhae_gyeongnam_simulation_chart.png</code></li>
-            </ul>
-        </div>
+            <h3 class="sub-title">정책 및 국제비교</h3>
+            <div class="doc-grid">
+                <article class="doc-card">
+                    <span class="kind">웹 보고서</span>
+                    <h3>한의사 재택의료(방문진료) 참여 확대 종합분석 및 정책제언</h3>
+                    <p>KDCA 8대 체계, 재택의료 4대 기능 모델, 시범사업 참여 실태, SWOT과 5대 추진 전략</p>
+                    <a href="01_재택의료_방문진료/정책_및_국제비교/policy_report.html">열람하기 →</a>
+                </article>
+                <article class="doc-card">
+                    <span class="kind new">웹 보고서 · 신규 등록</span>
+                    <h3>한국 재택의료 현황 진단 및 일본·대만 비교를 통한 개선 방향</h3>
+                    <p>질병관리청 공시 8대 시범사업 분석과 일본(한방)·대만(중의) 재택의료 제도화 모델 벤치마킹</p>
+                    <a href="01_재택의료_방문진료/정책_및_국제비교/한국_재택의료_현황_및_일본_대만_비교를_통한_개선방향_보고서.html">열람하기 →</a>
+                </article>
+            </div>
+
+            <div class="raw-box">
+                <h3>📁 김해·경남 시뮬레이션 원자료</h3>
+                <ul>
+                    <li><a href="01_재택의료_방문진료/지역별_시뮬레이션/경상남도_및_김해시_한의약_방문진료_기관참여율별_의료적정성_및_5개년_효과시뮬레이션_보고서.md">마크다운 종합 보고서 (MD)</a></li>
+                    <li><a href="01_재택의료_방문진료/지역별_시뮬레이션/gimhae_gyeongnam_full_simulation.json">5개년 시뮬레이션 데이터셋 (JSON)</a></li>
+                    <li><a href="01_재택의료_방문진료/지역별_시뮬레이션/gimhae_gyeongnam_simulation_chart.png">4분할 시각화 차트 이미지 (PNG)</a></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 02 질환별 한의약 의료서비스 -->
+        <section id="cat-02" class="cat-section">
+            <div class="cat-head"><span class="num">02</span><h2>질환별 한의약 의료서비스</h2><code>02_질환별_한의약_의료서비스/</code></div>
+            <p class="cat-desc">HIRA 청구 통계로 본 질환별 한의약 진료 현황과 급여·비급여 확대 방안</p>
+            <div class="doc-grid">
+                <article class="doc-card">
+                    <span class="kind new">웹 보고서 · 신규 등록</span>
+                    <h3>편두통 한의약 의료서비스 현황 및 급여·비급여 확대방안</h3>
+                    <p>편두통 진료 현황, 한의약 치료 근거와 급여·비급여 확대 방안 종합 마스터 보고서</p>
+                    <a href="02_질환별_한의약_의료서비스/편두통/편두통_한의약_의료서비스_현황_및_확대방안_보고서.html">열람하기 →</a>
+                </article>
+                <article class="doc-card">
+                    <span class="kind new">웹 보고서 · 신규 등록</span>
+                    <h3>안면신경마비 한의약 의료서비스 현황 및 급여·비급여 확대방안</h3>
+                    <p>안면신경마비(G51) 진료 현황과 의료기관 종별 점유율, 급여·비급여 확대 방안</p>
+                    <a href="02_질환별_한의약_의료서비스/안면신경마비/안면신경마비_한의약_의료서비스_현황_및_급여_비급여_확대방안_보고서.html">열람하기 →</a>
+                </article>
+                <article class="doc-card">
+                    <span class="kind new">웹 보고서 · 신규 등록</span>
+                    <h3>심부전 한의약 치료 및 HIRA 보건의료빅데이터 종합 분석</h3>
+                    <p>심부전 진료 통계와 한의약 치료의 역할 분석</p>
+                    <a href="02_질환별_한의약_의료서비스/심부전/심부전_한의약치료_및_HIRA통계_종합분석_보고서.html">열람하기 →</a>
+                </article>
+                <article class="doc-card">
+                    <span class="kind new">웹 보고서 · 신규 등록</span>
+                    <h3>HIRA 빅데이터 기반 한의원 요통 및 침구치료 분석</h3>
+                    <p>한의원 요통 진료와 침구치료 이용 현황 분석</p>
+                    <a href="02_질환별_한의약_의료서비스/요통_및_침구치료/HIRA_한의원_요통_및_침구치료_분석_보고서.html">열람하기 →</a>
+                </article>
+                <article class="doc-card">
+                    <span class="kind dash">대시보드 · 신규 등록</span>
+                    <h3>2024 한의원 침구치료 다빈도 상병 Top 20</h3>
+                    <p>2024년 HIRA 기준 한의원 침구치료 다빈도 상병 순위</p>
+                    <a href="02_질환별_한의약_의료서비스/요통_및_침구치료/HIRA_2024_한의원_침구치료_다빈도상병_Top20.html">열람하기 →</a>
+                </article>
+            </div>
+        </section>
+
+        <!-- 03 의료이용·진료비·건강지표 -->
+        <section id="cat-03" class="cat-section">
+            <div class="cat-head"><span class="num">03</span><h2>의료이용·진료비·건강지표</h2><code>03_의료이용_진료비_및_건강지표/</code></div>
+            <p class="cat-desc">한의원 다빈도상병·처방, 지역별 진료비, 건강수준 지표 분석</p>
+
+            <h3 class="sub-title">한의원 다빈도상병 및 처방</h3>
+            <div class="doc-grid">
+                <article class="doc-card">
+                    <span class="kind dash">대시보드 · 신규 등록</span>
+                    <h3>한의원 외래 다빈도 상병 10종 10개년(2014~2023) 시계열</h3>
+                    <p>10대 상병 환자수·진료비·성장률과 제도 충격 분석. 10대 상병 진료비 9,790억 원(2014) → 2조 504억 원(2023)</p>
+                    <a href="03_의료이용_진료비_및_건강지표/한의원_다빈도상병_및_처방/한의원_다빈도상병_10종_10개년_시계열_종합분석_대시보드.html">열람하기 →</a>
+                </article>
+                <article class="doc-card">
+                    <span class="kind new">웹 보고서 · 신규 등록</span>
+                    <h3>한의원 급여 및 비급여 한약 처방 Top 20</h3>
+                    <p>급여 엑스제·첩약 시범사업과 비급여 맞춤 한약 처방 순위</p>
+                    <a href="03_의료이용_진료비_및_건강지표/한의원_다빈도상병_및_처방/HIRA_한의원_급여_및_비급여_한약처방_Top20.html">열람하기 →</a>
+                </article>
+                <article class="doc-card">
+                    <span class="kind new">웹 보고서 · 신규 등록</span>
+                    <h3>진료과 및 요양기관별 치료·약물 처방 종합 분석</h3>
+                    <p>1인당 진료비 상위 5개 vs 하위 5개 시·군·구의 치료·처방 구조 비교</p>
+                    <a href="03_의료이용_진료비_및_건강지표/한의원_다빈도상병_및_처방/진료과_및_요양기관별_치료_약물처방_종합분석_보고서.html">열람하기 →</a>
+                </article>
+            </div>
+
+            <h3 class="sub-title">지역별 진료비</h3>
+            <div class="doc-grid">
+                <article class="doc-card">
+                    <span class="kind new">웹 보고서 · 신규 등록</span>
+                    <h3>시·군·구별 1인당 연간 진료비와 한의약 역할 확대 시뮬레이션</h3>
+                    <p>진료비 상위 초고령 지역의 1인당 진료비 감축과 건강보험 재정 절감 시뮬레이션</p>
+                    <a href="03_의료이용_진료비_및_건강지표/지역별_진료비/시군구별_1인당_연간진료비_상하위_종합분석_보고서.html">열람하기 →</a>
+                </article>
+                <article class="doc-card">
+                    <span class="kind new">웹 보고서 · 신규 등록</span>
+                    <h3>익산시 20세 이하 연평균 의료비 및 다빈도 상병 Top 20</h3>
+                    <p>익산시 소아·청소년의 연령대별 의료비 지출과 진료과별 다빈도 질환</p>
+                    <a href="03_의료이용_진료비_및_건강지표/지역별_진료비/익산시_20세이하_연평균_의료비_및_다빈도상병_Top20_분석_보고서.html">열람하기 →</a>
+                </article>
+                <article class="doc-card">
+                    <span class="kind new">웹 보고서 · 신규 등록</span>
+                    <h3>익산시 소아·청소년 한의약 의료서비스 진료현황 및 5개년 비용 시뮬레이션</h3>
+                    <p>한방병원과 한의원의 소아·청소년 진료 특성 비교와 한의약 비중 확대 시 5개년 진료비 변화</p>
+                    <a href="03_의료이용_진료비_및_건강지표/지역별_진료비/익산시_소아청소년_한의약의료서비스_진료현황_및_5개년_비용시뮬레이션_보고서.html">열람하기 →</a>
+                </article>
+            </div>
+
+            <h3 class="sub-title">건강수준 지표</h3>
+            <div class="doc-grid">
+                <article class="doc-card">
+                    <span class="kind new">웹 보고서 · 신규 등록</span>
+                    <h3>시도별 치료가능 사망률 분석 및 한방의료기관 역할</h3>
+                    <p>시도별 치료가능 사망률 격차와 한방의료기관의 역할</p>
+                    <a href="03_의료이용_진료비_및_건강지표/건강수준_지표/시도별_치료가능_사망률_분석_및_한방의료기관_역할_보고서.html">열람하기 →</a>
+                </article>
+            </div>
+        </section>
+
+        <!-- 04 의료기관 경영·환자경험 -->
+        <section id="cat-04" class="cat-section">
+            <div class="cat-head"><span class="num">04</span><h2>의료기관 경영·환자경험</h2><code>04_의료기관_경영_및_환자경험/</code></div>
+            <p class="cat-desc">KOSIS(korea-stats MCP)·HIRA 자료로 본 의료기관 종별 수익성과 환자경험</p>
+            <div class="doc-grid">
+                <article class="doc-card">
+                    <span class="kind new">웹 보고서 · 신규 등록</span>
+                    <h3>의료기관 종별 매출액·영업이익률 10개년(2014~2024)</h3>
+                    <p>상급종합·종합병원, 병원, 요양병원, 의원, 치과, 한방병원, 한의원의 매출·영업이익률과 건강보험 진료비</p>
+                    <a href="04_의료기관_경영_및_환자경험/의료기관_종별_매출_및_영업이익률/종합병원_매출액_및_영업이익률_10개년_분석_보고서.html">열람하기 →</a>
+                </article>
+                <article class="doc-card">
+                    <span class="kind new">웹 보고서 · 신규 등록</span>
+                    <h3>환자경험 만족도 분석 및 환자가 중시하는 요소 우선순위 10</h3>
+                    <p>의사·간호사·의료기관 이용 경험 만족도(2017~2025)와 환자가 중시하는 요소 우선순위</p>
+                    <a href="04_의료기관_경영_및_환자경험/환자경험_및_환자중시요소/환자경험_만족도_분석_및_환자중시요소_우선순위_보고서.html">열람하기 →</a>
+                </article>
+            </div>
+        </section>
+
+        <!-- 08 한의학교육·의료인력 정책 -->
+        <section id="cat-08" class="cat-section">
+            <div class="cat-head"><span class="num">08</span><h2>한의학교육·의료인력 정책</h2><code>08_한의학교육_및_의료인력_정책/</code></div>
+            <p class="cat-desc">6년제 통합의료 교육과정과 한의학 교육권·직능 관련 정책 보고서</p>
+            <div class="doc-grid">
+                <article class="doc-card">
+                    <span class="kind dash">대시보드</span>
+                    <h3>초고령사회 대응 통합의료 교육과정(6년제) 10개년 혁신 로드맵</h3>
+                    <p>218학점 6년제 학년별 매트릭스, 노년증후군 CPG 모듈, 2026~2035 3단계 이행 로드맵</p>
+                    <a href="curriculum_10yr_roadmap.html">열람하기 →</a>
+                </article>
+                <article class="doc-card">
+                    <span class="kind">웹 보고서</span>
+                    <h3>시체해부법 개정에 따른 한의학 교육권 확보 및 한의사 직능 정상화 방안</h3>
+                    <p>법률 제21107호·대통령령 제36725호 분석과 12개 한의대 시체제공기관 허가·해부권 입법 전략</p>
+                    <a href="anatomy_act_reform_plan.html">열람하기 →</a>
+                </article>
+            </div>
+            <div class="raw-box">
+                <h3>📁 마크다운 원고</h3>
+                <ul>
+                    <li><a href="08_한의학교육_및_의료인력_정책/시체해부법_개정에_따른_한의학_교육권_확보_및_한의사_직능_정상화_방안_최종본.md">시체해부법 정책보고서 원본 (MD)</a></li>
+                    <li><a href="08_한의학교육_및_의료인력_정책/통합의료_한의학교육과정_10년_혁신로드맵.md">통합의료 교육과정 10개년 로드맵 원본 (MD)</a></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 09 아카이브 -->
+        <section id="cat-09" class="cat-section">
+            <div class="cat-head"><span class="num">09</span><h2>아카이브·서식</h2><code>09_아카이브_서식_및_참고자료/</code></div>
+            <div class="doc-grid">
+                <article class="doc-card">
+                    <span class="kind new">서식 · 신규 등록</span>
+                    <h3>아젠다 제안 양식 (권오상 2차)</h3>
+                    <p>익산형 통합 방문 기능유지 돌봄 네트워크 아젠다 제안 양식</p>
+                    <a href="09_아카이브_서식_및_참고자료/서식/(양식)%20아젠다%20제안양식%20권오상%202차.html">열람하기 →</a>
+                </article>
+            </div>
+        </section>
     </div>
 
     <footer>
-        <p>대한민국 지역별 한의약 보건의료 통계 및 시뮬레이션 대시보드 아카이브</p>
+        <p>대한민국 한의약 보건의료 빅데이터 연구 포털 · <a href="https://github.com/jaehyokim-sketch/km-healthcare-stats">GitHub 저장소</a></p>
     </footer>
 
 </body>

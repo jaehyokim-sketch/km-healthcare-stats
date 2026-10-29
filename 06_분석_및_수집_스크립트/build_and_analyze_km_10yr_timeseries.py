@@ -18,7 +18,7 @@ plt.rcParams['axes.unicode_minus'] = False
 
 base_dir = r"d:\한의 의료서비스 통계"
 db_dir = os.path.join(base_dir, "05_원천_통계_데이터셋", "06_HIRA_한의의료_마스터DB")
-report_dir = os.path.join(base_dir, "03_HIRA_및_임상통계_보고서")
+report_dir = os.path.join(base_dir, "03_의료이용_진료비_및_건강지표", "한의원_다빈도상병_및_처방")
 os.makedirs(db_dir, exist_ok=True)
 os.makedirs(report_dir, exist_ok=True)
 
