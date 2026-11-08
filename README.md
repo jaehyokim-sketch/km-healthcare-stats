@@ -18,6 +18,7 @@
 | **📊 전북특별자치도 & 전주시 시뮬레이션 대시보드** | **[👉 전주·전북 대시보드](https://jaehyokim-sketch.github.io/km-healthcare-stats/01_%EC%9E%AC%ED%83%9D%EC%9D%98%EB%A3%8C_%EB%B0%A9%EB%AC%B8%EC%A7%84%EB%A3%8C/%EC%A7%80%EC%97%AD%EB%B3%84_%EC%8B%9C%EB%AE%AC%EB%A0%88%EC%9D%B4%EC%85%98/jeonju_jeonbuk.html)** | 초고령 전북 14개 시·군 Nash 균형 시뮬레이션, 5대 다빈도 질환 비용절감(최대 1.84조 원) |
 | **📊 전라남도 & 여수시 시뮬레이션 대시보드** | **[👉 여수·전남 대시보드](https://jaehyokim-sketch.github.io/km-healthcare-stats/01_%EC%9E%AC%ED%83%9D%EC%9D%98%EB%A3%8C_%EB%B0%A9%EB%AC%B8%EC%A7%84%EB%A3%8C/%EC%A7%80%EC%97%AD%EB%B3%84_%EC%8B%9C%EB%AE%AC%EB%A0%88%EC%9D%B4%EC%85%98/yeosu_jeonnam.html)** | 최고 고령화율(26.6%) 전남 22개 시·군 및 여수시 도서·해양 벽지 특화 재택의료 5개년 시뮬레이션 (최대 4.59조) |
 | **📊 익산시 소아청소년 & 통합돌봄 대시보드** | **[👉 익산시 대시보드](https://jaehyokim-sketch.github.io/km-healthcare-stats/01_%EC%9E%AC%ED%83%9D%EC%9D%98%EB%A3%8C_%EB%B0%A9%EB%AC%B8%EC%A7%84%EB%A3%8C/%EC%A7%80%EC%97%AD%EB%B3%84_%EC%8B%9C%EB%AE%AC%EB%A0%88%EC%9D%B4%EC%85%98/iksan.html)** | 익산시 10%~100% 참여율 시뮬레이션, 20세 이하 소아청소년 진료비 추정 및 지역돌봄 특화 모델 |
+| **🧭 영추 4대 병증 & 동의보감·HIRA KCD 탐색기** | **[👉 탐색기 열람](https://jaehyokim-sketch.github.io/km-healthcare-stats/02_%EC%A7%88%ED%99%98%EB%B3%84_%ED%95%9C%EC%9D%98%EC%95%BD_%EC%9D%98%EB%A3%8C%EC%84%9C%EB%B9%84%EC%8A%A4/%EC%98%81%EC%B6%94_%EA%B2%BD%EB%A7%A5%EB%B3%91%EC%A6%9D_%EB%8F%99%EC%9D%98%EB%B3%B4%EA%B0%90_KCD/%EC%98%81%EC%B6%94_%EB%B3%91%EC%A6%9D_%EB%8F%99%EC%9D%98%EB%B3%B4%EA%B0%90_%ED%99%A9%EB%A3%A1%EC%83%81_%EA%B2%80%EC%83%89%ED%83%90%EC%83%89%EA%B8%B0.html)** | 『영추』 시동·소생·락맥·경근병 → 황룡상 고증·중의백병명원고·동의보감·변증론치 → HIRA 현행 KCD-8/9(150개 코드 검증)와 2025 의과·한방 진료실적 |
 | **🏛️ 통합 포털 메인 허브** | **[👉 메인 포털 접속](https://jaehyokim-sketch.github.io/km-healthcare-stats/)** | 대한민국 한의약 보건의료 빅데이터 및 지역별 방문진료 시뮬레이션 통합 포털 |
 
 ---
@@ -53,7 +54,7 @@
 | [06_분석_및_수집_스크립트](06_분석_및_수집_스크립트) | 분석·수집 스크립트 | KOSIS(korea-stats MCP)·HIRA 수집, 시뮬레이션, 그래프·HTML 빌더 |
 | [07_MCP_및_API_인프라](07_MCP_및_API_인프라) | MCP·API 인프라 | HIRA·KDCA MCP 서버 |
 | [08_한의학교육_및_의료인력_정책](08_한의학교육_및_의료인력_정책) | 한의학교육·의료인력 정책 | 6년제 통합의료 교육과정 10개년 로드맵, 시체해부법 개정 방안, 한평원 KAS2022, 중의학교육표준 비교, 의료통합교육 정책 분석 |
-| [09_아카이브_서식_및_참고자료](09_아카이브_서식_및_참고자료) | 아카이브 | `서식/`: 아젠다 제안 양식 · `작업기록/` |
+| [09_아카이브_서식_및_참고자료](09_아카이브_서식_및_참고자료) | 아카이브 | `작업기록/` |
 
 루트의 `index.html`(통합 포털), `anatomy_act_reform_plan.html`, `curriculum_10yr_roadmap.html`은 GitHub Pages 공개 주소를 유지하려고 루트에 둔다.
 
