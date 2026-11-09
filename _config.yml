@@ -1,14 +1,17 @@
 # GitHub Pages(Jekyll) 게시 범위
 # 웹 페이지(.html)와 페이지가 쓰는 이미지·데이터만 게시한다.
 # 원고(.md)·스크립트·원천 데이터·작업 기록·설정 파일은 게시하지 않는다(저장소에는 그대로 남는다).
-# 새 보고서가 PNG·JSON 등 로컬 파일을 쓰면 아래 include에 경로를 더한다.
+# JSON은 패턴("*.json")으로 빼면 include로 되살릴 수 없으므로(Jekyll), 게시하지 않을 JSON을 파일별로 적는다.
+# 새 JSON·CSV 등을 커밋하면 게시할지 판단해 아래 exclude에 더한다.
 exclude:
   - "*.md"
   - "*.py"
   - "*.pyc"
   - "*.ipynb"
   - "*.csv"
-  - "*.json"
+  - mcp_config.json
+  - 01_재택의료_방문진료/지역별_시뮬레이션/all_regions_revalidated_summary.json
+  - 01_재택의료_방문진료/지역별_시뮬레이션/revalidated_corpus_simulation.json
   - "*.pdf"
   - "*.zip"
   - "*.docx"
@@ -25,5 +28,3 @@ exclude:
   - 07_MCP_및_API_인프라
   - 09_아카이브_서식_및_참고자료
   - __pycache__
-include:
-  - 01_재택의료_방문진료/지역별_시뮬레이션/gimhae_gyeongnam_full_simulation.json
