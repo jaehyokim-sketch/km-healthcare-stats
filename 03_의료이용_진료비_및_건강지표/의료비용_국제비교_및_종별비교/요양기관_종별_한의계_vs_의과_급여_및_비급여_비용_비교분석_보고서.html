@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>최근 3~4개년 요양기관 종별 급여 및 비급여 비용 심층 비교 분석 보고서</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #1e3a8a; --primary-light: #3b82f6; --secondary: #0d9488;
+  --danger: #dc2626; --warn-bg: #fffbeb; --warn-border: #f59e0b;
+  --bg-body: #f8fafc; --bg-card: #ffffff; --text-main: #1f2937; --text-muted: #64748b;
+  --border: #e2e8f0; --radius: 12px;
+  --shadow: 0 4px 6px -1px rgba(0,0,0,.08), 0 2px 4px -2px rgba(0,0,0,.05);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Noto Sans KR', sans-serif; background: var(--bg-body); color: var(--text-main);
+       line-height: 1.7; font-size: 15.5px; }
+.header { background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 55%, #0d9488 100%); color: #fff;
+          padding: 48px 16px 40px; text-align: center; }
+.header h1 { font-size: clamp(1.45rem, 3.6vw, 2.1rem); font-weight: 800; letter-spacing: -.5px; max-width: 1000px; margin: 0 auto; }
+.header .sub { color: #cbd5e1; margin-top: 10px; font-weight: 300; }
+.tags { display: flex; justify-content: center; gap: 8px; margin-top: 18px; flex-wrap: wrap; }
+.tag { background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.25); padding: 4px 12px;
+       border-radius: 999px; font-size: .82rem; }
+.layout { max-width: 1280px; margin: 0 auto; padding: 28px 16px; display: grid;
+          grid-template-columns: 250px minmax(0, 1fr); gap: 28px; align-items: start; }
+nav.toc { position: sticky; top: 16px; background: var(--bg-card); border: 1px solid var(--border);
+          border-radius: var(--radius); padding: 16px 14px; box-shadow: var(--shadow); font-size: .86rem;
+          max-height: calc(100vh - 32px); overflow-y: auto; }
+nav.toc .toc-title { font-weight: 700; color: var(--primary); margin-bottom: 8px; }
+nav.toc ul { list-style: none; }
+nav.toc li { margin: 3px 0; }
+nav.toc ul ul { padding-left: 12px; font-size: .82rem; }
+nav.toc a { color: var(--text-muted); text-decoration: none; }
+nav.toc a:hover { color: var(--primary-light); }
+main, nav.toc { min-width: 0; }
+code { overflow-wrap: anywhere; }
+pre { white-space: pre-wrap; }
+.card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+        box-shadow: var(--shadow); padding: 28px 30px; margin-bottom: 24px; }
+.meta { background: #eff6ff; border-left: 4px solid var(--primary-light); }
+.meta p { margin: 2px 0; font-size: .9rem; }
+h2 { font-size: 1.4rem; color: var(--primary); font-weight: 800; padding-bottom: 10px;
+     border-bottom: 2px solid var(--border); margin-bottom: 18px; }
+h3 { font-size: 1.12rem; color: #0f172a; font-weight: 700; margin: 22px 0 10px; padding-left: 10px;
+     border-left: 4px solid var(--secondary); }
+p { margin: 10px 0; }
+ul, ol { margin: 10px 0 10px 22px; }
+li { margin: 6px 0; }
+strong { color: #0f172a; }
+code { font-family: Consolas, monospace; background: #f1f5f9; padding: 1px 5px; border-radius: 4px; font-size: .88em; }
+pre { background: #0f172a; color: #e2e8f0; padding: 16px; border-radius: 8px; overflow-x: auto; margin: 12px 0; }
+pre code { background: none; color: inherit; padding: 0; }
+.table-wrap { overflow-x: auto; margin: 14px 0; border: 1px solid var(--border); border-radius: 8px; }
+table { border-collapse: collapse; width: 100%; font-size: .87rem; font-variant-numeric: tabular-nums; }
+th { background: #f1f5f9; color: #0f172a; font-weight: 700; padding: 9px 10px; border-bottom: 2px solid var(--border);
+     white-space: nowrap; }
+td { padding: 8px 10px; border-bottom: 1px solid var(--border); }
+tbody tr:hover { background: #f8fafc; }
+td.neg { color: var(--danger); font-weight: 600; }
+p em, li em { color: var(--text-muted); }
+p > em:only-child { display: block; font-size: .85rem; }
+figure { margin: 18px 0; text-align: center; }
+figure img { max-width: 100%; height: auto; border: 1px solid var(--border); border-radius: 8px; background: #fcfcfb; }
+figcaption { font-size: .82rem; color: var(--text-muted); margin-top: 6px; }
+.warn { background: var(--warn-bg); border: 1px solid var(--warn-border); border-left-width: 4px;
+        border-radius: 8px; padding: 10px 14px; list-style: none; margin-left: -22px; }
+hr { display: none; }
+.mermaid { text-align: center; margin: 18px 0; overflow-x: auto; }
+.chart-box { position: relative; height: 360px; max-width: 760px; margin: 0 auto; }
+.callout { border: 1px solid var(--border); border-left: 4px solid var(--primary-light); background: #eff6ff;
+           border-radius: 8px; padding: 10px 16px; margin: 14px 0; }
+.callout-tip { border-left-color: var(--secondary); background: #f0fdfa; }
+.callout-warning, .callout-caution { border-left-color: var(--warn-border); background: var(--warn-bg); }
+.callout-title { font-weight: 700; color: var(--primary); margin: 4px 0; }
+.callout-tip .callout-title { color: var(--secondary); }
+footer { text-align: center; color: var(--text-muted); font-size: .8rem; padding: 10px 16px 40px; }
+@media (max-width: 900px) {
+  .layout { grid-template-columns: minmax(0, 1fr); }
+  nav.toc { position: static; max-height: none; }
+  .card { padding: 20px 16px; }
+}
+@media print {
+  body { background: #fff; font-size: 11pt; }
+  .header { background: #1e3a8a !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .layout { display: block; }
+  nav.toc { display: none; }
+  .card { box-shadow: none; break-inside: auto; }
+  figure, table { break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+<header class="header">
+  <h1>최근 3~4개년 요양기관 종별 급여 및 비급여 비용 심층 비교 분석 보고서</h1>
+  <p class="sub">한의원 · 한방병원 vs 의원 · 병원 (약국·치과 제외) — 건강보험 급여 진료비와 비급여 본인부담 비교</p>
+  <div class="tags"><span class="tag">KOSIS 건강보험통계</span><span class="tag">HIRA 진료비 심사실적</span><span class="tag">NHIS 진료비 실태조사</span><span class="tag">비급여 보고자료</span><span class="tag">2021~2024</span></div>
+</header>
+<div class="layout">
+<nav class="toc"><div class="toc-title">목차</div>
+<ul>
+<li><a href="#executive-summary">Executive Summary (핵심 요약)</a></li>
+<li><a href="#1-4-kosishira">1. 최근 4개년 건강보험 급여 진료비 심사실적 비교 (KOSIS/HIRA)</a></li>
+<li><a href="#2">2. 요양기관 종별 비급여 본인부담률 및 비급여 비용 추계</a><ul>
+<li><a href="#1">(1) 연도별 비급여 본인부담률 추이 (진료비 실태조사)</a></li>
+<li><a href="#2-2023">(2) 급여 및 비급여 비용 통합 시장 규모 추정 (2023년 확정 기준)</a></li>
+</ul>
+</li>
+<li><a href="#3-hira">3. HIRA 비급여 보고제도로 본 핵심 비급여 항목 비교</a><ul>
+<li><a href="#1-2024-31">(1) 2024년 3월(1개월분) 종별 비급여 진료비 발생액</a></li>
+<li><a href="#2-vs">(2) 의과 vs 한의과 대표 비급여 상위 항목 대조</a></li>
+</ul>
+</li>
+<li><a href="#4-vs">4. 보충 분석: 의료인력 직종별(의사 vs 한의사) 보수(급여) 및 비급여 연계</a></li>
+<li><a href="#5">5. 결론 및 종합 비교 매트릭스</a></li>
+</ul>
+</nav>
+
+<main>
+<section class="card meta"><p><strong>분석 대상:</strong> 한의원·한방병원 vs 의원·병원 (약국 및 치과 제외)<br /><br>
+<strong>공식 출처:</strong> 통계청 국가통계포털(KOSIS), 건강보험심사평가원(HIRA), 국민건강보험공단(NHIS)<br /><br>
+<strong>기준 연도:</strong> 2021년 ~ 2024년 (최신 확정 진료비 심사실적 및 비급여 보고자료·진료비 실태조사 연계)</p></section>
+<section class="card"><h2 id="executive-summary">Executive Summary (핵심 요약)</h2>
+<ol>
+<li>
+<p><strong>용어 및 비교 기준 정립</strong></p>
+<ul>
+<li>보건의료체계 및 건강보험법상 공식 분류 기준인 <strong>「요양기관 종별(한의원·한방병원 vs 의원·병원)」</strong>의 건강보험 <strong>급여 진료비용</strong>(건강보험 심사실적)과 <strong>비급여 진료비용</strong>(비급여 보고제도 및 진료비 실태조사)을 주축으로 심층 대조했습니다.</li>
+<li>아울러 질의어의 '직종별' 의미를 충실히 반영하여 보건의료인력실태조사 상의 <strong>의료인력 직종별(의사 vs 한의사) 보수(급여)</strong>와 비급여 수익 구조의 연관성을 보충 분석했습니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>급여 진료비 규모 (2023~2024년 기준)</strong></p>
+<ul>
+<li><strong>의원 vs 한의원:</strong> 의원의 건강보험 급여 진료비(2023년 24.6조 원 → 2024년 26.4조 원)는 한의원(2023년 2.76조 원 → 2024년 3.11조 원)의 <strong>약 8.5~8.9배</strong> 규모입니다.</li>
+<li><strong>병원 vs 한방병원:</strong> 병원의 급여 진료비(2023년 9.22조 원 → 2024년 10.21조 원)는 한방병원(2023년 6,883억 원 → 2024년 8,252억 원)의 <strong>약 12.4~13.4배</strong> 규모입니다. 단, 한방병원은 연평균 16.3%의 가파른 급여 성장세를 기록하고 있습니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>비급여 본인부담률 및 비급여 진료비 특성</strong></p>
+<ul>
+<li><strong>한방병원 (비급여율 45.1% ~ 49.2%):</strong> 전체 의료기관 종별 중 비급여 비중이 가장 높으며, 총 진료비 중 거의 절반이 비급여(비급여 첩약, 약침술, 상급병실료 등)로 발생합니다.</li>
+<li><strong>병원 (비급여율 29.2% ~ 31.7%):</strong> 도수치료, 1인실 상급병실료, 관절강내 주사 등 신규 비급여 확대로 비급여율 30% 내외를 안정적으로 유지하고 있습니다.</li>
+<li><strong>의원 (비급여율 19.7% ~ 25.0%):</strong> 도수치료, 백내장 다초점인공수정체, 독감 비급여 치료주사/검사 등의 유행에 따라 변동성이 크며, 2023년 23.0%로 반등했습니다.</li>
+<li><strong>한의원 (비급여율 20.5% ~ 24.2%):</strong> 첩약(조제한약 76.7%)과 약침(9.6%)이 비급여의 대부분을 차지하며, 추나요법 급여화 및 첩약 건강보험 시범사업 확대로 비급여율이 점진적 하향 안정세(2023년 20.5%)를 보입니다.</li>
+</ul>
+</li>
+</ol>
+<hr />
+</section><section class="card"><h2 id="1-4-kosishira">1. 최근 4개년 건강보험 급여 진료비 심사실적 비교 (KOSIS/HIRA)</h2>
+<p><em>출처: KOSIS 국가통계포털 「건강보험통계 - 요양기관종별 진료비 심사실적(DT_LEE_02)」 (국민건강보험공단·건강보험심사평가원 공동 집계)</em><br />
+<em>(단위: 억 원, 만 건, 원)</em></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: left;">구분</th>
+<th style="text-align: center;">연도</th>
+<th style="text-align: center;">청구건수(만건)</th>
+<th style="text-align: center;">진료비 총액(계)</th>
+<th style="text-align: center;">공단부담금(급여비)</th>
+<th style="text-align: center;">법정 본인부담금</th>
+<th style="text-align: center;">건당 진료비</th>
+<th style="text-align: center;">급여비율(%)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>한의원</strong></td>
+<td style="text-align: center;"><strong>2021</strong></td>
+<td style="text-align: center;">8,916.8</td>
+<td style="text-align: center;"><strong>25,371.2</strong></td>
+<td style="text-align: center;">19,202.4</td>
+<td style="text-align: center;">6,168.9</td>
+<td style="text-align: center;">28,453</td>
+<td style="text-align: center;">75.7%</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: center;"><strong>2022</strong></td>
+<td style="text-align: center;">8,683.5</td>
+<td style="text-align: center;"><strong>25,793.5</strong></td>
+<td style="text-align: center;">19,530.7</td>
+<td style="text-align: center;">6,262.8</td>
+<td style="text-align: center;">29,704</td>
+<td style="text-align: center;">75.7%</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: center;"><strong>2023</strong></td>
+<td style="text-align: center;">8,827.0</td>
+<td style="text-align: center;"><strong>27,635.7</strong></td>
+<td style="text-align: center;">20,882.2</td>
+<td style="text-align: center;">6,753.5</td>
+<td style="text-align: center;">31,308</td>
+<td style="text-align: center;">75.6%</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: center;"><strong>2024</strong></td>
+<td style="text-align: center;">9,290.5</td>
+<td style="text-align: center;"><strong>31,141.1</strong></td>
+<td style="text-align: center;">23,397.8</td>
+<td style="text-align: center;">7,743.4</td>
+<td style="text-align: center;">33,520</td>
+<td style="text-align: center;">75.1%</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>의원</strong></td>
+<td style="text-align: center;"><strong>2021</strong></td>
+<td style="text-align: center;">47,094.1</td>
+<td style="text-align: center;"><strong>187,709.6</strong></td>
+<td style="text-align: center;">140,903.4</td>
+<td style="text-align: center;">46,806.2</td>
+<td style="text-align: center;">39,858</td>
+<td style="text-align: center;">75.1%</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: center;"><strong>2022</strong></td>
+<td style="text-align: center;">55,394.6</td>
+<td style="text-align: center;"><strong>231,198.5</strong></td>
+<td style="text-align: center;">175,566.3</td>
+<td style="text-align: center;">55,632.2</td>
+<td style="text-align: center;">41,737</td>
+<td style="text-align: center;">75.9%</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: center;"><strong>2023</strong></td>
+<td style="text-align: center;">58,967.1</td>
+<td style="text-align: center;"><strong>246,495.7</strong></td>
+<td style="text-align: center;">184,804.1</td>
+<td style="text-align: center;">61,691.7</td>
+<td style="text-align: center;">41,802</td>
+<td style="text-align: center;">75.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: center;"><strong>2024</strong></td>
+<td style="text-align: center;">58,932.3</td>
+<td style="text-align: center;"><strong>263,830.8</strong></td>
+<td style="text-align: center;">196,384.2</td>
+<td style="text-align: center;">67,446.6</td>
+<td style="text-align: center;">44,768</td>
+<td style="text-align: center;">74.4%</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>한방병원</strong></td>
+<td style="text-align: center;"><strong>2021</strong></td>
+<td style="text-align: center;">445.9</td>
+<td style="text-align: center;"><strong>5,250.5</strong></td>
+<td style="text-align: center;">3,705.0</td>
+<td style="text-align: center;">1,545.5</td>
+<td style="text-align: center;">117,759</td>
+<td style="text-align: center;">70.6%</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: center;"><strong>2022</strong></td>
+<td style="text-align: center;">446.7</td>
+<td style="text-align: center;"><strong>5,739.3</strong></td>
+<td style="text-align: center;">4,062.2</td>
+<td style="text-align: center;">1,677.1</td>
+<td style="text-align: center;">128,488</td>
+<td style="text-align: center;">70.8%</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: center;"><strong>2023</strong></td>
+<td style="text-align: center;">446.4</td>
+<td style="text-align: center;"><strong>6,882.8</strong></td>
+<td style="text-align: center;">4,926.1</td>
+<td style="text-align: center;">1,956.7</td>
+<td style="text-align: center;">154,193</td>
+<td style="text-align: center;">71.6%</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: center;"><strong>2024</strong></td>
+<td style="text-align: center;">466.5</td>
+<td style="text-align: center;"><strong>8,251.7</strong></td>
+<td style="text-align: center;">5,969.2</td>
+<td style="text-align: center;">2,282.5</td>
+<td style="text-align: center;">176,882</td>
+<td style="text-align: center;">72.3%</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>병원</strong></td>
+<td style="text-align: center;"><strong>2021</strong></td>
+<td style="text-align: center;">6,048.2</td>
+<td style="text-align: center;"><strong>82,375.1</strong></td>
+<td style="text-align: center;">60,217.0</td>
+<td style="text-align: center;">22,158.1</td>
+<td style="text-align: center;">136,199</td>
+<td style="text-align: center;">73.1%</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: center;"><strong>2022</strong></td>
+<td style="text-align: center;">7,141.5</td>
+<td style="text-align: center;"><strong>90,798.6</strong></td>
+<td style="text-align: center;">66,101.0</td>
+<td style="text-align: center;">24,697.6</td>
+<td style="text-align: center;">127,143</td>
+<td style="text-align: center;">72.8%</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: center;"><strong>2023</strong></td>
+<td style="text-align: center;">6,599.6</td>
+<td style="text-align: center;"><strong>92,178.2</strong></td>
+<td style="text-align: center;">67,455.0</td>
+<td style="text-align: center;">24,723.2</td>
+<td style="text-align: center;">139,673</td>
+<td style="text-align: center;">73.2%</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: center;"><strong>2024</strong></td>
+<td style="text-align: center;">6,476.7</td>
+<td style="text-align: center;"><strong>102,078.0</strong></td>
+<td style="text-align: center;">75,134.4</td>
+<td style="text-align: center;">26,943.6</td>
+<td style="text-align: center;">157,608</td>
+<td style="text-align: center;">73.6%</td>
+</tr>
+</tbody>
+</table></div>
+<div class="callout callout-note"><p class="callout-title">참고</p><ul>
+<li><strong>급여비율</strong>: 급여 진료비 총액 중 공단부담금 비율을 의미하며, 의원 및 한의원은 약 75% 내외, 병원 및 한방병원은 약 71~73% 수준입니다.</li>
+<li><strong>한방병원 건당 진료비 역전</strong>: 2024년 기준 한방병원의 건당 진료비는 <strong>176,882원</strong>으로 의과 병원(157,608원)을 상회했습니다. 이는 한방병원의 집중 입원 치료(자동차보험 및 한방 복합 처치) 비중 증가에 기인합니다.</li>
+</ul></div>
+
+<hr />
+</section><section class="card"><h2 id="2">2. 요양기관 종별 비급여 본인부담률 및 비급여 비용 추계</h2>
+<p>비급여 진료비는 국민건강보험공단의 <strong>「건강보험환자 진료비 실태조사」</strong>(환자 표본 조사)와 보건복지부·심평원의 <strong>「비급여 보고제도」</strong>(의료기관 전수 보고)를 통해 파악됩니다.</p>
+<h3 id="1">(1) 연도별 비급여 본인부담률 추이 (진료비 실태조사)</h3>
+<p><em>비급여 본인부담률 = 비급여 진료비 / (급여 진료비 + 비급여 진료비)</em></p>
+<figure class="chart"><div class="chart-box"><canvas id="xychart0"></canvas></div></figure><script>window.__charts=(window.__charts||[]).concat([["xychart0",{"type": "bar", "data": {"labels": ["한의원", "한방병원", "의원", "병원"], "datasets": [{"label": "2021년", "data": [23.8, 48.8, 25.0, 29.6], "backgroundColor": "#4F46E5"}, {"label": "2022년", "data": [24.2, 49.2, 19.7, 29.2], "backgroundColor": "#06B6D4"}, {"label": "2023년", "data": [20.5, 45.1, 23.0, 31.7], "backgroundColor": "#F59E0B"}]}, "options": {"responsive": true, "maintainAspectRatio": false, "plugins": {"title": {"display": true, "text": "요양기관 종별 비급여 본인부담률 추이 (2021~2023, %)", "font": {"size": 15}}, "legend": {"position": "bottom"}}, "scales": {"y": {"title": {"display": true, "text": "비급여 본인부담률 (%)"}, "min": 0.0, "max": 55.0}}}}]]);</script>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: left;">요양기관 종별</th>
+<th style="text-align: center;">2021년</th>
+<th style="text-align: center;">2022년</th>
+<th style="text-align: center;">2023년</th>
+<th style="text-align: center;">3개년 평균</th>
+<th style="text-align: left;">비급여 발생 특성</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>한의원</strong></td>
+<td style="text-align: center;">23.8%</td>
+<td style="text-align: center;">24.2%</td>
+<td style="text-align: center;"><strong>20.5%</strong></td>
+<td style="text-align: center;"><strong>22.8%</strong></td>
+<td style="text-align: left;">첩약(보약 및 일부 치료용), 약침술 위주</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>한방병원</strong></td>
+<td style="text-align: center;">48.8%</td>
+<td style="text-align: center;">49.2%</td>
+<td style="text-align: center;"><strong>45.1%</strong></td>
+<td style="text-align: center;"><strong>47.7%</strong></td>
+<td style="text-align: left;">첩약, 약침술, 상급병실료, 비급여 물리요법</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>의원</strong></td>
+<td style="text-align: center;">25.0%</td>
+<td style="text-align: center;">19.7%</td>
+<td style="text-align: center;"><strong>23.0%</strong></td>
+<td style="text-align: center;"><strong>22.6%</strong></td>
+<td style="text-align: left;">도수치료, 비급여 주사(영양·독감), 백내장 검사 등</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>병원</strong></td>
+<td style="text-align: center;">29.6%</td>
+<td style="text-align: center;">29.2%</td>
+<td style="text-align: center;"><strong>31.7%</strong></td>
+<td style="text-align: center;"><strong>30.2%</strong></td>
+<td style="text-align: left;">상급병실료, 도수치료, 신규 관절강 주사, 재료대</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="2-2023">(2) 급여 및 비급여 비용 통합 시장 규모 추정 (2023년 확정 기준)</h3>
+<p><em>급여 진료비 심사실적에 비급여 본인부담률을 역산 적용하여 산출한 총 진료비 규모</em><br />
+<em>(단위: 조 원)</em></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: left;">종별</th>
+<th style="text-align: center;">급여 총 진료비 (A)</th>
+<th style="text-align: center;">비급여 본인부담률 (B)</th>
+<th style="text-align: center;">추정 비급여 진료비 (C)</th>
+<th style="text-align: center;">총 의료비 시장 규모 (A + C)</th>
+<th style="text-align: center;">비급여 비중</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>한의원</strong></td>
+<td style="text-align: center;">2.76조 원</td>
+<td style="text-align: center;">20.5%</td>
+<td style="text-align: center;"><strong>약 0.71조 원</strong></td>
+<td style="text-align: center;"><strong>3.47조 원</strong></td>
+<td style="text-align: center;">20.5%</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>한방병원</strong></td>
+<td style="text-align: center;">0.69조 원</td>
+<td style="text-align: center;">45.1%</td>
+<td style="text-align: center;"><strong>약 0.57조 원</strong></td>
+<td style="text-align: center;"><strong>1.26조 원</strong></td>
+<td style="text-align: center;">45.1%</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>[한의계 소계]</strong></td>
+<td style="text-align: center;"><strong>3.45조 원</strong></td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;"><strong>약 1.28조 원</strong></td>
+<td style="text-align: center;"><strong>4.73조 원</strong></td>
+<td style="text-align: center;"><strong>27.1%</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>의원</strong></td>
+<td style="text-align: center;">24.65조 원</td>
+<td style="text-align: center;">23.0%</td>
+<td style="text-align: center;"><strong>약 7.36조 원</strong></td>
+<td style="text-align: center;"><strong>32.01조 원</strong></td>
+<td style="text-align: center;">23.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>병원</strong></td>
+<td style="text-align: center;">9.22조 원</td>
+<td style="text-align: center;">31.7%</td>
+<td style="text-align: center;"><strong>약 4.28조 원</strong></td>
+<td style="text-align: center;"><strong>13.50조 원</strong></td>
+<td style="text-align: center;">31.7%</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>[의과 소계]</strong></td>
+<td style="text-align: center;"><strong>33.87조 원</strong></td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;"><strong>약 11.64조 원</strong></td>
+<td style="text-align: center;"><strong>45.51조 원</strong></td>
+<td style="text-align: center;"><strong>25.6%</strong></td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+</section><section class="card"><h2 id="3-hira">3. HIRA 비급여 보고제도로 본 핵심 비급여 항목 비교</h2>
+<p>보건복지부와 건강보험심사평가원이 시행한 <strong>2024년 비급여 보고자료(1,068개 항목 전수 분석)</strong>에 나타난 종별 비급여 품목 구성의 질적 차이는 다음과 같습니다.</p>
+<h3 id="1-2024-31">(1) 2024년 3월(1개월분) 종별 비급여 진료비 발생액</h3>
+<ul>
+<li><strong>의원급 (의과):</strong> <strong>4,316억 원</strong> (전체 비급여 보고액의 22.9%)</li>
+<li><strong>병원급 (의과):</strong> <strong>2,616억 원</strong> (전체 비급여 보고액의 13.9%)</li>
+<li><strong>한의원:</strong> <strong>1,417억 원</strong> (전체 비급여 보고액의 7.5%)</li>
+<li><strong>한방병원:</strong> <strong>약 530억 ~ 580억 원</strong> (병원급 내 한방병원 비중 약 7.7%)</li>
+</ul>
+<h3 id="2-vs">(2) 의과 vs 한의과 대표 비급여 상위 항목 대조</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: left;">구분</th>
+<th style="text-align: left;">한의과 (한의원·한방병원)</th>
+<th style="text-align: left;">의과 (의원·병원)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>1위 항목</strong></td>
+<td style="text-align: left;"><strong>한약 첩약</strong> (한의 비급여의 <strong>76.7%</strong> 점유)</td>
+<td style="text-align: left;"><strong>도수치료</strong> (의과 외래 비급여 압도적 1위)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>2위 항목</strong></td>
+<td style="text-align: left;"><strong>약침술 (경혈약침)</strong> (한의 비급여의 <strong>9.6%</strong> 점유)</td>
+<td style="text-align: left;"><strong>상급병실료 (1인실)</strong> (병원 입원 비급여 1위)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>3위 항목</strong></td>
+<td style="text-align: left;"><strong>한약 기타 제제</strong> (한의 비급여의 <strong>8.1%</strong> 점유)</td>
+<td style="text-align: left;"><strong>비급여 주사료</strong> (독감 페라미비르, 영양주사제)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>주요 비급여</strong></td>
+<td style="text-align: left;">1인실 병실료(한방병원), 특수 추나요법, 매선요법</td>
+<td style="text-align: left;">관절강내 주사(골수흡입농축물), 백내장 검사, 체외충격파</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>비급여 성격</strong></td>
+<td style="text-align: left;">제도적 급여 미등재(약제) 중심의 필수·보완 치료재</td>
+<td style="text-align: left;">실손보험 연계형 처치·시술 및 신의료기술 팽창형</td>
+</tr>
+</tbody>
+</table></div>
+<div class="callout callout-tip"><p class="callout-title">도움말</p><p><strong>비급여의 성격 차이:</strong></p>
+<ul>
+<li><strong>한의의료의 비급여</strong>: 한약(첩약)이 건강보험 급여 항목으로 전면 진입하지 못해 발생하는 <strong>‘구조적 비급여’</strong>(환자 수요는 높으나 급여 인정 범위가 협소)의 성격이 강합니다. (첩약 건보 시범사업 추진 중)</li>
+<li><strong>의과의료의 비급여</strong>: 물리치료(도수치료), 정밀검사(MRI/초음파 비급여 잔여분), 신의료기술 주사제 등 <strong>실손의료보험과 결합하여 파생된 ‘확장형 비급여’</strong>의 비중이 큽니다.</li>
+</ul></div>
+
+<hr />
+</section><section class="card"><h2 id="4-vs">4. 보충 분석: 의료인력 직종별(의사 vs 한의사) 보수(급여) 및 비급여 연계</h2>
+<p>'직종별 급여'를 의료인력의 근로/사업 소득(임금 급여) 관점에서 볼 때, 비급여 진료 수익 구조는 직종별 평균 보수 격차에 직접적인 영향을 미치고 있습니다.</p>
+<p><em>출처: 보건복지부 「보건의료인력실태조사」</em></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: left;">의료인력 직종</th>
+<th style="text-align: left;">요양기관 종별</th>
+<th style="text-align: center;">연평균 임금·보수(세전)</th>
+<th style="text-align: left;">비급여 및 진료 수익 연계 구조</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>의사</strong></td>
+<td style="text-align: left;"><strong>의원</strong></td>
+<td style="text-align: center;"><strong>약 2억 6,900만 원</strong></td>
+<td style="text-align: left;">실손보험 연계 비급여(정형외과, 안과, 피성 등) 다빈도 과목의 초과 수익</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>병원</strong></td>
+<td style="text-align: center;"><strong>약 2억 2,800만 원</strong></td>
+<td style="text-align: left;">수술/시술 행위료 및 입원 병상 관리 기반 고정·성과급 체계</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>한의사</strong></td>
+<td style="text-align: left;"><strong>한의원</strong></td>
+<td style="text-align: center;"><strong>약 1억 800만 원</strong></td>
+<td style="text-align: left;">침구·부항 등 표준 행위 급여 위주, 첩약 비급여 시장 위축에 따른 안정형 소득</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>한방병원</strong></td>
+<td style="text-align: center;"><strong>약 9,600만 ~ 1억 200만 원</strong></td>
+<td style="text-align: left;">봉직의(페이드터) 중심 구조, 야간·당직 및 자보/비급여 입원 관리 수당</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li><strong>직종 간 보수 격차:</strong> 의사 평균 보수는 한의사 평균 보수의 약 <strong>2.3~2.5배</strong> 수준으로 나타나며, 이는 의과의 압도적인 급여 총액 규모(진료량) 및 고수익성 비급여 시술(도수치료, 비급여 주사, 고가 검사) 포트폴리오의 차이에서 비롯됩니다.</li>
+</ul>
+<hr />
+</section><section class="card"><h2 id="5">5. 결론 및 종합 비교 매트릭스</h2>
+<pre><code>┌────────────────────────────────────────────────────────────────────────────────────────┐
+│                               종합 비교 요약 매트릭스                                   │
+├─────────────┬────────────────────────────┬─────────────────────────────────────────────┤
+│   구 분     │     한의원 &amp; 한방병원      │                의원 &amp; 병원                  │
+├─────────────┼────────────────────────────┼─────────────────────────────────────────────┤
+│ 급여 진료비 │ 3.94조 원 (2024년 기준)    │ 36.59조 원 (2024년 기준)                    │
+│   규 모     │ - 한의원: 3.11조 원        │ - 의원: 26.38조 원                          │
+│             │ - 한방병원: 0.83조 원      │ - 병원: 10.21조 원                          │
+├─────────────┼────────────────────────────┼─────────────────────────────────────────────┤
+│ 비급여율    │ - 한의원: 20.5% (하향 안정)│ - 의원: 23.0% (변동성 큼, 2023년 반등)      │
+│ (본인부담률)│ - 한방병원: 45.1% (최고치) │ - 병원: 31.7% (30%대 지속 유지)             │
+├─────────────┼────────────────────────────┼─────────────────────────────────────────────┤
+│ 핵심 비급여 │ - 첩약 (76.7%)             │ - 도수치료 (외래 비급여 압도적 1위)         │
+│   항 목     │ - 경혈약침술 (9.6%)        │ - 상급병실료 1인실 (병원 입원 1위)          │
+│             │ - 1인실 병실료(한방병원)   │ - 독감/영양주사, 관절강내 주사 등           │
+├─────────────┼────────────────────────────┼─────────────────────────────────────────────┤
+│ 건당 진료비 │ - 한의원: 3.1만 ~ 3.4만 원 │ - 의원: 4.1만 ~ 4.5만 원                    │
+│   특 성     │ - 한방병원: 15.4만 ~ 17.7만│ - 병원: 12.7만 ~ 15.8만 원                  │
+│             │   (한방병원이 병원 상회)   │                                             │
+└─────────────┴────────────────────────────┴─────────────────────────────────────────────┘
+</code></pre>
+<ol>
+<li>
+<p><strong>외래 중심 의원급 비교 (한의원 vs 의원):</strong></p>
+<ul>
+<li>의원은 급여 규모(26조 원)와 비급여 규모(약 7조 원) 모두에서 한의원(급여 3.1조, 비급여 약 0.7조)을 압도합니다.</li>
+<li>의원은 호흡기 감염병 유행, 실손보험 청구형 비급여 처치에 따라 비급여율 변동이 큰 반면, 한의원은 침구 급여 처치 중심의 균일한 내원 패턴과 첩약 중심의 고정적 비급여 구조를 보입니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>입원·전문 중심 병원급 비교 (한방병원 vs 병원):</strong></p>
+<ul>
+<li>의과 병원은 수술, 검사, 처치가 결합된 10조 원대 급여 시장과 30%대 비급여율을 유지합니다.</li>
+<li>한방병원은 급여 총액(8,252억 원)은 상대적으로 작으나, <strong>45.1%에 달하는 극히 높은 비급여 본인부담률</strong>과 입원 집중형 진료로 인해 건당 진료비가 의과 병원을 추월(건당 17.7만 원)하는 독특한 성장 모델을 나타냅니다.</li>
+</ul>
+</li>
+</ol></section>
+</main>
+</div>
+<footer>자료: KOSIS 건강보험통계 · HIRA 진료비 심사실적 · NHIS 진료비 실태조사 · 비급여 보고자료 · 2021~2024 · 원본 보고서: 요양기관_종별_한의계_vs_의과_급여_및_비급여_비용_비교분석_보고서.md</footer>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script>(window.__charts||[]).forEach(function(c){new Chart(document.getElementById(c[0]), c[1]);});</script>
+</body>
+</html>

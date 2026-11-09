@@ -9,6 +9,7 @@ usage: python build_hospital_finance_html.py [보고서.md]
 """
 import base64
 import html
+import json
 import os
 import re
 import sys
@@ -80,6 +81,14 @@ figcaption { font-size: .82rem; color: var(--text-muted); margin-top: 6px; }
 .warn { background: var(--warn-bg); border: 1px solid var(--warn-border); border-left-width: 4px;
         border-radius: 8px; padding: 10px 14px; list-style: none; margin-left: -22px; }
 hr { display: none; }
+.mermaid { text-align: center; margin: 18px 0; overflow-x: auto; }
+.chart-box { position: relative; height: 360px; max-width: 760px; margin: 0 auto; }
+.callout { border: 1px solid var(--border); border-left: 4px solid var(--primary-light); background: #eff6ff;
+           border-radius: 8px; padding: 10px 16px; margin: 14px 0; }
+.callout-tip { border-left-color: var(--secondary); background: #f0fdfa; }
+.callout-warning, .callout-caution { border-left-color: var(--warn-border); background: var(--warn-bg); }
+.callout-title { font-weight: 700; color: var(--primary); margin: 4px 0; }
+.callout-tip .callout-title { color: var(--secondary); }
 footer { text-align: center; color: var(--text-muted); font-size: .8rem; padding: 10px 16px 40px; }
 @media (max-width: 900px) {
   .layout { grid-template-columns: minmax(0, 1fr); }
@@ -119,13 +128,108 @@ def decorate(body):
     return body
 
 
+LIST_RE = re.compile(r"^(\s*)([*+-]|\d+[.)])\s")
+CALLOUT_TITLES = {"NOTE": "참고", "TIP": "도움말", "IMPORTANT": "중요", "WARNING": "주의", "CAUTION": "경고"}
+
+
+def normalize_lists(text):
+    """Python-Markdown은 하위 목록에 4칸 들여쓰기와 목록 앞 빈 줄을 요구한다.
+    GitHub식 원고(2~3칸 들여쓰기, 문단 바로 뒤 목록)를 그에 맞춘다. 코드 블록 안은 건드리지 않는다."""
+    out, fence, prev = [], False, ""
+    for line in text.split("\n"):
+        if line.lstrip().startswith("```"):
+            fence = not fence
+        if not fence:
+            m = LIST_RE.match(line)
+            if m:
+                n = len(m.group(1).expandtabs(4))
+                if n % 4:
+                    line = " " * (4 * ((n + 3) // 4)) + line.lstrip()
+                if prev.strip() and not LIST_RE.match(prev) and not prev.startswith(("|", ">", " ", "\t")):
+                    out.append("")
+        out.append(line)
+        prev = line
+    return "\n".join(out)
+
+
+def convert_callouts(text, render):
+    """> [!NOTE] 등 GitHub 알림 인용 블록을 <div class="callout">로 바꾼다."""
+    lines, out, i = text.split("\n"), [], 0
+    while i < len(lines):
+        m = re.match(r"^>\s*\[!(\w+)\]\s*$", lines[i])
+        if not m:
+            out.append(lines[i]); i += 1; continue
+        kind, i, inner = m.group(1).upper(), i + 1, []
+        while i < len(lines) and lines[i].startswith(">"):
+            inner.append(re.sub(r"^>\s?", "", lines[i])); i += 1
+        title = CALLOUT_TITLES.get(kind, kind.title())
+        out += ["", f'<div class="callout callout-{kind.lower()}"><p class="callout-title">{title}</p>'
+                    f'{render(chr(10).join(inner))}</div>', ""]
+    return "\n".join(out)
+
+
+CHART_COLORS = ["#4F46E5", "#06B6D4", "#F59E0B", "#10B981", "#EF4444", "#8B5CF6"]
+
+
+def xychart_to_chartjs(src, idx):
+    """계열이 둘 이상인 Mermaid xychart(bar)는 막대가 겹쳐 그려지므로 Chart.js 묶음 막대로 바꾼다.
+    계열 이름은 블록 안 주석 '%% series: 2021|2022|2023'으로 준다. 해당하지 않으면 None."""
+    if "xychart-beta" not in src:
+        return None
+    bars = [json_list(b) for b in re.findall(r"^\s*bar\s*(\[.*?\])", src, re.M)]
+    if len(bars) < 2:
+        return None
+    labels = json_list(re.search(r"x-axis\s*(\[.*?\])", src).group(1))
+    title = (re.search(r'title\s+"([^"]*)"', src) or [None, ""])[1]
+    ym = re.search(r'y-axis\s+"([^"]*)"(?:\s+([\d.]+)\s*-->\s*([\d.]+))?', src)
+    names = (re.search(r"%%\s*series:\s*(.+)", src) or [None, ""])[1].split("|")
+    names = [n.strip() for n in names if n.strip()] or []
+    ds = [{"label": names[k] if k < len(names) else f"계열 {k + 1}", "data": b,
+           "backgroundColor": CHART_COLORS[k % len(CHART_COLORS)]} for k, b in enumerate(bars)]
+    y = {"title": {"display": bool(ym), "text": ym.group(1) if ym else ""}}
+    if ym and ym.group(2):
+        y.update(min=float(ym.group(2)), max=float(ym.group(3)))
+    cfg = {"type": "bar", "data": {"labels": labels, "datasets": ds},
+           "options": {"responsive": True, "maintainAspectRatio": False,
+                       "plugins": {"title": {"display": bool(title), "text": title, "font": {"size": 15}},
+                                   "legend": {"position": "bottom"}},
+                       "scales": {"y": y}}}
+    return (f'<figure class="chart"><div class="chart-box"><canvas id="xychart{idx}"></canvas></div></figure>'
+            f'<script>window.__charts=(window.__charts||[]).concat([["xychart{idx}",{json.dumps(cfg, ensure_ascii=False)}]]);</script>')
+
+
+def json_list(s):
+    return json.loads(s)
+
+
+def mermaid_blocks(body):
+    """```mermaid 코드 블록을 Mermaid가 그리는 <div class="mermaid">로 바꾼다(다계열 xychart는 Chart.js).
+    반환: (본문, Mermaid 블록 수, Chart.js 차트 수)"""
+    counts = {"mermaid": 0, "chart": 0}
+
+    def repl(m):
+        src = html.unescape(m.group(1))
+        chart = xychart_to_chartjs(src, counts["chart"])
+        if chart:
+            counts["chart"] += 1
+            return chart
+        counts["mermaid"] += 1
+        return f'<div class="mermaid">{src}</div>'
+    body = re.sub(r'<pre><code class="language-mermaid">(.*?)</code></pre>', repl, body, flags=re.S)
+    return body, counts["mermaid"], counts["chart"]
+
+
 def split_sections(body):
-    """h2 단위로 카드를 나눈다. 첫 blockquote(자료원 등 메타)는 따로 꺼낸다."""
+    """h2 단위로 카드를 나눈다. 첫 blockquote(자료원 등 메타)는 따로 꺼낸다.
+    blockquote가 없으면 첫 h2 앞의 머리말(작성일·작성자 줄 등)을 메타로 쓴다."""
     meta = ""
     m = re.search(r"<blockquote>(.*?)</blockquote>", body, re.S)
     if m and body.index("<blockquote>") < body.find("<h2"):
         meta = m.group(1)
         body = body[:m.start()] + body[m.end():]
+    elif body.find("<h2") > 0:
+        meta = body[:body.find("<h2")]
+        body = body[body.find("<h2"):]
     parts = re.split(r"(?=<h2)", body)
     cards = "".join(f'<section class="card">{p}</section>' for p in parts if "<h2" in p)
     return meta, cards
@@ -140,14 +244,24 @@ def build(md_path):
     subtitle = opt.get("subtitle", "상급종합병원·종합병원 · 병원 · 요양병원 · 의원 · 치과 · 한방병원 · 한의원")
     tag_list = opt["tags"].split("|") if "tags" in opt else [
         "통계청 서비스업조사", "HIRA 진료비 심사실적", "2014~2024", "KOSIS · korea-stats MCP"]
+    text = normalize_lists(text)
+    text = convert_callouts(text, lambda s: markdown.markdown(normalize_lists(s), extensions=["tables", "sane_lists"]))
     md = markdown.Markdown(extensions=["tables", "fenced_code", "toc", "sane_lists"],
                            extension_configs={"toc": {"toc_depth": "2-3"}})
     body = md.convert(text)
     body = decorate(embed_images(body, os.path.dirname(md_path)))
+    body, n_mermaid, n_chart = mermaid_blocks(body)
+    mermaid_js = ('<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>\n'
+                  '<script>mermaid.initialize({startOnLoad: true, theme: "default"});</script>\n') if n_mermaid else ""
+    if n_chart:
+        mermaid_js += ('<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>\n'
+                       '<script>(window.__charts||[]).forEach(function(c){'
+                       'new Chart(document.getElementById(c[0]), c[1]);});</script>\n')
     meta, cards = split_sections(body)
     # </div> → </nav> 치환을 먼저 해야 목차 제목의 </div>가 바뀌지 않는다
     toc = md.toc.replace("</div>", "</nav>").replace('<div class="toc">', '<nav class="toc"><div class="toc-title">목차</div>')
     meta = meta.strip().replace("\n", "<br>\n").replace("<p><br>", "<p>").replace("<br>\n</p>", "</p>")
+    meta_card = f'<section class="card meta">{meta}</section>' if re.sub(r"<[^>]+>|\s", "", meta) else ""
     tags = "".join(f'<span class="tag">{html.escape(t.strip())}</span>' for t in tag_list)
     page = f"""<!DOCTYPE html>
 <html lang="ko">
@@ -169,12 +283,12 @@ def build(md_path):
 <div class="layout">
 {toc}
 <main>
-<section class="card meta">{meta}</section>
+{meta_card}
 {cards}
 </main>
 </div>
 <footer>자료: {html.escape(" · ".join(tag_list))} · 원본 보고서: {html.escape(os.path.basename(md_path))}</footer>
-</body>
+{mermaid_js}</body>
 </html>
 """
     out = os.path.splitext(md_path)[0] + ".html"
