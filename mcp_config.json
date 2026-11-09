@@ -6,7 +6,7 @@
         "D:/한의 의료서비스 통계/07_MCP_및_API_인프라/hira_mcp_server.py"
       ],
       "env": {
-        "HIRA_API_KEY": "e8U1shQ3d%2FByDVYStgfpaCdeSsJ1263%2BvNYAPjeZmPV5%2FxDHN6nqHk3EfqjlYZgrlpo5fYeXSSygjrNtRx5Reg%3D%3D",
+        "HIRA_API_KEY": "<공공데이터포털_HIRA_인증키>",
         "HIRA_DISEASE_ENDPOINT": "https://apis.data.go.kr/B551182/diseaseInfoService1/getDissNameCodeList1",
         "HIRA_DETAIL_ENDPOINT": "https://apis.data.go.kr/B551182/MadmDtlInfoService2.8/getDtlInfo2.8",
         "HIRA_ADSC_DAMT_ENDPOINT": "https://apis.data.go.kr/B551182/adscDamtDmdAdmInqService1.1",

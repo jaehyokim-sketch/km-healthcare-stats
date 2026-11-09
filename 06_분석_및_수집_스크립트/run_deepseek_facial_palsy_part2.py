@@ -9,6 +9,37 @@ import json
 import sys
 import os
 
+
+def _interactive():
+    """키 입력을 받을 수 있는 실제 콘솔(터미널)에서 실행 중인지. 파이프·NUL·MCP 표준입출력이면 False."""
+    try:
+        if sys.stdin is None or not sys.stdin.isatty():
+            return False
+        if os.name == "nt":  # Windows는 NUL 장치도 isatty()가 참이므로 콘솔 모드를 직접 확인한다
+            import ctypes
+            import msvcrt
+            mode = ctypes.c_uint()
+            return bool(ctypes.windll.kernel32.GetConsoleMode(msvcrt.get_osfhandle(sys.stdin.fileno()), ctypes.byref(mode)))
+        return True
+    except Exception:
+        return False
+
+
+def _require_key(name, label):
+    """환경변수 name의 API 키를 돌려준다. 없으면 오류를 안내하고 키 입력을 요청한다.
+    키는 저장소·코드에 쓰지 않는다. 입력한 키는 이번 실행에서만 쓴다."""
+    key = os.environ.get(name, "").strip()
+    if key:
+        return key
+    print(f"[오류] {label} 키가 없습니다: 환경변수 {name}이(가) 설정되지 않았습니다.", file=sys.stderr)
+    if _interactive():
+        import getpass
+        key = getpass.getpass(f"{label} 키를 입력하세요 (입력 내용은 화면에 표시되지 않음): ").strip()
+        if key:
+            os.environ[name] = key
+            return key
+    sys.exit(f"{name}을(를) 설정한 뒤 다시 실행하세요. 예) PowerShell: $env:{name}=\"<키>\"   bash: export {name}=<키>")
+
 def clean_text_for_api(text):
     for emoji in ['📌', '📋', '📑', '💡', '⚠️', '✅', '🔍', '🚀', '📂', '📄', '📝', '📜', '🏥', '🎯', '🏛️', '🔹']:
         text = text.replace(emoji, '')
@@ -17,7 +48,7 @@ def clean_text_for_api(text):
 def main():
     sys.stdout.reconfigure(encoding='utf-8')
     
-    api_key = "sk-d7325ace4aed4389b7fcd100b4e42152"
+    api_key = _require_key("DEEPSEEK_API_KEY", "DeepSeek API")
     url = "https://api.deepseek.com/chat/completions"
 
     part1_file = r"d:\한의 의료서비스 통계\03_HIRA_및_임상통계_보고서\안면신경마비_한의약_의료서비스_현황_및_급여_비급여_확대방안_보고서.md"

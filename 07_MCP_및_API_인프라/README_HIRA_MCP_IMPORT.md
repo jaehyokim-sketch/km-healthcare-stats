@@ -42,4 +42,4 @@ python setup_hira_mcp.py
 | **수가기준정보서비스** | `https://apis.data.go.kr/B551182/mdfeeCrtrInfoService` | `get_hira_mdfee_crtr_info` (의료수가코드, 한방수가, 심사기준 조회) |
 | **비급여진료비정보서비스** | `https://apis.data.go.kr/B551182/nonPaymentDamtInfoService` | `get_hira_non_payment_damt_info` (비급여 항목코드, 병원별 비급여 진료비용 조회) |
 
-- **일반 인증키**: `e8U1shQ3d%2FByDVYStgfpaCdeSsJ1263%2BvNYAPjeZmPV5%2FxDHN6nqHk3EfqjlYZgrlpo5fYeXSSygjrNtRx5Reg%3D%3D`
+- **일반 인증키**: `<공공데이터포털_HIRA_인증키>`

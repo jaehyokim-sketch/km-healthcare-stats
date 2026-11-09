@@ -1,4 +1,5 @@
 import os
+import sys
 import requests
 import json
 import urllib.parse
@@ -7,16 +8,49 @@ from mcp.server.fastmcp import FastMCP
 # Create MCP server for HIRA Health Services
 mcp = FastMCP("hira-health-mcp")
 
-# Default API Key provided for HIRA Services
-DEFAULT_HIRA_API_KEY = "e8U1shQ3d%2FByDVYStgfpaCdeSsJ1263%2BvNYAPjeZmPV5%2FxDHN6nqHk3EfqjlYZgrlpo5fYeXSSygjrNtRx5Reg%3D%3D"
+# 인증키는 환경변수 HIRA_API_KEY로만 받는다(저장소·코드에 쓰지 않음)
+DEFAULT_HIRA_API_KEY = ""
 HIRA_DISEASE_ENDPOINT = "https://apis.data.go.kr/B551182/diseaseInfoService1/getDissNameCodeList1"
 HIRA_DETAIL_ENDPOINT = "https://apis.data.go.kr/B551182/MadmDtlInfoService2.8/getDtlInfo2.8"
 HIRA_ADSC_DAMT_ENDPOINT = "https://apis.data.go.kr/B551182/adscDamtDmdAdmInqService1.1"
 HIRA_MDFEE_ENDPOINT = "https://apis.data.go.kr/B551182/mdfeeCrtrInfoService"
 HIRA_NON_PAYMENT_ENDPOINT = "https://apis.data.go.kr/B551182/nonPaymentDamtInfoService"
 
+def _interactive():
+    """키 입력을 받을 수 있는 실제 콘솔(터미널)에서 실행 중인지. 파이프·NUL·MCP 표준입출력이면 False."""
+    try:
+        if sys.stdin is None or not sys.stdin.isatty():
+            return False
+        if os.name == "nt":  # Windows는 NUL 장치도 isatty()가 참이므로 콘솔 모드를 직접 확인한다
+            import ctypes
+            import msvcrt
+            mode = ctypes.c_uint()
+            return bool(ctypes.windll.kernel32.GetConsoleMode(msvcrt.get_osfhandle(sys.stdin.fileno()), ctypes.byref(mode)))
+        return True
+    except Exception:
+        return False
+
+
 def _get_api_key():
-    return os.environ.get("HIRA_API_KEY", DEFAULT_HIRA_API_KEY)
+    """HIRA 인증키(환경변수 HIRA_API_KEY). 없으면 오류를 안내하고 키 입력을 요청한다.
+    직접 실행(대화형 터미널)에서는 키를 입력받고, MCP 서버로 실행 중이면(표준입출력이 통신 채널)
+    입력을 받을 수 없으므로 키 입력을 요청하라는 오류를 돌려준다. 키는 저장소·코드에 쓰지 않는다."""
+    key = os.environ.get("HIRA_API_KEY", DEFAULT_HIRA_API_KEY).strip()
+    if key:
+        return key
+    if _interactive():
+        import getpass
+        print("[오류] HIRA 인증키가 없습니다: 환경변수 HIRA_API_KEY가 설정되지 않았습니다.", file=sys.stderr)
+        key = getpass.getpass("공공데이터포털 HIRA 인증키를 입력하세요 (입력 내용은 화면에 표시되지 않음): ").strip()
+        if key:
+            os.environ["HIRA_API_KEY"] = key
+            return key
+    raise RuntimeError(
+        "[오류] HIRA 인증키가 없습니다(환경변수 HIRA_API_KEY 미설정). "
+        "사용자에게 공공데이터포털(data.go.kr) 건강보험심사평가원 API 인증키 입력을 요청한 뒤, "
+        "MCP 서버 설정의 env에 HIRA_API_KEY로 넣고 서버를 다시 연결하세요."
+    )
+
 
 @mcp.tool()
 def search_hira_disease_info(

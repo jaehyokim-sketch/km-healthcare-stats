@@ -76,8 +76,9 @@
             padding: 10px 16px;
             list-style: none;
             display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
             gap: 8px;
-            overflow-x: auto;
         }
 
         .cat-nav a {
@@ -94,6 +95,11 @@
         }
 
         .cat-nav a:hover { background: var(--primary); color: #fff; }
+
+        @media (max-width: 640px) {
+            .cat-nav ul { gap: 6px; padding: 8px 10px; }
+            .cat-nav a { padding: 4px 9px; font-size: 0.76rem; }
+        }
 
         .container {
             max-width: 1200px;

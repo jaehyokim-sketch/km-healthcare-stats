@@ -1,0 +1,29 @@
+# GitHub Pages(Jekyll) 게시 범위
+# 웹 페이지(.html)와 페이지가 쓰는 이미지·데이터만 게시한다.
+# 원고(.md)·스크립트·원천 데이터·작업 기록·설정 파일은 게시하지 않는다(저장소에는 그대로 남는다).
+# 새 보고서가 PNG·JSON 등 로컬 파일을 쓰면 아래 include에 경로를 더한다.
+exclude:
+  - "*.md"
+  - "*.py"
+  - "*.pyc"
+  - "*.ipynb"
+  - "*.csv"
+  - "*.json"
+  - "*.pdf"
+  - "*.zip"
+  - "*.docx"
+  - "*.xlsx"
+  - "*.xls"
+  - "*.hwp"
+  - "*.hwpx"
+  - "*.txt"
+  - "*.bat"
+  - "*.yml"
+  - 04_CLI_대화세션_아카이브
+  - 05_원천_통계_데이터셋
+  - 06_분석_및_수집_스크립트
+  - 07_MCP_및_API_인프라
+  - 09_아카이브_서식_및_참고자료
+  - __pycache__
+include:
+  - 01_재택의료_방문진료/지역별_시뮬레이션/gimhae_gyeongnam_full_simulation.json
