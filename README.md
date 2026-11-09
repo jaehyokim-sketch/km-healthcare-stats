@@ -13,6 +13,7 @@
 | :--- | :--- | :--- |
 | **⚖️ 시체해부법 개정 & 직능 정상화 방안** | **[👉 정책보고서 열람](https://jaehyokim-sketch.github.io/km-healthcare-stats/anatomy_act_reform_plan.html)** | 법률 제21107호·대통령령 제36725호, 12개 한의대 '교육목적 시체제공기관' 인가, BL2 6대 공간 인프라, 제2조제1호 개정 청원 |
 | **🎓 6년제 통합의료 교육과정 10개년 로드맵** | **[👉 대시보드 열람](https://jaehyokim-sketch.github.io/km-healthcare-stats/curriculum_10yr_roadmap.html)** | 218학점 6년제 학년별 매트릭스, AI 30.5학점 감축, 2026 시체해부법, 재택의료 160h 의무화, 10개년 타임라인 |
+| **👥 한의 의료서비스 KCD 상위 100 & 의사인력 수급 속 한의사 직역 제안** | **[👉 대시보드 열람](https://jaehyokim-sketch.github.io/km-healthcare-stats/08_%ED%95%9C%EC%9D%98%ED%95%99%EA%B5%90%EC%9C%A1_%EB%B0%8F_%EC%9D%98%EB%A3%8C%EC%9D%B8%EB%A0%A5_%EC%A0%95%EC%B1%85/%ED%95%9C%EC%9D%98%EC%9D%98%EB%A3%8C%EC%84%9C%EB%B9%84%EC%8A%A4_KCD_%EC%83%81%EC%9C%84100_%ED%98%84%ED%99%A9%EB%B6%84%EC%84%9D_%EB%B0%8F_%EC%9D%98%EC%82%AC%EC%9D%B8%EB%A0%A5%EC%88%98%EA%B8%89%EB%B0%B0%EA%B2%BD_%ED%95%9C%EC%9D%98%EC%82%AC_%EC%A7%81%EC%97%AD%EC%97%AD%ED%95%A0%EC%A0%9C%EC%95%88.html)** | HIRA·KOSIS 2023 상위 100대 KCD 상병 환자수·진료비·급여율, 의사 vs 한의사 인력 수급 시뮬레이션(2021~2030), 상병별 한의사 직역·역할 및 제도개선 과제 매트릭스 |
 | **📜 한의사 재택의료 참여확대 종합 정책보고서** | **[👉 정책보고서 열람](https://jaehyokim-sketch.github.io/km-healthcare-stats/01_%EC%9E%AC%ED%83%9D%EC%9D%98%EB%A3%8C_%EB%B0%A9%EB%AC%B8%EC%A7%84%EB%A3%8C/%EC%A0%95%EC%B1%85_%EB%B0%8F_%EA%B5%AD%EC%A0%9C%EB%B9%84%EA%B5%90/policy_report.html)** | 질병관리청 KDCA 8대 체계, 이혜진 교수 4대 기능 모델($F_1 \sim F_4$), 15개 시범사업 점유율(48.3%), 전국 SWOT 분석 |
 | **📊 경상남도 & 김해시 시뮬레이션 대시보드** | **[👉 김해·경남 대시보드](https://jaehyokim-sketch.github.io/km-healthcare-stats/01_%EC%9E%AC%ED%83%9D%EC%9D%98%EB%A3%8C_%EB%B0%A9%EB%AC%B8%EC%A7%84%EB%A3%8C/%EC%A7%80%EC%97%AD%EB%B3%84_%EC%8B%9C%EB%AE%AC%EB%A0%88%EC%9D%B4%EC%85%98/gimhae_gyeongnam.html)** | 김해시 및 경남 18개 시·군 기관참여율별 5개년 재정절감(최대 1.78조) 및 진료병행($\rho$) 차단 모형 |
 | **📊 전북특별자치도 & 전주시 시뮬레이션 대시보드** | **[👉 전주·전북 대시보드](https://jaehyokim-sketch.github.io/km-healthcare-stats/01_%EC%9E%AC%ED%83%9D%EC%9D%98%EB%A3%8C_%EB%B0%A9%EB%AC%B8%EC%A7%84%EB%A3%8C/%EC%A7%80%EC%97%AD%EB%B3%84_%EC%8B%9C%EB%AE%AC%EB%A0%88%EC%9D%B4%EC%85%98/jeonju_jeonbuk.html)** | 초고령 전북 14개 시·군 Nash 균형 시뮬레이션, 5대 다빈도 질환 비용절감(최대 1.84조 원) |
@@ -53,7 +54,7 @@
 | [05_원천_통계_데이터셋](05_원천_통계_데이터셋) | 원천 데이터 | HIRA·KOSIS·NHIS 원자료 CSV/JSON, 수집 웹페이지 |
 | [06_분석_및_수집_스크립트](06_분석_및_수집_스크립트) | 분석·수집 스크립트 | KOSIS(korea-stats MCP)·HIRA 수집, 시뮬레이션, 그래프·HTML 빌더 |
 | [07_MCP_및_API_인프라](07_MCP_및_API_인프라) | MCP·API 인프라 | HIRA·KDCA MCP 서버 |
-| [08_한의학교육_및_의료인력_정책](08_한의학교육_및_의료인력_정책) | 한의학교육·의료인력 정책 | 6년제 통합의료 교육과정 10개년 로드맵, 시체해부법 개정 방안, 한평원 KAS2022, 중의학교육표준 비교, 의료통합교육 정책 분석 |
+| [08_한의학교육_및_의료인력_정책](08_한의학교육_및_의료인력_정책) | 한의학교육·의료인력 정책 | 6년제 통합의료 교육과정 10개년 로드맵, 시체해부법 개정 방안, 한의 의료서비스 KCD 상위 100·의사인력 수급과 한의사 직역 제안, 한평원 KAS2022, 중의학교육표준 비교, 의료통합교육 정책 분석 |
 | [09_아카이브_서식_및_참고자료](09_아카이브_서식_및_참고자료) | 아카이브 | `작업기록/` |
 
 루트의 `index.html`(통합 포털), `anatomy_act_reform_plan.html`, `curriculum_10yr_roadmap.html`은 GitHub Pages 공개 주소를 유지하려고 루트에 둔다.
