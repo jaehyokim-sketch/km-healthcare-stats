@@ -1,0 +1,130 @@
+2024 원광대학교 한의과대학 교육과정해설서
+- 22 -
+학
+년
+학
+기
+구
+분
+학수
+번호
+교과목(국문)
+학
+점
+시간
+교과목(영문)
+이
+론
+실
+습
+전
+선
+222809
+한의약연구방법론
+1
+2
+0
+Korean Medical Research
+Methodology
+본3
+1
+전
+필
+222685
+진단검사의학1
+1
+2
+0
+Laboratory Medicine Ⅰ
+전
+필
+222796
+진단학2
+1
+2
+0
+Diagnosis Ⅱ
+전
+필
+222738
+진단학실습
+1
+0
+2
+Practice in Diagnostics of
+Korean Medicine
+전
+필
+222739
+침구의학2
+3
+4
+0
+Acupuncture and
+Moxibustion Ⅱ
+전
+필
+222740
+사상체질의학2
+1.5
+3
+0
+Constitutional Medicine Ⅱ
+전
+필
+222741
+재활의학과학2
+1.5
+3
+0
+Rehabilitation Medicine Ⅱ
+전
+필
+222742
+간계내과학1
+1
+2
+0
+Hepatobiliary System of
+Korean Internal Medicine
+Ⅰ
+전
+필
+222743
+심계내과학1
+1
+2
+0
+Circulatory System of
+Korean internal Medicine
+Ⅰ
+전
+필
+222744
+비계내과학1
+1
+2
+0
+Gastrointestinal System of
+Korean Internal Medicine
+Ⅰ
+전
+필
+222745
+폐계내과학1
+1
+2
+0
+Respiratory system of
+Korean internal Medicine
+Ⅰ
+전
+필
+222746
+신계내과학1
+1
+2
+0
+Urogenital system of
+Korean internal Medicine
+Ⅰ

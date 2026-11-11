@@ -1,0 +1,1364 @@
+
+--- Page 17 ---
+2024 원광대학교 한의과대학 교육과정해설서
+- 15 -
+3.4. 학년별 교육과정
+학
+년
+학
+기
+구
+분
+학수
+번호
+교과목(국문)
+학
+점
+시간
+교과목(영문)
+이
+론
+실
+습
+예1
+1
+교
+필
+001111
+종교와원불교
+3
+3
+0
+Religion and 
+Won-Buddhism
+교
+필
+001252
+대학생활과자기혁신
+2
+2
+0
+Guide to the Collegiate life 
+& Innovation Oneself
+전
+필
+221050
+의학용어1
+1
+2
+0
+Medical Terminology Ⅰ
+전
+필
+221263
+한의학기초이론1
+2
+3
+0
+Basic Theory of Korean 
+Medicine Ⅰ
+전
+필
+221264
+한의학개론
+2
+3
+0
+Introduction to Korean 
+Medicine
+전
+필
+221296
+일반생물학1
+2
+2
+0
+General Biology Ⅰ
+전
+필
+221295
+일반화학1
+2
+2
+0
+General Chemistry Ⅰ
+전
+선
+221291
+기초중국어
+2
+2
+0
+Basic Chinese
+전
+선
+221292
+심리학개론
+2
+2
+0
+Introduction of 
+Psychology
+2
+전
+필
+221051
+의학용어2
+1
+2
+0
+Medical Terminology Ⅱ
+전
+필
+221269
+한의학기초이론2
+2
+3
+0
+Basic Theory of Korean 
+Medicine Ⅱ
+전
+필
+221270
+한의학의역사와현대
+사회
+2
+3
+0
+The History of Korean 
+Medicine and Modern 
+Society
+전
+221297
+일반화학2
+2
+2
+0
+General Chemistry Ⅱ
+
+--- Page 18 ---
+2024 원광대학교 한의과대학 교육과정해설서
+- 16 -
+학
+년
+학
+기
+구
+분
+학수
+번호
+교과목(국문)
+학
+점
+시간
+교과목(영문)
+이
+론
+실
+습
+필
+전
+필
+221298
+일반생물학2
+2
+2
+0
+General Biology Ⅱ
+전
+필
+221299
+한의학한문
+1
+2
+0
+Chinese Characters in 
+Korean Medicine
+전
+필
+221300
+인체의구조와기능1
+1
+2
+0
+Structure and Function of 
+human body Ⅰ
+전
+선
+221293
+약용식물학
+2
+2
+0
+Medical Plant
+전
+선
+221294
+의료데이터사이언스
+2
+2
+0
+Medical Data Science
+예2
+1
+전
+필
+221258
+본초학총론
+1
+2
+0
+Introduction to Herbology
+전
+필
+221259
+원전학1
+3
+4
+0
+Canons of Korean 
+Medicine 1
+전
+필
+221278
+의철학
+1
+2
+0
+Medical Philosophy
+전
+필
+221280
+인체의구조와기능실
+습1
+1
+0
+2
+Laboratory courses in 
+Structure and Function of 
+human body Ⅰ
+전
+필
+221281
+분자와세포의학1
+1
+2
+0
+Medical molecular and 
+cellular biology Ⅰ
+전
+필
+222701
+생리학1
+3
+4
+0
+Korean Physiology1
+전
+필
+221300
+인체의구조와기능1
+1
+2
+0
+Structure and Function of 
+human body Ⅰ
+전
+필
+221301
+인체의구조와기능2
+3
+4
+0
+Structure and Function of 
+human body Ⅱ
+
+--- Page 19 ---
+2024 원광대학교 한의과대학 교육과정해설서
+- 17 -
+학
+년
+학
+기
+구
+분
+학수
+번호
+교과목(국문)
+학
+점
+시간
+교과목(영문)
+이
+론
+실
+습
+전
+필
+221305
+분자와세포의학2
+1
+2
+0
+Medical molecular and 
+cellular biology Ⅱ
+전
+선
+221276
+의학중국어
+2
+2
+0
+Medical Chinese
+전
+선
+221277
+경서강독
+2
+2
+0
+Reading of the Classics
+2
+전
+필
+221261
+원전학2
+3
+4
+0
+Canons of Korean 
+Medicine Ⅱ
+전
+필
+221282
+본초학1
+2
+3
+0
+HerbologyⅠ
+전
+필
+221287
+인체의구조와기능실
+습2
+1
+0
+2
+Laboratory courses in 
+Structure and Function of 
+human body Ⅱ
+전
+필
+221290
+기초의과학실습1
+1
+0
+2
+Laboratory courses in 
+basic biomedical 
+scienceⅠ
+전
+필
+222113
+본초학실습1
+1
+0
+2
+Herbology Practice Ⅰ
+전
+필
+221302
+인체의구조와기능3
+3
+4
+0
+Structure and Function of 
+human body Ⅲ
+전
+필
+221303
+인체의구조와기능4
+2
+3
+0
+Structure and Function of 
+human body Ⅳ
+전
+필
+221304
+분자와세포의학3
+2
+3
+0
+Medical molecular and 
+cellular biology Ⅲ
+전
+필
+222702
+생리학2
+3
+4
+0
+Korean Physiology Ⅱ
+전
+선
+221283
+의학통계학
+2
+2
+0
+Medical Statistics
+
+--- Page 20 ---
+2024 원광대학교 한의과대학 교육과정해설서
+- 18 -
+학
+년
+학
+기
+구
+분
+학수
+번호
+교과목(국문)
+학
+점
+시간
+교과목(영문)
+이
+론
+실
+습
+전
+선
+221284
+의료교육학
+2
+2
+0
+Medical Education
+본1
+1
+전
+필
+222125
+본초학실습2
+1
+0
+2
+Herbology Practice Ⅱ
+전
+필
+222812
+경혈학1
+2
+3
+0
+Details of Meridian & 
+Acupoint Ⅰ
+전
+필
+222813
+본초학2
+2
+3
+0
+Herbology Ⅱ
+전
+필
+222814
+원전학3
+2
+3
+0
+Canons of Korean 
+Medicine Ⅲ
+전
+필
+222815
+질병의예방과관리1
+3
+4
+0
+Prevention and 
+management of disease Ⅰ
+전
+필
+222817
+각가학설
+1
+2
+0
+Korean Medicine Theories
+전
+필
+222820
+질병의원리와반응1
+1
+2
+0
+Principles and reactions of 
+disease Ⅰ
+전
+필
+222821
+질병의원리와반응2
+1
+2
+0
+Principles and reactions of 
+disease Ⅱ
+전
+필
+222822
+한의과학기초실습
+1
+0
+2
+Laboratory courses in 
+Korean medical 
+sciences
+전
+필
+222823
+병리학1
+3
+4
+0
+Korean Pathology Ⅰ
+전
+선
+222807
+한의학과경제
+1
+2
+0
+Korean Medicine and 
+Economy
+전
+선
+222816
+의학기상학
+1
+2
+0
+Medical Meteorology
+전
+222818
+뇌신경연구
+1
+2
+0
+Cranial nerve research
+
+--- Page 21 ---
+2024 원광대학교 한의과대학 교육과정해설서
+- 19 -
+학
+년
+학
+기
+구
+분
+학수
+번호
+교과목(국문)
+학
+점
+시간
+교과목(영문)
+이
+론
+실
+습
+선
+2
+전
+필
+222824
+임상본초학실습
+1
+0
+2
+Clinical Herbology 
+Practice 
+전
+필
+222825
+임상본초학
+2
+3
+0
+Clinical Herbology 
+전
+필
+222826
+경혈학2
+2
+3
+0
+Details of Meridian & 
+Acupoint Ⅱ
+전
+필
+222827
+경혈학실습
+1
+0
+3
+Practice of Meridian & 
+Acupoint
+전
+필
+222828
+기초의과학실습2
+1
+0
+2
+Laboratory courses in 
+basic biomedical 
+science 
+전
+필
+222829
+질병의예방과관리2
+2
+3
+0
+Prevention and 
+management of disease Ⅱ
+전
+필
+222830
+임상상한온병학1
+2
+3
+0
+Clinical exogenous febrile 
+epidemic febrile disease Ⅰ
+전
+필
+222831
+병리학2
+3
+4
+0
+Korean Pathology Ⅱ
+전
+필
+222832
+진단검사의학1
+1
+2
+0
+Laboratory Medicine Ⅰ
+전
+필
+222833
+질병의원리와반응3
+2
+3
+0
+Principles and reactions of 
+disease Ⅲ
+전
+필
+222834
+질병의원리와반응4
+2
+3
+0
+Principles and reactions of 
+disease Ⅳ
+전
+선
+222631
+의료정보학
+1
+2
+0
+Medical Informatics
+전
+선
+222835
+이상심리학
+1
+2
+0
+Abnormal psychology
+
+--- Page 22 ---
+2024 원광대학교 한의과대학 교육과정해설서
+- 20 -
+학
+년
+학
+기
+구
+분
+학수
+번호
+교과목(국문)
+학
+점
+시간
+교과목(영문)
+이
+론
+실
+습
+본2
+1
+전
+필
+222430
+병리학실습1
+1
+0
+2
+Korean Pathology Lab. Ⅰ
+전
+필
+222636
+방제학실습
+1
+0
+2
+Prescription lab of Korean 
+Medicine 
+전
+필
+222647
+경혈학3
+1
+2
+0
+Details of Meridians & 
+Acupoints Ⅲ
+전
+필
+222672
+의료법규
+2
+3
+0
+Medical Regulation
+전
+필
+222703
+병리학1
+3
+5
+0
+Korean Pathology Ⅰ
+전
+필
+222704
+양방병리학1
+1
+2
+0
+Pathology Ⅰ
+전
+필
+222724
+경혈학2
+2
+2
+0
+Details of Meridian & 
+Acupoint Ⅱ
+전
+필
+222725
+경혈학실습2
+1
+0
+3
+Practice of Meridian & 
+Acupoint Ⅱ
+전
+필
+222726
+방제학1
+3
+4
+0
+Korean Medicine 
+Prescription Ⅰ
+전
+필
+222727
+약리학1
+1
+2
+0
+ParmacologyⅠ
+전
+필
+222728
+약리학실습1
+1
+0
+2
+Experimental 
+Parmacology Ⅰ
+전
+필
+222732
+상한론2
+2
+3
+0
+Theory of Exogenous 
+Febrile Disease Ⅱ
+전
+선
+222579
+예방한의학
+1
+2
+0
+Preventive Korean 
+medicine
+전
+선
+222808
+한의산업학
+1
+2
+0
+Korean Medicine and 
+Industries
+
+--- Page 23 ---
+2024 원광대학교 한의과대학 교육과정해설서
+- 21 -
+학
+년
+학
+기
+구
+분
+학수
+번호
+교과목(국문)
+학
+점
+시간
+교과목(영문)
+이
+론
+실
+습
+2
+전
+필
+222436
+병리학실습2
+1
+0
+2
+Korean Pathology Lab. Ⅱ
+전
+필
+222445
+응급의학
+1
+2
+0
+Emergency Medicine
+전
+필
+222645
+방제학2
+3
+4
+0
+Korean Medicine 
+Prescription Ⅱ
+전
+필
+222646
+영상의학
+1
+2
+0
+Medical Imaging and 
+Intervention
+전
+필
+222653
+온병학
+1
+2
+0
+Epidemic Febrile Disease
+전
+필
+222705
+병리학2
+3
+5
+0
+Korean Pathology Ⅱ
+전
+필
+222706
+양방병리학2
+1
+2
+0
+Pathology Ⅱ
+전
+필
+222730
+약리학2
+1
+2
+0
+Parmacology Ⅱ
+전
+필
+222731
+약리학실습2
+1
+0
+2
+Experimental 
+Parmacology Ⅱ
+전
+필
+222733
+진단학1
+2
+3
+0
+Diagnosis Ⅰ
+전
+필
+222734
+침구의학1
+2
+3
+0
+Acupuncture and 
+Moxibustion Ⅰ
+전
+필
+222735
+사상체질의학1
+1
+2
+0
+Constitutional Medicine Ⅰ
+전
+필
+222736
+재활의학과학1
+1
+2
+0
+Rehabilitation Medicine Ⅰ
+전
+선
+222502
+법의학
+1
+2
+0
+Forensic Medicine
+
+--- Page 24 ---
+2024 원광대학교 한의과대학 교육과정해설서
+- 22 -
+학
+년
+학
+기
+구
+분
+학수
+번호
+교과목(국문)
+학
+점
+시간
+교과목(영문)
+이
+론
+실
+습
+전
+선
+222809
+한의약연구방법론
+1
+2
+0
+Korean Medical Research 
+Methodology
+본3
+1
+전
+필
+222685
+진단검사의학1
+1
+2
+0
+Laboratory Medicine Ⅰ
+전
+필
+222796
+진단학2
+1
+2
+0
+Diagnosis Ⅱ
+전
+필
+222738
+진단학실습
+1
+0
+2
+Practice in Diagnostics of 
+Korean Medicine
+전
+필
+222739
+침구의학2
+3
+4
+0
+Acupuncture and 
+Moxibustion Ⅱ
+전
+필
+222740
+사상체질의학2
+1.5
+3
+0
+Constitutional Medicine Ⅱ
+전
+필
+222741
+재활의학과학2
+1.5
+3
+0
+Rehabilitation Medicine Ⅱ
+전
+필
+222742
+간계내과학1
+1
+2
+0
+Hepatobiliary System of 
+Korean Internal Medicine 
+Ⅰ
+전
+필
+222743
+심계내과학1
+1
+2
+0
+Circulatory System of 
+Korean internal Medicine 
+Ⅰ
+전
+필
+222744
+비계내과학1
+1
+2
+0
+Gastrointestinal System of 
+Korean Internal Medicine 
+Ⅰ
+전
+필
+222745
+폐계내과학1
+1
+2
+0
+Respiratory system of 
+Korean internal Medicine 
+Ⅰ
+전
+필
+222746
+신계내과학1
+1
+2
+0
+Urogenital system of 
+Korean internal Medicine
+Ⅰ 
+
+--- Page 25 ---
+2024 원광대학교 한의과대학 교육과정해설서
+- 23 -
+학
+년
+학
+기
+구
+분
+학수
+번호
+교과목(국문)
+학
+점
+시간
+교과목(영문)
+이
+론
+실
+습
+전
+필
+222747
+소아과학1
+1
+2
+0
+Korean Pediatrics1
+전
+필
+222748
+부인과학1
+3
+4
+0
+Korean Gynecology and 
+Obstetrics Ⅰ
+전
+필
+222749
+안이비인후피부과학
+1
+2
+3
+0
+Korean Medicine 
+Ophthalmology, 
+Otolaryngology & 
+Dermatology Ⅰ
+전
+필
+222750
+신경정신과학1
+1
+2
+0
+Korean Neuropsy 
+Pschiatry Ⅰ
+전
+필
+222794
+추나의학
+1
+2
+0
+CHUNA Manual Medicine
+2
+전
+필
+222659
+양방진단학
+1.5
+2
+0
+Diagnosis
+전
+필
+222699
+진단검사의학2
+1
+2
+0
+Laboratory Medicine Ⅱ
+전
+필
+222751
+침구의학3
+3
+6
+0
+Acupuncture and 
+Moxibustion Ⅲ
+전
+필
+222752
+간계내과학2
+1.5
+2
+0
+Hepatobiliary System of 
+Korean Internal Medicine 
+Ⅱ
+전
+필
+222753
+심계내과학2
+1.5
+2
+0
+Circulatory System of 
+Korean internal Medicine 
+Ⅱ
+전
+필
+222754
+비계내과학2
+1.5
+2
+0
+Gastrointestinal System of 
+Korean Internal Medicine 
+Ⅱ
+전
+필
+222755
+폐계내과학2
+1.5
+2
+0
+Respiratory system of 
+Korean internal Medicine 
+
+--- Page 26 ---
+2024 원광대학교 한의과대학 교육과정해설서
+- 24 -
+학
+년
+학
+기
+구
+분
+학수
+번호
+교과목(국문)
+학
+점
+시간
+교과목(영문)
+이
+론
+실
+습
+Ⅱ
+전
+필
+222756
+신계내과학2
+1.5
+2
+0
+Urogenital system of 
+Korean internal Medicine 
+Ⅱ
+전
+필
+222757
+소아과학2
+2
+3
+0
+Korean Pediatrics Ⅱ
+전
+필
+222758
+부인과학2
+2
+3
+0
+Korean Gynecology and 
+Obstetrics Ⅱ
+전
+필
+222759
+안이비인후피부과학
+2
+2
+3
+0
+Korean Medicine 
+Ophthalmology, 
+Otolaryngology & 
+Dermatology Ⅱ
+전
+필
+222760
+신경정신과학2
+2
+3
+0
+Korean Neuropsy 
+Pschiatry Ⅱ
+전
+필
+222795
+추나의학실습
+1
+0
+2
+Practice Chuna manual 
+medicine
+본4
+1
+전
+필
+222810
+임상술기실습1
+1.5
+0
+3
+Clinical Skills Practice Ⅰ
+전
+필
+222798
+직무체험실습1
+3.5
+0
+7.5
+Externship Practice Ⅰ
+전
+필
+222799
+임상각과실습A-1
+5
+0
+10
+Clinical Practice A-Ⅰ
+전
+필
+222800
+임상각과실습B-1
+5
+0
+10
+Clinical Practice B-Ⅰ
+전
+필
+222801
+임상각과실습C-1
+5
+0
+10
+Clinical Practice C-Ⅰ
+2
+교
+필
+001175
+졸업(시험.작품)논문
+0
+0
+0
+Graduation Thesis 

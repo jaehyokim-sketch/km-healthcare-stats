@@ -7,3 +7,6 @@ __pycache__/
 .agents/
 04_CLI_대화세션_아카이브/
 04_CLI_*/
+# >100MB reference PDFs (keep locally and in Google Drive only; GitHub limit is 100MB)
+curriculum.pdf
+2024 원광대학교 한의과대학 교육과정해설서.pdf

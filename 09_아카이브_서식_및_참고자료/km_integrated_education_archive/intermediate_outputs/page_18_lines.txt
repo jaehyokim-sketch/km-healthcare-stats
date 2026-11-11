@@ -1,0 +1,135 @@
+2024 원광대학교 한의과대학 교육과정해설서
+- 16 -
+학
+년
+학
+기
+구
+분
+학수
+번호
+교과목(국문)
+학
+점
+시간
+교과목(영문)
+이
+론
+실
+습
+필
+전
+필
+221298
+일반생물학2
+2
+2
+0
+General Biology Ⅱ
+전
+필
+221299
+한의학한문
+1
+2
+0
+Chinese Characters in
+Korean Medicine
+전
+필
+221300
+인체의구조와기능1
+1
+2
+0
+Structure and Function of
+human body Ⅰ
+전
+선
+221293
+약용식물학
+2
+2
+0
+Medical Plant
+전
+선
+221294
+의료데이터사이언스
+2
+2
+0
+Medical Data Science
+예2
+1
+전
+필
+221258
+본초학총론
+1
+2
+0
+Introduction to Herbology
+전
+필
+221259
+원전학1
+3
+4
+0
+Canons of Korean
+Medicine 1
+전
+필
+221278
+의철학
+1
+2
+0
+Medical Philosophy
+전
+필
+221280
+인체의구조와기능실
+습1
+1
+0
+2
+Laboratory courses in
+Structure and Function of
+human body Ⅰ
+전
+필
+221281
+분자와세포의학1
+1
+2
+0
+Medical molecular and
+cellular biology Ⅰ
+전
+필
+222701
+생리학1
+3
+4
+0
+Korean Physiology1
+전
+필
+221300
+인체의구조와기능1
+1
+2
+0
+Structure and Function of
+human body Ⅰ
+전
+필
+221301
+인체의구조와기능2
+3
+4
+0
+Structure and Function of
+human body Ⅱ
