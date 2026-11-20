@@ -10,3 +10,6 @@ __pycache__/
 # >100MB reference PDFs (keep locally and in Google Drive only; GitHub limit is 100MB)
 curriculum.pdf
 2024 원광대학교 한의과대학 교육과정해설서.pdf
+
+# 통계 포털 원시 다운로드(파일명 무의미) — 로컬·Google Drive에만 둔다
+Format_PROC*.xls
