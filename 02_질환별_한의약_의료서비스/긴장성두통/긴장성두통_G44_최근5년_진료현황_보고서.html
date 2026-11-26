@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>긴장성 두통(G44) 최근 5년간(2020~2024) 진료 현황 보고서</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+  <style>
+    :root {
+      --primary: #1e3a8a;
+      --primary-light: #3b82f6;
+      --teal: #0d9488;
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --text: #0f172a;
+      --muted: #475569;
+      --border: #e2e8f0;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Malgun Gothic', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      line-height: 1.65;
+    }
+    .topbar {
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+      color: #fff;
+      padding: 28px 20px 32px;
+    }
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+    .back-link {
+      display: inline-block;
+      color: #bfdbfe;
+      text-decoration: none;
+      font-size: 0.88rem;
+      margin-bottom: 12px;
+    }
+    .back-link:hover { text-decoration: underline; }
+    .badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.16);
+      color: #e0f2fe;
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 999px;
+      margin-bottom: 10px;
+    }
+    .topbar h1 {
+      margin: 0 0 8px;
+      font-size: 1.75rem;
+      line-height: 1.3;
+    }
+    .topbar p {
+      margin: 0;
+      color: #cbd5e1;
+      font-size: 0.95rem;
+    }
+    main {
+      padding: 24px 20px 60px;
+    }
+    .note-box {
+      background: #eff6ff;
+      border-left: 4px solid var(--primary-light);
+      padding: 14px 18px;
+      border-radius: 8px;
+      margin-bottom: 24px;
+      font-size: 0.92rem;
+      color: #1e293b;
+    }
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin-bottom: 26px;
+    }
+    @media (max-width: 820px) {
+      .kpi-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 480px) {
+      .kpi-grid { grid-template-columns: 1fr; }
+    }
+    .kpi {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px;
+      box-shadow: 0 1px 3px rgba(15,23,42,0.05);
+    }
+    .kpi-label {
+      font-size: 0.82rem;
+      color: var(--muted);
+      font-weight: 600;
+    }
+    .kpi-value {
+      font-size: 1.65rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin: 6px 0 4px;
+    }
+    .kpi.teal .kpi-value { color: var(--teal); }
+    .kpi-sub {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+    .section {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px;
+      margin-bottom: 22px;
+      box-shadow: 0 1px 3px rgba(15,23,42,0.05);
+    }
+    .section h2 {
+      margin: 0 0 6px;
+      font-size: 1.22rem;
+      color: #0f172a;
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 8px;
+    }
+    .src {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin: 0 0 16px;
+    }
+    .chart-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+    @media (max-width: 820px) {
+      .chart-grid { grid-template-columns: 1fr; }
+    }
+    .chart-card {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+    }
+    .chart-card h3 {
+      margin: 0 0 12px;
+      font-size: 0.96rem;
+      color: #1e293b;
+    }
+    .table-wrap {
+      overflow-x: auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      min-width: 680px;
+    }
+    th, td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border);
+      text-align: right;
+    }
+    th {
+      background: #f1f5f9;
+      color: #1e293b;
+      font-weight: 700;
+      text-align: center;
+    }
+    td:first-child, th:first-child { text-align: center; font-weight: 700; }
+    td:nth-child(2) { text-align: center; }
+    tbody tr:hover { background: #f8fafc; }
+    .up { color: #dc2626; font-weight: 600; }
+    .down { color: #2563eb; font-weight: 600; }
+    .insight-list {
+      margin: 12px 0 0;
+      padding-left: 20px;
+    }
+    .insight-list li {
+      margin-bottom: 10px;
+    }
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.82rem;
+      padding: 12px 20px 32px;
+    }
+    footer a { color: var(--primary-light); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+    @media print {
+      .back-link { display: none; }
+      body { background: #fff; }
+      .section, .kpi { box-shadow: none; break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container">
+      <a class="back-link" href="../../index.html">← 한의 보건의료 통계 아카이브 홈으로</a><br>
+      <span class="badge">HIRA · KOSIS 공식 건강보험통계 (2020~2024)</span>
+      <h1>긴장성 두통(G44) 최근 5년간 진료 현황 분석 보고서</h1>
+      <p>건강보험심사평가원·국민건강보험공단 질병소분류별 다빈도 상병 진료현황(전체 및 한방 외래) 기준</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="note-box">
+      <strong>데이터 기준 안내:</strong> 긴장성 두통(긴장형 두통)의 4단 상병코드는 <code>G44.2</code>이며, 본 보고서는 KOSIS 공식 건강보험통계에서 최근 5년(2020~2024년) 확정 실적이 제공되는 3단 질병소분류 <strong><code>G44</code> (기타 두통 증후군)</strong>을 기준으로 전체(의과·한방 통합) 및 한방 외래 진료 추이를 정리했습니다. 전체 <code>G44</code> 환자의 대다수가 긴장형 두통(<code>G44.2</code>)에 해당합니다.
+    </div>
+
+    <div class="kpi-grid">
+      <div class="kpi">
+        <div class="kpi-label">2024년 전체 진료실인원</div>
+        <div class="kpi-value">518,604명</div>
+        <div class="kpi-sub">다빈도 132위 · 2020년 대비 -4.9%</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">2024년 전체 총 진료비</div>
+        <div class="kpi-value">1,097.5억 원</div>
+        <div class="kpi-sub">급여비 705.2억 · 1인당 21.2만 원</div>
+      </div>
+      <div class="kpi teal">
+        <div class="kpi-label">2024년 한방 외래 환자수</div>
+        <div class="kpi-value">78,167명</div>
+        <div class="kpi-sub">한방 다빈도 27위 · 전체의 15.1%</div>
+      </div>
+      <div class="kpi teal">
+        <div class="kpi-label">한방 외래 1인당 내원일수</div>
+        <div class="kpi-value">4.49일</div>
+        <div class="kpi-sub">전체 평균(1.97일)의 2.3배</div>
+      </div>
+    </div>
+
+    <section class="section">
+      <h2>1. 최근 5년간(2020~2024) 추이 시각화</h2>
+      <p class="src">전체(의과·한방 통합) vs 한방 외래 연도별 진료실인원 및 총 진료비 변화</p>
+      <div class="chart-grid">
+        <div class="chart-card">
+          <h3>연도별 진료실인원 추이 (명)</h3>
+          <canvas id="chartPatients" height="220"></canvas>
+        </div>
+        <div class="chart-card">
+          <h3>연도별 총 진료비 추이 (억 원)</h3>
+          <canvas id="chartCost" height="220"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>2. 전체(의과·한방 통합) G44 기타 두통 증후군 진료 현황</h2>
+      <p class="src">출처: KOSIS 건강보험통계 <code>DT_35001_A075111</code> (질병소분류별 다빈도 상병 진료현황·계)</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>연도</th>
+              <th>다빈도 순위</th>
+              <th>진료실인원(명)</th>
+              <th>전년 대비</th>
+              <th>입내원일수(일)</th>
+              <th>요양급여일수(일)</th>
+              <th>진료비(천원)</th>
+              <th>급여비(천원)</th>
+              <th>1인당 진료비(원)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2020</td><td>104위</td><td>545,319</td><td>-</td>
+              <td>1,079,291</td><td>14,012,796</td><td>114,917,617</td><td>69,486,234</td><td>210,735</td>
+            </tr>
+            <tr>
+              <td>2021</td><td>98위</td><td>643,946</td><td class="up">+18.1%</td>
+              <td>1,231,218</td><td>15,525,879</td><td>133,239,733</td><td>78,807,564</td><td>206,911</td>
+            </tr>
+            <tr>
+              <td>2022</td><td>114위</td><td>580,674</td><td class="down">-9.8%</td>
+              <td>1,126,740</td><td>15,427,365</td><td>129,754,833</td><td>77,285,054</td><td>223,456</td>
+            </tr>
+            <tr>
+              <td>2023</td><td>126위</td><td>543,750</td><td class="down">-6.4%</td>
+              <td>1,067,957</td><td>15,520,253</td><td>123,538,345</td><td>75,425,813</td><td>227,197</td>
+            </tr>
+            <tr>
+              <td>2024</td><td>132위</td><td>518,604</td><td class="down">-4.6%</td>
+              <td>1,021,400</td><td>15,227,224</td><td>109,753,027</td><td>70,515,246</td><td>211,632</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>3. 한방 외래 G44 기타 두통 증후군 진료 현황</h2>
+      <p class="src">출처: KOSIS 건강보험통계 <code>DT_35001_A182111</code> (질병소분류별 외래 다빈도 상병 진료현황·한방 계)</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>연도</th>
+              <th>한방 순위</th>
+              <th>진료실인원(명)</th>
+              <th>전체 대비 비중</th>
+              <th>입내원일수(일)</th>
+              <th>요양급여일수(일)</th>
+              <th>진료비(천원)</th>
+              <th>급여비(천원)</th>
+              <th>1인당 내원일수</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2020</td><td>26위</td><td>95,519</td><td>17.5%</td>
+              <td>420,310</td><td>472,720</td><td>11,075,016</td><td>8,512,740</td><td>4.40일</td>
+            </tr>
+            <tr>
+              <td>2021</td><td>26위</td><td>91,489</td><td>14.2%</td>
+              <td>414,075</td><td>463,095</td><td>11,296,615</td><td>8,665,382</td><td>4.53일</td>
+            </tr>
+            <tr>
+              <td>2022</td><td>27위</td><td>86,632</td><td>14.9%</td>
+              <td>385,575</td><td>432,935</td><td>10,994,640</td><td>8,420,611</td><td>4.45일</td>
+            </tr>
+            <tr>
+              <td>2023</td><td>27위</td><td>80,875</td><td>14.9%</td>
+              <td>365,045</td><td>407,702</td><td>10,792,200</td><td>8,264,277</td><td>4.51일</td>
+            </tr>
+            <tr>
+              <td>2024</td><td>27위</td><td>78,167</td><td>15.1%</td>
+              <td>351,030</td><td>392,693</td><td>10,733,923</td><td>8,198,275</td><td>4.49일</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>4. 핵심 추세 및 임상·정책 시사점</h2>
+      <ul class="insight-list">
+        <li><strong>2021년 정점 후 완만한 감소세:</strong> 전체 <code>G44</code> 환자는 2021년 643,946명(98위, 전년 대비 +18.1%)으로 정점을 기록한 뒤 2024년 518,604명(132위)까지 3년 연속 감소했습니다(2020→2024년 -4.9%).</li>
+        <li><strong>연간 1,100억 원대 진료 규모 유지:</strong> 2024년 기준 총 진료비는 약 1,097.5억 원(급여비 705.2억 원), 1인당 연간 진료비는 약 21.2만 원으로 안정적인 의료 수요를 형성하고 있습니다.</li>
+        <li><strong>한방 외래의 높은 지속 치료 비중:</strong> 한방 외래에서는 매년 26~27위권의 주요 다빈도 상병으로 자리잡고 있으며, 2024년 기준 전체 <code>G44</code> 환자의 약 15.1%가 한방 외래를 이용했습니다. 특히 1인당 내원일수는 <strong>4.49일</strong>로 전체 평균(1.97일)의 약 2.3배에 달해 침·약침·추나 등 반복 내원 치료 수요가 뚜렷합니다.</li>
+        <li><strong><code>G44.2</code> 4단 상병 단독 조회 안내:</strong> 긴장형 두통 4단 코드 단독의 성별·연령별 세부 통계는 <a href="https://opendata.hira.or.kr" target="_blank" rel="noopener">HIRA 보건의료빅데이터개방시스템</a> → 의료통계정보 → 질병세분류(4단상병) 통계에서 <code>G442</code>로 직접 조회 및 엑셀 다운로드할 수 있습니다.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    데이터 출처: 건강보험심사평가원 · 국민건강보험공단 건강보험통계 (KOSIS) | 작성일: 2026-11-26 |
+    <a href="../../index.html">km-healthcare-stats 포털로 돌아가기</a>
+  </footer>
+
+  <script>
+    const years = ['2020', '2021', '2022', '2023', '2024'];
+    const totalPatients = [545319, 643946, 580674, 543750, 518604];
+    const kmPatients = [95519, 91489, 86632, 80875, 78167];
+    const totalCost = [1149.2, 1332.4, 1297.5, 1235.4, 1097.5];
+    const kmCost = [110.8, 113.0, 109.9, 107.9, 107.3];
+
+    new Chart(document.getElementById('chartPatients'), {
+      type: 'line',
+      data: {
+        labels: years,
+        datasets: [
+          {
+            label: '전체 (의과·한방 통합)',
+            data: totalPatients,
+            borderColor: '#1e3a8a',
+            backgroundColor: 'rgba(30,58,138,0.12)',
+            borderWidth: 2.5,
+            tension: 0.25,
+            fill: true
+          },
+          {
+            label: '한방 외래',
+            data: kmPatients,
+            borderColor: '#0d9488',
+            backgroundColor: 'rgba(13,148,136,0.12)',
+            borderWidth: 2.5,
+            tension: 0.25,
+            fill: true
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { position: 'bottom' } },
+        scales: { y: { beginAtZero: true } }
+      }
+    });
+
+    new Chart(document.getElementById('chartCost'), {
+      type: 'bar',
+      data: {
+        labels: years,
+        datasets: [
+          {
+            label: '전체 총 진료비 (억 원)',
+            data: totalCost,
+            backgroundColor: 'rgba(30,58,138,0.82)',
+            borderRadius: 6
+          },
+          {
+            label: '한방 외래 진료비 (억 원)',
+            data: kmCost,
+            backgroundColor: 'rgba(13,148,136,0.85)',
+            borderRadius: 6
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { position: 'bottom' } },
+        scales: { y: { beginAtZero: true } }
+      }
+    });
+  </script>
+</body>
+</html>
